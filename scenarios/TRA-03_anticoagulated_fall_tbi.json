@@ -298,7 +298,8 @@
       "branches": [
         {
           "if": "Refusal accepted",
-          "then": "Stage **B** begins in front of them; capacity now in question"
+          "then": "Stage **B** begins in front of them; capacity now in question",
+          "goto_stage": "B"
         },
         {
           "if": "Crew explains risk",
@@ -332,12 +333,14 @@
       "branches": [
         {
           "if": "Hyperventilation",
-          "then": "Stage **D**"
+          "then": "Stage **D**",
+          "goto_stage": "D"
         },
         {
           "type": "inject",
           "if": "BP drops to 100/60 (any time after T+8)",
-          "then": "Stage **F**; expect IV + NS 1 L (4.10), HOB flat if SBP < 100, search for 2nd bleed source"
+          "then": "Stage **F**; expect IV + NS 1 L (4.10), HOB flat if SBP < 100, search for 2nd bleed source",
+          "goto_stage": "F"
         },
         {
           "type": "inject",

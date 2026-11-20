@@ -278,11 +278,13 @@
       "branches": [
         {
           "if": "Log-roll / board",
-          "then": "pain 10/10, Stage **C**"
+          "then": "pain 10/10, Stage **C**",
+          "goto_stage": "C"
         },
         {
           "if": "Binder at trochanters + scoop/ rapid extrication",
-          "then": "Stage **B**"
+          "then": "Stage **B**",
+          "goto_stage": "B"
         }
       ],
       "expected": [
@@ -302,7 +304,8 @@
         },
         {
           "if": "Waits on scene for intercept",
-          "then": "scene time > 15 min -> Stage **C**"
+          "then": "scene time > 15 min -> Stage **C**",
+          "goto_stage": "C"
         }
       ],
       "expected": [
@@ -318,12 +321,14 @@
       "branches": [
         {
           "if": "Wide-open fluids",
-          "then": "Stage **D**"
+          "then": "Stage **D**",
+          "goto_stage": "D"
         },
         {
           "type": "inject",
           "if": "BP drops to 78/48 despite binder",
-          "then": "Stage **C** values; expect 250 mL boluses to radial pulse/mentation, MD after 1 L, update UVMMC"
+          "then": "Stage **C** values; expect 250 mL boluses to radial pulse/mentation, MD after 1 L, update UVMMC",
+          "goto_stage": "C"
         },
         {
           "type": "inject",

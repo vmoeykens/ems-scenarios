@@ -262,7 +262,8 @@
         },
         {
           "if": "Crew abandons IV, gives glucagon",
-          "then": "Stage **C**"
+          "then": "Stage **C**",
+          "goto_stage": "C"
         },
         {
           "type": "inject",
@@ -319,7 +320,8 @@
         {
           "type": "inject",
           "if": "Crew still on scene at T+25",
-          "then": "Stage **D**: repeat D10, transport; capacity now in question"
+          "then": "Stage **D**: repeat D10, transport; capacity now in question",
+          "goto_stage": "D"
         }
       ],
       "expected": [

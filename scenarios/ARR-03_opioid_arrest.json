@@ -277,11 +277,13 @@
       "branches": [
         {
           "if": "BVM w/ O2 + suction prioritized",
-          "then": "Stage **B**"
+          "then": "Stage **B**",
+          "goto_stage": "B"
         },
         {
           "if": "Crew focuses on Narcan, no BVM by T+3",
-          "then": "Stage **C**"
+          "then": "Stage **C**",
+          "goto_stage": "C"
         }
       ],
       "expected": [
@@ -307,11 +309,13 @@
       "branches": [
         {
           "if": "Naloxone titrated 0.4 mg increments",
-          "then": "Stage **E**"
+          "then": "Stage **E**",
+          "goto_stage": "E"
         },
         {
           "if": "Large bolus",
-          "then": "Stage **F** - manage safely (6.6)"
+          "then": "Stage **F** - manage safely (6.6)",
+          "goto_stage": "F"
         },
         {
           "type": "inject",

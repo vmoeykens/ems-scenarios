@@ -261,11 +261,13 @@
       "branches": [
         {
           "if": "Epi 0.3 mg IM thigh <= T+5",
-          "then": "Stage **B**"
+          "then": "Stage **B**",
+          "goto_stage": "B"
         },
         {
           "if": "Diphenhydramine/neb first, or epi delayed > T+5",
-          "then": "Stage **E**"
+          "then": "Stage **E**",
+          "goto_stage": "E"
         },
         {
           "if": "Wrong concentration drawn (0.1 mg/mL IM)",
@@ -291,7 +293,8 @@
         {
           "type": "inject",
           "if": "Stridor develops despite epi #2",
-          "then": "Stage **E** airway signs; expect epi re-dose, BVM/suction ready, MD + intercept"
+          "then": "Stage **E** airway signs; expect epi re-dose, BVM/suction ready, MD + intercept",
+          "goto_stage": "E"
         }
       ]
     },
@@ -302,7 +305,8 @@
       "branches": [
         {
           "if": "Pt allowed to walk / sit up",
-          "then": "syncope -> Stage **E**"
+          "then": "syncope -> Stage **E**",
+          "goto_stage": "E"
         }
       ],
       "expected": [
@@ -318,11 +322,13 @@
       "branches": [
         {
           "if": "Epi #3 given",
-          "then": "Stage **C**"
+          "then": "Stage **C**",
+          "goto_stage": "C"
         },
         {
           "if": "No re-dose",
-          "then": "Stage **E**"
+          "then": "Stage **E**",
+          "goto_stage": "E"
         },
         {
           "type": "inject",

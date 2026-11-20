@@ -281,7 +281,8 @@
       "branches": [
         {
           "if": "Pauses > 10 s / poor rate",
-          "then": "Stage **C**"
+          "then": "Stage **C**",
+          "goto_stage": "C"
         },
         {
           "type": "inject",

@@ -263,7 +263,8 @@
       "branches": [
         {
           "if": "CPR left in bathroom / pauses",
-          "then": "Stage **C**"
+          "then": "Stage **C**",
+          "goto_stage": "C"
         }
       ],
       "expected": [

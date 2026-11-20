@@ -263,11 +263,13 @@
       "branches": [
         {
           "if": "TQ high & tight / 2-3 in proximal, tightened",
-          "then": "bleeding stops; Stage **A**"
+          "then": "bleeding stops; Stage **A**",
+          "goto_stage": "A"
         },
         {
           "if": "Direct pressure / belt left alone",
-          "then": "Stage **B** at +3 min"
+          "then": "Stage **B** at +3 min",
+          "goto_stage": "B"
         }
       ],
       "expected": [
@@ -283,11 +285,13 @@
       "branches": [
         {
           "if": "2nd TQ just proximal to 1st",
-          "then": "controlled; Stage **C**"
+          "then": "controlled; Stage **C**",
+          "goto_stage": "C"
         },
         {
           "if": "Ooze ignored",
-          "then": "Stage **B**"
+          "then": "Stage **B**",
+          "goto_stage": "B"
         }
       ],
       "expected": [
@@ -303,7 +307,8 @@
       "branches": [
         {
           "if": "TQ loosened",
-          "then": "re-bleed, Stage **B**; critical (evaluator discretion)"
+          "then": "re-bleed, Stage **B**; critical (evaluator discretion)",
+          "goto_stage": "B"
         }
       ],
       "expected": [
@@ -325,7 +330,8 @@
         {
           "type": "inject",
           "if": "TQ #1 slips during carry; bleeding resumes",
-          "then": "Stage **B** values; expect stop, tighten/2nd TQ, re-mark time"
+          "then": "Stage **B** values; expect stop, tighten/2nd TQ, re-mark time",
+          "goto_stage": "B"
         },
         {
           "type": "inject",

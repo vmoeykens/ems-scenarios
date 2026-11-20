@@ -264,7 +264,8 @@
       "branches": [
         {
           "if": "Treated as COPD only (nebs, O2 limited)",
-          "then": "Stage **B**"
+          "then": "Stage **B**",
+          "goto_stage": "B"
         }
       ],
       "expected": [
@@ -280,11 +281,13 @@
       "branches": [
         {
           "if": "CPAP applied with coaching",
-          "then": "Stage **C**"
+          "then": "Stage **C**",
+          "goto_stage": "C"
         },
         {
           "if": "No CPAP by T+15",
-          "then": "Stage **E**"
+          "then": "Stage **E**",
+          "goto_stage": "E"
         },
         {
           "type": "inject",

@@ -290,7 +290,8 @@
       "branches": [
         {
           "if": "NTG given (with or w/o IV)",
-          "then": "Stage **C** at +2 min. No IV first = critical (evaluator discretion)"
+          "then": "Stage **C** at +2 min. No IV first = critical (evaluator discretion)",
+          "goto_stage": "C"
         },
         {
           "if": "NTG withheld / Med Direction contacted",
@@ -310,7 +311,8 @@
       "branches": [
         {
           "if": "Supine + NS bolus, reassess lungs",
-          "then": "Stage **D**"
+          "then": "Stage **D**",
+          "goto_stage": "D"
         },
         {
           "if": "No action within 2 min",
