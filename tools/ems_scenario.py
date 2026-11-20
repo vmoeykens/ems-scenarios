@@ -93,8 +93,12 @@ def kv(rows, w, lw=.95 * inch, box=False):
 def pad(fl, p=3):
     t = Table([[fl]], colWidths=[None]); t.setStyle(TableStyle(BASE + [("LEFTPADDING", (0, 0), (-1, -1), p), ("RIGHTPADDING", (0, 0), (-1, -1), p), ("TOPPADDING", (0, 0), (-1, -1), 2), ("BOTTOMPADDING", (0, 0), (-1, -1), 2.5)])); return t
 
+def _txt(i):
+    """Checklist item: plain string or {id, text} (Scenario Runner format)."""
+    return i.get("text", "") if isinstance(i, dict) else i
+
 def checklist(items, w):
-    data = [[Box(), P(i)] for i in items]
+    data = [[Box(), P(_txt(i))] for i in items]
     t = Table(data, colWidths=[11, w - 11]); t.setStyle(TableStyle(BASE + [("TOPPADDING", (0, 0), (-1, -1), 1), ("BOTTOMPADDING", (0, 0), (-1, -1), 1.2)])); return t
 
 def two_col(left, right, wl=None, gap=5):
@@ -225,15 +229,16 @@ def _h(t, width):
         out.append(ln)
     return "<BR/>".join(out)
 
-def _stage_row(sc, txt):
+def _stage_row(sc, txt, goto=None):
     m = re.search(r"Stage \*\*([A-Z])\*\*", txt) or re.search(r"Stage ([A-Z])\b", txt)
-    if not m: return None, None
+    letter = goto or (m.group(1) if m else None)
+    if not letter: return None, None
     for r in sc.get("vitals", []):
-        if r.get("stage", "").strip().upper().startswith(m.group(1)):
+        if (r["key"].upper() == letter) if r.get("key") else r.get("stage", "").strip().upper().startswith(letter):
             keys = [k for k in ("HR", "BP", "RR", "SpO2", "EtCO2", "GCS") if r.get(k) not in (None, "", "-")]
             v = "  ".join(f"{k} {re.sub(r'[*]', '', str(r[k]))}" for k in keys[:5])
-            return m.group(1), v
-    return m.group(1), None
+            return letter, v
+    return letter, None
 
 def flowchart_png(sc, path):
     """Grid layout: col 1 = phase spine, col 2 = decision diamond, col 3 = outcome. One row per branch."""
@@ -244,7 +249,7 @@ def flowchart_png(sc, path):
     prev = "start"
     for i, ph in enumerate(flow):
         n = f"p{i}"
-        acts = "".join(f'<TR><TD ALIGN="LEFT" BALIGN="LEFT"><FONT POINT-SIZE="8">&#9633; {_h(a, 40)}</FONT></TD></TR>' for a in ph.get("expected", [])[:3])
+        acts = "".join(f'<TR><TD ALIGN="LEFT" BALIGN="LEFT"><FONT POINT-SIZE="8">&#9633; {_h(_txt(a), 40)}</FONT></TD></TR>' for a in ph.get("expected", [])[:3])
         L.append(f'{n} [shape=plain, group=s, label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="2" WIDTH="190">'
                  f'<TR><TD ALIGN="LEFT" WIDTH="186" BGCOLOR="#DDDDDD"><B>{_h(ph.get("time", ""), 10)} min  |  {_h(ph.get("phase", ""), 30)}</B></TD></TR>{acts}</TABLE>>];')
         L.append(f'{prev} -> {n} [penwidth=1.8, weight=20];')
@@ -263,7 +268,7 @@ def flowchart_png(sc, path):
                 L.append(f'{d} [shape=hexagon, group=d, style=filled, fillcolor="#EEEEEE", margin="0.02,0.02", fontsize=8, label=<<FONT POINT-SIZE="6.5"><B>EXAMINER OPTION</B></FONT><BR/>{_h(br["if"], 24)}>];')
             else:
                 L.append(f'{d} [shape=diamond, group=d, margin="0.01,0.01", fontsize=8, label=<{_h(br["if"], 24)}>];')
-            stg, vit = _stage_row(sc, br["then"])
+            stg, vit = _stage_row(sc, br["then"], br.get("goto_stage"))
             body = _h(br["then"].replace("critical (evaluator discretion)", "**critical\u00a0(evaluator\u00a0discretion)**"), 34)
             if vit: body += f'<BR/><FONT POINT-SIZE="7.5"><I>{_h(vit, 40)}</I></FONT>'
             if crit and "critical" not in br["then"].lower(): body = "<B>CRITICAL</B> <I>(discretion)</I><BR/>" + body
@@ -354,20 +359,34 @@ RHYTHMS = {"sinus", "afib", "svt", "vt", "vf", "asystole", "chb", "avb1", "flutt
 def validate(sc):
     """Return list of problems; build refuses to run if any."""
     errs = []
-    letters = [str(v.get("stage", "?"))[:1].upper() for v in sc.get("vitals", [])]
+    # stage letter = optional vitals[].key, else first char of stage (Scenario Runner format; keep in sync with schema/ + src/lib/validate)
+    letters = [str(v.get("key") or str(v.get("stage", "?"))[:1]).upper() for v in sc.get("vitals", [])]
     if len(set(letters)) != len(letters): errs.append(f"duplicate vitals stage letters: {letters}")
+    flow_ids = [str(f.get("id") or f"p{i}") for i, f in enumerate(sc.get("flow", []))]
+    if len(set(flow_ids)) != len(flow_ids): errs.append(f"duplicate flow ids: {flow_ids}")
+    for i in sc.get("critical", []):
+        if isinstance(i, dict) and not i.get("text"): errs.append("critical item object needs text")
     for f in sc.get("flow", []):
         pfx = f"flow '{f.get('phase')}'"
         if not f.get("expected"): errs.append(f"{pfx}: no expected actions")
+        for i in f.get("expected", []) or []:
+            if isinstance(i, dict) and not i.get("text"): errs.append(f"{pfx}: expected item object needs text")
         for b in f.get("branches", []):
-            if set(b) - {"if", "then", "type"}: errs.append(f"{pfx}: unknown branch keys {set(b) - {'if', 'then', 'type'}}")
+            BK = {"if", "then", "type", "goto_stage", "goto_phase", "id"}
+            if set(b) - BK: errs.append(f"{pfx}: unknown branch keys {set(b) - BK}")
             if b.get("type") not in (None, "inject"): errs.append(f"{pfx}: branch type must be omitted or 'inject'")
             if not b.get("if") or not b.get("then"): errs.append(f"{pfx}: branch missing if/then"); continue
             if re.match(r"\s*(stage\b|advanced option)", b["if"], re.I): errs.append(f"{pfx}: IF '{b['if']}' is not a condition (use type:inject for examiner choices)")
             if len(b["if"]) > 75: errs.append(f"{pfx}: IF text > 75 chars")
+            refs = []
             for m in re.findall(r"Stage \*\*([A-Z])\*\*|Stage ([A-Z])\b", b["then"]):
-                L_ = (m[0] or m[1])
+                L_ = (m[0] or m[1]); refs.append(L_)
                 if L_ not in letters: errs.append(f"{pfx}: references Stage {L_} but vitals has {letters}")
+            if "goto_stage" in b:
+                g_ = b["goto_stage"]
+                if g_ not in letters: errs.append(f"{pfx}: goto_stage {g_} is not a vitals stage {letters}")
+                elif refs and g_ not in refs: errs.append(f"{pfx}: goto_stage {g_} disagrees with THEN text Stage {refs}")
+            if "goto_phase" in b and b["goto_phase"] not in flow_ids: errs.append(f"{pfx}: goto_phase {b['goto_phase']} is not a flow id {flow_ids}")
             if re.search(r"critical fail|miss = fail", b["then"], re.I): errs.append(f"{pfx}: use 'critical (evaluator discretion)'")
     LEAK = re.compile(r"\b(if |show when|after |overbag|over-bag|rosc|pea\b|no pulse|stage |normal wave|square|shark|instructor|recheck|use vitals|t\+\d|good |during |analysis)", re.I)
     for c in sc.get("show_cards", []):

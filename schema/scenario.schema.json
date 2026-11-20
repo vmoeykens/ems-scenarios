@@ -1,0 +1,275 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://uvm-rescue.local/ems-scenarios/scenario.schema.json",
+  "title": "EMS training scenario (UVM Rescue AEMT CCIT)",
+  "description": "One scenario file in scenarios/. Rendered to PDF by tools/ems_scenario.py and run interactively by the Scenario Runner app. Rules JSON Schema cannot express (stage-letter references, card-face hint regex, learn_more prompt length after templating) live in src/lib/validate/rules.ts, which mirrors validate() in tools/ems_scenario.py.",
+  "type": "object",
+  "required": ["title"],
+  "additionalProperties": false,
+  "properties": {
+    "id": { "type": "string", "pattern": "^(CARD|MED|TRA|ARR|PED|OB|ENV)-[0-9]{2}$" },
+    "title": { "type": "string", "minLength": 1 },
+    "version": { "type": "string" },
+    "category": { "type": "string" },
+    "level": { "type": "string" },
+    "run_time": { "type": "string" },
+    "difficulty": { "type": "string" },
+    "crew": { "type": "string" },
+    "protocols": { "$ref": "#/$defs/strings" },
+    "objectives": { "$ref": "#/$defs/strings" },
+    "resources": { "type": "string" },
+    "dispatch": { "type": "string" },
+    "scene": {
+      "description": "Rendered in key order. Any key except safety (scene safety is trained outside scenarios).",
+      "type": "object",
+      "properties": {
+        "location": { "type": "string" },
+        "setup": { "type": "string" },
+        "moulage": { "type": "string" },
+        "roles": { "type": "string" },
+        "safety": false
+      },
+      "additionalProperties": { "type": "string" }
+    },
+    "patient": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "name": { "type": "string" },
+        "age": { "type": ["string", "number"] },
+        "sex": { "type": "string" },
+        "weight_kg": { "type": ["string", "number"] },
+        "cc": { "type": "string" },
+        "on_arrival": { "type": "string" }
+      }
+    },
+    "history": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "SAMPLE": { "$ref": "#/$defs/pairs" },
+        "OPQRST": { "$ref": "#/$defs/pairs" }
+      }
+    },
+    "primary": { "$ref": "#/$defs/pairs" },
+    "secondary": { "$ref": "#/$defs/pairs" },
+    "vitals": { "type": "array", "items": { "$ref": "#/$defs/vitalsRow" } },
+    "vitals_note": { "type": "string" },
+    "blank_vitals_rows": { "type": "integer", "minimum": 0 },
+    "flow": { "type": "array", "items": { "$ref": "#/$defs/phase" } },
+    "critical": { "type": "array", "items": { "$ref": "#/$defs/checkItem" } },
+    "differentials": {
+      "description": "[dx, supports, against]",
+      "type": "array",
+      "items": {
+        "type": "array",
+        "prefixItems": [{ "type": "string" }, { "type": "string" }, { "type": "string" }],
+        "minItems": 3,
+        "maxItems": 3
+      }
+    },
+    "debrief": { "$ref": "#/$defs/strings" },
+    "crew_card": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "dispatch": { "type": "string" },
+        "on_arrival": { "type": "string" }
+      }
+    },
+    "actor_card": {
+      "description": "label -> text, rendered in key order",
+      "type": "object",
+      "additionalProperties": { "type": "string" }
+    },
+    "show_cards": { "type": "array", "items": { "$ref": "#/$defs/showCard" } },
+    "moulage_tags": { "type": "array", "items": { "$ref": "#/$defs/moulageTag" } },
+    "learn_more": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": { "topic": { "type": "string" }, "focus": { "type": "string" } }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["prompt"],
+          "properties": { "prompt": { "type": "string", "minLength": 1, "maxLength": 480 } }
+        }
+      ]
+    }
+  },
+  "$defs": {
+    "strings": { "type": "array", "items": { "type": "string" } },
+    "pairs": {
+      "description": "[label, text] rows",
+      "type": "array",
+      "items": {
+        "type": "array",
+        "prefixItems": [{ "type": "string" }, { "type": "string" }],
+        "minItems": 2,
+        "maxItems": 2
+      }
+    },
+    "id": { "type": "string", "pattern": "^[A-Za-z0-9_.-]+$" },
+    "stageKey": { "type": "string", "pattern": "^[A-Z]$" },
+    "vitalCell": { "type": ["string", "number"] },
+    "vitalName": { "enum": ["HR", "BP", "RR", "SpO2", "EtCO2", "BGL", "Temp", "Pain", "GCS", "Pupils", "other"] },
+    "vitalsRow": {
+      "type": "object",
+      "required": ["stage"],
+      "additionalProperties": false,
+      "properties": {
+        "stage": { "type": "string", "minLength": 1, "description": "e.g. 'C Poor CPR'; first char = stage letter unless key is set" },
+        "key": { "$ref": "#/$defs/stageKey", "description": "optional stage letter; default = first char of stage" },
+        "trigger": { "type": "string" },
+        "HR": { "$ref": "#/$defs/vitalCell" },
+        "BP": { "$ref": "#/$defs/vitalCell" },
+        "RR": { "$ref": "#/$defs/vitalCell" },
+        "SpO2": { "$ref": "#/$defs/vitalCell" },
+        "EtCO2": { "$ref": "#/$defs/vitalCell" },
+        "BGL": { "$ref": "#/$defs/vitalCell" },
+        "Temp": { "$ref": "#/$defs/vitalCell" },
+        "Pain": { "$ref": "#/$defs/vitalCell" },
+        "GCS": { "$ref": "#/$defs/vitalCell" },
+        "Pupils": { "$ref": "#/$defs/vitalCell" },
+        "other": { "type": "string" },
+        "bold": { "type": "array", "items": { "$ref": "#/$defs/vitalName" } }
+      }
+    },
+    "checkItem": {
+      "description": "plain string, or {id, text} for stable ids in run logs",
+      "oneOf": [
+        { "type": "string", "minLength": 1 },
+        {
+          "type": "object",
+          "required": ["id", "text"],
+          "additionalProperties": false,
+          "properties": { "id": { "$ref": "#/$defs/id" }, "text": { "type": "string", "minLength": 1 } }
+        }
+      ]
+    },
+    "branch": {
+      "description": "Crew branch {if, then} or examiner option {type:'inject', if, then}. goto_stage/goto_phase/id are optional machine-readable links.",
+      "type": "object",
+      "required": ["if", "then"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "type": { "const": "inject" },
+        "if": { "type": "string", "minLength": 1, "maxLength": 75 },
+        "then": { "type": "string", "minLength": 1 },
+        "goto_stage": { "$ref": "#/$defs/stageKey" },
+        "goto_phase": { "$ref": "#/$defs/id" }
+      }
+    },
+    "phase": {
+      "type": "object",
+      "required": ["expected"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id", "description": "optional; default p0, p1, ... by index" },
+        "time": { "type": "string" },
+        "phase": { "type": "string" },
+        "give": { "type": "string" },
+        "expected": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/checkItem" } },
+        "branches": { "type": "array", "items": { "$ref": "#/$defs/branch" } }
+      }
+    },
+    "rhythm": { "enum": ["sinus", "afib", "svt", "vt", "vf", "asystole", "chb", "avb1", "flutter"] },
+    "lead": { "enum": ["I", "II", "III", "aVR", "aVL", "aVF", "V1", "V2", "V3", "V4", "V5", "V6"] },
+    "width": { "enum": ["full", "half"] },
+    "showCard": {
+      "description": "Card face = title/caption/body only (what the device/scene shows). cue = instructor-only.",
+      "type": "object",
+      "required": ["type"],
+      "properties": {
+        "type": { "enum": ["12lead", "strip", "capno", "text", "image"] }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "type": { "const": "12lead" } }, "required": ["type"] },
+          "then": {
+            "additionalProperties": false,
+            "properties": {
+              "type": true, "title": { "type": "string" }, "caption": { "type": "string" }, "cue": { "type": "string" },
+              "width": { "$ref": "#/$defs/width", "description": "ignored: 12-leads always print full width" },
+              "rhythm": { "$ref": "#/$defs/rhythm" },
+              "rate": { "type": "number", "minimum": 0 },
+              "p_rate": { "type": "number", "minimum": 0 },
+              "st": {
+                "description": "ST shift in mm per lead (+ elevation / - depression)",
+                "type": "object",
+                "propertyNames": { "$ref": "#/$defs/lead" },
+                "additionalProperties": { "type": "number" }
+              }
+            }
+          }
+        },
+        {
+          "if": { "properties": { "type": { "const": "strip" } }, "required": ["type"] },
+          "then": {
+            "additionalProperties": false,
+            "properties": {
+              "type": true, "title": { "type": "string" }, "caption": { "type": "string" }, "cue": { "type": "string" },
+              "width": { "$ref": "#/$defs/width" },
+              "rhythm": { "$ref": "#/$defs/rhythm" },
+              "rate": { "type": "number", "minimum": 0 },
+              "p_rate": { "type": "number", "minimum": 0 },
+              "lead": { "$ref": "#/$defs/lead" },
+              "st": { "type": "number", "description": "ST shift in mm" },
+              "seconds": { "type": "number", "exclusiveMinimum": 0 }
+            }
+          }
+        },
+        {
+          "if": { "properties": { "type": { "const": "capno" } }, "required": ["type"] },
+          "then": {
+            "additionalProperties": false,
+            "properties": {
+              "type": true, "title": { "type": "string" }, "caption": { "type": "string" }, "cue": { "type": "string" },
+              "width": { "$ref": "#/$defs/width" },
+              "pattern": { "enum": ["normal", "shark", "cpr"] },
+              "etco2": { "type": "number", "minimum": 0 },
+              "rr": { "type": "number", "minimum": 0 }
+            }
+          }
+        },
+        {
+          "if": { "properties": { "type": { "const": "text" } }, "required": ["type"] },
+          "then": {
+            "additionalProperties": false,
+            "properties": {
+              "type": true, "title": { "type": "string" }, "cue": { "type": "string" },
+              "width": { "$ref": "#/$defs/width" },
+              "body": { "type": "string" }
+            }
+          }
+        },
+        {
+          "if": { "properties": { "type": { "const": "image" } }, "required": ["type"] },
+          "then": {
+            "required": ["path"],
+            "additionalProperties": false,
+            "properties": {
+              "type": true, "title": { "type": "string" }, "caption": { "type": "string" }, "cue": { "type": "string" },
+              "width": { "$ref": "#/$defs/width" },
+              "path": { "type": "string", "minLength": 1 }
+            }
+          }
+        }
+      ]
+    },
+    "moulageTag": {
+      "type": "object",
+      "required": ["region", "text"],
+      "additionalProperties": false,
+      "properties": {
+        "region": { "type": "string", "minLength": 1 },
+        "text": { "type": "string", "minLength": 1 },
+        "cue": { "type": "string" }
+      }
+    }
+  }
+}

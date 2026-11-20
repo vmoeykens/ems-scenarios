@@ -1,0 +1,105 @@
+{
+  "id": "MED-99",
+  "title": "Fixture - new optional Runner fields",
+  "version": "test",
+  "scene": {
+    "location": "Test room"
+  },
+  "patient": {
+    "name": "Test Patient",
+    "age": "50",
+    "sex": "M",
+    "weight_kg": "80",
+    "cc": "Test",
+    "on_arrival": "Sitting up"
+  },
+  "vitals": [
+    {
+      "stage": "A Initial",
+      "trigger": "First set",
+      "HR": "100",
+      "BP": "120/80",
+      "RR": "16",
+      "SpO2": "97%",
+      "other": "-",
+      "key": "A"
+    },
+    {
+      "stage": "Better (after tx)",
+      "trigger": "After tx",
+      "HR": "90",
+      "BP": "118/78",
+      "RR": "14",
+      "SpO2": "98%",
+      "other": "-",
+      "key": "B"
+    }
+  ],
+  "flow": [
+    {
+      "time": "0-5",
+      "phase": "Arrival",
+      "give": "Stage **A**.",
+      "expected": [
+        {
+          "id": "roles",
+          "text": "Roles assigned"
+        },
+        "Vitals obtained"
+      ],
+      "branches": [
+        {
+          "id": "treat",
+          "if": "Crew treats promptly",
+          "then": "Stage **B**",
+          "goto_stage": "B",
+          "goto_phase": "transport"
+        },
+        {
+          "type": "inject",
+          "if": "Monitor battery dies",
+          "then": "switch to backup",
+          "goto_stage": "A"
+        }
+      ],
+      "id": "arrival"
+    },
+    {
+      "time": "5+",
+      "phase": "Transport",
+      "give": "Stage **B**.",
+      "expected": [
+        "Report given",
+        "Reassess q5"
+      ],
+      "id": "transport"
+    }
+  ],
+  "critical": [
+    {
+      "id": "no-vitals",
+      "text": "No vitals obtained"
+    },
+    "No report"
+  ],
+  "show_cards": [
+    {
+      "type": "strip",
+      "width": "half",
+      "title": "MONITOR - Lead II",
+      "caption": "Initial",
+      "rhythm": "sinus",
+      "rate": 100
+    }
+  ],
+  "moulage_tags": [
+    {
+      "region": "Skin",
+      "text": "Warm, dry"
+    }
+  ],
+  "learn_more": {
+    "topic": "test topic",
+    "focus": "test focus"
+  }
+}

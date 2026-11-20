@@ -27,6 +27,34 @@ Origin: viability assessment + Claude Code prompt from the "EMS Scenarios" claud
 - Tailwind for styling.
 - ajv (or zod generated from the schema) validating against `schema/scenario.schema.json`.
 
+## Visual design - "paper on the web"
+
+User requirement (Nov 2026): "The UI of the application should match the paper one relatively closely - imagine 'paper on the web'. Still add nice interactivity and other web UI tools, but keep the simple look, broadly greyscale except for very specific pointed places."
+
+- **Instructor UI mirrors the PDF sheet** (`tools/ems_scenario.py`): white page, black text, Helvetica/Arial-style sans, dense layout; black section header bars with white UPPERCASE titles; thin black grid lines; light-grey (#e0e0e0) table header rows; zebra rows (#f2f2f2); square checkboxes; **bold** for abnormal/key values; dashed lines where the paper has cut lines. Same section names and order as the PDF pages: p.1 setup / patient / vitals, p.2 flow / critical / differentials / debrief, p.3 decision flowchart, p.4 handouts / show cards, p.5 moulage tags + learn-more.
+- **Interactivity fits the paper look**: tap-to-reveal, timestamped checkboxes, clock, branch buttons, modals, tooltips, drag-drop import are all flat: no shadows, no gradients, no rounded "app" chrome beyond a minimal 2 px, no decorative color. Controls look like the sheet's own elements (a branch button = the IF -> THEN row with a border; a vital tile = a table cell).
+- **Palette**: greyscale tokens only, plus a small set of named semantic accents. The Tailwind theme removes the default color palette, so nothing else is available.
+
+  | Token | Value | Use |
+  |---|---|---|
+  | `paper` | #ffffff | page background |
+  | `ink` | #000000 | text, grid lines, section bars, checkboxes |
+  | `rule` | #8c8c8c | secondary rules, writing lines, muted text (PDF GREY) |
+  | `head` | #e0e0e0 | table header rows, examiner-option shading (PDF LIGHT) |
+  | `zebra` | #f2f2f2 | alternate table rows |
+  | `cue` | #404040 | instructor-only cue text (italic, as in the PDF scrap strips) |
+
+  | Accent | Value | Allowed only for |
+  |---|---|---|
+  | `alert` | #b91c1c | critical item marked MISSED; the run's "flagged for evaluator discretion" banner; validation errors on import |
+  | `live` | #15803d | the scenario clock while running (dot + digits); nothing else |
+  | `active` | #1d4ed8 | marker for the current flow phase and current vitals stage (left bar / outline) |
+  | `pushed` | #b45309 | small marker on an item currently shown on the student display (vital, card, tag) |
+
+  Revealed vs hidden vitals is greyscale first (hidden = dashed grey cell "tap", revealed = solid value); `pushed` is only added if testing shows that is ambiguous. Any new accent needs a row in this table.
+- **Print**: a print stylesheet renders the screens as the paper sheet: accents become black (MISSED prints as bold "MISSED"), interactive chrome hidden, footer kept. The debrief summary export uses the same stylesheet.
+- **Student display exception**: the `/display` monitor keeps the patient-monitor look (black background, large white numerals); waveforms may use a single accent (`monitor-wave`). This is the only dark/colored screen. (Open question in `docs/PLAN.md`: confirm, or use a paper-style display instead.)
+
 ## Phase 0 - Schema (STOP for review after this phase)
 
 1. Write `schema/scenario.schema.json` describing the current format exactly as the 10 files use it: `id, title, version, category, level, run_time, difficulty, crew, protocols, objectives, resources, dispatch, scene{...}, patient, history.SAMPLE/OPQRST, primary, secondary, vitals[], vitals_note, blank_vitals_rows, flow[] (time, phase, give, expected, branches[] with optional type:"inject"), critical, differentials, debrief, crew_card, actor_card, show_cards[] (12lead | strip | capno | text | image, each with optional cue), moulage_tags[] {region, text, cue?}, learn_more {topic, focus} | {prompt}`.
