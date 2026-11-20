@@ -1,0 +1,482 @@
+{
+  "id": "TRA-01",
+  "title": "Rollover MVC - unstable pelvis",
+  "version": "v1.1 | VT Protocols 2025 | UVM Rescue",
+  "category": "Trauma",
+  "level": "AEMT CCIT",
+  "run_time": "20-25 min",
+  "difficulty": "Hard",
+  "crew": "CC + 2, FD on scene",
+  "protocols": [
+    "1.2 Routine Pt Care",
+    "4.12 Traumatic Emergencies",
+    "4.5 Musculoskeletal (pelvis)",
+    "4.6 Spinal",
+    "4.9 Trauma Triage",
+    "2.24A Shock",
+    "8.0 Air Medical"
+  ],
+  "objectives": [
+    "Recognize hemorrhagic shock from pelvic fx (HR > SBP)",
+    "Pelvic binder; scoop instead of log-roll",
+    "Scene time < 10 min; early TRAUMA ALERT",
+    "Destination: UVMMC Level 1 by ground (<= 60 min, 4.9); recognize air is not faster",
+    "Permissive fluids in 250 mL boluses; prevent hypothermia"
+  ],
+  "resources": "Pelvic binder (or sheet), scoop, collar, IV x2, warm NS, blankets. UVMMC (Level 1) ~20 min ground; air medical ETA ~20 min + LZ time",
+  "dispatch": "UVM Rescue, respond to Route 116 in Hinesburg near Silver St for a single-vehicle rollover. One patient, conscious. Fire is en route. Time out 1735.",
+  "scene": {
+    "location": "Rural 2-lane, ~20 min from UVMMC, dusk, 28 F, wet leaves. Car upright in ditch after 1 roll, roof crushed ~14 in at driver side.",
+    "setup": "Pt still in driver seat, restrained, airbags deployed. Driver door removed by FD.",
+    "moulage": "Seatbelt abrasion L shoulder to R hip, glass in hair, pale.",
+    "roles": "Pt actor; FD officer (asks \"want us to backboard her?\"); PD."
+  },
+  "patient": {
+    "name": "Megan Ouellette",
+    "age": "46",
+    "sex": "F",
+    "weight_kg": "68",
+    "cc": "Hip / low belly pain",
+    "on_arrival": "Restrained in seat, pale, anxious, moaning, guarding pelvis, answers questions."
+  },
+  "history": {
+    "SAMPLE": [
+      [
+        "S",
+        "Pelvic/groin pain, low abd pain, \"cold\", thirsty"
+      ],
+      [
+        "A",
+        "NKDA"
+      ],
+      [
+        "M",
+        "Sertraline, oral contraceptive"
+      ],
+      [
+        "P",
+        "Depression, otherwise healthy"
+      ],
+      [
+        "L",
+        "Coffee 1500"
+      ],
+      [
+        "E",
+        "Swerved for deer, went off road, rolled once. Belted. No LOC"
+      ]
+    ],
+    "OPQRST": [
+      [
+        "O",
+        "At crash, ~20 min ago"
+      ],
+      [
+        "P",
+        "Any movement of hips/legs = severe"
+      ],
+      [
+        "Q",
+        "Deep, crushing"
+      ],
+      [
+        "R",
+        "Groin and low back"
+      ],
+      [
+        "S",
+        "9/10"
+      ],
+      [
+        "T",
+        "Constant, worse"
+      ]
+    ]
+  },
+  "primary": [
+    [
+      "X / hemorrhage",
+      "No external bleeding"
+    ],
+    [
+      "Airway",
+      "Patent, talking"
+    ],
+    [
+      "Breathing",
+      "RR 24, equal, seatbelt abrasion; clear bilat"
+    ],
+    [
+      "Circulation",
+      "Radial weak, rapid. Pale, cool, clammy. **Shock**"
+    ],
+    [
+      "Disability",
+      "GCS 15 initially, anxious. Moves all 4, pain w/ legs"
+    ],
+    [
+      "Exposure",
+      "Pelvic instability on single gentle compression; perineal bruising. Cold - cover"
+    ],
+    [
+      "Priority / impression",
+      "**HIGH**: hemorrhagic shock, pelvic fx. Load and go"
+    ]
+  ],
+  "secondary": [
+    [
+      "Head",
+      "Scalp lacs (glass), no deformity"
+    ],
+    [
+      "Neck",
+      "Midline C-spine tenderness: **none**; mechanism high-risk"
+    ],
+    [
+      "Chest",
+      "Belt abrasion, no crepitus, equal sounds"
+    ],
+    [
+      "Abdomen",
+      "Lower abd tender, belt sign below umbilicus"
+    ],
+    [
+      "Pelvis",
+      "**Unstable**, pain - DO NOT re-check"
+    ],
+    [
+      "Extremities",
+      "R leg slightly shortened, ext rotated; distal pulses weak equal"
+    ],
+    [
+      "Back",
+      "Low back pain; check during scoop"
+    ],
+    [
+      "Neuro",
+      "Sensation intact all 4"
+    ]
+  ],
+  "vitals": [
+    {
+      "stage": "A Initial",
+      "trigger": "First set (in car)",
+      "HR": "**124**",
+      "BP": "**96/64**",
+      "RR": "24",
+      "SpO2": "96% RA",
+      "EtCO2": "30",
+      "BGL": "128",
+      "Temp": "96.4",
+      "Pain": "9",
+      "GCS": "15",
+      "Pupils": "4 PERRL",
+      "other": "Pale/cool/clammy. **HR > SBP**",
+      "bold": [
+        "HR",
+        "BP"
+      ]
+    },
+    {
+      "stage": "B Binder",
+      "trigger": "Binder + warmed + 250 mL NS (~T+10)",
+      "HR": "118",
+      "BP": "98/66",
+      "RR": "22",
+      "SpO2": "97%",
+      "EtCO2": "31",
+      "BGL": "-",
+      "Temp": "-",
+      "Pain": "7",
+      "GCS": "15",
+      "Pupils": "-",
+      "other": "Radial palpable. Pain better after binder"
+    },
+    {
+      "stage": "C No binder/ delay",
+      "trigger": "IF no binder or scene > 15 min",
+      "HR": "**138**",
+      "BP": "**78/48**",
+      "RR": "28",
+      "SpO2": "95%",
+      "EtCO2": "**24**",
+      "BGL": "-",
+      "Temp": "95.8",
+      "Pain": "8",
+      "GCS": "**14**",
+      "Pupils": "-",
+      "other": "Confused, radial lost, mottled",
+      "bold": [
+        "HR",
+        "BP",
+        "GCS",
+        "EtCO2"
+      ]
+    },
+    {
+      "stage": "D Over-fluid",
+      "trigger": "IF wide-open fluids > 1 L fast",
+      "HR": "120",
+      "BP": "118/74",
+      "RR": "24",
+      "SpO2": "95%",
+      "EtCO2": "30",
+      "BGL": "-",
+      "Temp": "**95.2**",
+      "Pain": "8",
+      "GCS": "15",
+      "Pupils": "-",
+      "other": "BP up briefly, then drops 10 min later (re-bleed, dilution, hypothermia)"
+    },
+    {
+      "stage": "E Transport",
+      "trigger": "En route q5",
+      "HR": "116",
+      "BP": "96/62",
+      "RR": "22",
+      "SpO2": "97%",
+      "EtCO2": "32",
+      "BGL": "-",
+      "Temp": "96.2",
+      "Pain": "7",
+      "GCS": "15",
+      "Pupils": "-",
+      "other": "Titrated 250 mL boluses to radial pulse / mentation"
+    }
+  ],
+  "flow": [
+    {
+      "time": "0-2",
+      "phase": "Size-up",
+      "give": "Read dispatch. FD: \"Car's stable, door's off.\" Give mechanism (roof intrusion 14 in).",
+      "expected": [
+        "High-risk mechanism identified (4.9)",
+        "Roles assigned; FD tasked",
+        "Early TRAUMA ALERT plan; minimize scene time"
+      ]
+    },
+    {
+      "time": "2-5",
+      "phase": "Primary in vehicle",
+      "give": "Stage **A**. Pelvic exam: instability with ONE gentle compression.",
+      "branches": [
+        {
+          "if": "Pelvis rocked repeatedly",
+          "then": "pt screams; debrief clot disruption"
+        }
+      ],
+      "expected": [
+        "Shock recognized (HR > SBP)",
+        "Pelvis assessed once only",
+        "SMR decision verbalized (4.6)"
+      ]
+    },
+    {
+      "time": "5-10",
+      "phase": "Extrication / packaging",
+      "give": "FD officer: \"Want us to log-roll her onto a board?\"",
+      "branches": [
+        {
+          "if": "Log-roll / board",
+          "then": "pain 10/10, Stage **C**"
+        },
+        {
+          "if": "Binder at trochanters + scoop/ rapid extrication",
+          "then": "Stage **B**"
+        }
+      ],
+      "expected": [
+        "Pelvic binder at greater trochanters",
+        "Scoop, not log-roll; legs bound together",
+        "Warm blankets, heat on in rig"
+      ]
+    },
+    {
+      "time": "8-12",
+      "phase": "Destination decision",
+      "give": "Ask CC: \"Where are we going and how?\" (UVMMC 20 min ground; air ETA 20 min + LZ; intercept ETA 15 min)",
+      "branches": [
+        {
+          "if": "Air requested",
+          "then": "flight arrives after ground would reach UVMMC; debrief when air helps"
+        },
+        {
+          "if": "Waits on scene for intercept",
+          "then": "scene time > 15 min -> Stage **C**"
+        }
+      ],
+      "expected": [
+        "TRAUMA ALERT to UVMMC",
+        "Ground, direct to UVMMC (Level 1)",
+        "Intercept only en route, no delay"
+      ]
+    },
+    {
+      "time": "10-20",
+      "phase": "Treatment en route",
+      "give": "Second IV hard (cold, vasoconstricted).",
+      "branches": [
+        {
+          "if": "Wide-open fluids",
+          "then": "Stage **D**"
+        },
+        {
+          "type": "inject",
+          "if": "BP drops to 78/48 despite binder",
+          "then": "Stage **C** values; expect 250 mL boluses to radial pulse/mentation, MD after 1 L, update UVMMC"
+        },
+        {
+          "type": "inject",
+          "if": "2nd IV fails twice",
+          "then": "expect IO (6.4) or go with one line; no added scene/delay"
+        }
+      ],
+      "expected": [
+        "IV x2 large bore, warm NS",
+        "250 mL boluses to radial pulse/mentation, SBP ~90",
+        "Med Direction after 1 L; reassess q5"
+      ]
+    },
+    {
+      "time": "20+",
+      "phase": "Report / handoff",
+      "give": "Stage **E**. Evaluator = UVMMC trauma team.",
+      "expected": [
+        "MIST report: mechanism, injuries, signs, tx",
+        "Scene time stated (goal < 10 min)",
+        "SIREN: binder time, fluid total"
+      ]
+    }
+  ],
+  "critical": [
+    "Repeated pelvic compression / rocking",
+    "Log-roll onto long board with suspected pelvic fx",
+    "No pelvic stabilization",
+    "Scene time > 15 min without cause",
+    "Hemorrhagic shock not recognized/no TRAUMA ALERT",
+    "Inappropriate destination w/o rationale (4.9)",
+    "Unrestricted wide-open fluids / no reassessment",
+    "No hypothermia prevention"
+  ],
+  "differentials": [
+    [
+      "Pelvic fx w/ hemorrhage (dx)",
+      "Unstable pelvis, groin pain, shock, leg shortened",
+      "-"
+    ],
+    [
+      "Intra-abd bleed (spleen/liver)",
+      "Belt sign, abd tenderness",
+      "Can coexist - same plan"
+    ],
+    [
+      "Femur / hip fx",
+      "Leg shortened, ext rotated",
+      "Pelvic instability, perineal bruising"
+    ],
+    [
+      "Spinal cord injury (neurogenic)",
+      "Mechanism, back pain",
+      "Tachycardic, cool skin, intact sensation"
+    ],
+    [
+      "Tension PTX",
+      "Chest belt abrasion, shock",
+      "Equal sounds, no JVD, SpO2 96"
+    ],
+    [
+      "Bladder / urethral injury",
+      "Pelvic fx, low abd pain",
+      "Secondary concern, same tx"
+    ]
+  ],
+  "debrief": [
+    "Which 4.9 criteria made this a Level 1 patient?",
+    "Why scoop instead of log-roll for pelvic fx?",
+    "Why limit fluids? What's your endpoint?",
+    "Why ground over air here? When would air make sense?",
+    "How did you use the fire department?"
+  ],
+  "crew_card": {
+    "dispatch": "Route 116, Hinesburg, near Silver St. Single-vehicle rollover. 1 pt, conscious. FD en route. 28 F, dusk, wet road.",
+    "on_arrival": "Sedan upright in ditch, roof crushed on driver side, airbags out. Woman in driver seat, belted, moaning, pale. FD stabilizing car."
+  },
+  "actor_card": {
+    "Act": "Pale, shivering, moan. Hold your hips. Answer clearly at first.",
+    "Pelvis touched": "Yell in pain. If touched again, scream louder and cry.",
+    "If log-rolled": "Scream 10/10, then get confused (\"where am I?\").",
+    "After binder": "\"That's a little better.\"",
+    "Ask": "\"Is my car totaled? Can someone call my husband?\""
+  },
+  "show_cards": [
+    {
+      "type": "text",
+      "width": "half",
+      "title": "VEHICLE",
+      "body": "Roof intrusion driver side ~14 in.\nAirbags deployed. Belt worn.\nWindshield starred passenger side."
+    },
+    {
+      "type": "text",
+      "width": "half",
+      "title": "PELVIS / LEGS",
+      "body": "Pelvis shifts with gentle pressure.\nBruising perineum.\nR leg 2 cm shorter, rotated out."
+    },
+    {
+      "type": "text",
+      "width": "half",
+      "title": "ABDOMEN",
+      "body": "Seatbelt bruise across lower abdomen.\nTender below navel. Not distended (yet)."
+    },
+    {
+      "type": "strip",
+      "width": "half",
+      "title": "MONITOR - Lead II",
+      "caption": "Initial",
+      "rhythm": "sinus",
+      "rate": 124
+    }
+  ],
+  "moulage_tags": [
+    {
+      "region": "Scalp",
+      "text": "Small cuts, glass in hair"
+    },
+    {
+      "region": "Chest",
+      "text": "Seatbelt bruise L shoulder to R hip"
+    },
+    {
+      "region": "Lower abdomen",
+      "text": "Belt bruise below navel; tender"
+    },
+    {
+      "region": "Pelvis",
+      "text": "Shifts with gentle pressure; severe pain",
+      "cue": "Allow ONE gentle compression; scream if repeated"
+    },
+    {
+      "region": "Groin / perineum",
+      "text": "Bruising"
+    },
+    {
+      "region": "R leg",
+      "text": "About 2 cm shorter, rotated outward"
+    },
+    {
+      "region": "Feet",
+      "text": "Pulses weak but equal; can feel touch"
+    },
+    {
+      "region": "Skin",
+      "text": "Pale, cool, clammy"
+    },
+    {
+      "region": "Back (lung sounds)",
+      "text": "Clear and equal"
+    }
+  ],
+  "learn_more": {
+    "topic": "hemorrhagic shock from an unstable pelvic fracture after a rollover crash",
+    "focus": "pelvic binders, scoop vs log-roll, permissive hypotension, and trauma triage / scene-time evidence"
+  }
+}

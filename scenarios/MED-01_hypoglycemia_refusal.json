@@ -1,0 +1,463 @@
+{
+  "id": "MED-01",
+  "title": "Hypoglycemia - sulfonylurea refusal",
+  "version": "v1.1 | VT Protocols 2025 | UVM Rescue",
+  "category": "Medical",
+  "level": "AEMT CCIT",
+  "run_time": "20-25 min",
+  "difficulty": "Moderate",
+  "crew": "CC + 1",
+  "protocols": [
+    "1.2 Routine Pt Care",
+    "2.3A Altered Mental Status",
+    "2.8A Hypoglycemia",
+    "6.4 IO",
+    "8.15 Refusal of Care"
+  ],
+  "objectives": [
+    "BGL early in any AMS",
+    "IV D10 titrated to mental status / BGL >= 60; glucagon IM if no IV",
+    "Recheck BGL 5 min post-dextrose",
+    "Recognize sulfonylurea = recurrent hypoglycemia risk",
+    "Capacity/informed-refusal process; Med Direction before any treat-and-release"
+  ],
+  "resources": "Glucometer, IV kit, D10 250 mL, glucagon 1 mg, oral glucose, IO, refusal / non-transport form. UVMMC ~10 min",
+  "dispatch": "UVM Rescue, respond to 9 Birch Hollow Ln for a 74-year-old female, confused. Caller is her daughter. Patient is breathing. Time out 1540.",
+  "scene": {
+    "location": "Small ranch home, living room recliner. Warm, TV on.",
+    "setup": "Pt slumped in recliner, half-eaten crackers on tray, pill organizer on side table (today's AM slot empty).",
+    "moulage": "Misted water for diaphoresis, pale powder.",
+    "roles": "Pt actor; daughter (history, later pushes for no transport)."
+  },
+  "patient": {
+    "name": "Ruth Lambert",
+    "age": "74",
+    "sex": "F",
+    "weight_kg": "62",
+    "cc": "Confusion x ~1 hr",
+    "on_arrival": "Slumped, sweaty, mumbling, opens eyes to voice, picks at blanket. Not following commands."
+  },
+  "history": {
+    "SAMPLE": [
+      [
+        "S",
+        "Confused, sweaty, weak (daughter). Stomach bug x2 days, barely eating"
+      ],
+      [
+        "A",
+        "Sulfa (hives)"
+      ],
+      [
+        "M",
+        "**Glipizide 10 mg BID** (took AM dose), lisinopril 10 mg, atorvastatin 20 mg"
+      ],
+      [
+        "P",
+        "T2DM, HTN, high cholesterol. No prior hypoglycemic episodes"
+      ],
+      [
+        "L",
+        "Few crackers ~1130. Little fluid"
+      ],
+      [
+        "E",
+        "Daughter called at 1500, found her \"not making sense\""
+      ]
+    ],
+    "OPQRST": [
+      [
+        "O",
+        "Normal at 1100 phone call; confused by ~1500"
+      ],
+      [
+        "P",
+        "N/A"
+      ],
+      [
+        "Q",
+        "Post-tx: \"just shaky and hungry\""
+      ],
+      [
+        "R",
+        "N/A"
+      ],
+      [
+        "S",
+        "N/A"
+      ],
+      [
+        "T",
+        "Gradual over afternoon"
+      ]
+    ]
+  },
+  "primary": [
+    [
+      "X / hemorrhage",
+      "None"
+    ],
+    [
+      "Airway",
+      "Patent, managing secretions"
+    ],
+    [
+      "Breathing",
+      "RR 18, adequate, lungs clear"
+    ],
+    [
+      "Circulation",
+      "Radial strong, rapid. Skin pale, cool, **diaphoretic**"
+    ],
+    [
+      "Disability",
+      "GCS 13 (E3 V4 M6). Moves all 4. **BGL is the key D item**"
+    ],
+    [
+      "Exposure",
+      "No trauma, no rash, no insulin pump/CGM"
+    ],
+    [
+      "Priority / impression",
+      "AMS - hypoglycemia until proven otherwise; stroke screen after correction"
+    ]
+  ],
+  "secondary": [
+    [
+      "Head / neck",
+      "No trauma, no tongue bite"
+    ],
+    [
+      "Neuro",
+      "No facial droop, grips equal (weak), no drift. Speech confused, not slurred"
+    ],
+    [
+      "Chest / lungs",
+      "Clear, equal"
+    ],
+    [
+      "Abdomen",
+      "Soft, mild diffuse tenderness (GI bug)"
+    ],
+    [
+      "Extremities",
+      "Poor veins; L AC best. No edema"
+    ],
+    [
+      "Skin",
+      "Dry mucous membranes, tenting"
+    ],
+    [
+      "Post-dextrose",
+      "A&Ox4, no deficits, \"hungry\""
+    ],
+    [
+      "Capacity check",
+      "Oriented x4 after tx; can explain risk only if crew explains it"
+    ]
+  ],
+  "vitals": [
+    {
+      "stage": "A Initial",
+      "trigger": "First set",
+      "HR": "108",
+      "BP": "142/84",
+      "RR": "18",
+      "SpO2": "97% RA",
+      "EtCO2": "36",
+      "BGL": "**38**",
+      "Temp": "98.0",
+      "Pain": "-",
+      "GCS": "13",
+      "Pupils": "3 PERRL",
+      "other": "Diaphoretic, pale. Sinus tach",
+      "bold": [
+        "BGL",
+        "GCS",
+        "HR"
+      ]
+    },
+    {
+      "stage": "B Post D10",
+      "trigger": "~150 mL D10 in; recheck 5 min after",
+      "HR": "92",
+      "BP": "138/80",
+      "RR": "16",
+      "SpO2": "98%",
+      "EtCO2": "37",
+      "BGL": "**112**",
+      "Temp": "-",
+      "Pain": "-",
+      "GCS": "15",
+      "Pupils": "-",
+      "other": "Diaphoresis resolving. Talking, embarrassed"
+    },
+    {
+      "stage": "C Glucagon",
+      "trigger": "IF no IV -> glucagon 1 mg IM; BGL at 15 min",
+      "HR": "100",
+      "BP": "140/82",
+      "RR": "16",
+      "SpO2": "98%",
+      "EtCO2": "-",
+      "BGL": "74",
+      "Temp": "-",
+      "Pain": "-",
+      "GCS": "14",
+      "Pupils": "-",
+      "other": "Slower recovery, nauseated. Glucagon may fail (poor intake/ glycogen)"
+    },
+    {
+      "stage": "D Relapse",
+      "trigger": "IF still on scene at T+25 (refusal debate)",
+      "HR": "104",
+      "BP": "140/84",
+      "RR": "18",
+      "SpO2": "97%",
+      "EtCO2": "-",
+      "BGL": "**54**",
+      "Temp": "-",
+      "Pain": "-",
+      "GCS": "14",
+      "Pupils": "-",
+      "other": "Shaky, sweaty again, repeating herself",
+      "bold": [
+        "BGL"
+      ]
+    },
+    {
+      "stage": "E Transport",
+      "trigger": "En route q5-10 min BGL",
+      "HR": "90",
+      "BP": "136/78",
+      "RR": "16",
+      "SpO2": "98%",
+      "EtCO2": "37",
+      "BGL": "96",
+      "Temp": "-",
+      "Pain": "-",
+      "GCS": "15",
+      "Pupils": "-",
+      "other": "Eating graham crackers if offered"
+    }
+  ],
+  "flow": [
+    {
+      "time": "0-3",
+      "phase": "Arrival / primary",
+      "give": "Read dispatch. Daughter: \"She was fine this morning.\" Give primary + Stage **A** (BGL only when checked).",
+      "expected": [
+        "Roles assigned",
+        "BGL obtained early (<5 min)",
+        "Intercept request considered"
+      ]
+    },
+    {
+      "time": "3-8",
+      "phase": "Treatment",
+      "give": "Veins poor: first IV attempt fails, second (L AC 20g) succeeds.",
+      "branches": [
+        {
+          "if": "Oral glucose attempted at GCS 13",
+          "then": "pt can't follow commands, coughs; aspiration risk - debrief"
+        },
+        {
+          "if": "Crew abandons IV, gives glucagon",
+          "then": "Stage **C**"
+        },
+        {
+          "type": "inject",
+          "if": "IV infiltrates mid-D10 (site swelling)",
+          "then": "pt stays GCS 13; expect stop infusion, new site or glucagon 1 mg IM, watch site (2.8A)"
+        }
+      ],
+      "expected": [
+        "IV established (or glucagon 1 mg IM)",
+        "D10 bolus titrated, stop at baseline/BGL >= 60",
+        "IV site watched for extravasation"
+      ]
+    },
+    {
+      "time": "8-12",
+      "phase": "Reassess",
+      "give": "Stage **B** at 5 min recheck. Pt: \"Oh my, I'm so sorry for all this.\"",
+      "expected": [
+        "BGL rechecked 5 min post",
+        "Stroke screen repeated, cause sought",
+        "Med list reviewed: **glipizide** noted"
+      ]
+    },
+    {
+      "time": "12-18",
+      "phase": "Refusal decision",
+      "give": "Pt + daughter: \"She's fine now, I'll make her a sandwich. We don't need the hospital.\"",
+      "branches": [
+        {
+          "if": "Crew accepts refusal w/o Med Direction",
+          "then": "critical (evaluator discretion) (2.8A); let play out, debrief"
+        },
+        {
+          "if": "Crew contacts MD",
+          "then": "MD: \"Glipizide - high risk recurrence, needs ED. Explain risks; if she still refuses with capacity, document.\""
+        },
+        {
+          "type": "inject",
+          "if": "Daughter: \"She took an extra glipizide by mistake\"",
+          "then": "strengthens case for ED; MD will insist on transport"
+        }
+      ],
+      "expected": [
+        "Capacity assessed per 8.15 (A&Ox4, no impairment)",
+        "Risks explained (recurrence 24-72 h)",
+        "Med Direction contacted"
+      ]
+    },
+    {
+      "time": "18-25",
+      "phase": "Outcome",
+      "give": "If crew explains risk clearly -> pt agrees to go.",
+      "branches": [
+        {
+          "type": "inject",
+          "if": "Crew still on scene at T+25",
+          "then": "Stage **D**: repeat D10, transport; capacity now in question"
+        }
+      ],
+      "expected": [
+        "Pt agrees to transport (best outcome)",
+        "If refusal: form, BGL, MD name, daughter stays, carbs eaten"
+      ]
+    },
+    {
+      "time": "25+",
+      "phase": "Transport + report",
+      "give": "Stage **E**. Evaluator plays ED.",
+      "expected": [
+        "Serial BGL en route",
+        "Report includes sulfonylurea + dextrose total",
+        "SIREN: times, doses, BGLs"
+      ]
+    }
+  ],
+  "critical": [
+    "No BGL check in altered patient",
+    "Oral glucose given to pt unable to protect airway",
+    "Dextrose given without confirmed patent IV",
+    "No BGL recheck after dextrose",
+    "Treat-and-release without contacting Medical Direction (2.8A)",
+    "Refusal accepted without capacity assessment / informed refusal (8.15)",
+    "Stroke not considered after correction"
+  ],
+  "differentials": [
+    [
+      "Hypoglycemia (dx)",
+      "BGL 38, sulfonylurea, poor intake, diaphoresis",
+      "-"
+    ],
+    [
+      "Stroke / TIA",
+      "Age, HTN, acute confusion",
+      "No focal deficit; full resolution w/ dextrose"
+    ],
+    [
+      "Sepsis / UTI",
+      "Elderly, GI illness, tachycardia",
+      "Afebrile, resolves with dextrose"
+    ],
+    [
+      "Dehydration",
+      "Vomiting, dry membranes",
+      "Explains weakness, not BGL 38"
+    ],
+    [
+      "Med error / OD",
+      "Pill organizer",
+      "AM slot only; take count if unsure"
+    ],
+    [
+      "Hypoglycemia from other cause",
+      "Alcohol, infection",
+      "No ETOH; clear mechanism"
+    ]
+  ],
+  "debrief": [
+    "Why does glipizide change the refusal conversation?",
+    "What three elements make a refusal valid (8.15)?",
+    "D10 vs D50 - why D10 preferred?",
+    "When is glucagon likely to fail?",
+    "How did you engage the daughter as an ally?"
+  ],
+  "crew_card": {
+    "dispatch": "9 Birch Hollow Ln. 74 y/o F, confused. Breathing. Caller: daughter.",
+    "on_arrival": "Elderly woman slumped in recliner, sweaty, mumbling. Daughter standing over her, worried."
+  },
+  "actor_card": {
+    "Before tx": "Eyes open to voice, mumble, pick at blanket. Don't follow commands. Push hand away from mouth.",
+    "After dextrose": "Wake up over ~1 min, embarrassed, apologize a lot. Fully oriented.",
+    "Refusal": "\"I'm fine now, I don't want to waste your time.\" Daughter agrees. Agree to go ONLY if crew clearly explains the pill keeps lowering sugar for a day or more.",
+    "If Stage D": "Get shaky again, repeat \"what time is it?\"",
+    "Do NOT volunteer": "That you took this morning's glipizide - only if asked"
+  },
+  "show_cards": [
+    {
+      "type": "text",
+      "width": "half",
+      "title": "GLUCOMETER",
+      "body": "**38 mg/dL**",
+      "cue": "Initial reading only; give rechecks verbally from the Vitals table"
+    },
+    {
+      "type": "text",
+      "width": "half",
+      "title": "PILL ORGANIZER / BOTTLES",
+      "body": "Glipizide 10 mg - 1 tab twice daily\nLisinopril 10 mg\nAtorvastatin 20 mg\nToday: AM slot EMPTY"
+    },
+    {
+      "type": "strip",
+      "width": "half",
+      "title": "MONITOR - Lead II",
+      "caption": "Initial",
+      "rhythm": "sinus",
+      "rate": 108
+    },
+    {
+      "type": "text",
+      "width": "half",
+      "title": "IV ATTEMPT #1",
+      "body": "R hand 22g: **blown**. No flash.\nVeins small, rolling."
+    }
+  ],
+  "moulage_tags": [
+    {
+      "region": "Forehead / skin",
+      "text": "Pale, cool, drenched in sweat"
+    },
+    {
+      "region": "Mouth",
+      "text": "Dry mucous membranes"
+    },
+    {
+      "region": "Wrist (radial)",
+      "text": "Rapid, strong"
+    },
+    {
+      "region": "Arms",
+      "text": "Small rolling veins. L elbow (AC) best"
+    },
+    {
+      "region": "Face",
+      "text": "Symmetric smile. Speech confused, not slurred"
+    },
+    {
+      "region": "Abdomen",
+      "text": "Soft, mildly tender all over"
+    },
+    {
+      "region": "Back (lung sounds)",
+      "text": "Clear and equal"
+    }
+  ],
+  "learn_more": {
+    "topic": "hypoglycemia in an older adult taking a sulfonylurea (glipizide)",
+    "focus": "D10 vs D50, why sulfonylurea hypoglycemia recurs, and evidence on prehospital treat-and-release / refusal safety"
+  }
+}

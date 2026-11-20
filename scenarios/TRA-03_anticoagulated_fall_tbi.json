@@ -1,0 +1,509 @@
+{
+  "id": "TRA-03",
+  "title": "Elderly fall on Eliquis - evolving TBI",
+  "version": "v1.1 | VT Protocols 2025 | UVM Rescue",
+  "category": "Trauma",
+  "level": "AEMT CCIT",
+  "run_time": "20-25 min",
+  "difficulty": "Moderate",
+  "crew": "CC + 1",
+  "protocols": [
+    "1.2 Routine Pt Care",
+    "4.6 Spinal Trauma",
+    "4.10 TBI",
+    "4.9 Trauma Triage",
+    "8.10 Lift Assist",
+    "8.15 Refusal"
+  ],
+  "objectives": [
+    "Treat 'lift assist' as a full assessment; anticoagulant + head strike = trauma center risk factor (4.9)",
+    "Spinal assessment per 4.6 algorithm; SMR when indicated",
+    "Serial GCS/pupils; recognize deterioration & Cushing's triad (HTN, bradycardia, irregular resp)",
+    "TBI bundle: SpO2 > 94, SBP >= 110, EtCO2 35-45, no hyperventilation",
+    "Manage family pressure to not transport"
+  ],
+  "resources": "Collar/SMR, scoop, O2/NRB, BVM w/ capno, IV, suction. UVMMC (Level 1, neurosurgery) ~7 min",
+  "dispatch": "UVM Rescue, respond to 6 Elm Court for a lift assist. 82-year-old female fell, uninjured per caller. Caller is her son. Time out 1920.",
+  "scene": {
+    "location": "Kitchen floor, ranch home. Throw rug bunched near table.",
+    "setup": "Pt sitting on floor against cabinet, small bump on forehead, son trying to lift her by arms as you arrive.",
+    "moulage": "Purple bruise/egg R forehead, skin tear L forearm (gauze wrap).",
+    "roles": "Pt actor; son (wants a quick lift - \"she's fine, she's done this before\")."
+  },
+  "patient": {
+    "name": "Irene Tatro",
+    "age": "82",
+    "sex": "F",
+    "weight_kg": "58",
+    "cc": "Fall, 'just need help up'",
+    "on_arrival": "Alert, chatty, embarrassed, sitting on floor. Hematoma R forehead. Mild neck stiffness when turning."
+  },
+  "history": {
+    "SAMPLE": [
+      [
+        "S",
+        "\"Little headache\", embarrassed. Later: nausea, vomiting"
+      ],
+      [
+        "A",
+        "Penicillin"
+      ],
+      [
+        "M",
+        "**Apixaban (Eliquis) 5 mg BID**, metoprolol 25 mg, levothyroxine 50 mcg"
+      ],
+      [
+        "P",
+        "Afib, HTN, hypothyroid, prior hip replacement"
+      ],
+      [
+        "L",
+        "Supper 1730"
+      ],
+      [
+        "E",
+        "Tripped on rug ~1845, hit head on table edge. Unsure if LOC. On floor ~30 min"
+      ]
+    ],
+    "OPQRST": [
+      [
+        "O",
+        "After fall ~35 min ago"
+      ],
+      [
+        "P",
+        "Headache worse with bright light (later)"
+      ],
+      [
+        "Q",
+        "Dull, pressure"
+      ],
+      [
+        "R",
+        "Forehead; neck \"a little stiff\""
+      ],
+      [
+        "S",
+        "3/10 -> 7/10"
+      ],
+      [
+        "T",
+        "Slowly worsening"
+      ]
+    ]
+  },
+  "primary": [
+    [
+      "X / hemorrhage",
+      "Skin tear L forearm - minor"
+    ],
+    [
+      "Airway",
+      "Patent (watch after vomiting)"
+    ],
+    [
+      "Breathing",
+      "RR 16, clear"
+    ],
+    [
+      "Circulation",
+      "Radial irregular. Skin normal"
+    ],
+    [
+      "Disability",
+      "GCS 15 initially; **repeats questions**; possible LOC"
+    ],
+    [
+      "Exposure",
+      "Forehead hematoma; check hips (prior replacement) - normal"
+    ],
+    [
+      "Priority / impression",
+      "Looks stable; **high-risk TBI** (age + anticoagulant + head strike)"
+    ]
+  ],
+  "secondary": [
+    [
+      "Head",
+      "4 cm hematoma R forehead, no deformity"
+    ],
+    [
+      "Neck / C-spine",
+      "**Midline tenderness C5-6**; pain turning head"
+    ],
+    [
+      "Chest / abd",
+      "Normal"
+    ],
+    [
+      "Pelvis / hips",
+      "Stable, no pain, legs equal"
+    ],
+    [
+      "Extremities",
+      "Skin tear L forearm; CSM intact x4"
+    ],
+    [
+      "Neuro (initial)",
+      "No drift, grips equal, PERRL 3"
+    ],
+    [
+      "Neuro (T+12)",
+      "**L-sided weakness, R pupil 5 sluggish**"
+    ],
+    [
+      "Skin",
+      "Easy bruising, old bruises shins"
+    ]
+  ],
+  "vitals": [
+    {
+      "stage": "A Initial",
+      "trigger": "First set",
+      "HR": "84 irreg",
+      "BP": "152/88",
+      "RR": "16",
+      "SpO2": "96% RA",
+      "EtCO2": "38",
+      "BGL": "124",
+      "Temp": "97.8",
+      "Pain": "3",
+      "GCS": "15",
+      "Pupils": "3 PERRL",
+      "other": "Afib on monitor. Repeats \"did I fall?\""
+    },
+    {
+      "stage": "B Decline",
+      "trigger": "~T+10 (any path)",
+      "HR": "76 irreg",
+      "BP": "168/92",
+      "RR": "18",
+      "SpO2": "95%",
+      "EtCO2": "37",
+      "BGL": "-",
+      "Temp": "-",
+      "Pain": "6",
+      "GCS": "**14**",
+      "Pupils": "3 PERRL",
+      "other": "Vomits x1, sleepy, headache worse",
+      "bold": [
+        "GCS"
+      ]
+    },
+    {
+      "stage": "C Herniation signs",
+      "trigger": "~T+15",
+      "HR": "**58** irreg",
+      "BP": "**188/96**",
+      "RR": "**10** irreg",
+      "SpO2": "92%",
+      "EtCO2": "44",
+      "BGL": "-",
+      "Temp": "-",
+      "Pain": "-",
+      "GCS": "**11**",
+      "Pupils": "**R 5 sluggish / L 3**",
+      "other": "L-sided weakness. Cushing's triad (rising BP w/ widening pulse pressure, bradycardia, irregular respirations)",
+      "bold": [
+        "HR",
+        "BP",
+        "RR",
+        "GCS",
+        "Pupils"
+      ]
+    },
+    {
+      "stage": "D Hypervent",
+      "trigger": "IF BVM at > 10/min (EtCO2 < 35)",
+      "HR": "60",
+      "BP": "180/94",
+      "RR": "24 bag",
+      "SpO2": "99%",
+      "EtCO2": "**26**",
+      "BGL": "-",
+      "Temp": "-",
+      "Pain": "-",
+      "GCS": "10",
+      "Pupils": "R 5 / L 3",
+      "other": "Point out on capno; correct to 10/min",
+      "bold": [
+        "EtCO2"
+      ]
+    },
+    {
+      "stage": "E Managed",
+      "trigger": "O2 NRB/BVM 10/min, HOB 30, transport",
+      "HR": "62",
+      "BP": "176/90",
+      "RR": "12",
+      "SpO2": "97%",
+      "EtCO2": "38",
+      "BGL": "-",
+      "Temp": "-",
+      "Pain": "-",
+      "GCS": "11",
+      "Pupils": "R 5 / L 3",
+      "other": "Stable en route; suction ready"
+    },
+    {
+      "stage": "F BP drop",
+      "trigger": "Examiner inject, any time after T+8",
+      "HR": "88 irreg",
+      "BP": "**100/60**",
+      "RR": "16",
+      "SpO2": "95%",
+      "EtCO2": "36",
+      "BGL": "-",
+      "Temp": "-",
+      "Pain": "-",
+      "GCS": "-",
+      "Pupils": "-",
+      "other": "SBP < 110 in TBI (GCS/pupils unchanged). After NS 1 L: BP 118/70. HR blunted by metoprolol",
+      "bold": [
+        "BP"
+      ]
+    }
+  ],
+  "flow": [
+    {
+      "time": "0-3",
+      "phase": "Arrival",
+      "give": "Son lifting her by arms: \"She's fine, just help me get her up.\"",
+      "branches": [
+        {
+          "if": "Crew lifts without assessment",
+          "then": "pt dizzy, near-fall; debrief"
+        }
+      ],
+      "expected": [
+        "Stop lift; full assessment first",
+        "Roles assigned",
+        "Mechanism + time on floor obtained"
+      ]
+    },
+    {
+      "time": "3-8",
+      "phase": "Assessment",
+      "give": "Stage **A**. Neck tender at C5-6 if palpated. Show MED LIST card if asked about meds.",
+      "expected": [
+        "Anticoagulant identified",
+        "Spinal assessment per 4.6 -> SMR",
+        "Baseline GCS/pupils/neuro documented"
+      ]
+    },
+    {
+      "time": "8-12",
+      "phase": "Decision / family",
+      "give": "Pt: \"I don't want to go, it's just a bump.\" Son agrees.",
+      "branches": [
+        {
+          "if": "Refusal accepted",
+          "then": "Stage **B** begins in front of them; capacity now in question"
+        },
+        {
+          "if": "Crew explains risk",
+          "then": "pt agrees"
+        },
+        {
+          "if": "Son: \"It's 7 min, I'll drive her myself\" - crew agrees",
+          "then": "critical (evaluator discretion); debrief (deteriorates in car)"
+        }
+      ],
+      "expected": [
+        "Risk explained (bleed on blood thinner)",
+        "Repeating questions = capacity concern",
+        "Transport decision: trauma center (4.9 risk factors)"
+      ]
+    },
+    {
+      "time": "10-15",
+      "phase": "Deterioration",
+      "give": "Stage **B** -> vomits. Then Stage **C** at T+15.",
+      "expected": [
+        "Suction, airway protected, SMR maintained",
+        "O2 NRB; BVM if RR inadequate at 10/min",
+        "Pupils/GCS rechecked q5"
+      ]
+    },
+    {
+      "time": "15-20",
+      "phase": "TBI bundle / destination",
+      "give": "Son asks to ride along. Check vent rate and SBP.",
+      "branches": [
+        {
+          "if": "Hyperventilation",
+          "then": "Stage **D**"
+        },
+        {
+          "type": "inject",
+          "if": "BP drops to 100/60 (any time after T+8)",
+          "then": "Stage **F**; expect IV + NS 1 L (4.10), HOB flat if SBP < 100, search for 2nd bleed source"
+        },
+        {
+          "type": "inject",
+          "if": "Seizure (T+20)",
+          "then": "expect airway/suction, O2, protect, 2.22A; intercept"
+        }
+      ],
+      "expected": [
+        "SpO2 > 94, EtCO2 35-45, SBP >= 110",
+        "HOB 30 (SBP > 100) w/ SMR",
+        "TRAUMA ALERT to UVMMC (Level 1)"
+      ]
+    },
+    {
+      "time": "20+",
+      "phase": "Transport + report",
+      "give": "Stage **E**. Evaluator = receiving.",
+      "expected": [
+        "Report: anticoagulant, GCS trend, pupils, last dose",
+        "Paramedic intercept for airway support",
+        "SIREN: serial neuro exams w/ times"
+      ]
+    }
+  ],
+  "critical": [
+    "Pt lifted before assessment",
+    "Anticoagulant use not identified",
+    "No spinal assessment / SMR with midline tenderness",
+    "Refusal accepted without capacity assessment / with confusion",
+    "No serial GCS/pupil checks",
+    "SBP < 110 not treated with fluid / not rechecked q3-5 min (4.10)",
+    "Hypoxia (SpO2 < 90) or hyperventilation (EtCO2 < 35) not corrected",
+    "No suction ready after vomiting / airway not protected",
+    "POV transport allowed / no TRAUMA ALERT"
+  ],
+  "differentials": [
+    [
+      "Subdural hematoma (dx)",
+      "Elderly, anticoagulated, head strike, delayed decline",
+      "-"
+    ],
+    [
+      "Stroke (ischemic/hemorrhagic)",
+      "Afib, L weakness",
+      "Trauma history; treat as TBI, still time-critical"
+    ],
+    [
+      "Syncope cause of fall",
+      "Afib, beta-blocker, elderly",
+      "Mechanical trip; ask about prodrome"
+    ],
+    [
+      "Cervical spine injury",
+      "Midline tenderness",
+      "Coexists - SMR"
+    ],
+    [
+      "Hypoglycemia",
+      "AMS",
+      "BGL 124"
+    ],
+    [
+      "Dementia baseline",
+      "Repeating questions",
+      "Son says she's normally sharp"
+    ]
+  ],
+  "debrief": [
+    "Which 4.9 risk factors applied even though vitals were normal?",
+    "Why are anticoagulated head injuries 'talk and deteriorate'?",
+    "Cushing's triad (rising BP w/ widening pulse pressure, bradycardia, irregular respirations) - what did you see and when?",
+    "Why does hyperventilation harm TBI patients?",
+    "How do you turn a 'lift assist' into an assessment without fighting the family?"
+  ],
+  "crew_card": {
+    "dispatch": "6 Elm Court. Lift assist. 82 y/o F fell, uninjured per caller. Caller: son.",
+    "on_arrival": "Kitchen. Elderly woman on floor against cabinet, bump on forehead. Son is pulling her up by the arms."
+  },
+  "actor_card": {
+    "Act": "Pleasant, embarrassed, chatty. Ask \"did I fall?\" twice early on.",
+    "Want": "\"I don't need the hospital, it's just a bump.\"",
+    "~T+10": "Say headache is worse, nauseated, vomit (fake), sleepy.",
+    "~T+15": "Slurred, only respond to loud voice, L arm/leg weak.",
+    "Son": "\"She's fine, she's fallen before.\" Accepts transport if crew explains Eliquis risk."
+  },
+  "show_cards": [
+    {
+      "type": "text",
+      "width": "half",
+      "title": "MED LIST (fridge)",
+      "body": "Apixaban (Eliquis) 5 mg twice daily - last dose 1730\nMetoprolol 25 mg\nLevothyroxine 50 mcg"
+    },
+    {
+      "type": "strip",
+      "width": "half",
+      "title": "MONITOR - Lead II",
+      "caption": "Initial",
+      "rhythm": "afib",
+      "rate": 84
+    },
+    {
+      "type": "text",
+      "width": "half",
+      "title": "PUPILS",
+      "body": "R: 5 mm, sluggish\nL: 3 mm, brisk",
+      "cue": "Give at T+15 (Stage C)"
+    },
+    {
+      "type": "capno",
+      "width": "half",
+      "title": "CAPNOGRAPHY",
+      "caption": "EtCO2 38   RR 16",
+      "pattern": "normal",
+      "etco2": 38,
+      "rr": 16,
+      "cue": "Baseline (Stage A)"
+    },
+    {
+      "type": "capno",
+      "width": "half",
+      "title": "CAPNOGRAPHY",
+      "caption": "EtCO2 26   RR 24",
+      "pattern": "normal",
+      "etco2": 26,
+      "rr": 24,
+      "cue": "Only if BVM rate > 10/min (Stage D)"
+    }
+  ],
+  "moulage_tags": [
+    {
+      "region": "R forehead",
+      "text": "4 cm goose egg; no deformity"
+    },
+    {
+      "region": "Back of neck",
+      "text": "Tender in the middle (C5-6); pain turning head"
+    },
+    {
+      "region": "L forearm",
+      "text": "Skin tear, gauze wrapped"
+    },
+    {
+      "region": "Shins",
+      "text": "Old bruises; bruises easily"
+    },
+    {
+      "region": "Hips / pelvis",
+      "text": "Stable, no pain, legs equal length"
+    },
+    {
+      "region": "Wrist (radial)",
+      "text": "Irregular pulse"
+    },
+    {
+      "region": "Eyes",
+      "text": "R pupil 5 mm, sluggish. L pupil 3 mm, brisk",
+      "cue": "Place at T+15 (Stage C)"
+    },
+    {
+      "region": "L arm / L leg",
+      "text": "Weak compared to right",
+      "cue": "Place at T+12"
+    }
+  ],
+  "learn_more": {
+    "topic": "traumatic brain injury in an older adult on apixaban after a ground-level fall",
+    "focus": "anticoagulated head injury risk, avoiding hypotension (SBP >= 110), hypoxia and hyperventilation, and Cushing's triad"
+  }
+}

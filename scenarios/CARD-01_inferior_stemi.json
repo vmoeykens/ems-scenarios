@@ -1,0 +1,523 @@
+{
+  "id": "CARD-01",
+  "title": "Inferior STEMI - nitrate trap",
+  "version": "v1.1 | VT Protocols 2025 | UVM Rescue",
+  "category": "Cardiac",
+  "level": "AEMT CCIT",
+  "run_time": "20-25 min",
+  "difficulty": "Moderate",
+  "crew": "CC + 1-2",
+  "protocols": [
+    "1.2 Routine Pt Care",
+    "3.0A Acute Coronary Syndrome",
+    "6.2 ECG Acquisition/Transmission",
+    "2.24A Shock",
+    "8.3 Communications"
+  ],
+  "objectives": [
+    "12-lead acquired & transmitted <10 min of contact",
+    "ASA 324 mg; O2 only if SpO2 <94%",
+    "Recognize inferior STEMI as nitrate caution; IV before any nitro",
+    "STEMI Alert + direct transport to UVMMC (PCI)",
+    "Manage nitrate-induced hypotension"
+  ],
+  "resources": "Monitor w/ 12-lead (or show cards), O2, IV kit, NS 1 L, ASA, NTG, stair chair, stretcher. Scene ~12 min from UVMMC (PCI center).",
+  "dispatch": "UVM Rescue, respond to 14 Maple Ridge Rd for a 62-year-old male with chest pain. Caller is his wife. Patient is conscious and breathing. Time out 0714.",
+  "scene": {
+    "location": "Kitchen of a farmhouse, 2nd-floor bedroom stairs nearby. Cold morning, 22 F. ~12 min from UVMMC.",
+    "setup": "Pt seated at kitchen table, hand on chest, coffee mug, pill bottles on counter (lisinopril, atorvastatin, metformin).",
+    "moulage": "Pale face powder, misted water for diaphoresis.",
+    "roles": "Pt actor; wife (bystander/history); evaluator times flow."
+  },
+  "patient": {
+    "name": "Gerald Pratt",
+    "age": "62",
+    "sex": "M",
+    "weight_kg": "98",
+    "cc": "Chest pressure x 40 min",
+    "on_arrival": "Seated, leaning forward, pale and sweaty, speaking full sentences, clutching chest. Looks sick."
+  },
+  "history": {
+    "SAMPLE": [
+      [
+        "S",
+        "Chest pressure, nausea, sweaty, mild SOB, lightheaded when stood"
+      ],
+      [
+        "A",
+        "Penicillin (rash)"
+      ],
+      [
+        "M",
+        "Lisinopril 20 mg, atorvastatin 40 mg, metformin 1000 mg BID. **No ED meds** (ask!). No ASA today"
+      ],
+      [
+        "P",
+        "HTN, high cholesterol, T2DM, 30 pack-yr smoker (quit 5 yr). Father MI at 58"
+      ],
+      [
+        "L",
+        "Coffee + toast 0630"
+      ],
+      [
+        "E",
+        "Shoveling snow off porch ~0630, pain began ~0635, didn't stop at rest"
+      ]
+    ],
+    "OPQRST": [
+      [
+        "O",
+        "Sudden while shoveling, ~40 min ago"
+      ],
+      [
+        "P",
+        "Nothing helps; not positional or reproducible"
+      ],
+      [
+        "Q",
+        "Pressure, \"elephant on my chest\""
+      ],
+      [
+        "R",
+        "Substernal -> L jaw and both arms"
+      ],
+      [
+        "S",
+        "8/10"
+      ],
+      [
+        "T",
+        "Constant, slowly worsening. Never had this before"
+      ]
+    ]
+  },
+  "primary": [
+    [
+      "X / hemorrhage",
+      "None"
+    ],
+    [
+      "Airway",
+      "Patent, speaking full sentences"
+    ],
+    [
+      "Breathing",
+      "RR 18, mildly labored, equal rise; lungs clear bilat"
+    ],
+    [
+      "Circulation",
+      "Radial pulse slow, regular, weak-ish. Skin pale, cool, diaphoretic. No bleeding"
+    ],
+    [
+      "Disability",
+      "A&Ox4, GCS 15, PERRL"
+    ],
+    [
+      "Exposure",
+      "No rash, no edema, no trauma. Keep warm"
+    ],
+    [
+      "Priority / impression",
+      "**HIGH** priority: suspected ACS. Should verbalize early 12-lead + intercept/PCI destination"
+    ]
+  ],
+  "secondary": [
+    [
+      "Head / neck",
+      "No JVD, trachea midline"
+    ],
+    [
+      "Chest",
+      "Non-tender, no crepitus, equal sounds; not reproducible"
+    ],
+    [
+      "Lungs",
+      "Clear all fields (re-check after any fluid)"
+    ],
+    [
+      "Heart",
+      "Regular, slow"
+    ],
+    [
+      "Abdomen",
+      "Soft, non-tender, no pulsatile mass"
+    ],
+    [
+      "Extremities",
+      "Pulses equal bilat (radial & femoral). No edema, no calf tenderness"
+    ],
+    [
+      "Neuro",
+      "No facial droop, grips equal, speech clear"
+    ],
+    [
+      "Back",
+      "No tearing pain; no point tenderness"
+    ]
+  ],
+  "vitals": [
+    {
+      "stage": "A Initial",
+      "trigger": "First set on contact",
+      "HR": "58",
+      "BP": "112/74",
+      "RR": "18",
+      "SpO2": "95% RA",
+      "EtCO2": "36",
+      "BGL": "142",
+      "Temp": "98.2",
+      "Pain": "8",
+      "GCS": "15",
+      "Pupils": "3 PERRL",
+      "other": "Pale/cool/diaphoretic. Lungs clear. Sinus brady (show 12-lead card)",
+      "bold": [
+        "HR"
+      ]
+    },
+    {
+      "stage": "B Stable",
+      "trigger": "ASA given, IV placed, NO nitro (~T+8)",
+      "HR": "56",
+      "BP": "108/70",
+      "RR": "18",
+      "SpO2": "95%",
+      "EtCO2": "36",
+      "BGL": "-",
+      "Temp": "-",
+      "Pain": "8",
+      "GCS": "15",
+      "Pupils": "-",
+      "other": "Unchanged. Nausea worse"
+    },
+    {
+      "stage": "C Hypo-tension",
+      "trigger": "IF NTG given (any route) - 2 min after",
+      "HR": "50",
+      "BP": "82/50",
+      "RR": "20",
+      "SpO2": "94%",
+      "EtCO2": "32",
+      "BGL": "-",
+      "Temp": "-",
+      "Pain": "7",
+      "GCS": "14",
+      "Pupils": "-",
+      "other": "Dizzy, \"going to pass out\", grey. Lungs clear",
+      "bold": [
+        "BP",
+        "HR",
+        "GCS"
+      ]
+    },
+    {
+      "stage": "D Fluid",
+      "trigger": "After supine + NS bolus (~5 min)",
+      "HR": "58",
+      "BP": "98/62",
+      "RR": "18",
+      "SpO2": "95%",
+      "EtCO2": "35",
+      "BGL": "-",
+      "Temp": "-",
+      "Pain": "7",
+      "GCS": "15",
+      "Pupils": "-",
+      "other": "Mentation back. Lungs still clear"
+    },
+    {
+      "stage": "E Transport",
+      "trigger": "En route, q5 min",
+      "HR": "60",
+      "BP": "106/68",
+      "RR": "18",
+      "SpO2": "96%",
+      "EtCO2": "36",
+      "BGL": "-",
+      "Temp": "-",
+      "Pain": "7",
+      "GCS": "15",
+      "Pupils": "-",
+      "other": "Repeat 12-lead unchanged"
+    }
+  ],
+  "blank_vitals_rows": 2,
+  "flow": [
+    {
+      "time": "0-2",
+      "phase": "Arrival / impression",
+      "give": "Read dispatch. Show crew card. Wife: \"He was shoveling and just went white.\"",
+      "expected": [
+        "General impression: sick",
+        "Crew roles assigned by CC"
+      ]
+    },
+    {
+      "time": "2-5",
+      "phase": "Primary + first vitals",
+      "give": "Give primary findings and Stage **A** vitals as obtained.",
+      "branches": [
+        {
+          "if": "O2 by NRB at SpO2 95%",
+          "then": "allow; debrief (protocol: O2 only <94%, dyspnea, CHF)"
+        }
+      ],
+      "expected": [
+        "XABCDE complete",
+        "Monitor applied",
+        "Intercept vs. direct decided (don't wait on scene)"
+      ]
+    },
+    {
+      "time": "5-10",
+      "phase": "12-lead + history",
+      "give": "Show **12-lead card** when acquired. Machine reads: ***ACUTE MI SUSPECTED*** - inferior. SAMPLE/OPQRST as asked.",
+      "branches": [
+        {
+          "if": "No 12-lead by T+10",
+          "then": "wife: \"Is it his heart?\" Note time; critical (evaluator discretion)"
+        }
+      ],
+      "expected": [
+        "12-lead acquired <=10 min, transmitted",
+        "ASA 324 mg chewed (allergy asked)",
+        "ED meds / PDE-5 use asked"
+      ]
+    },
+    {
+      "time": "8-12",
+      "phase": "Treatment decision",
+      "give": "Pt asks: \"Can I have a nitro? My buddy takes those.\" Advance to Stage **B**.",
+      "branches": [
+        {
+          "if": "NTG given (with or w/o IV)",
+          "then": "Stage **C** at +2 min. No IV first = critical (evaluator discretion)"
+        },
+        {
+          "if": "NTG withheld / Med Direction contacted",
+          "then": "MD: \"Hold nitrates, inferior STEMI. Fluids if hypotensive.\""
+        }
+      ],
+      "expected": [
+        "IV established (18-20g AC)",
+        "Inferior STEMI = nitrate caution verbalized",
+        "STEMI Alert decision"
+      ]
+    },
+    {
+      "time": "12-17",
+      "phase": "Hypotension (if C)",
+      "give": "Pt: \"I'm going to pass out.\" Give Stage **C**. Lungs clear if asked.",
+      "branches": [
+        {
+          "if": "Supine + NS bolus, reassess lungs",
+          "then": "Stage **D**"
+        },
+        {
+          "if": "No action within 2 min",
+          "then": "BP 74/44, GCS 13; prompt via wife"
+        }
+      ],
+      "expected": [
+        "Supine, no further NTG",
+        "NS bolus per 2.24A, lungs reassessed",
+        "Med Direction notified"
+      ]
+    },
+    {
+      "time": "15-20",
+      "phase": "Packaging / extrication",
+      "give": "Pt stands to walk? -> dizzy. Stairs to driveway, icy steps.",
+      "expected": [
+        "Pt not walked; stair chair/stretcher",
+        "Destination: UVMMC (PCI), direct",
+        "Scene time minimized (goal < 15 min)"
+      ]
+    },
+    {
+      "time": "20+",
+      "phase": "Transport + report",
+      "give": "Stage **E**. Evaluator plays receiving hospital / MD.",
+      "branches": [
+        {
+          "type": "inject",
+          "if": "VF arrest during transport (T+25)",
+          "then": "switch to 3.2A: AED, CPR; pull over for analysis/shock"
+        },
+        {
+          "type": "inject",
+          "if": "Repeat 12-lead reads complete heart block",
+          "then": "HR 38, BP 84/50, dizzy. Expect IV, NS 500 mL (3.1A), pads on, MD/intercept; no NTG"
+        }
+      ],
+      "expected": [
+        "STEMI Alert radio report (age, sx onset, 12-lead, tx, ETA)",
+        "Repeat vitals q5 / repeat 12-lead",
+        "12-lead copy left at ED; SIREN"
+      ]
+    }
+  ],
+  "critical": [
+    "12-lead not acquired within 10 min of contact",
+    "ASA not given (or given w/o allergy/bleed check)",
+    "Nitroglycerin given without IV access",
+    "Nitroglycerin given with SBP <100",
+    "Further NTG after hypotension develops",
+    "Patient walked / allowed to exert",
+    "Not transported directly to UVMMC (PCI) w/ STEMI Alert",
+    "No STEMI Alert / advance notification"
+  ],
+  "differentials": [
+    [
+      "Inferior STEMI (dx)",
+      "Exertional onset, pressure radiating jaw/arms, diaphoresis, STE II/III/aVF, brady",
+      "-"
+    ],
+    [
+      "Aortic dissection",
+      "HTN, severe pain",
+      "No tearing/back pain, equal pulses & BP, gradual pressure"
+    ],
+    [
+      "Pulmonary embolism",
+      "SOB, tachypnea",
+      "No pleuritic pain, no calf findings, SpO2 95%, HR slow"
+    ],
+    [
+      "Unstable angina/NSTEMI",
+      "Same history",
+      "12-lead shows STE -> STEMI"
+    ],
+    [
+      "GERD / esophageal",
+      "Ate recently",
+      "Exertional, diaphoresis, radiation, ECG changes"
+    ],
+    [
+      "Pericarditis",
+      "Chest pain + STE",
+      "Not positional/pleuritic; regional STE w/ reciprocal changes"
+    ],
+    [
+      "Symptomatic brady (3.1A)",
+      "HR 50s, lightheaded",
+      "Brady is from inferior MI; treat cause"
+    ]
+  ],
+  "debrief": [
+    "Why does an inferior STEMI change your nitro decision? (RV preload)",
+    "What did the 12-lead computer interp say, and what does an AEMT do with that? (6.2)",
+    "When is O2 indicated in ACS?",
+    "How did you choose destination & intercept vs. direct?",
+    "What would you change about crew roles?"
+  ],
+  "crew_card": {
+    "dispatch": "14 Maple Ridge Rd. 62 y/o M, chest pain. Conscious, breathing. Caller: wife. 22 F, light snow.",
+    "on_arrival": "Kitchen. Male seated at table, hand on chest, pale and sweaty. Wife at his side."
+  },
+  "actor_card": {
+    "Act": "Anxious, uncomfortable, rubs sternum. Sweaty. Talk in full sentences. Refuse to lie flat until dizzy.",
+    "Pain": "Pressure 8/10, into jaw and both arms. Started shoveling, never stopped.",
+    "Say early": "\"I think it's just indigestion... but I've never felt like this.\"",
+    "Ask at ~T+10": "\"Can I have a nitro? My buddy takes those.\"",
+    "If given nitro": "After ~2 min: \"I'm going to pass out\", get quiet, close eyes. Improve slowly once laid flat + fluids.",
+    "If asked to walk": "Stand, sway, \"whoa, room's spinning\"",
+    "Do NOT volunteer": "Father's MI at 58 or smoking history - only if asked"
+  },
+  "show_cards": [
+    {
+      "type": "12lead",
+      "title": "12-LEAD",
+      "caption": "Computer interpretation: Sinus bradycardia 58  ***ACUTE MI SUSPECTED*** Inferior injury pattern.  Simulated tracing - not to scale.",
+      "rhythm": "sinus",
+      "rate": 58,
+      "st": {
+        "II": 2.5,
+        "III": 3.5,
+        "aVF": 3,
+        "I": -1,
+        "aVL": -2,
+        "V2": -0.5
+      },
+      "cue": "Show when acquired (target <= 10 min of contact)"
+    },
+    {
+      "type": "strip",
+      "width": "half",
+      "title": "MONITOR - Lead II",
+      "caption": "",
+      "rhythm": "sinus",
+      "rate": 58,
+      "lead": "II",
+      "st": 2.5
+    },
+    {
+      "type": "capno",
+      "width": "half",
+      "title": "CAPNOGRAPHY",
+      "caption": "EtCO2 36   RR 18",
+      "pattern": "normal",
+      "etco2": 36,
+      "rr": 18
+    },
+    {
+      "type": "text",
+      "width": "half",
+      "title": "LUNG SOUNDS",
+      "body": "Clear and equal, all fields, bilaterally."
+    },
+    {
+      "type": "text",
+      "width": "half",
+      "title": "PILL BOTTLES ON COUNTER",
+      "body": "Lisinopril 20 mg\nAtorvastatin 40 mg\nMetformin 1000 mg\n(No nitroglycerin, no ED meds)"
+    },
+    {
+      "type": "strip",
+      "width": "half",
+      "title": "MONITOR - Lead II",
+      "caption": "",
+      "rhythm": "chb",
+      "rate": 38,
+      "p_rate": 80,
+      "cue": "Only if you inject heart block during transport"
+    }
+  ],
+  "moulage_tags": [
+    {
+      "region": "Face / skin",
+      "text": "Pale, cool, sweaty"
+    },
+    {
+      "region": "Wrist (radial)",
+      "text": "Slow, regular, weak-ish"
+    },
+    {
+      "region": "Neck",
+      "text": "No JVD"
+    },
+    {
+      "region": "Chest",
+      "text": "Non-tender. Pain NOT reproduced by pressing"
+    },
+    {
+      "region": "Back (lung sounds)",
+      "text": "Clear and equal bilaterally"
+    },
+    {
+      "region": "Abdomen",
+      "text": "Soft, non-tender, no pulsatile mass"
+    },
+    {
+      "region": "Ankles",
+      "text": "No swelling"
+    },
+    {
+      "region": "Both arms",
+      "text": "Equal pulses and BP both arms"
+    }
+  ],
+  "learn_more": {
+    "topic": "inferior STEMI in a 62-year-old man",
+    "focus": "why nitroglycerin is risky in inferior STEMI / right ventricular involvement, aspirin timing, and the value of prehospital 12-lead transmission and STEMI alerts"
+  }
+}

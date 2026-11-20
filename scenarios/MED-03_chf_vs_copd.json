@@ -1,0 +1,482 @@
+{
+  "id": "MED-03",
+  "title": "Acute pulmonary edema in a COPD patient",
+  "version": "v1.1 | VT Protocols 2025 | UVM Rescue",
+  "category": "Medical",
+  "level": "AEMT CCIT",
+  "run_time": "20-25 min",
+  "difficulty": "Hard",
+  "crew": "CC + 1",
+  "protocols": [
+    "1.2 Routine Pt Care",
+    "3.3A CHF/Pulmonary Edema",
+    "2.4A Asthma/COPD",
+    "5.4 CPAP",
+    "6.2 ECG",
+    "6.9 Capnography"
+  ],
+  "objectives": [
+    "Differentiate CHF from COPD (\"cardiac wheeze\", JVD, edema, capno shape)",
+    "CPAP early (SpO2 <94, RR >25, accessory use; SBP >= 100)",
+    "IV + Med Direction for SL nitro dosed by SBP",
+    "12-lead acquired/transmitted",
+    "Don't withhold O2 from hypoxic COPD pt; watch for fatigue"
+  ],
+  "resources": "CPAP, O2 (full tanks), DuoNeb, IV, NTG SL, 12-lead, BVM. UVMMC ~6 min",
+  "dispatch": "UVM Rescue, respond to 41 Pleasant St, Apt 3, for a 78-year-old male, difficulty breathing. Caller is his wife. Time out 0215.",
+  "scene": {
+    "location": "2nd floor apartment, bedroom. Narrow stairs, no elevator.",
+    "setup": "Pt tripoding on bed edge, home NC 2 L, pillows stacked, nebulizer on nightstand (just used).",
+    "moulage": "Pale/dusky lips, misted sweat, swollen ankles (padding under socks).",
+    "roles": "Pt actor; wife (\"it's his COPD, the neb didn't work\")."
+  },
+  "patient": {
+    "name": "Walter Hebert",
+    "age": "78",
+    "sex": "M",
+    "weight_kg": "92",
+    "cc": "Can't breathe x 2 hr, woke him from sleep",
+    "on_arrival": "Tripod, 1-2 word answers, frothy cough, sweaty, panicked. Wheezing audible from door."
+  },
+  "history": {
+    "SAMPLE": [
+      [
+        "S",
+        "SOB, can't lie flat, cough w/ pink froth, ankles swollen x1 wk"
+      ],
+      [
+        "A",
+        "NKDA"
+      ],
+      [
+        "M",
+        "Tiotropium, albuterol neb, home O2 2 L, **furosemide (ran out 5 days ago)**, metoprolol, lisinopril"
+      ],
+      [
+        "P",
+        "COPD, **CHF (EF 30%)**, HTN, prior MI 2019"
+      ],
+      [
+        "L",
+        "Ham dinner + pickles 1800"
+      ],
+      [
+        "E",
+        "Woke at 0000 gasping; neb x2 at home, no relief"
+      ]
+    ],
+    "OPQRST": [
+      [
+        "O",
+        "Woke from sleep ~0000"
+      ],
+      [
+        "P",
+        "Worse lying flat; neb didn't help"
+      ],
+      [
+        "Q",
+        "\"Drowning\", different from COPD flare"
+      ],
+      [
+        "R",
+        "None; mild chest pressure 3/10"
+      ],
+      [
+        "S",
+        "Breathing 10/10"
+      ],
+      [
+        "T",
+        "Worse over 2 hr. 3 pillows x1 wk"
+      ]
+    ]
+  },
+  "primary": [
+    [
+      "X / hemorrhage",
+      "None"
+    ],
+    [
+      "Airway",
+      "Patent, frothy pink sputum"
+    ],
+    [
+      "Breathing",
+      "RR 34, accessory muscles, retractions. **Wheeze + crackles to mid-fields**"
+    ],
+    [
+      "Circulation",
+      "Radial strong, rapid. Skin cool, diaphoretic, dusky"
+    ],
+    [
+      "Disability",
+      "A&Ox4, GCS 15, anxious"
+    ],
+    [
+      "Exposure",
+      "Bilateral 2+ pitting edema to shins"
+    ],
+    [
+      "Priority / impression",
+      "**HIGH**: acute pulmonary edema (CHF) - not just COPD"
+    ]
+  ],
+  "secondary": [
+    [
+      "Neck",
+      "**JVD** seated upright"
+    ],
+    [
+      "Chest",
+      "Barrel chest, old sternotomy? No"
+    ],
+    [
+      "Lungs",
+      "Crackles bases->mid, expiratory wheeze"
+    ],
+    [
+      "Heart",
+      "Rapid, regular"
+    ],
+    [
+      "Abdomen",
+      "Soft, distended"
+    ],
+    [
+      "Extremities",
+      "2+ pitting edema shins bilat"
+    ],
+    [
+      "Capno",
+      "Square waveform, EtCO2 34 (not shark fin)"
+    ],
+    [
+      "12-lead",
+      "Show card when acquired"
+    ]
+  ],
+  "vitals": [
+    {
+      "stage": "A Initial",
+      "trigger": "First set (on home 2 L)",
+      "HR": "118",
+      "BP": "**196/108**",
+      "RR": "**34**",
+      "SpO2": "**84%** 2L",
+      "EtCO2": "34",
+      "BGL": "164",
+      "Temp": "98.4",
+      "Pain": "3",
+      "GCS": "15",
+      "Pupils": "3 PERRL",
+      "other": "Crackles + wheeze, JVD, edema. Sinus tach",
+      "bold": [
+        "BP",
+        "RR",
+        "SpO2"
+      ]
+    },
+    {
+      "stage": "B Neb only",
+      "trigger": "IF DuoNeb/O2 only, no CPAP (~T+8)",
+      "HR": "126",
+      "BP": "200/110",
+      "RR": "36",
+      "SpO2": "**82%**",
+      "EtCO2": "38",
+      "BGL": "-",
+      "Temp": "-",
+      "Pain": "3",
+      "GCS": "15",
+      "Pupils": "-",
+      "other": "No better, more anxious, crackles higher",
+      "bold": [
+        "SpO2"
+      ]
+    },
+    {
+      "stage": "C CPAP",
+      "trigger": "5 min after CPAP 5-10 cm H2O",
+      "HR": "108",
+      "BP": "172/96",
+      "RR": "26",
+      "SpO2": "91%",
+      "EtCO2": "35",
+      "BGL": "-",
+      "Temp": "-",
+      "Pain": "2",
+      "GCS": "15",
+      "Pupils": "-",
+      "other": "Less work of breathing, 3-4 word sentences"
+    },
+    {
+      "stage": "D CPAP + NTG",
+      "trigger": "5 min after MD-ordered NTG 0.8 mg SL",
+      "HR": "100",
+      "BP": "150/88",
+      "RR": "22",
+      "SpO2": "95%",
+      "EtCO2": "36",
+      "BGL": "-",
+      "Temp": "-",
+      "Pain": "1",
+      "GCS": "15",
+      "Pupils": "-",
+      "other": "Crackles bases only. Talking full sentences"
+    },
+    {
+      "stage": "E Fatigue",
+      "trigger": "IF no CPAP by T+15",
+      "HR": "130",
+      "BP": "188/104",
+      "RR": "**10**",
+      "SpO2": "**78%**",
+      "EtCO2": "**58**",
+      "BGL": "-",
+      "Temp": "-",
+      "Pain": "-",
+      "GCS": "**12**",
+      "Pupils": "-",
+      "other": "Head bobbing, sleepy -> BVM w/ PEEP, d/c CPAP",
+      "bold": [
+        "RR",
+        "SpO2",
+        "EtCO2",
+        "GCS"
+      ]
+    }
+  ],
+  "flow": [
+    {
+      "time": "0-3",
+      "phase": "Arrival / scene",
+      "give": "Wife: \"It's his COPD, the neb isn't working.\" Stage **A**.",
+      "expected": [
+        "Roles; CPAP + monitor brought up",
+        "Paramedic intercept requested"
+      ]
+    },
+    {
+      "time": "3-8",
+      "phase": "Assessment / diagnosis",
+      "give": "Give lung sounds, JVD, edema, capno card when found. Wife: \"He ran out of his water pill.\"",
+      "branches": [
+        {
+          "if": "Treated as COPD only (nebs, O2 limited)",
+          "then": "Stage **B**"
+        }
+      ],
+      "expected": [
+        "CHF recognized: crackles, JVD, edema, orthopnea",
+        "Capno shape interpreted (no bronchospasm)",
+        "O2 increased to SpO2 94-98%"
+      ]
+    },
+    {
+      "time": "6-12",
+      "phase": "CPAP",
+      "give": "Pt pulls at mask: \"I can't, I'm suffocating!\"",
+      "branches": [
+        {
+          "if": "CPAP applied with coaching",
+          "then": "Stage **C**"
+        },
+        {
+          "if": "No CPAP by T+15",
+          "then": "Stage **E**"
+        },
+        {
+          "type": "inject",
+          "if": "Pt vomits under CPAP mask",
+          "then": "SpO2 84%; expect remove CPAP (5.4), suction, NRB/BVM, re-apply only when airway clear"
+        }
+      ],
+      "expected": [
+        "CPAP 5-10 cm H2O (SBP >= 100 confirmed)",
+        "Pt coached through claustrophobia",
+        "12-lead acquired + transmitted"
+      ]
+    },
+    {
+      "time": "10-15",
+      "phase": "Nitro / Med Direction",
+      "give": "MD (if contacted, SBP 160-200): \"NTG 0.8 mg SL, may repeat q5 until SBP 140.\"",
+      "branches": [
+        {
+          "if": "NTG given w/o MD or before IV",
+          "then": "critical (evaluator discretion) (3.3A AEMT)"
+        }
+      ],
+      "expected": [
+        "IV established before NTG",
+        "Med Direction contacted for NTG",
+        "PDE-5 use asked; SBP rechecked q5"
+      ]
+    },
+    {
+      "time": "15-20",
+      "phase": "Extrication",
+      "give": "Stage **D**. Narrow stairs. Pt can't lie flat.",
+      "expected": [
+        "Stair chair, upright, CPAP maintained",
+        "Portable O2 supply checked (CPAP uses lots)",
+        "Pt not walked"
+      ],
+      "branches": [
+        {
+          "type": "inject",
+          "if": "Portable O2 reads 500 psi at top of stairs",
+          "then": "expect tank swap/plan before moving; CPAP uses high flow"
+        }
+      ]
+    },
+    {
+      "time": "20+",
+      "phase": "Transport + report",
+      "give": "Evaluator plays ED: \"Prep for CPAP patient?\"",
+      "expected": [
+        "ED notified: CPAP pt, NTG doses",
+        "Serial SpO2/EtCO2/BP documented",
+        "SIREN: CPAP time + provider"
+      ]
+    }
+  ],
+  "critical": [
+    "No CPAP in pt meeting criteria (SpO2 <94, RR >25, accessory use)",
+    "CPAP applied with SBP < 100 or decreased LOC/no airway control",
+    "Nitroglycerin by AEMT without Med Direction order (3.3A)",
+    "Nitro given without IV access",
+    "O2 withheld from hypoxic pt due to COPD history",
+    "Failure to recognize fatigue/hypercapnia and assist ventilation",
+    "Pt walked down stairs"
+  ],
+  "differentials": [
+    [
+      "Acute pulmonary edema (dx)",
+      "Orthopnea, pink froth, crackles, JVD, edema, HTN, ran out of diuretic",
+      "-"
+    ],
+    [
+      "COPD exacerbation",
+      "COPD hx, wheeze",
+      "Square capno, crackles, JVD, edema, no relief from nebs"
+    ],
+    [
+      "ACS",
+      "Prior MI, chest pressure",
+      "12-lead no STEMI - keep serial ECGs"
+    ],
+    [
+      "Pneumonia",
+      "Cough, SOB",
+      "Afebrile, bilateral, frothy pink, acute"
+    ],
+    [
+      "Pulmonary embolism",
+      "Tachy, hypoxia",
+      "Crackles, JVD w/ HTN, edema bilateral"
+    ],
+    [
+      "Pneumothorax",
+      "COPD (blebs), SOB",
+      "Equal sounds bilat"
+    ]
+  ],
+  "debrief": [
+    "What told you this was CHF and not COPD?",
+    "How does the capnography waveform help sort them?",
+    "Why does CPAP help pulmonary edema?",
+    "What is an AEMT's route to nitro in 3.3A vs 3.0A?",
+    "Signs CPAP is failing and what you do next"
+  ],
+  "crew_card": {
+    "dispatch": "41 Pleasant St, Apt 3 (2nd floor). 78 y/o M, difficulty breathing. Caller: wife.",
+    "on_arrival": "Older man sitting on edge of bed, leaning forward, gasping, on nasal cannula. Oxygen machine humming. Wife in doorway."
+  },
+  "actor_card": {
+    "Act": "Tripod, gasp, 1-2 words, cough into tissue. Refuse to lie back.",
+    "On CPAP": "Panic for ~30 s, pull at mask. Calm down if crew coaches you. Then speak in longer phrases.",
+    "If asked about meds": "\"Ran out of the water pill last week.\" No Viagra/Cialis.",
+    "If no CPAP by T+15": "Get sleepy, slow breathing, head drops, mumble.",
+    "Wife": "Insist \"it's his COPD\" until crew explains."
+  },
+  "show_cards": [
+    {
+      "type": "12lead",
+      "title": "12-LEAD",
+      "caption": "Computer interpretation: Sinus tachycardia 118. Left ventricular hypertrophy with repolarization abnormality. No acute MI criteria. Simulated - not to scale.",
+      "rhythm": "sinus",
+      "rate": 118,
+      "st": {
+        "V5": -1,
+        "V6": -1,
+        "I": -0.5,
+        "aVL": -0.5
+      },
+      "cue": "Show when acquired"
+    },
+    {
+      "type": "capno",
+      "width": "half",
+      "title": "CAPNOGRAPHY",
+      "caption": "EtCO2 34   RR 34",
+      "pattern": "normal",
+      "etco2": 34,
+      "rr": 34,
+      "cue": "Square waveform (no bronchospasm) - supports CHF over COPD"
+    },
+    {
+      "type": "text",
+      "width": "half",
+      "title": "LUNG SOUNDS",
+      "body": "Crackles bases to mid-fields bilaterally.\nExpiratory wheeze throughout."
+    },
+    {
+      "type": "text",
+      "width": "half",
+      "title": "NECK / LEGS",
+      "body": "JVD sitting upright.\n2+ pitting edema both shins."
+    },
+    {
+      "type": "text",
+      "width": "half",
+      "title": "NIGHTSTAND",
+      "body": "Albuterol nebs (2 used tonight)\nTiotropium\nFurosemide 40 mg - **EMPTY**, filled 6 wk ago\nMetoprolol, lisinopril"
+    }
+  ],
+  "moulage_tags": [
+    {
+      "region": "Lips",
+      "text": "Dusky"
+    },
+    {
+      "region": "Neck",
+      "text": "Neck veins distended while sitting upright"
+    },
+    {
+      "region": "Back (lung sounds)",
+      "text": "Crackles bases to mid-fields; wheezes throughout"
+    },
+    {
+      "region": "Both shins",
+      "text": "Pitting edema 2+"
+    },
+    {
+      "region": "Skin",
+      "text": "Cool, sweaty"
+    },
+    {
+      "region": "Mouth / tissue",
+      "text": "Pink frothy sputum"
+    },
+    {
+      "region": "Abdomen",
+      "text": "Soft, distended"
+    }
+  ],
+  "learn_more": {
+    "topic": "acute cardiogenic pulmonary edema in a patient with COPD",
+    "focus": "telling CHF from COPD in the field (lung sounds, JVD, capnography waveform), CPAP evidence, and high-dose nitroglycerin"
+  }
+}

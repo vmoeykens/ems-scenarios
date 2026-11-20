@@ -1,0 +1,474 @@
+{
+  "id": "MED-02",
+  "title": "Anaphylaxis - rebound after auto-injector",
+  "version": "v1.1 | VT Protocols 2025 | UVM Rescue",
+  "category": "Medical",
+  "level": "AEMT CCIT",
+  "run_time": "20-25 min",
+  "difficulty": "Moderate",
+  "crew": "CC + 1",
+  "protocols": [
+    "1.2 Routine Pt Care",
+    "2.2A Allergic Reaction/Anaphylaxis",
+    "2.24A Shock"
+  ],
+  "objectives": [
+    "Recognize anaphylaxis despite prior auto-injector",
+    "Repeat epi 0.3 mg IM (1 mg/mL) without delay",
+    "IV + NS bolus for hypotension (MAP >= 65 / SBP >= 90)",
+    "Supine positioning; no standing/walking",
+    "Intercept vs. direct to UVMMC (18 min); epi re-dose plan en route"
+  ],
+  "resources": "Epi 1 mg/mL + syringes / auto-injectors, IV, NS 2 L, DuoNeb, O2, BVM, suction. UVMMC ~18 min. Paramedic intercept ETA: ______",
+  "dispatch": "UVM Rescue, respond to Camp Birchwood, 300 Lakeshore Dr (Malletts Bay), for a 29-year-old male, allergic reaction, difficulty breathing. Camp nurse on scene. Time out 1410.",
+  "scene": {
+    "location": "Camp health lodge cot. 82 F, humid. Gravel camp road; UVMMC ~18 min.",
+    "setup": "Pt seated on cot edge, scratching. Used EpiPen trainer on table. Camp nurse present.",
+    "moulage": "Red marker blotches (hives) on neck/chest/arms; sting site L forearm.",
+    "roles": "Pt actor; camp nurse (gave EpiPen 0.3 mg at 1358, ~14 min before contact)."
+  },
+  "patient": {
+    "name": "Tyler Morin",
+    "age": "29",
+    "sex": "M",
+    "weight_kg": "80",
+    "cc": "Throat tight, can't breathe",
+    "on_arrival": "Sitting upright, flushed with hives, hoarse 2-3 word answers, audible wheeze, anxious."
+  },
+  "history": {
+    "SAMPLE": [
+      [
+        "S",
+        "Throat tight, itchy, SOB, lightheaded, nauseated, 1x vomit"
+      ],
+      [
+        "A",
+        "Bee/wasp - anaphylaxis age 14. Carries EpiPen"
+      ],
+      [
+        "M",
+        "EpiPen (one used today), albuterol PRN"
+      ],
+      [
+        "P",
+        "Mild asthma"
+      ],
+      [
+        "L",
+        "Lunch 1230"
+      ],
+      [
+        "E",
+        "Stung L forearm ~1355 clearing brush; nurse gave EpiPen 1358, \"got better then came back\""
+      ]
+    ],
+    "OPQRST": [
+      [
+        "O",
+        "Within 3 min of sting"
+      ],
+      [
+        "P",
+        "Worse lying back? No - worse sitting up (dizzy)"
+      ],
+      [
+        "Q",
+        "Throat \"closing\", chest tight"
+      ],
+      [
+        "R",
+        "Whole body itch"
+      ],
+      [
+        "S",
+        "Breathing 8/10"
+      ],
+      [
+        "T",
+        "Improved ~5 min after EpiPen, worse again past ~5 min"
+      ]
+    ]
+  },
+  "primary": [
+    [
+      "X / hemorrhage",
+      "None"
+    ],
+    [
+      "Airway",
+      "Patent, **hoarse voice**, lip/uvula swelling, no stridor yet"
+    ],
+    [
+      "Breathing",
+      "RR 28, accessory use, diffuse expiratory wheeze"
+    ],
+    [
+      "Circulation",
+      "Radial weak, rapid. Skin flushed, warm, hives"
+    ],
+    [
+      "Disability",
+      "A&Ox4, GCS 15 (lightheaded)"
+    ],
+    [
+      "Exposure",
+      "Generalized urticaria; stinger visible L forearm"
+    ],
+    [
+      "Priority / impression",
+      "**HIGH**: anaphylaxis w/ airway + resp + shock signs. Epi now"
+    ]
+  ],
+  "secondary": [
+    [
+      "Face / mouth",
+      "Lips swollen, uvula edematous"
+    ],
+    [
+      "Neck",
+      "No stridor at rest; hoarse"
+    ],
+    [
+      "Chest / lungs",
+      "Diffuse wheeze, decreased bases"
+    ],
+    [
+      "Abdomen",
+      "Cramping, nausea"
+    ],
+    [
+      "Skin",
+      "Hives trunk/extremities, flushed"
+    ],
+    [
+      "L forearm",
+      "Sting site, stinger in place (scrape off)"
+    ],
+    [
+      "Prior epi",
+      "Auto-injector used R thigh 1358"
+    ],
+    [
+      "Capno",
+      "Shark-fin waveform (bronchospasm)"
+    ]
+  ],
+  "vitals": [
+    {
+      "stage": "A Initial",
+      "trigger": "First set (~14 min after 1st EpiPen)",
+      "HR": "128",
+      "BP": "**78/46**",
+      "RR": "28",
+      "SpO2": "91% RA",
+      "EtCO2": "32",
+      "BGL": "118",
+      "Temp": "98.9",
+      "Pain": "-",
+      "GCS": "15",
+      "Pupils": "4 PERRL",
+      "other": "Wheeze, hoarse, hives. Sinus tach. Shark-fin capno",
+      "bold": [
+        "BP",
+        "HR",
+        "SpO2"
+      ]
+    },
+    {
+      "stage": "B Epi #2",
+      "trigger": "3-4 min after epi 0.3 mg IM",
+      "HR": "120",
+      "BP": "96/60",
+      "RR": "22",
+      "SpO2": "94%",
+      "EtCO2": "35",
+      "BGL": "-",
+      "Temp": "-",
+      "Pain": "-",
+      "GCS": "15",
+      "Pupils": "-",
+      "other": "Voice clearer, wheeze less, hives fading"
+    },
+    {
+      "stage": "C Fluids/ neb",
+      "trigger": "After NS 1 L + DuoNeb",
+      "HR": "108",
+      "BP": "112/68",
+      "RR": "20",
+      "SpO2": "97%",
+      "EtCO2": "36",
+      "BGL": "-",
+      "Temp": "-",
+      "Pain": "-",
+      "GCS": "15",
+      "Pupils": "-",
+      "other": "Few scattered wheezes. Normal capno"
+    },
+    {
+      "stage": "D Rebound",
+      "trigger": "~T+22 (any path) - epi wearing off",
+      "HR": "124",
+      "BP": "**86/52**",
+      "RR": "26",
+      "SpO2": "92%",
+      "EtCO2": "33",
+      "BGL": "-",
+      "Temp": "-",
+      "Pain": "-",
+      "GCS": "15",
+      "Pupils": "-",
+      "other": "Throat tight again, hoarse. -> epi #3 (max 3; MD for more)",
+      "bold": [
+        "BP"
+      ]
+    },
+    {
+      "stage": "E Crash",
+      "trigger": "IF no epi by T+5 OR pt stood up",
+      "HR": "140",
+      "BP": "**64/30**",
+      "RR": "34",
+      "SpO2": "86%",
+      "EtCO2": "28",
+      "BGL": "-",
+      "Temp": "-",
+      "Pain": "-",
+      "GCS": "12",
+      "Pupils": "-",
+      "other": "**Stridor**, grey, near-syncope. Assist w/ BVM",
+      "bold": [
+        "BP",
+        "SpO2",
+        "GCS"
+      ]
+    }
+  ],
+  "flow": [
+    {
+      "time": "0-2",
+      "phase": "Arrival",
+      "give": "Nurse: \"I gave his EpiPen at 1358, he got better, now it's back.\" Stage **A**.",
+      "expected": [
+        "Anaphylaxis recognized (2.2A criteria)",
+        "Roles: one on epi, one on airway/O2",
+        "Paramedic intercept requested at once"
+      ]
+    },
+    {
+      "time": "2-5",
+      "phase": "Epi decision",
+      "give": "Pt: \"I'm so dizzy sitting up.\"",
+      "branches": [
+        {
+          "if": "Epi 0.3 mg IM thigh <= T+5",
+          "then": "Stage **B**"
+        },
+        {
+          "if": "Diphenhydramine/neb first, or epi delayed > T+5",
+          "then": "Stage **E**"
+        },
+        {
+          "if": "Wrong concentration drawn (0.1 mg/mL IM)",
+          "then": "partner catches if asked; critical (evaluator discretion)"
+        }
+      ],
+      "expected": [
+        "Epi 0.3 mg IM (1 mg/mL) anterolateral thigh",
+        "Pt laid supine, legs flat, not walked",
+        "O2 to SpO2 94-98%"
+      ]
+    },
+    {
+      "time": "5-12",
+      "phase": "Stabilize",
+      "give": "Pt's veins good. Stinger still in skin if crew looks.",
+      "expected": [
+        "IV large bore; NS bolus (up to 30 mL/kg) to SBP >= 90",
+        "DuoNeb for persistent wheeze",
+        "Stinger scraped out"
+      ],
+      "branches": [
+        {
+          "type": "inject",
+          "if": "Stridor develops despite epi #2",
+          "then": "Stage **E** airway signs; expect epi re-dose, BVM/suction ready, MD + intercept"
+        }
+      ]
+    },
+    {
+      "time": "8-14",
+      "phase": "Move to ambulance",
+      "give": "Stage **C**. Gravel path, 50 yd, 3 steps.",
+      "branches": [
+        {
+          "if": "Pt allowed to walk / sit up",
+          "then": "syncope -> Stage **E**"
+        }
+      ],
+      "expected": [
+        "Stretcher, supine",
+        "Direct to UVMMC vs. intercept decided (no scene delay)",
+        "Re-dose plan stated (q5-15 min)"
+      ]
+    },
+    {
+      "time": "15-25",
+      "phase": "Transport / rebound",
+      "give": "Stage **D** at ~T+22. Pt: \"It's coming back, my throat...\"",
+      "branches": [
+        {
+          "if": "Epi #3 given",
+          "then": "Stage **C**"
+        },
+        {
+          "if": "No re-dose",
+          "then": "Stage **E**"
+        },
+        {
+          "type": "inject",
+          "if": "Traffic on Rt 7: ETA +10 min",
+          "then": "MD contact for epi beyond 3 doses; airway equipment ready"
+        }
+      ],
+      "expected": [
+        "Rebound recognized; epi #3 IM",
+        "Med Direction for doses beyond 3",
+        "Airway equip ready (BVM, suction, SGA)"
+      ]
+    },
+    {
+      "time": "25+",
+      "phase": "Report / handoff",
+      "give": "Evaluator plays medic intercept or ED.",
+      "expected": [
+        "Handoff: times of all 3 epi doses, fluid total",
+        "Biphasic/rebound risk noted",
+        "SIREN; epi times on tape/chart"
+      ]
+    }
+  ],
+  "critical": [
+    "Epi not given within 5 min of contact",
+    "Second-line meds (neb/antihistamine) before epi",
+    "Wrong epi concentration/route (0.1 mg/mL IM or 1 mg/mL IV)",
+    "Hypotensive pt allowed to stand/walk",
+    "No IV fluid for SBP < 90 after epi",
+    "Failure to re-dose epi for recurrence",
+    "Not transported (epi given = must transport, 2.2A)"
+  ],
+  "differentials": [
+    [
+      "Anaphylaxis (dx)",
+      "Known allergen, hives, wheeze, hoarse, hypotension",
+      "-"
+    ],
+    [
+      "Asthma exacerbation",
+      "Asthma hx, wheeze, shark-fin",
+      "Hives, hypotension, lip edema, sting"
+    ],
+    [
+      "Epi side effect / anxiety",
+      "Tachycardia, tremor",
+      "Hypotension + airway edema"
+    ],
+    [
+      "Vasovagal",
+      "Lightheaded upright",
+      "Tachy, hives, wheeze"
+    ],
+    [
+      "Angioedema (ACE-I)",
+      "Lip swelling",
+      "No ACE-I; urticaria + sting"
+    ],
+    [
+      "Multiple stings / envenomation",
+      "Outdoor work",
+      "Single sting; immune pattern"
+    ]
+  ],
+  "debrief": [
+    "Why did symptoms return 15-20 min after the auto-injector?",
+    "Why supine, and why did standing make him crash?",
+    "Epi before everything - why are antihistamines second line?",
+    "How did you decide intercept vs. go direct with UVMMC 18 min away?",
+    "How do you avoid an epi concentration error under stress?"
+  ],
+  "crew_card": {
+    "dispatch": "Camp Birchwood, 300 Lakeshore Dr (Malletts Bay). 29 y/o M, allergic reaction, difficulty breathing. Camp nurse on scene.",
+    "on_arrival": "Health lodge. Young man sitting on cot, red blotches, scratching, hoarse, breathing hard. Nurse holding a used EpiPen."
+  },
+  "actor_card": {
+    "Act": "Anxious, scratch constantly, hoarse 2-3 word answers. Say you're dizzy sitting up.",
+    "After epi": "Within ~3 min voice gets better, breathe easier.",
+    "If you stand / walk": "Sway, \"I'm gonna pass out\", sit/collapse to ground.",
+    "~T+22": "\"It's coming back... my throat\" - hoarse again.",
+    "If no epi by T+5": "Make high-pitched noise breathing in (stridor), very drowsy."
+  },
+  "show_cards": [
+    {
+      "type": "capno",
+      "width": "half",
+      "title": "CAPNOGRAPHY - initial",
+      "caption": "EtCO2 32, RR 28",
+      "pattern": "shark",
+      "etco2": 32,
+      "rr": 28
+    },
+    {
+      "type": "strip",
+      "width": "half",
+      "title": "MONITOR - Lead II",
+      "caption": "Initial",
+      "rhythm": "sinus",
+      "rate": 128
+    },
+    {
+      "type": "text",
+      "width": "half",
+      "title": "SKIN / FACE",
+      "body": "Raised red welts neck, chest, arms, back.\nLips swollen. Uvula swollen."
+    },
+    {
+      "type": "text",
+      "width": "half",
+      "title": "LUNG SOUNDS",
+      "body": "Diffuse expiratory wheezes, all fields.\nDiminished at bases."
+    }
+  ],
+  "moulage_tags": [
+    {
+      "region": "Neck / chest / arms",
+      "text": "Raised red welts (hives), very itchy"
+    },
+    {
+      "region": "Lips / mouth",
+      "text": "Lips swollen. Uvula swollen. Voice hoarse"
+    },
+    {
+      "region": "L forearm",
+      "text": "Sting site - stinger still in skin"
+    },
+    {
+      "region": "R thigh",
+      "text": "Auto-injector site, given 1358"
+    },
+    {
+      "region": "Back (lung sounds)",
+      "text": "Wheezes all fields, diminished at bases"
+    },
+    {
+      "region": "Wrist (radial)",
+      "text": "Weak and rapid"
+    },
+    {
+      "region": "Abdomen",
+      "text": "Cramping; nauseated"
+    }
+  ],
+  "learn_more": {
+    "topic": "anaphylaxis with biphasic/rebound symptoms after an epinephrine auto-injector",
+    "focus": "IM epinephrine dosing and repeat timing, positioning, fluids, and how often biphasic reactions occur"
+  }
+}
