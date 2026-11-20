@@ -99,11 +99,11 @@ Router: hash routes (static hosting, no server rewrites). PWA via `vite-plugin-p
 
 | Route | Screen | Main components |
 |---|---|---|
-| `#/` | Library | `CategoryGroup` (Medical / Trauma / Cardiac / Cardiac arrest), `ScenarioCard` (id, title, difficulty, run time, protocols, validity badge), `ImportDropzone` (file picker + drag-drop -> `validateScenario` -> IndexedDB; shows schema/rule errors verbatim) |
+| `#/` | Library | `CategoryGroup` (Medical / Trauma / Cardiac / Cardiac arrest), `ScenarioCard` (id, title, difficulty, run time, protocols, validity badge), `ImportDropzone` (file picker + drag-drop -> `validateScenario` -> in-memory for the session; shows schema/rule errors verbatim) |
 | `#/s/:id/prebrief` | Pre-brief tab | `ReadAloud` (dispatch, large type), `SceneSetup`, `Resources`, `Objectives`, `ActorCard`, `MoulageChecklist` (tags with cues; setup checkboxes) |
 | `#/s/:id/run` | Run tab | `ScenarioClock` (start/pause/reset, T+mm:ss), `FlowTimeline` (`PhaseCard`: give text, `BranchButton` crew IF->THEN, `InjectButton` examiner option visually distinct/shaded hexagon icon), `ExpectedChecklist` (tap = check+timestamp, long-press = uncheck), `VitalsPanel` (`StageSwitcher`, `VitalTile` tap-to-reveal, bold keys highlighted, `AdLibEntry`), `HistoryPanel` (SAMPLE/OPQRST/primary/secondary, tap = asked/assessed), `ShowCardList` (cue visible, "Show" pushes face), `MoulageTagList` ("Show" pushes region+text, never cue), `CriticalList` (MET / MISSED -> "evaluator discretion" flag), `Notes` + `QuickNotes`, `StudentScreenButton` |
 | `#/s/:id/debrief` | Debrief tab | `EventTimeline`, `CompletionStats` (% expected checked), `CriticalMisses`, `DifferentialsTable`, `DebriefPrompts`, `ResultForm` (Pass / Remediate / Fail, trainee, evaluator, date), `LearnMoreCard` (`learnPrompt()` + copy + local QR via a JS QR lib, prompt + openevidence.com), `ExportButtons` (JSON run record, CSV events, printable B&W HTML) |
-| `#/runs` | Runs | `RunList` by trainee from IndexedDB, open -> read-only debrief |
+| `#/runs` | Runs | `RunFileOpener`: open exported run JSON file(s) -> read-only debrief, grouped by trainee (no stored history) |
 | `#/display` | Student display (Phase 2) | see below |
 
 Layout: tablet-first, tabs at the bottom (one-handed), touch targets >= 44 px, paper theme (section 5), `Footer` (exact footer string) on every screen and export.
@@ -141,7 +141,7 @@ interface RunRecord {
 ```
 
 Ids come from `normalize()` (explicit ids where present, else `p<i>`, `p<i>.e<j>`, `p<i>.b<j>`, `crit<i>`), so logs stay meaningful if a scenario is re-ordered only when explicit ids are used (Q5).
-Storage: IndexedDB (`idb` wrapper): stores `scenarios` (imported), `runs` (RunRecord, written on every event - crash-safe), `meta`. CSV = one row per event.
+Storage: stateless, no IndexedDB/backend (user decision). Run state in memory; the in-progress RunRecord is autosaved to a single localStorage key on every event (refresh/crash recovery, offer "resume run?" on load), cleared on export/discard. Imported scenarios are session-only. History = exported files. CSV = one row per event.
 State: `useReducer` + context per run (no Redux). Clock derived from clock events + `performance.now()`.
 
 ## 9. SyncTransport
@@ -183,8 +183,8 @@ v1 implements `BroadcastChannelTransport` only (same browser, second window). Sn
 7. **Live monitor rhythm**: vitals rows have no rhythm/capno fields (rhythm is only in `other` text, e.g. "**VF** - shock advised"). For the Phase 2 animated monitor, either (a) add optional `vitals[].monitor: {rhythm, rate, p_rate?, capno?: {pattern, etco2}}` (structural, generator ignores it), or (b) drive the monitor only from the last pushed strip/12-lead/capno card. I recommend (a).
 8. **`other` column on the student display**: it mixes patient findings with instructor notes ("Point to capno; no ROSC until fixed", "(show 12-lead card)"), so the plan never sends it to the display; skin/lung findings reach the crew via moulage tags or verbally. OK? And may the display show the scenario title (it can hint the diagnosis, e.g. "Anaphylaxis")? Default: no title.
 9. **Image show cards**: unused today; `path` is a local file path the browser can't load from an imported JSON. Bundle under `public/scenario-assets/` and/or allow `data:` URIs?
-10. **Trainee/evaluator names** in IndexedDB and exports: fine to store locally (staff names, no patient data)? Any retention rule?
-11. **Hosting**: GitHub Pages from this repo (which org/repo name), or another static host? Build uses relative base so either works.
+10. **Trainee/evaluator names** in the autosaved run and exports: fine to store locally (staff names, no patient data)? Any retention rule?
+11. ~~Hosting~~ Decided: GitHub Pages via Actions on push to `main` (vmoeykens/ems-scenarios).
 12. **Bundle**: ajv compiles the schema at runtime (uses `new Function`; ~455 kB JS now). If you plan a strict Content-Security-Policy, I'll switch to ajv's precompiled standalone validator in Phase 1.
 13. **Student display look**: per the paper-on-the-web direction, every screen is greyscale paper except `/display`, which I plan to keep as a patient-monitor (black background, large white numerals, waveforms in one green accent) because that is what the crew would see on a real monitor and it reads well on a projector. Confirm, or should the display also be paper-style (white background, black numerals/waveforms like the printed show cards)?
 14. **Accent set**: four accents (`alert` red, `live` green, `active` blue, `pushed` amber) as tabled in SPEC.md. OK, or fewer (e.g. drop `pushed` and mark pushed items with a black outline)?

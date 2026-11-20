@@ -16,7 +16,7 @@ Origin: viability assessment + Claude Code prompt from the "EMS Scenarios" claud
 1. Start single-device: instructor app + "student screen" button that opens a second window (second monitor / projector). No server.
 2. Branches are currently text ("-> Stage **C**"). Add machine-readable links (`goto_stage`, `goto_phase`) and IDs, backward compatible.
 3. One definition of the format: a single JSON Schema in the repo; both the app and the Python generator check against it (or at least never disagree).
-4. Results saved in-browser (IndexedDB) + export files. No accounts/backend in v1.
+4. **Stateless, no backend, no database.** Static files only (GitHub Pages). Nothing is stored server-side; there is no IndexedDB. A run lives in memory; the only browser storage is one localStorage key autosaving the in-progress run (crash/refresh recovery), cleared when the run is exported or discarded. Results leave the app as export files (JSON / CSV / print).
 5. No real patient data. Keep the "simulated, not for patient care" footer.
 6. Phone-to-phone sync later via a pluggable transport (Supabase Realtime with a 6-digit room code is the likely choice). Not in v1.
 
@@ -55,6 +55,12 @@ User requirement (Nov 2026): "The UI of the application should match the paper o
 - **Print**: a print stylesheet renders the screens as the paper sheet: accents become black (MISSED prints as bold "MISSED"), interactive chrome hidden, footer kept. The debrief summary export uses the same stylesheet.
 - **Student display exception**: the `/display` monitor keeps the patient-monitor look (black background, large white numerals); waveforms may use a single accent (`monitor-wave`). This is the only dark/colored screen. (Open question in `docs/PLAN.md`: confirm, or use a paper-style display instead.)
 
+## Deployment
+
+- GitHub Pages, built by GitHub Actions (`.github/workflows/pages.yml`) on every push to `main`: `npm ci`, `npm run validate`, `npm test`, `npm run build`, deploy `dist/`. Also runnable manually (workflow_dispatch).
+- Relative `base` + hash routes, so it works from the `/ems-scenarios/` sub-path with no server rewrites.
+- Adding or editing a scenario = commit the JSON to `scenarios/` on `main`; the site redeploys automatically.
+
 ## Phase 0 - Schema (STOP for review after this phase)
 
 1. Write `schema/scenario.schema.json` describing the current format exactly as the 10 files use it: `id, title, version, category, level, run_time, difficulty, crew, protocols, objectives, resources, dispatch, scene{...}, patient, history.SAMPLE/OPQRST, primary, secondary, vitals[], vitals_note, blank_vitals_rows, flow[] (time, phase, give, expected, branches[] with optional type:"inject"), critical, differentials, debrief, crew_card, actor_card, show_cards[] (12lead | strip | capno | text | image, each with optional cue), moulage_tags[] {region, text, cue?}, learn_more {topic, focus} | {prompt}`.
@@ -72,7 +78,7 @@ User requirement (Nov 2026): "The UI of the application should match the paper o
 
 ## Phase 1 - Instructor console (single device, tablet-first, works on laptop)
 
-- **Library**: scenarios grouped by category (Medical / Trauma / Cardiac / Cardiac arrest), with difficulty, run time, protocols. Bundled scenarios from `scenarios/` + import a JSON via file picker/drag-drop (validated, stored in IndexedDB).
+- **Library**: scenarios grouped by category (Medical / Trauma / Cardiac / Cardiac arrest), with difficulty, run time, protocols. Bundled scenarios from `scenarios/` (built into the app) + import a JSON via file picker/drag-drop (validated, held in memory for the session; to make it permanent, add it to `scenarios/` and redeploy).
 - **Pre-brief tab**: dispatch (large "read aloud" text), scene/setup, resources, objectives, actor card, moulage tags checklist (with cues) for setup.
 - **Run tab**:
   - Scenario clock (start/pause/reset), T+mm:ss. Every event timestamped relative to start.
@@ -85,7 +91,7 @@ User requirement (Nov 2026): "The UI of the application should match the paper o
   - Critical actions: mark MET / MISSED. MISSED flags the run for **evaluator discretion** - never an automatic fail (match the PDF wording).
   - Notes (free text) + quick-note buttons.
 - **Debrief tab**: event log timeline, checklist completion %, critical misses, differentials table, debrief prompts, result (Pass / Remediate / Fail), trainee + evaluator names, date. Learn-more card: the AEMT-scoped OpenEvidence prompt (same template as `learn_prompt()` in the generator) with copy button + QR (prompt and openevidence.com). Exports: JSON run record, CSV of events, printable B&W HTML summary.
-- **Runs** screen: past runs per trainee from IndexedDB.
+- **Runs** screen: open one or more exported run JSON files to view a read-only debrief or compare runs per trainee. No stored history.
 
 ## Phase 2 - Student display
 
