@@ -1,0 +1,584 @@
+{
+  "id": "MED-06",
+  "title": "Status epilepticus - airway first, intercept early",
+  "version": "v1.0 | VT Protocols 2025 | UVM Rescue",
+  "category": "Medical",
+  "level": "AEMT CCIT",
+  "run_time": "20-25 min",
+  "difficulty": "Hard",
+  "crew": "CC + 1",
+  "protocols": [
+    "1.2 Routine Pt Care",
+    "2.22A Seizures - Adult",
+    "2.8A Hypoglycemia",
+    "6.9 Capnography",
+    "8.3 Communications"
+  ],
+  "objectives": [
+    "Protect, position, suction, NPA, O2; BVM if ventilation inadequate",
+    "BGL early (treat < 60)",
+    "Recognize status (> 5 min); AEMT benzo = pt's own Rx rescue med only",
+    "Early paramedic intercept / Med Direction without delaying transport",
+    "Reassess ventilation (RR, EtCO2) post-ictal and after any benzo"
+  ],
+  "resources": "Suction, NPA/OPA, BVM, O2, monitor w/ capno, glucometer, IV kit, stretcher. Scene ~7 min from UVMMC. Paramedic intercept ~10 min out.",
+  "dispatch": "UVM Rescue, respond to Riverside Cafe, 12 Main St, Winooski, for a 29-year-old male having a seizure. Caller is a coworker. Seizure is still going. Time out 1404.",
+  "scene": {
+    "location": "Back kitchen of a cafe, tile floor, pt between prep table and wall. ~7 min from UVMMC.",
+    "setup": "Pt supine on floor, jerking. Coworker kneeling by head. Pt's backpack on hook by door. Apron, cut-resistant gloves on floor.",
+    "moulage": "Blue lip color, blood-tinged froth at mouth (glycerin + red), wet pants.",
+    "roles": "Pt actor (seizing, then post-ictal); coworker (timeline, knows little); evaluator plays MD + intercept."
+  },
+  "patient": {
+    "name": "Marcus Bell",
+    "age": "29",
+    "sex": "M",
+    "weight_kg": "80",
+    "cc": "Seizure ~7 min, not stopping",
+    "on_arrival": "On floor, all 4 limbs jerking rhythmically, eyes open staring R, jaw clenched, gurgling, lips blue. Does not respond."
+  },
+  "history": {
+    "SAMPLE": [
+      [
+        "S",
+        "Generalized jerking ~7 min, no break; bit tongue, wet pants"
+      ],
+      [
+        "A",
+        "NKDA (per bracelet)"
+      ],
+      [
+        "M",
+        "**Levetiracetam 1000 mg BID - out x3 days** (pharmacy/insurance). **Rx Nayzilam** (in backpack)"
+      ],
+      [
+        "P",
+        "Epilepsy since age 16. Last seizure 8 mo ago"
+      ],
+      [
+        "L",
+        "Bagel ~0900. 2 beers last night"
+      ],
+      [
+        "E",
+        "Worked overnight shift + this shift, little sleep. Dropped at ~1402"
+      ]
+    ],
+    "OPQRST": [
+      [
+        "O",
+        "Sudden, ~1402, witnessed; fell from standing"
+      ],
+      [
+        "P",
+        "Missed meds, no sleep, alcohol"
+      ],
+      [
+        "Q",
+        "Generalized tonic-clonic, never woke up"
+      ],
+      [
+        "R",
+        "N/A"
+      ],
+      [
+        "S",
+        "N/A"
+      ],
+      [
+        "T",
+        "Continuous since 1402 (coworker)"
+      ]
+    ]
+  },
+  "primary": [
+    [
+      "X / hemorrhage",
+      "Minor tongue bleeding only"
+    ],
+    [
+      "Airway",
+      "**Jaw clenched, gurgling**, froth. Suction + NPA (no OPA/bite block)"
+    ],
+    [
+      "Breathing",
+      "**Irregular, ineffective ~8/min**, cyanotic lips"
+    ],
+    [
+      "Circulation",
+      "Radial rapid, strong. Skin hot, sweaty"
+    ],
+    [
+      "Disability",
+      "GCS 3 while seizing. Eyes deviated R. **Seizing > 5 min = status**"
+    ],
+    [
+      "Exposure",
+      "Incontinent urine. Small bump back of head. **Medical ID bracelet L wrist**"
+    ],
+    [
+      "Priority / impression",
+      "**HIGH**: status epilepticus, hypoxic. Airway, BGL, rescue med, move"
+    ]
+  ],
+  "secondary": [
+    [
+      "Head",
+      "**Small bump occiput**, no bleeding"
+    ],
+    [
+      "Mouth",
+      "R tongue bite, blood-tinged froth"
+    ],
+    [
+      "Neck",
+      "No stiffness (post-ictal check)"
+    ],
+    [
+      "Chest / lungs",
+      "Coarse upper-airway sounds; clear after suction"
+    ],
+    [
+      "Extremities",
+      "No deformity; no injection marks"
+    ],
+    [
+      "Skin",
+      "Hot, sweaty. Temp 99.6"
+    ],
+    [
+      "Neuro post-ictal",
+      "Moves all 4, no focal weakness"
+    ],
+    [
+      "L wrist",
+      "**Medical ID: EPILEPSY / KEPPRA / NAYZILAM IN BAG**"
+    ]
+  ],
+  "vitals": [
+    {
+      "stage": "A Seizing",
+      "trigger": "First set (~7 min of seizure)",
+      "HR": "**138**",
+      "BP": "**172/98**",
+      "RR": "**8**",
+      "SpO2": "**86%** RA",
+      "EtCO2": "**54**",
+      "BGL": "104",
+      "Temp": "99.6",
+      "Pain": "-",
+      "GCS": "**3**",
+      "Pupils": "6 sluggish",
+      "other": "RR irreg. GTC ongoing, eyes deviated R. Gurgling. Sinus tach",
+      "bold": [
+        "HR",
+        "BP",
+        "RR",
+        "SpO2",
+        "EtCO2",
+        "GCS"
+      ],
+      "monitor": {
+        "rhythm": "sinus",
+        "rate": 138,
+        "capno": {
+          "pattern": "normal",
+          "etco2": 54,
+          "rr": 8
+        }
+      }
+    },
+    {
+      "stage": "B Airway",
+      "trigger": "Lateral, suction, NPA, NRB 15 L (still seizing)",
+      "HR": "134",
+      "BP": "168/96",
+      "RR": "10",
+      "SpO2": "92% NRB",
+      "EtCO2": "**50**",
+      "BGL": "-",
+      "Temp": "-",
+      "Pain": "-",
+      "GCS": "3",
+      "Pupils": "-",
+      "other": "RR irreg. Still seizing. Less gurgling",
+      "bold": [
+        "EtCO2"
+      ],
+      "monitor": {
+        "rhythm": "sinus",
+        "rate": 134,
+        "capno": {
+          "pattern": "normal",
+          "etco2": 50,
+          "rr": 10
+        }
+      }
+    },
+    {
+      "stage": "C Post-ictal",
+      "trigger": "~3 min after rescue med (or intercept midazolam)",
+      "HR": "112",
+      "BP": "150/88",
+      "RR": "**9**",
+      "SpO2": "93% NRB",
+      "EtCO2": "**52**",
+      "BGL": "-",
+      "Temp": "-",
+      "Pain": "-",
+      "GCS": "**7**",
+      "Pupils": "5 PERRL",
+      "other": "RR shallow. Jerking stopped. Snoring. E1 V2 M4. Assist BVM",
+      "bold": [
+        "RR",
+        "EtCO2",
+        "GCS"
+      ],
+      "monitor": {
+        "rhythm": "sinus",
+        "rate": 112,
+        "capno": {
+          "pattern": "normal",
+          "etco2": 52,
+          "rr": 9
+        }
+      }
+    },
+    {
+      "stage": "D Desat",
+      "trigger": "IF no airway/O2 by T+4, or vomit inject",
+      "HR": "**146**",
+      "BP": "176/102",
+      "RR": "**6**",
+      "SpO2": "**80%**",
+      "EtCO2": "**62**",
+      "BGL": "-",
+      "Temp": "-",
+      "Pain": "-",
+      "GCS": "3",
+      "Pupils": "-",
+      "other": "Cyanotic, gurgling / emesis in mouth",
+      "bold": [
+        "HR",
+        "RR",
+        "SpO2",
+        "EtCO2"
+      ],
+      "monitor": {
+        "rhythm": "sinus",
+        "rate": 146,
+        "capno": {
+          "pattern": "normal",
+          "etco2": 62,
+          "rr": 6
+        }
+      }
+    },
+    {
+      "stage": "E Return",
+      "trigger": "Examiner option en route (~T+16)",
+      "HR": "**140**",
+      "BP": "176/100",
+      "RR": "**8**",
+      "SpO2": "**88%**",
+      "EtCO2": "**56**",
+      "BGL": "-",
+      "Temp": "-",
+      "Pain": "-",
+      "GCS": "**3**",
+      "Pupils": "-",
+      "other": "RR irreg. 2nd GTC, never woke between = still status",
+      "bold": [
+        "HR",
+        "RR",
+        "SpO2",
+        "EtCO2",
+        "GCS"
+      ],
+      "monitor": {
+        "rhythm": "sinus",
+        "rate": 140,
+        "capno": {
+          "pattern": "normal",
+          "etco2": 56,
+          "rr": 8
+        }
+      }
+    },
+    {
+      "stage": "F Better",
+      "trigger": "En route, airway supported (~T+20)",
+      "HR": "102",
+      "BP": "142/84",
+      "RR": "14",
+      "SpO2": "97% NRB",
+      "EtCO2": "42",
+      "BGL": "-",
+      "Temp": "-",
+      "Pain": "-",
+      "GCS": "11",
+      "Pupils": "4 PERRL",
+      "other": "E3 V3 M5. Confused, pushes mask. No focal deficit",
+      "monitor": {
+        "rhythm": "sinus",
+        "rate": 102,
+        "capno": {
+          "pattern": "normal",
+          "etco2": 42,
+          "rr": 14
+        }
+      }
+    }
+  ],
+  "flow": [
+    {
+      "time": "0-2",
+      "phase": "Arrival / primary",
+      "give": "Coworker: \"He just dropped. He's been shaking like this since before I called.\" Stage **A** as obtained.",
+      "expected": [
+        "Seizure duration from witness (> 5 min = status)",
+        "Protect head, no restraint, nothing forced in mouth",
+        "Paramedic intercept requested now"
+      ]
+    },
+    {
+      "time": "1-5",
+      "phase": "Airway / O2 / BGL",
+      "give": "Stage **B** once positioned + O2.",
+      "branches": [
+        {
+          "if": "OPA or bite block forced past clenched teeth",
+          "then": "broken tooth, bleeding; debrief (NPA instead)"
+        },
+        {
+          "if": "No suction/NPA/O2 by T+4",
+          "then": "Stage **D**"
+        }
+      ],
+      "expected": [
+        "Lateral + suction",
+        "NPA + NRB 15 L; BVM if ineffective",
+        "BGL checked (104)",
+        "Monitor + capno on"
+      ]
+    },
+    {
+      "time": "3-8",
+      "phase": "Stop the seizure",
+      "give": "Rescue med info only if crew checks bracelet or asks. Coworker: \"He keeps a nose spray thing in his bag.\"",
+      "branches": [
+        {
+          "if": "Pt's Rx Nayzilam 5 mg IN given per label/MD",
+          "then": "Stage **C** at ~3 min"
+        },
+        {
+          "if": "No rescue med sought",
+          "then": "seizing continues; coworker mentions bag at T+8; intercept midazolam ~T+15"
+        },
+        {
+          "if": "Crew waits on scene for intercept or IV",
+          "then": "critical (evaluator discretion); intercept meets en route"
+        }
+      ],
+      "expected": [
+        "Rx rescue med assisted (2.22A); MD if unsure",
+        "Load + go to UVMMC; intercept en route",
+        "IV only if no delay (AEMT)"
+      ]
+    },
+    {
+      "time": "8-12",
+      "phase": "Post-ictal",
+      "give": "Stage **C**. Snoring, shallow. MD (if called): \"Assist ventilations. 2nd spray at 10 min if he seizes again.\"",
+      "branches": [
+        {
+          "type": "inject",
+          "if": "Pt vomits post-ictal",
+          "then": "Stage **D**; expect lateral, suction, BVM w/ O2 -> back toward Stage **C**"
+        }
+      ],
+      "expected": [
+        "RR + EtCO2 reassessed after benzo",
+        "Jaw thrust/NPA; BVM for RR < 10 / EtCO2 > 50",
+        "Recovery position, suction ready"
+      ]
+    },
+    {
+      "time": "12-20",
+      "phase": "Transport",
+      "give": "Moving. Stage **F** if airway supported.",
+      "branches": [
+        {
+          "type": "inject",
+          "if": "2nd GTC en route, never woke between",
+          "then": "Stage **E**; expect protect, O2/BVM, 2nd Nayzilam if >= 10 min, MD, intercept midazolam"
+        }
+      ],
+      "expected": [
+        "Seizure times + rescue dose logged",
+        "Intercept rendezvous without stopping long",
+        "Serial GCS, SpO2, EtCO2"
+      ]
+    },
+    {
+      "time": "20+",
+      "phase": "Report / handoff",
+      "give": "Evaluator plays UVMMC. Coworker gives mom's number from bracelet.",
+      "expected": [
+        "Report: total seizure time, rescue med/time, airway",
+        "Trigger: missed Keppra x3 d, no sleep, ETOH",
+        "SIREN: times, doses, BGL, head bump"
+      ]
+    }
+  ],
+  "critical": [
+    "No BGL in seizing / post-ictal pt (2.22A)",
+    "Airway/oxygenation not managed (position, suction, NPA, O2/BVM)",
+    "Status not recognized; no intercept or Med Direction (2.22A)",
+    "Restraint, or objects forced into mouth",
+    "Pt's prescribed rescue med not sought (2.22A)",
+    "Transport delayed for intercept or IV",
+    "Ventilation not reassessed after benzodiazepine (RR, EtCO2)",
+    "Agency benzodiazepine given by AEMT (paramedic order)"
+  ],
+  "differentials": [
+    [
+      "Status epilepticus, AED non-adherence (dx)",
+      "Epilepsy, out of Keppra x3 d, no sleep, ETOH, GTC > 5 min",
+      "-"
+    ],
+    [
+      "Hypoglycemia",
+      "Seizure, sweaty",
+      "BGL 104"
+    ],
+    [
+      "Alcohol withdrawal seizure",
+      "Drank last night",
+      "2 beers only, no heavy use"
+    ],
+    [
+      "Head injury / ICH",
+      "Fell, occiput bump",
+      "Fell after onset; no focal deficit post-ictal"
+    ],
+    [
+      "Toxic ingestion",
+      "Young, cafe",
+      "No pills/paraphernalia; clear epilepsy hx"
+    ],
+    [
+      "Convulsive syncope",
+      "Collapse + jerking",
+      "7+ min, tongue bite, incontinence, hypoxic"
+    ],
+    [
+      "Nonepileptic (psychogenic)",
+      "Eyes open",
+      "Cyanosis, EtCO2 54, tongue bite, incontinence"
+    ]
+  ],
+  "debrief": [
+    "When did this become status epilepticus, and why does it matter?",
+    "What benzo options does an AEMT have under 2.22A?",
+    "Why NPA and not OPA? When did you go to BVM?",
+    "What did EtCO2 tell you post-ictal?",
+    "How did you use the intercept without delaying transport?"
+  ],
+  "crew_card": {
+    "dispatch": "Riverside Cafe, 12 Main St, Winooski. 29 y/o M, seizure, still going. Caller: coworker.",
+    "on_arrival": "Back kitchen. Young man on the tile floor, whole body jerking, lips blue, gurgling. Coworker kneeling by his head."
+  },
+  "actor_card": {
+    "Seizing": "Rhythmic jerk all 4 limbs, eyes open staring R, clench jaw (resist OPA), gurgle. No response to anything.",
+    "Stops": "~3 min after nasal spray, or when evaluator says. Go limp, snore, shallow breaths.",
+    "Post-ictal": "Eyes closed; groan to pain. Over ~10 min: open eyes to voice, confused, push O2 mask away.",
+    "If 2nd seizure inject": "Start jerking again without waking first.",
+    "Coworker": "\"He dropped about 2:02.\" Mention backpack nose spray ONLY if asked about meds/bracelet, or at T+8.",
+    "Do NOT volunteer": "Missed Keppra, no sleep, beers - coworker knows only if asked"
+  },
+  "show_cards": [
+    {
+      "type": "text",
+      "width": "half",
+      "title": "MEDICAL ID BRACELET (L wrist)",
+      "body": "**EPILEPSY**\nKEPPRA\nRESCUE MED: NAYZILAM - IN BAG\nICE: Mom 802-555-0143"
+    },
+    {
+      "type": "text",
+      "width": "half",
+      "title": "RESCUE MED BOX (backpack)",
+      "body": "**NAYZILAM (midazolam) nasal spray 5 mg**\nPt: Marcus Bell\n1 spray in one nostril for seizure > 5 min.\n2nd spray in other nostril at 10 min when seizure continues.\nMax 2 sprays per episode.",
+      "cue": "Only when crew searches the bag"
+    },
+    {
+      "type": "text",
+      "width": "half",
+      "title": "GLUCOMETER",
+      "body": "**104 mg/dL**"
+    },
+    {
+      "type": "text",
+      "width": "half",
+      "title": "PILL BOTTLE (backpack)",
+      "body": "Levetiracetam 1000 mg\n1 tab twice daily\nFilled 33 days ago, #60\n**EMPTY**"
+    },
+    {
+      "type": "capno",
+      "width": "half",
+      "title": "CAPNOGRAPHY",
+      "caption": "EtCO2 54   RR 8",
+      "pattern": "normal",
+      "etco2": 54,
+      "rr": 8
+    },
+    {
+      "type": "strip",
+      "width": "half",
+      "title": "MONITOR - Lead II",
+      "caption": "",
+      "rhythm": "sinus",
+      "rate": 138,
+      "lead": "II"
+    }
+  ],
+  "moulage_tags": [
+    {
+      "region": "Arms / legs",
+      "text": "Rhythmic jerking all four limbs",
+      "cue": "Remove when seizure stops; replace at 2nd seizure inject"
+    },
+    {
+      "region": "Jaw",
+      "text": "Clenched tight"
+    },
+    {
+      "region": "Mouth",
+      "text": "Bloody froth; bitten R side of tongue"
+    },
+    {
+      "region": "Lips",
+      "text": "Blue"
+    },
+    {
+      "region": "Eyes",
+      "text": "Open, staring to R; pupils large"
+    },
+    {
+      "region": "Back of head",
+      "text": "Small bump, no bleeding"
+    },
+    {
+      "region": "L wrist",
+      "text": "Medical alert bracelet"
+    },
+    {
+      "region": "Pants",
+      "text": "Wet - urinated"
+    }
+  ],
+  "learn_more": {
+    "topic": "adult status epilepticus",
+    "focus": "airway and ventilation during and after seizures, prescribed intranasal rescue meds, benzodiazepine timing evidence (RAMPART), and hypoxia risk"
+  }
+}

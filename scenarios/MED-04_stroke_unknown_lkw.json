@@ -1,0 +1,538 @@
+{
+  "id": "MED-04",
+  "title": "Wake-up stroke - unknown last known well",
+  "version": "v1.0 | VT Protocols 2025 | UVM Rescue",
+  "category": "Medical",
+  "level": "AEMT CCIT",
+  "run_time": "20-25 min",
+  "difficulty": "Moderate",
+  "crew": "CC + 1",
+  "protocols": [
+    "1.2 Routine Pt Care",
+    "2.26A Stroke - Adult",
+    "2.8A Hypoglycemia",
+    "6.2 ECG Acquisition",
+    "8.3 Communications"
+  ],
+  "objectives": [
+    "BGL before calling it a stroke (mimic r/o)",
+    "TLKW = last time at baseline, not time found; probe overnight + phone contacts",
+    "Stroke screen + FAST-ED; Stroke Alert <10 min of recognition",
+    "Thrombolytic checklist incl. anticoagulant last dose",
+    "Direct to UVMMC, scene <15 min, witness rides or phone # obtained"
+  ],
+  "resources": "Glucometer, monitor/12-lead, O2, suction, IV kit + NS 250 mL, stretcher (HOB 30 deg). Scene ~12 min from UVMMC (comprehensive stroke / thrombectomy center).",
+  "dispatch": "UVM Rescue, respond to 37 Lakeshore Dr, Colchester, for a 71-year-old male, possible stroke. Caller is his wife; he can't speak. Patient is breathing. Time out 0707.",
+  "scene": {
+    "location": "Kitchen of a split-level home, 4 steps to front door. ~12 min from UVMMC.",
+    "setup": "Pt slumped in kitchen chair, coffee mug tipped over, cold coffee on table. Wife's cell phone on counter. Pill bottles by sink.",
+    "moulage": "None needed beyond tags; actor plays R-sided weakness.",
+    "roles": "Pt actor (aphasic); wife (history, \"he was fine at bedtime\"); evaluator plays daughter by phone + UVMMC."
+  },
+  "patient": {
+    "name": "Richard Desautels",
+    "age": "71",
+    "sex": "M",
+    "weight_kg": "88",
+    "cc": "Can't talk, R arm limp - found by wife 0655",
+    "on_arrival": "Seated, slumped to R, eyes open, R arm hanging limp. Says \"no, no\" to every question. Follows \"squeeze my hand\" with L only."
+  },
+  "history": {
+    "SAMPLE": [
+      [
+        "S",
+        "Can't speak, R arm/leg weak, R face droop"
+      ],
+      [
+        "A",
+        "NKDA"
+      ],
+      [
+        "M",
+        "**Apixaban 5 mg BID - stopped ~2 wk ago** (nosebleeds), metoprolol 50 mg, lisinopril 20 mg"
+      ],
+      [
+        "P",
+        "**A-fib**, HTN. No prior stroke, no seizures, no recent surgery/head trauma"
+      ],
+      [
+        "L",
+        "Dinner 1830. Coffee this AM"
+      ],
+      [
+        "E",
+        "Bed 2215 normal. Wife woke 0655, found him at table like this"
+      ]
+    ],
+    "OPQRST": [
+      [
+        "O",
+        "Unknown - **found** 0655. Daughter spoke w/ him 0550 (only if probed)"
+      ],
+      [
+        "P",
+        "N/A"
+      ],
+      [
+        "Q",
+        "N/A (aphasic)"
+      ],
+      [
+        "R",
+        "N/A"
+      ],
+      [
+        "S",
+        "N/A"
+      ],
+      [
+        "T",
+        "Deficits unchanged since found"
+      ]
+    ]
+  },
+  "primary": [
+    [
+      "X / hemorrhage",
+      "None"
+    ],
+    [
+      "Airway",
+      "Patent; pooling saliva R mouth corner"
+    ],
+    [
+      "Breathing",
+      "RR 18, unlabored, lungs clear"
+    ],
+    [
+      "Circulation",
+      "Radial **irregular**, strong. Skin warm, dry"
+    ],
+    [
+      "Disability",
+      "GCS 13 (E4 V3 M6). **R face droop, R arm flaccid, aphasic**. BGL needed"
+    ],
+    [
+      "Exposure",
+      "No head trauma, no tongue bite, no incontinence"
+    ],
+    [
+      "Priority / impression",
+      "**HIGH**: acute stroke, probable LVO. TLKW not yet known"
+    ]
+  ],
+  "secondary": [
+    [
+      "Head / face",
+      "No trauma. **R lower face droop**"
+    ],
+    [
+      "Eyes",
+      "**Gaze deviated L**, won't cross midline to R"
+    ],
+    [
+      "Speech",
+      "Only \"no, no\"; can't name objects or repeat"
+    ],
+    [
+      "Arms",
+      "**R arm no movement**; L normal"
+    ],
+    [
+      "Legs",
+      "R leg weak, can't lift off floor"
+    ],
+    [
+      "Neglect",
+      "Aware of R side (no neglect)"
+    ],
+    [
+      "Chest / lungs",
+      "Clear, equal"
+    ],
+    [
+      "Swallow",
+      "Drools R; coughs on sip (do not test w/ fluid)"
+    ]
+  ],
+  "vitals": [
+    {
+      "stage": "A Initial",
+      "trigger": "First set on contact",
+      "HR": "104",
+      "BP": "**192/104**",
+      "RR": "18",
+      "SpO2": "95% RA",
+      "EtCO2": "36",
+      "BGL": "128",
+      "Temp": "98.0",
+      "Pain": "-",
+      "GCS": "**13**",
+      "Pupils": "3 PERRL",
+      "other": "Irregularly irregular. Gaze L. R face/arm/leg weak, aphasic",
+      "bold": [
+        "BP",
+        "GCS"
+      ],
+      "monitor": {
+        "rhythm": "afib",
+        "rate": 104,
+        "capno": {
+          "pattern": "normal",
+          "etco2": 36,
+          "rr": 18
+        }
+      }
+    },
+    {
+      "stage": "B Packaged",
+      "trigger": "On stretcher HOB 30, IV, loaded (~T+12)",
+      "HR": "98",
+      "BP": "188/102",
+      "RR": "18",
+      "SpO2": "96% RA",
+      "EtCO2": "36",
+      "BGL": "-",
+      "Temp": "-",
+      "Pain": "-",
+      "GCS": "13",
+      "Pupils": "-",
+      "other": "Deficits unchanged. FAST-ED 6",
+      "monitor": {
+        "rhythm": "afib",
+        "rate": 98,
+        "capno": {
+          "pattern": "normal",
+          "etco2": 36,
+          "rr": 18
+        }
+      }
+    },
+    {
+      "stage": "C Emesis",
+      "trigger": "Examiner option en route (~T+16)",
+      "HR": "112",
+      "BP": "**204/110**",
+      "RR": "24",
+      "SpO2": "**89%**",
+      "EtCO2": "32",
+      "BGL": "-",
+      "Temp": "-",
+      "Pain": "-",
+      "GCS": "**11**",
+      "Pupils": "3 PERRL",
+      "other": "Vomits, gurgling, coughing. E3 V2 M6",
+      "bold": [
+        "BP",
+        "SpO2",
+        "GCS"
+      ],
+      "monitor": {
+        "rhythm": "afib",
+        "rate": 112,
+        "capno": {
+          "pattern": "normal",
+          "etco2": 32,
+          "rr": 24
+        }
+      }
+    },
+    {
+      "stage": "D Cleared",
+      "trigger": "~2 min after suction, L lateral/upright, O2 NC",
+      "HR": "104",
+      "BP": "196/106",
+      "RR": "20",
+      "SpO2": "95% 4L",
+      "EtCO2": "35",
+      "BGL": "-",
+      "Temp": "-",
+      "Pain": "-",
+      "GCS": "12",
+      "Pupils": "-",
+      "other": "Airway clear. Lungs clear. Report GCS drop to UVMMC",
+      "monitor": {
+        "rhythm": "afib",
+        "rate": 104,
+        "capno": {
+          "pattern": "normal",
+          "etco2": 35,
+          "rr": 20
+        }
+      }
+    },
+    {
+      "stage": "E En route",
+      "trigger": "q5 min en route / arrival",
+      "HR": "96",
+      "BP": "186/100",
+      "RR": "18",
+      "SpO2": "96%",
+      "EtCO2": "36",
+      "BGL": "-",
+      "Temp": "-",
+      "Pain": "-",
+      "GCS": "13",
+      "Pupils": "-",
+      "other": "Repeat stroke screen unchanged",
+      "monitor": {
+        "rhythm": "afib",
+        "rate": 96,
+        "capno": {
+          "pattern": "normal",
+          "etco2": 36,
+          "rr": 18
+        }
+      }
+    }
+  ],
+  "flow": [
+    {
+      "time": "0-3",
+      "phase": "Arrival / primary",
+      "give": "Read dispatch. Wife: \"I just found him like this, he can't talk!\" Stage **A** as obtained.",
+      "expected": [
+        "Roles assigned; stretcher to door",
+        "Airway/breathing OK verbalized",
+        "BGL obtained early (mimic r/o)"
+      ]
+    },
+    {
+      "time": "3-7",
+      "phase": "Stroke screen + TLKW",
+      "give": "Wife: \"He was fine at bedtime, 10:15. Is it too late for the clot-buster?\" Give TLKW clues only when asked.",
+      "branches": [
+        {
+          "if": "Crew uses time found (0655) as onset",
+          "then": "wrong TLKW; critical (evaluator discretion) (2.26A)"
+        },
+        {
+          "if": "Crew asks if he got up overnight / who saw him",
+          "then": "wife: \"Heard him up at 5:30, always is.\" Daughter calls wife's phone: \"Talked to Dad at 5:50, he was fine.\" TLKW 0550"
+        },
+        {
+          "if": "Crew accepts 2215 without probing",
+          "then": "still alert criteria (FAST-ED >= 4, <24 h); tPA window missed - debrief"
+        }
+      ],
+      "expected": [
+        "Stroke screen positive (F, A, S)",
+        "FAST-ED scored (6) -> possible LVO",
+        "TLKW pinned w/ source (0550, daughter)",
+        "Witness phone # obtained"
+      ]
+    },
+    {
+      "time": "6-10",
+      "phase": "Alert / destination",
+      "give": "Wife: \"Can we wait for our daughter? She's 10 minutes out.\"",
+      "branches": [
+        {
+          "if": "Crew waits for daughter or intercept",
+          "then": "scene >15 min; critical (evaluator discretion). Wife rides instead"
+        }
+      ],
+      "expected": [
+        "Stroke Alert to UVMMC <10 min of recognition",
+        "Thrombolytic checklist; apixaban last dose ~2 wk",
+        "Direct to UVMMC, no wait for intercept",
+        "Wife rides along"
+      ]
+    },
+    {
+      "time": "8-14",
+      "phase": "Package / treat",
+      "give": "Stage **B**. Wife offers his morning pills and water.",
+      "branches": [
+        {
+          "if": "Pills, water or ASA given by mouth",
+          "then": "chokes; critical (evaluator discretion)"
+        },
+        {
+          "if": "Crew wants to lower BP",
+          "then": "no AEMT treatment; report BP, let UVMMC manage"
+        }
+      ],
+      "expected": [
+        "HOB 30 deg, NPO",
+        "O2 only if SpO2 <94%",
+        "IV 18g R AC + NS 250 mL (2.26A)",
+        "12-lead only if no delay"
+      ]
+    },
+    {
+      "time": "14-20",
+      "phase": "Transport",
+      "give": "Moving. Repeat screen q5-10 min.",
+      "branches": [
+        {
+          "type": "inject",
+          "if": "Pt vomits en route",
+          "then": "Stage **C**; expect suction, L lateral/upright, O2 to 94-98% -> Stage **D**; GCS drop reported (hemorrhage?)"
+        }
+      ],
+      "expected": [
+        "Serial GCS + stroke screen",
+        "Suction ready, airway watched",
+        "Scene time < 15 min documented"
+      ]
+    },
+    {
+      "time": "20+",
+      "phase": "Report / handoff",
+      "give": "Stage **E**. Evaluator plays UVMMC stroke team at the door.",
+      "expected": [
+        "Report: TLKW + source, FAST-ED, BGL, anticoag",
+        "Daughter's phone # handed off",
+        "SIREN: TLKW, alert time, scene times"
+      ]
+    }
+  ],
+  "critical": [
+    "No BGL before stroke alert / mimic not considered (2.26A)",
+    "TLKW reported as time found, or not established (2.26A)",
+    "No stroke screen or severity score (FAST-ED)",
+    "No Stroke Alert, or >10 min after recognition (2.26A)",
+    "Not direct to UVMMC; scene delayed for intercept or family",
+    "Anything by mouth (pills, water, ASA)",
+    "Anticoagulant / thrombolytic checklist not asked",
+    "No witness on board and no witness phone number",
+    "Airway not cleared/positioned after vomiting"
+  ],
+  "differentials": [
+    [
+      "L MCA ischemic stroke, LVO (dx)",
+      "A-fib off apixaban, aphasia, R hemiparesis, gaze L, FAST-ED 6",
+      "-"
+    ],
+    [
+      "Hemorrhagic stroke",
+      "BP 192/104, later vomiting + GCS drop",
+      "No headache reported; can't exclude in field"
+    ],
+    [
+      "Hypoglycemia",
+      "Found altered at breakfast",
+      "BGL 128"
+    ],
+    [
+      "Post-ictal (Todd's) paralysis",
+      "Unwitnessed, found down",
+      "No seizure hx, no tongue bite/incontinence"
+    ],
+    [
+      "TIA",
+      "Sudden focal deficit",
+      "Deficits persist, not resolving"
+    ],
+    [
+      "Sepsis / infection AMS",
+      "Elderly, altered",
+      "Afebrile, focal deficits"
+    ],
+    [
+      "Hypertensive encephalopathy",
+      "BP elevated",
+      "Focal deficits, BP not extreme"
+    ]
+  ],
+  "debrief": [
+    "How did you get from 2215 to 0550? Why does it matter?",
+    "What does TLKW mean when someone wakes up with symptoms?",
+    "Which FAST-ED findings scored, and what does >= 4 suggest?",
+    "Why is the anticoagulant last dose part of the alert?",
+    "Why HOB 30 and NPO? What would you do differently on vomiting?"
+  ],
+  "crew_card": {
+    "dispatch": "37 Lakeshore Dr, Colchester. 71 y/o M, possible stroke. Can't speak. Breathing. Caller: wife.",
+    "on_arrival": "Kitchen. Older man slumped in chair, coffee spilled, right arm hanging. Wife beside him, upset."
+  },
+  "actor_card": {
+    "Act": "Eyes open, slumped to R. R arm limp, R leg weak. Drool from R mouth corner. Look to your L.",
+    "Speech": "Only \"no, no\" to every question. Get frustrated. Can't name a pen or repeat a phrase.",
+    "Commands": "Squeeze/raise L hand when asked. R arm drops when lifted.",
+    "If given water": "Cough, choke, spill it out R side.",
+    "If vomit inject": "Gag, cough, groggier; open eyes only to voice.",
+    "Wife": "Fine at bedtime 2215. ONLY if asked about the night: heard him up at 5:30. Mention he quit his blood thinner only if asked about meds.",
+    "Daughter (phone)": "Calls only if crew asks who talked to him: \"I talked to Dad at 5:50, he was fine.\""
+  },
+  "show_cards": [
+    {
+      "type": "text",
+      "width": "half",
+      "title": "GLUCOMETER",
+      "body": "**128 mg/dL**",
+      "cue": "Give when BGL checked"
+    },
+    {
+      "type": "strip",
+      "width": "half",
+      "title": "MONITOR - Lead II",
+      "caption": "",
+      "rhythm": "afib",
+      "rate": 104,
+      "lead": "II"
+    },
+    {
+      "type": "12lead",
+      "title": "12-LEAD",
+      "caption": "Computer interpretation: Atrial fibrillation 104. Nonspecific ST-T abnormality. No acute MI criteria.  Simulated tracing - not to scale.",
+      "rhythm": "afib",
+      "rate": 104,
+      "st": {},
+      "cue": "Show when acquired; must not delay transport"
+    },
+    {
+      "type": "text",
+      "width": "half",
+      "title": "WIFE'S PHONE - CALL LOG",
+      "body": "Kim (daughter)  Incoming  5:50 AM  6 min\nKim (daughter)  Missed  7:01 AM",
+      "cue": "Only when crew asks who last saw/talked to him or about the phone"
+    },
+    {
+      "type": "text",
+      "width": "half",
+      "title": "PILL BOTTLES BY SINK",
+      "body": "Apixaban 5 mg - 1 tab twice daily. Filled 5 wk ago (#60), 18 tabs left\nMetoprolol 50 mg\nLisinopril 20 mg"
+    }
+  ],
+  "moulage_tags": [
+    {
+      "region": "R face",
+      "text": "Mouth droops on R; smile only moves L side"
+    },
+    {
+      "region": "R arm",
+      "text": "No movement; drops when lifted"
+    },
+    {
+      "region": "R leg",
+      "text": "Moves on bed, can't lift"
+    },
+    {
+      "region": "Eyes",
+      "text": "Looks to L; won't look past middle to R"
+    },
+    {
+      "region": "Mouth / speech",
+      "text": "Says only \"no, no\"; drooling R corner"
+    },
+    {
+      "region": "Wrist (radial)",
+      "text": "Irregular, strong"
+    },
+    {
+      "region": "Head",
+      "text": "No bumps, no bruising"
+    },
+    {
+      "region": "Back (lung sounds)",
+      "text": "Clear and equal",
+      "cue": "At vomiting inject: gurgling from throat until suctioned; lungs stay clear"
+    }
+  ],
+  "learn_more": {
+    "topic": "acute ischemic stroke with unknown onset (wake-up stroke)",
+    "focus": "defining last known well, LVO screens like FAST-ED, stroke mimics, and wake-up stroke treatment windows"
+  }
+}

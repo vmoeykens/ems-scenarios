@@ -7,7 +7,7 @@ EMS training scenarios for AEMT crew-chief trainees (UVM Rescue, Vermont) plus t
 - `tools/ems_scenario.py` - PDF generator + validator. `python3 tools/ems_scenario.py scenarios/X.json out.pdf`. Needs reportlab, matplotlib, numpy, segno, Graphviz `dot`.
 - `docs/SPEC.md` - web app build spec (phases, constraints). Read before working on the app.
 - `docs/scenario-authoring-standard.md` - content rules and JSON schema for writing scenarios.
-- `docs/reference/eprip-2025-EMS-Protocols_0.pdf` - VT Statewide EMS Protocols 2025.
+- `docs/reference/eprip-2025-EMS-Protocols-text.txt` - text extraction of the VT Statewide EMS Protocols 2025 (columns can be scrambled; grep it). Official PDF: `public/protocols/vt-ems-protocols-2025.pdf` once added.
 
 ## Rules
 - Never change clinical content in scenario JSON unless the user asks. Structural/format upgrades are OK when the spec calls for them; keep them in their own commit.

@@ -1,0 +1,226 @@
+{
+  "id": "ARR-06",
+  "title": "Infant found unresponsive in crib",
+  "version": "v1.0 | VT Protocols 2025 | UVM Rescue",
+  "category": "Cardiac arrest",
+  "level": "AEMT CCIT",
+  "run_time": "30 min",
+  "difficulty": "Hard",
+  "crew": "CC + 2 + Engine (2 FD EMRs)",
+  "protocols": [
+    "3.2P Cardiac Arrest - Pediatric",
+    "8.17 Resuscitation Initiation & Termination",
+    "2.8P Hypoglycemia - Pediatric",
+    "3.6 Team Focused CPR",
+    "8.13 Pediatric Transportation",
+    "8.6 Crime Scene"
+  ],
+  "objectives": [
+    "Start decision: no lividity/rigor -> resuscitate (8.17 SUID criteria)",
+    "Ventilation-first infant CPR: firm surface, visible chest rise, 2-rescuer 15:2",
+    "Weight 6.5 kg (tape 6-7 kg): NS 20 mL/kg = 130 mL, D10 5 mL/kg = 33 mL; epi 0.01 mg/kg = paramedic",
+    "MD at 20 min (adult TOR rule N/A < 18); infant secured on cot (8.13)",
+    "Parents, law enforcement + scene preservation, crew wellbeing"
+  ],
+  "resources": "Peds AED pads, infant BVM + masks, OPA, bulb + suction, SGA 1.5, IO (infant needle), NS + 60 mL syringes, D10, capno, length-based tape, metronome. Paramedic intercept ~10 min. UVMMC (peds ED) ~6 min",
+  "dispatch": "UVM Rescue and South Burlington Engine 1, respond to 41 Kennedy Dr, Apt 2B, South Burlington, for a 4-month-old not breathing. Caller is the mother; CPR instructions in progress. Police en route. Time out 0648.",
+  "scene": {
+    "location": "2nd-floor apartment bedroom, dim, cramped. Crib beside parents' bed.",
+    "setup": "Infant manikin on parents' mattress; mother doing CPR on the soft bed. Crib: blanket + pillow, pacifier.",
+    "moulage": "Pale/blotchy, bluish lips, cool hands/feet, milky mucus at nose. No pooling, limbs floppy.",
+    "roles": "Mother (frantic); father (angry, scared); 2 FD EMRs; PD officer T+8; medic T+10; evaluator calls AED + pulse."
+  },
+  "patient": {
+    "name": "Ava Moreau",
+    "age": "4 mo",
+    "sex": "F",
+    "weight_kg": "6.5",
+    "cc": "Found unresponsive in crib",
+    "on_arrival": "Limp, pale-blotchy, blue lips, not breathing, no brachial pulse. Mother doing CPR on soft mattress."
+  },
+  "history": {
+    "SAMPLE": [
+      ["S", "Mother: \"She was fussy at 6, I gave her the pacifier. At 6:40 she was face down and limp\""],
+      ["A", "None"],
+      ["M", "Infant acetaminophen last night"],
+      ["P", "Term birth, healthy; 4-mo visit last week (6.4 kg)"],
+      ["L", "Bottle ~0400"],
+      ["E", "Stuffy nose/cough x2 days; found 0640 prone, blanket + pillow; CPR 0643"]
+    ],
+    "OPQRST": [
+      ["O", "Last seen fussing ~0600; found 0640"],
+      ["P", "-"],
+      ["Q", "Cold symptoms x2 days, mild fever"],
+      ["R", "-"],
+      ["S", "-"],
+      ["T", "Unwitnessed; up to ~40 min before CPR"]
+    ]
+  },
+  "primary": [
+    ["X / hemorrhage", "None"],
+    ["Airway", "Milky mucus nose/mouth -> bulb/suction; neutral head + shoulder roll"],
+    ["Breathing", "Apneic -> infant mask BVM w/ O2, just enough for chest rise"],
+    ["Circulation", "No brachial pulse -> CPR on firm surface"],
+    ["Disability", "Unresponsive, pupils 5 fixed"],
+    ["Exposure", "Cool, blotchy; no injuries; no pooling or stiffness"],
+    ["Priority / impression", "Unwitnessed infant arrest, likely respiratory -> **ventilation is the priority**"]
+  ],
+  "secondary": [
+    ["Death signs (8.17)", "**No lividity, no rigor** -> resuscitate"],
+    ["Weight", "Tape 6-7 kg zone; parents 6.4 kg -> use 6.5 kg"],
+    ["Head", "Fontanelle flat; no swelling or marks"],
+    ["Skin", "Blotchy, cool; no bruises or pinpoint spots"],
+    ["Lungs (BVM)", "Scattered crackles; equal rise w/ good seal"],
+    ["BGL (heel/IO)", "**38**"],
+    ["Temp", "95.4 axillary -> keep warm"],
+    ["Scene", "Found prone; soft blanket + pillow in crib"]
+  ],
+  "vitals_note": "Arrest stages are 2-min cycles from EMS contact. Pulse 0 = CPR. Doses at 6.5 kg.",
+  "vitals": [
+    {"stage": "A Contact", "trigger": "T+0, moved to firm surface; analysis 1", "HR": "0", "BP": "-", "RR": "0", "SpO2": "no read", "EtCO2": "22 1st breaths", "BGL": "-", "Temp": "95.4", "Pain": "-", "GCS": "3", "Pupils": "5 fixed", "other": "**Asystole** - no shock (peds pads). No pooling, no stiffness",
+     "monitor": {"rhythm": "asystole", "rate": 0, "capno": {"pattern": "cpr", "etco2": 22, "rr": 12}}},
+    {"stage": "B Good vent", "trigger": "15:2, rise each breath, ~T+4", "HR": "0", "BP": "-", "RR": "BVM", "SpO2": "-", "EtCO2": "16", "BGL": "**38**", "Temp": "-", "Pain": "-", "GCS": "3", "Pupils": "-", "other": "Asystole. Chest rises both sides", "bold": ["BGL"],
+     "monitor": {"rhythm": "asystole", "rate": 0, "capno": {"pattern": "cpr", "etco2": 16, "rr": 12}}},
+    {"stage": "C No rise", "trigger": "IF poor seal, head flexed/over-extended, wrong mask", "HR": "0", "BP": "-", "RR": "-", "SpO2": "-", "EtCO2": "**2**", "BGL": "-", "Temp": "-", "Pain": "-", "GCS": "3", "Pupils": "-", "other": "No chest rise; belly distending. Fixed -> Stage B values", "bold": ["EtCO2"],
+     "monitor": {"rhythm": "asystole", "rate": 0, "capno": {"pattern": "cpr", "etco2": 2, "rr": 12}}},
+    {"stage": "D 10 min", "trigger": "Analysis 5 (T+10): D10 + NS in, medic arrives", "HR": "0", "BP": "-", "RR": "BVM", "SpO2": "-", "EtCO2": "14", "BGL": "118", "Temp": "-", "Pain": "-", "GCS": "3", "Pupils": "5 fixed", "other": "Asystole. Medic: epi 0.065 mg IO q other cycle",
+     "monitor": {"rhythm": "asystole", "rate": 0, "capno": {"pattern": "cpr", "etco2": 14, "rr": 12}}},
+    {"stage": "E 20 min", "trigger": "Analysis 10 (T+20) - MD contact", "HR": "0", "BP": "-", "RR": "BVM", "SpO2": "-", "EtCO2": "**9**", "BGL": "-", "Temp": "95.0", "Pain": "-", "GCS": "3", "Pupils": "5 fixed", "other": "Asystole. Adult TOR rule N/A (< 18) -> MD decides", "bold": ["EtCO2"],
+     "monitor": {"rhythm": "asystole", "rate": 0, "capno": {"pattern": "cpr", "etco2": 9, "rr": 12}}}
+  ],
+  "flow": [
+    {
+      "time": "0-2",
+      "phase": "Arrival / start",
+      "give": "Mother doing CPR on the bed: \"Please, she's not breathing!\" Stage **A**. Show **CRIB** card if crew looks.",
+      "branches": [
+        {"if": "Crew withholds: 'cold and blue, too long'", "then": "critical (evaluator discretion) - no lividity/rigor; SUID presumption not met (8.17)"}
+      ],
+      "expected": [
+        "Infant to firm surface (floor/table); brachial check <= 10 s",
+        "Roles: compressor, BVM, CC = commander; parent liaison (FD)",
+        "Peds pads, analyze ASAP (3.2P); intercept requested"
+      ]
+    },
+    {
+      "time": "1-6",
+      "phase": "Ventilate + compress",
+      "give": "Milky mucus at nose. Stage **A**, then **B** once BVM is effective.",
+      "branches": [
+        {"if": "No chest rise (seal, head position, mask size)", "then": "Stage **C**"},
+        {"if": "SGA placed while BVM works", "then": "debrief 3.2P: BVM preferred; SGA only if BVM fails"}
+      ],
+      "expected": [
+        "Suction; neutral head + shoulder roll; infant mask, just enough for rise",
+        "2-rescuer 15:2, two-thumb encircling, ~4 cm, 100-120/min (3.2P)",
+        "100% O2; capno in-line on BVM"
+      ]
+    },
+    {
+      "time": "4-10",
+      "phase": "Weight + AEMT care",
+      "give": "Show **TAPE** card. **GLUCOMETER** 38 if checked (Stage **B**). Father: \"Why did it take so long?\"",
+      "branches": [
+        {"if": "Crew gives epi to the infant", "then": "debrief 3.2P: peds epi is a paramedic order"},
+        {"type": "inject", "if": "Father: \"Give her adrenaline, you're wasting time!\"", "then": "expect calm reply: medic bringing it; liaison stays with parents"}
+      ],
+      "expected": [
+        "IO proximal tibia w/o pausing CPR (3.2P)",
+        "D10 5 mL/kg = 33 mL IO for BGL 38; recheck 5 min (2.8P)",
+        "NS 20 mL/kg = 130 mL by syringe (3.2P)"
+      ]
+    },
+    {
+      "time": "10-20",
+      "phase": "Intercept / H's & T's",
+      "give": "Stage **D**. Medic gives epi 0.01 mg/kg = 0.065 mg (0.65 mL of 0.1 mg/mL) IO. PD officer arrives (T+8).",
+      "expected": [
+        "Hand-off to medic w/o CPR pause; roles kept",
+        "H's & T's: hypoxia, glucose, hypothermia (keep warm), volume",
+        "Compressor swap q2 min; quality checked on capno"
+      ]
+    },
+    {
+      "time": "20-26",
+      "phase": "MD contact / transport",
+      "give": "Stage **E**. MD: \"Continue and transport to UVMMC.\"",
+      "branches": [
+        {"type": "inject", "if": "MD orders termination on scene instead", "then": "expect: lines/pads left in, PD notified, parents may hold her (PD ok), support (8.17)"}
+      ],
+      "expected": [
+        "MD contacted at 20 min (adult TOR rule N/A < 18, 8.17)",
+        "Infant on cot, firm surface, crew belted; parent belted up front (8.13)",
+        "UVMMC alerted: infant arrest, CPR in progress, ETA"
+      ]
+    },
+    {
+      "time": "26+",
+      "phase": "Family / PD / crew",
+      "give": "Officer: \"Did you move anything? What did mom tell you?\"",
+      "expected": [
+        "PD told: position found, bedding, times, parents' words in quotes; crib left as found (8.6)",
+        "Non-judgmental with parents; ride + support person arranged",
+        "Crew check-in; peer support/CISM before next call"
+      ]
+    }
+  ],
+  "critical": [
+    "Resuscitation withheld without lividity/rigor (8.17)",
+    "Ineffective ventilation (no chest rise) not corrected (3.2P)",
+    "CPR left on soft mattress / wrong ratio for 2 rescuers (15:2)",
+    "Compressions paused > 10 s for IO, airway or moving",
+    "No weight estimate / wrong weight-based dose (D10 5 mL/kg, NS 20 mL/kg)",
+    "AEMT gives infant epi (paramedic order) / no intercept requested (3.2P)",
+    "Hypoglycemia not checked or treated (3.2P/2.8P)",
+    "Law enforcement not informed / scene items moved undocumented (8.6)",
+    "Infant unrestrained or held by parent in ambulance (8.13)"
+  ],
+  "differentials": [
+    ["SUID / unsafe sleep (dx)", "Prone, soft bedding, age 4 mo, found limp", "-"],
+    ["Resp infection (RSV) -> apnea", "Stuffy nose/cough x2 days, crackles", "Can co-exist with unsafe sleep"],
+    ["Sepsis / meningitis", "Mild fever, fussy", "Fontanelle flat; short illness"],
+    ["Hypoglycemia / metabolic", "BGL 38", "Likely from arrest; treat anyway"],
+    ["Non-accidental trauma", "Unwitnessed infant arrest", "No marks, fontanelle flat - PD/ME decide, not EMS"],
+    ["Aspiration / obstruction", "Milky mucus at nose", "Chest rises with good BVM"],
+    ["Congenital heart / arrhythmia", "Sudden death in infant", "Healthy, normal checkups"]
+  ],
+  "debrief": [
+    "What made you start? When could you presume death in an infant (8.17)?",
+    "How did you know your breaths were working, and what fixed it when they weren't?",
+    "Walk through the weight estimate and each dose. Which order is paramedic-only?",
+    "What did you say to the parents, and who was assigned to them?",
+    "What did PD need from you? How is the crew doing, and what is the peer support plan?"
+  ],
+  "crew_card": {
+    "dispatch": "41 Kennedy Dr, Apt 2B, South Burlington. 4-month-old not breathing. Caller: mother. CPR instructions in progress. Police en route.",
+    "on_arrival": "Small dim bedroom. Mother kneeling on the bed, pushing on a limp baby's chest on the mattress, crying. Father pacing on the phone. Crib against the wall."
+  },
+  "actor_card": {
+    "Mother": "Crying, doing CPR on the bed. \"She was fussy at 6, I gave her the pacifier... at 6:40 she was face down.\" Answers if asked calmly.",
+    "Father": "Angry, scared. \"Why did it take so long?\" Later: \"Give her adrenaline, you're wasting time!\" Calms if a crew member stays with him.",
+    "PD officer (T+8)": "Calm. Asks who moved what, times, and what the parents said.",
+    "Medical Direction (T+20)": "\"Continue and transport to UVMMC.\" (Inject option: \"Terminate - time 0714.\")",
+    "Evaluator": "Asystole throughout, no ROSC. Medic arrives T+10."
+  },
+  "show_cards": [
+    {"type": "strip", "width": "full", "title": "AED / MONITOR", "caption": "NO SHOCK ADVISED", "rhythm": "asystole", "rate": 0, "cue": "Every analysis (peds pads). Asystole throughout"},
+    {"type": "capno", "width": "half", "title": "CAPNOGRAPHY", "caption": "EtCO2 16", "pattern": "cpr", "etco2": 16, "rr": 12, "cue": "Effective BVM + CPR (Stage B). 2 w/ no chest rise (C); 9 at T+20"},
+    {"type": "text", "width": "half", "title": "TAPE", "body": "Length-based tape zone: 6-7 kg\nParents: \"6.4 kg at her 4-month visit\"", "cue": "When crew measures or asks weight"},
+    {"type": "text", "width": "half", "title": "GLUCOMETER", "body": "38 mg/dL", "cue": "When checked (heel or IO). 118 on 5-min recheck post-D10"},
+    {"type": "text", "width": "half", "title": "CRIB", "body": "Baby was face down.\nSoft blanket and pillow in crib.\nPacifier on mattress.\nBottle on dresser.", "cue": "When crew looks or asks; items stay in place for PD"}
+  ],
+  "moulage_tags": [
+    {"region": "Lips", "text": "Bluish"},
+    {"region": "Trunk skin", "text": "Pale, blotchy, cool"},
+    {"region": "Hands / feet", "text": "Cold, bluish"},
+    {"region": "Back / low areas", "text": "No dark pooling; skin blanches"},
+    {"region": "Arms / legs", "text": "Floppy, not stiff"},
+    {"region": "Nose / mouth", "text": "Milky mucus"},
+    {"region": "Eyes", "text": "Pupils 5 mm, not reacting"},
+    {"region": "Head", "text": "Soft spot flat; no marks"}
+  ],
+  "learn_more": {
+    "topic": "infant cardiac arrest and sudden unexpected infant death",
+    "focus": "ventilation-first CPR, weight-based AEMT dosing, family and police roles, crew wellbeing"
+  }
+}

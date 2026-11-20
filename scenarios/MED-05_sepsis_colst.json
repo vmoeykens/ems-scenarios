@@ -1,0 +1,568 @@
+{
+  "id": "MED-05",
+  "title": "Urosepsis in a DNR/COLST resident",
+  "version": "v1.0 | VT Protocols 2025 | UVM Rescue",
+  "category": "Medical",
+  "level": "AEMT CCIT",
+  "run_time": "20-25 min",
+  "difficulty": "Hard",
+  "crew": "CC + 1",
+  "protocols": [
+    "1.2 Routine Pt Care",
+    "2.23A Sepsis - Adult",
+    "8.7 DNR/COLST",
+    "2.24A Shock",
+    "6.4 IO",
+    "5.4 CPAP"
+  ],
+  "objectives": [
+    "Sepsis screen: suspected infection + >= 2 criteria -> Sepsis Alert",
+    "Read the COLST: Section A = arrest only; Sections B-D guide treatment",
+    "NS up to 30 mL/kg to MAP >= 65, lungs reassessed q500 mL",
+    "Hold position against staff pressure; Med Direction for conflicts / no response",
+    "Paramedic intercept requested without delaying transport"
+  ],
+  "resources": "Monitor w/ capno, O2, IV/IO kit, NS 2 x 1 L, CPAP, glucometer, thermometer, stretcher. Facility ~8 min from UVMMC.",
+  "dispatch": "UVM Rescue, respond to Lakeview Terrace Health and Rehab, 450 Dorset St, South Burlington, room 214, for an 86-year-old female, altered, low blood pressure. Caller is the night nurse. Time out 0342.",
+  "scene": {
+    "location": "Long-term care facility, 2nd floor room, elevator. Hallway lights dimmed. ~8 min from UVMMC.",
+    "setup": "Pt in bed, head up, Foley bag hanging low on rail. Night RN with face sheet, MAR and DNR/COLST copy in hand.",
+    "moulage": "Flushed cheeks (rouge), mottling on knees (purple marker lace), warm compress on forehead.",
+    "roles": "Pt actor (lethargic, mumbles); night RN (pressure: \"she's a DNR\"); evaluator plays daughter by phone + MD."
+  },
+  "patient": {
+    "name": "Dorothy Gagnon",
+    "age": "86",
+    "sex": "F",
+    "weight_kg": "52",
+    "cc": "More sleepy, fever, low BP on facility check",
+    "on_arrival": "Lying in bed, eyes closed, opens to voice, mumbles, picks at sheet. Flushed face, breathing fast."
+  },
+  "history": {
+    "SAMPLE": [
+      [
+        "S",
+        "Sleepier since dinner, fever, ate 25% of dinner"
+      ],
+      [
+        "A",
+        "NKDA"
+      ],
+      [
+        "M",
+        "Furosemide 20 mg, metoprolol 25 mg, donepezil, ASA 81 mg"
+      ],
+      [
+        "P",
+        "Dementia (baseline A&Ox2, chatty, walker), **CHF EF 45%**, neurogenic bladder w/ **chronic Foley**, HTN"
+      ],
+      [
+        "L",
+        "Dinner 1730 (25%). Few sips since"
+      ],
+      [
+        "E",
+        "2200 T 100.4 F, cloudy urine. 0330 BP 80s, \"won't wake up right\""
+      ]
+    ],
+    "OPQRST": [
+      [
+        "O",
+        "Gradual since ~1800"
+      ],
+      [
+        "P",
+        "N/A"
+      ],
+      [
+        "Q",
+        "Grimaces to suprapubic pressure"
+      ],
+      [
+        "R",
+        "N/A"
+      ],
+      [
+        "S",
+        "N/A"
+      ],
+      [
+        "T",
+        "Worse over 10 hr. Foley changed 9 days ago"
+      ]
+    ]
+  },
+  "primary": [
+    [
+      "X / hemorrhage",
+      "None"
+    ],
+    [
+      "Airway",
+      "Patent, dry mouth"
+    ],
+    [
+      "Breathing",
+      "**RR 26**, shallow, lungs clear"
+    ],
+    [
+      "Circulation",
+      "Radial **weak, rapid**. Warm flushed trunk, **mottled knees**, cap refill 4 s"
+    ],
+    [
+      "Disability",
+      "GCS 12 (E3 V4 M5), baseline 14 per RN. **New AMS**"
+    ],
+    [
+      "Exposure",
+      "**Hot**. Foley: cloudy, foul urine. Sacrum red, intact"
+    ],
+    [
+      "Priority / impression",
+      "**HIGH**: septic shock, urinary source. COLST must be read, not assumed"
+    ]
+  ],
+  "secondary": [
+    [
+      "Head / neck",
+      "No meningismus, no JVD"
+    ],
+    [
+      "Chest / lungs",
+      "Clear bilat (recheck q500 mL)"
+    ],
+    [
+      "Heart",
+      "Rapid, regular"
+    ],
+    [
+      "Abdomen",
+      "Soft, **suprapubic tenderness**"
+    ],
+    [
+      "GU",
+      "Foley: **cloudy, sediment, foul**, ~50 mL since 2200"
+    ],
+    [
+      "Skin",
+      "Hot, flushed trunk; **mottled knees**; no wounds"
+    ],
+    [
+      "Extremities",
+      "Trace ankle edema (baseline). Cool fingertips"
+    ],
+    [
+      "Neuro",
+      "No focal deficit; moves all 4"
+    ]
+  ],
+  "vitals": [
+    {
+      "stage": "A Initial",
+      "trigger": "First set on contact",
+      "HR": "**122**",
+      "BP": "**82/44**",
+      "RR": "**26**",
+      "SpO2": "**91%** RA",
+      "EtCO2": "**21**",
+      "BGL": "162",
+      "Temp": "**102.1**",
+      "Pain": "-",
+      "GCS": "**12**",
+      "Pupils": "3 PERRL",
+      "other": "MAP 57. Mottled knees, CRT 4 s. Lungs clear. Sinus tach",
+      "bold": [
+        "HR",
+        "BP",
+        "RR",
+        "SpO2",
+        "EtCO2",
+        "Temp",
+        "GCS"
+      ],
+      "monitor": {
+        "rhythm": "sinus",
+        "rate": 122,
+        "capno": {
+          "pattern": "normal",
+          "etco2": 21,
+          "rr": 26
+        }
+      }
+    },
+    {
+      "stage": "B 500 mL",
+      "trigger": "First 500 mL NS in, O2 NC 2 L",
+      "HR": "116",
+      "BP": "**88/48**",
+      "RR": "24",
+      "SpO2": "94% 2L",
+      "EtCO2": "23",
+      "BGL": "-",
+      "Temp": "-",
+      "Pain": "-",
+      "GCS": "12",
+      "Pupils": "-",
+      "other": "MAP 61. Lungs clear",
+      "bold": [
+        "BP"
+      ],
+      "monitor": {
+        "rhythm": "sinus",
+        "rate": 116,
+        "capno": {
+          "pattern": "normal",
+          "etco2": 23,
+          "rr": 24
+        }
+      }
+    },
+    {
+      "stage": "C 1 L",
+      "trigger": "~1000 mL NS in (~T+14)",
+      "HR": "106",
+      "BP": "96/54",
+      "RR": "22",
+      "SpO2": "95% 2L",
+      "EtCO2": "26",
+      "BGL": "-",
+      "Temp": "-",
+      "Pain": "-",
+      "GCS": "13",
+      "Pupils": "-",
+      "other": "MAP 68. CRT 3 s. Lungs clear. Says \"where am I?\"",
+      "monitor": {
+        "rhythm": "sinus",
+        "rate": 106,
+        "capno": {
+          "pattern": "normal",
+          "etco2": 26,
+          "rr": 22
+        }
+      }
+    },
+    {
+      "stage": "D Crackles",
+      "trigger": "Examiner option ~1500 mL in",
+      "HR": "112",
+      "BP": "104/58",
+      "RR": "**30**",
+      "SpO2": "**89%** 2L",
+      "EtCO2": "28",
+      "BGL": "-",
+      "Temp": "-",
+      "Pain": "-",
+      "GCS": "13",
+      "Pupils": "-",
+      "other": "**New crackles both bases**, more work of breathing",
+      "bold": [
+        "RR",
+        "SpO2"
+      ],
+      "monitor": {
+        "rhythm": "sinus",
+        "rate": 112,
+        "capno": {
+          "pattern": "normal",
+          "etco2": 28,
+          "rr": 30
+        }
+      }
+    },
+    {
+      "stage": "E Untreated",
+      "trigger": "IF no IV fluids by T+12 (\"DNR\")",
+      "HR": "**130**",
+      "BP": "**72/38**",
+      "RR": "28",
+      "SpO2": "90%",
+      "EtCO2": "**18**",
+      "BGL": "-",
+      "Temp": "-",
+      "Pain": "-",
+      "GCS": "**10**",
+      "Pupils": "-",
+      "other": "MAP 49. Mottled to thighs, moans only",
+      "bold": [
+        "HR",
+        "BP",
+        "EtCO2",
+        "GCS"
+      ],
+      "monitor": {
+        "rhythm": "sinus",
+        "rate": 130,
+        "capno": {
+          "pattern": "normal",
+          "etco2": 18,
+          "rr": 28
+        }
+      }
+    },
+    {
+      "stage": "F Transport",
+      "trigger": "~1.5 L in, en route q5 min",
+      "HR": "102",
+      "BP": "100/56",
+      "RR": "20",
+      "SpO2": "96% 2L",
+      "EtCO2": "28",
+      "BGL": "-",
+      "Temp": "-",
+      "Pain": "-",
+      "GCS": "13",
+      "Pupils": "-",
+      "other": "MAP 71. Lungs clear. Mottling fading",
+      "monitor": {
+        "rhythm": "sinus",
+        "rate": 102,
+        "capno": {
+          "pattern": "normal",
+          "etco2": 28,
+          "rr": 20
+        }
+      }
+    }
+  ],
+  "vitals_note": "Give a value only when obtained. Bold = abnormal. 30 mL/kg = ~1.5 L.",
+  "flow": [
+    {
+      "time": "0-3",
+      "phase": "Arrival / handoff",
+      "give": "RN: \"Dot's a DNR. The family doesn't want anything done - just take her, no needles.\" Hands COLST + face sheet. Stage **A** as obtained.",
+      "expected": [
+        "Roles; primary w/ temp + BGL",
+        "Paramedic intercept requested (no delay)",
+        "Infection source sought (Foley)"
+      ]
+    },
+    {
+      "time": "2-6",
+      "phase": "Read the COLST",
+      "give": "Show **DNR/COLST** card when crew reads it.",
+      "branches": [
+        {
+          "if": "Crew withholds IV/fluids because \"DNR\"",
+          "then": "Stage **E**; critical (evaluator discretion) (8.7)"
+        },
+        {
+          "if": "Crew reads Sections B-D aloud to RN",
+          "then": "RN: \"Oh. I thought DNR meant comfort only.\" Fluids, O2, CPAP, transfer allowed"
+        }
+      ],
+      "expected": [
+        "Name/DOB matched; clinician signature present",
+        "Section A = arrest only (no CPR/BVM)",
+        "B-D reviewed: DNI; IV fluids + transfer OK"
+      ]
+    },
+    {
+      "time": "4-12",
+      "phase": "Sepsis care",
+      "give": "IV L AC 20g on 1st attempt. Stage **B** after 500 mL.",
+      "branches": [
+        {
+          "if": "No IV after 2 attempts",
+          "then": "IO (6.4) or load and try en route; don't delay"
+        },
+        {
+          "if": "Fluids run without lung checks",
+          "then": "debrief; examiner option D more likely"
+        }
+      ],
+      "expected": [
+        "Sepsis screen positive verbalized (2.23A)",
+        "NS rapid, reassess lungs q500 mL",
+        "O2 to SpO2 94-98%",
+        "MAP >= 65 target (SBP >= 90)"
+      ]
+    },
+    {
+      "time": "8-14",
+      "phase": "Package / alert",
+      "give": "RN: \"Our on-call NP hasn't called back. Can you wait 10 minutes?\" Stage **C** at ~1 L.",
+      "branches": [
+        {
+          "if": "Crew waits on scene for NP or intercept",
+          "then": "Stage **E** trend; critical (evaluator discretion)"
+        }
+      ],
+      "expected": [
+        "Sepsis Alert to UVMMC",
+        "COLST copy + face sheet go with pt",
+        "Intercept meets en route, not on scene"
+      ]
+    },
+    {
+      "time": "12-18",
+      "phase": "Conflict / reassess",
+      "give": "Continue boluses toward ~1.5 L.",
+      "branches": [
+        {
+          "type": "inject",
+          "if": "Daughter (HCA) by phone: \"Do everything, intubate her!\"",
+          "then": "expect calm explanation (COLST B = DNI, her consent), Med Direction; MD: \"Honor the COLST; continue limited treatment.\""
+        },
+        {
+          "type": "inject",
+          "if": "New crackles both bases at ~1500 mL",
+          "then": "Stage **D**; expect stop fluids, sit up, O2 up, CPAP (5.4) allowed by COLST C, MD re: pressors (intercept)"
+        }
+      ],
+      "expected": [
+        "Med Direction for conflict / no response",
+        "Fluids stopped at overload signs",
+        "Pressors = paramedic (intercept/MD)"
+      ]
+    },
+    {
+      "time": "18+",
+      "phase": "Transport / report",
+      "give": "Stage **F**. Evaluator plays UVMMC.",
+      "expected": [
+        "Report: sepsis criteria, source, fluid total, MAP",
+        "Code status: DNR/DNI, limited tx",
+        "SIREN: COLST actions + MD name (8.7)"
+      ]
+    }
+  ],
+  "critical": [
+    "DNR read as \"do not treat\"; indicated fluids/O2 withheld (8.7)",
+    "COLST validity (pt identity, signature) or Sections B-D not checked (8.7)",
+    "Sepsis not recognized / no Sepsis Alert (2.23A)",
+    "No IV/IO fluid bolus with SBP <90 / MAP <65 (2.23A)",
+    "Lungs not reassessed between 500 mL boluses (2.23A)",
+    "Transport delayed for IV, intercept or facility callback",
+    "Ventilation/airway escalation against COLST Section B without MD",
+    "No temperature or BGL obtained"
+  ],
+  "differentials": [
+    [
+      "Urosepsis / septic shock (dx)",
+      "Chronic Foley, cloudy foul urine, fever, HR 122, MAP 57, EtCO2 21, new AMS",
+      "-"
+    ],
+    [
+      "Pneumonia sepsis",
+      "RR 26, SpO2 91%",
+      "Lungs clear, no cough"
+    ],
+    [
+      "Dehydration",
+      "Poor intake, dry mouth",
+      "Fever, mottling, source present"
+    ],
+    [
+      "Cardiogenic shock",
+      "CHF hx",
+      "Warm flushed, clear lungs, no JVD"
+    ],
+    [
+      "Stroke",
+      "AMS, elderly",
+      "No focal deficit"
+    ],
+    [
+      "Hypoglycemia",
+      "AMS",
+      "BGL 162"
+    ]
+  ],
+  "debrief": [
+    "What does Section A of the COLST cover - and what doesn't it?",
+    "Which sepsis criteria did she meet, and what was the source?",
+    "Why reassess lungs every 500 mL in this patient?",
+    "How did you handle the RN and the daughter? When did you call MD?",
+    "What would have changed if Section C said comfort-focused only?"
+  ],
+  "crew_card": {
+    "dispatch": "Lakeview Terrace Health & Rehab, 450 Dorset St, room 214. 86 y/o F, altered, low BP. Caller: night nurse.",
+    "on_arrival": "Elderly woman in bed, eyes closed, flushed, breathing fast. Urine bag on bed rail. Nurse waiting with paperwork."
+  },
+  "actor_card": {
+    "Act": "Eyes closed, open to voice. Mumble, pick at sheet. Grimace when lower belly pressed.",
+    "Orientation": "Know your name only. \"Is it Tuesday?\"",
+    "After ~1 L fluid": "A bit brighter: \"Where am I? Where's my walker?\"",
+    "If untreated": "Moan only, stop answering.",
+    "Night RN": "Open with \"She's a DNR, no needles.\" Back down when crew shows Sections B-D. Ask crew to wait for NP callback at ~T+10.",
+    "Daughter (phone)": "Only on examiner inject: \"Do everything, put her on a breathing machine!\" Calm down if crew explains the form you signed."
+  },
+  "show_cards": [
+    {
+      "type": "text",
+      "width": "full",
+      "title": "VERMONT DNR/COLST (copy) - simulated excerpt",
+      "body": "Patient: **Dorothy Gagnon**   DOB 02/11/1940\n**A. CPR:**  [X] DNR - Do Not Attempt Resuscitation\n**B. Intubation:**  [X] DNI - Do Not Intubate\n**C. Other treatment:**\n   [ ] Comfort-focused only\n   [X] **Limited**: IV fluids, monitor, O2, noninvasive airway support (CPAP/BiPAP), transfer to hospital; no ICU\n   [ ] Full treatment\n**D. Antibiotics:** [X] Yes    **IV hydration:** [X] Trial    **Feeding tube:** [X] No\nConsent: Linda Gagnon (daughter, health care agent)\nClinician: Sarah Morrow, APRN - signed 03/14/2026",
+      "cue": "Hand over when crew asks for / reads the form. Valid: name, signature, consent present"
+    },
+    {
+      "type": "text",
+      "width": "half",
+      "title": "FACILITY FACE SHEET / NOTES",
+      "body": "Dx: dementia, CHF (EF 45%), neurogenic bladder - chronic Foley, HTN\nMeds: furosemide 20, metoprolol 25, donepezil, ASA 81\nNKDA\n2200: T 100.4 F, sleepier, urine cloudy\n0330: BP 84/46, HR 120"
+    },
+    {
+      "type": "text",
+      "width": "half",
+      "title": "FOLEY BAG",
+      "body": "Cloudy, dark amber urine with sediment. Strong odor.\n~50 mL in bag since 2200."
+    },
+    {
+      "type": "capno",
+      "width": "half",
+      "title": "CAPNOGRAPHY",
+      "caption": "EtCO2 21   RR 26",
+      "pattern": "normal",
+      "etco2": 21,
+      "rr": 26
+    },
+    {
+      "type": "strip",
+      "width": "half",
+      "title": "MONITOR - Lead II",
+      "caption": "",
+      "rhythm": "sinus",
+      "rate": 122,
+      "lead": "II"
+    }
+  ],
+  "moulage_tags": [
+    {
+      "region": "Forehead",
+      "text": "Hot to touch, flushed"
+    },
+    {
+      "region": "Both knees",
+      "text": "Purple lacy blotches"
+    },
+    {
+      "region": "Fingertip",
+      "text": "Color returns in 4 seconds; cool"
+    },
+    {
+      "region": "Wrist (radial)",
+      "text": "Fast, weak"
+    },
+    {
+      "region": "Mouth",
+      "text": "Dry, sticky"
+    },
+    {
+      "region": "Lower belly",
+      "text": "Winces when pressed above pubic bone"
+    },
+    {
+      "region": "Back (lung sounds)",
+      "text": "Clear and equal",
+      "cue": "Swap to 'Crackles both bases' at examiner inject (~1500 mL)"
+    },
+    {
+      "region": "Sacrum",
+      "text": "Red area, skin intact"
+    }
+  ],
+  "learn_more": {
+    "topic": "septic shock in a nursing home resident with a DNR/COLST order",
+    "focus": "prehospital sepsis screening, fluid volume and reassessment in CHF, and why DNR orders do not mean do not treat"
+  }
+}
