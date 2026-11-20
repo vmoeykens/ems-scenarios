@@ -172,7 +172,16 @@
       "other": "**PEA** (sinus brady 38, no pulse) - no shock",
       "bold": [
         "EtCO2"
-      ]
+      ],
+      "monitor": {
+        "rhythm": "sinus",
+        "rate": 38,
+        "capno": {
+          "pattern": "cpr",
+          "etco2": 58,
+          "rr": 10
+        }
+      }
     },
     {
       "stage": "B Good vent",
@@ -187,7 +196,16 @@
       "Pain": "-",
       "GCS": "3",
       "Pupils": "-",
-      "other": "PEA rate 50s. Capno falling = CO2 cleared"
+      "other": "PEA rate 50s. Capno falling = CO2 cleared",
+      "monitor": {
+        "rhythm": "sinus",
+        "rate": 50,
+        "capno": {
+          "pattern": "cpr",
+          "etco2": 32,
+          "rr": 10
+        }
+      }
     },
     {
       "stage": "C Narcan only",
@@ -205,7 +223,11 @@
       "other": "**Asystole** at next check (worse prognosis)",
       "bold": [
         "HR"
-      ]
+      ],
+      "monitor": {
+        "rhythm": "asystole",
+        "rate": 0
+      }
     },
     {
       "stage": "D ROSC",
@@ -224,7 +246,16 @@
       "bold": [
         "BP",
         "EtCO2"
-      ]
+      ],
+      "monitor": {
+        "rhythm": "sinus",
+        "rate": 64,
+        "capno": {
+          "pattern": "normal",
+          "etco2": 48,
+          "rr": 10
+        }
+      }
     },
     {
       "stage": "E Titrated",
@@ -239,7 +270,16 @@
       "Pain": "-",
       "GCS": "10",
       "Pupils": "3 mm",
-      "other": "Breathing on own, groggy, protecting airway"
+      "other": "Breathing on own, groggy, protecting airway",
+      "monitor": {
+        "rhythm": "sinus",
+        "rate": 96,
+        "capno": {
+          "pattern": "normal",
+          "etco2": 40,
+          "rr": 12
+        }
+      }
     },
     {
       "stage": "F Big dose",
@@ -257,7 +297,16 @@
       "other": "**Combative**, pulls SGA/IO, vomits, withdrawal",
       "bold": [
         "GCS"
-      ]
+      ],
+      "monitor": {
+        "rhythm": "sinus",
+        "rate": 128,
+        "capno": {
+          "pattern": "normal",
+          "etco2": 32,
+          "rr": 28
+        }
+      }
     },
     {
       "stage": "G Re-sedation",
@@ -278,7 +327,16 @@
         "SpO2",
         "EtCO2",
         "GCS"
-      ]
+      ],
+      "monitor": {
+        "rhythm": "sinus",
+        "rate": 58,
+        "capno": {
+          "pattern": "normal",
+          "etco2": 58,
+          "rr": 6
+        }
+      }
     }
   ],
   "flow": [

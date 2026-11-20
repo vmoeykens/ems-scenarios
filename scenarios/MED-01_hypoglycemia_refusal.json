@@ -174,7 +174,16 @@
         "BGL",
         "GCS",
         "HR"
-      ]
+      ],
+      "monitor": {
+        "rhythm": "sinus",
+        "rate": 108,
+        "capno": {
+          "pattern": "normal",
+          "etco2": 36,
+          "rr": 18
+        }
+      }
     },
     {
       "stage": "B Post D10",
@@ -189,7 +198,16 @@
       "Pain": "-",
       "GCS": "15",
       "Pupils": "-",
-      "other": "Diaphoresis resolving. Talking, embarrassed"
+      "other": "Diaphoresis resolving. Talking, embarrassed",
+      "monitor": {
+        "rhythm": "sinus",
+        "rate": 92,
+        "capno": {
+          "pattern": "normal",
+          "etco2": 37,
+          "rr": 16
+        }
+      }
     },
     {
       "stage": "C Glucagon",
@@ -204,7 +222,11 @@
       "Pain": "-",
       "GCS": "14",
       "Pupils": "-",
-      "other": "Slower recovery, nauseated. Glucagon may fail (poor intake/ glycogen)"
+      "other": "Slower recovery, nauseated. Glucagon may fail (poor intake/ glycogen)",
+      "monitor": {
+        "rhythm": "sinus",
+        "rate": 100
+      }
     },
     {
       "stage": "D Relapse",
@@ -222,7 +244,11 @@
       "other": "Shaky, sweaty again, repeating herself",
       "bold": [
         "BGL"
-      ]
+      ],
+      "monitor": {
+        "rhythm": "sinus",
+        "rate": 104
+      }
     },
     {
       "stage": "E Transport",
@@ -237,7 +263,16 @@
       "Pain": "-",
       "GCS": "15",
       "Pupils": "-",
-      "other": "Eating graham crackers if offered"
+      "other": "Eating graham crackers if offered",
+      "monitor": {
+        "rhythm": "sinus",
+        "rate": 90,
+        "capno": {
+          "pattern": "normal",
+          "etco2": 37,
+          "rr": 16
+        }
+      }
     }
   ],
   "flow": [

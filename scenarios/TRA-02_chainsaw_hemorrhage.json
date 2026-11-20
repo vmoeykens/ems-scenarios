@@ -174,7 +174,16 @@
       "bold": [
         "HR",
         "BP"
-      ]
+      ],
+      "monitor": {
+        "rhythm": "sinus",
+        "rate": 132,
+        "capno": {
+          "pattern": "normal",
+          "etco2": 28,
+          "rr": 26
+        }
+      }
     },
     {
       "stage": "B Ongoing bleed",
@@ -195,7 +204,16 @@
         "BP",
         "GCS",
         "EtCO2"
-      ]
+      ],
+      "monitor": {
+        "rhythm": "sinus",
+        "rate": 148,
+        "capno": {
+          "pattern": "normal",
+          "etco2": 20,
+          "rr": 30
+        }
+      }
     },
     {
       "stage": "C Controlled",
@@ -210,7 +228,16 @@
       "Pain": "9",
       "GCS": "15",
       "Pupils": "-",
-      "other": "Radial palpable"
+      "other": "Radial palpable",
+      "monitor": {
+        "rhythm": "sinus",
+        "rate": 122,
+        "capno": {
+          "pattern": "normal",
+          "etco2": 30,
+          "rr": 24
+        }
+      }
     },
     {
       "stage": "D Carry-out",
@@ -228,7 +255,16 @@
       "other": "Shivering hard. Warm -> Stage E",
       "bold": [
         "Temp"
-      ]
+      ],
+      "monitor": {
+        "rhythm": "sinus",
+        "rate": 126,
+        "capno": {
+          "pattern": "normal",
+          "etco2": 29,
+          "rr": 24
+        }
+      }
     },
     {
       "stage": "E Transport",
@@ -243,7 +279,16 @@
       "Pain": "8",
       "GCS": "15",
       "Pupils": "-",
-      "other": "TQ holding, no distal pulse"
+      "other": "TQ holding, no distal pulse",
+      "monitor": {
+        "rhythm": "sinus",
+        "rate": 118,
+        "capno": {
+          "pattern": "normal",
+          "etco2": 31,
+          "rr": 22
+        }
+      }
     }
   ],
   "flow": [

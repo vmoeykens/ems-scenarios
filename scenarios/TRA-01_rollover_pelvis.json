@@ -175,7 +175,16 @@
       "bold": [
         "HR",
         "BP"
-      ]
+      ],
+      "monitor": {
+        "rhythm": "sinus",
+        "rate": 124,
+        "capno": {
+          "pattern": "normal",
+          "etco2": 30,
+          "rr": 24
+        }
+      }
     },
     {
       "stage": "B Binder",
@@ -190,7 +199,16 @@
       "Pain": "7",
       "GCS": "15",
       "Pupils": "-",
-      "other": "Radial palpable. Pain better after binder"
+      "other": "Radial palpable. Pain better after binder",
+      "monitor": {
+        "rhythm": "sinus",
+        "rate": 118,
+        "capno": {
+          "pattern": "normal",
+          "etco2": 31,
+          "rr": 22
+        }
+      }
     },
     {
       "stage": "C No binder/ delay",
@@ -211,7 +229,16 @@
         "BP",
         "GCS",
         "EtCO2"
-      ]
+      ],
+      "monitor": {
+        "rhythm": "sinus",
+        "rate": 138,
+        "capno": {
+          "pattern": "normal",
+          "etco2": 24,
+          "rr": 28
+        }
+      }
     },
     {
       "stage": "D Over-fluid",
@@ -226,7 +253,16 @@
       "Pain": "8",
       "GCS": "15",
       "Pupils": "-",
-      "other": "BP up briefly, then drops 10 min later (re-bleed, dilution, hypothermia)"
+      "other": "BP up briefly, then drops 10 min later (re-bleed, dilution, hypothermia)",
+      "monitor": {
+        "rhythm": "sinus",
+        "rate": 120,
+        "capno": {
+          "pattern": "normal",
+          "etco2": 30,
+          "rr": 24
+        }
+      }
     },
     {
       "stage": "E Transport",
@@ -241,7 +277,16 @@
       "Pain": "7",
       "GCS": "15",
       "Pupils": "-",
-      "other": "Titrated 250 mL boluses to radial pulse / mentation"
+      "other": "Titrated 250 mL boluses to radial pulse / mentation",
+      "monitor": {
+        "rhythm": "sinus",
+        "rate": 116,
+        "capno": {
+          "pattern": "normal",
+          "etco2": 32,
+          "rr": 22
+        }
+      }
     }
   ],
   "flow": [

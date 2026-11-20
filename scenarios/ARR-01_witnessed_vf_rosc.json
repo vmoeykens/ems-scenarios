@@ -174,7 +174,16 @@
       "other": "**VF** - shock advised",
       "bold": [
         "EtCO2"
-      ]
+      ],
+      "monitor": {
+        "rhythm": "vf",
+        "rate": 0,
+        "capno": {
+          "pattern": "cpr",
+          "etco2": 16,
+          "rr": 10
+        }
+      }
     },
     {
       "stage": "B Cycle 2",
@@ -189,7 +198,16 @@
       "Pain": "-",
       "GCS": "3",
       "Pupils": "-",
-      "other": "**VF** - shock #3 total. Epi #1 after this cycle (IV/IO)"
+      "other": "**VF** - shock #3 total. Epi #1 after this cycle (IV/IO)",
+      "monitor": {
+        "rhythm": "vf",
+        "rate": 0,
+        "capno": {
+          "pattern": "cpr",
+          "etco2": 18,
+          "rr": 10
+        }
+      }
     },
     {
       "stage": "C Poor CPR",
@@ -207,7 +225,16 @@
       "other": "Point to capno; no ROSC until fixed",
       "bold": [
         "EtCO2"
-      ]
+      ],
+      "monitor": {
+        "rhythm": "vf",
+        "rate": 0,
+        "capno": {
+          "pattern": "cpr",
+          "etco2": 8,
+          "rr": 10
+        }
+      }
     },
     {
       "stage": "D ROSC",
@@ -226,7 +253,17 @@
       "bold": [
         "BP",
         "EtCO2"
-      ]
+      ],
+      "monitor": {
+        "rhythm": "sinus",
+        "rate": 104,
+        "st": -1,
+        "capno": {
+          "pattern": "normal",
+          "etco2": 44,
+          "rr": 10
+        }
+      }
     },
     {
       "stage": "E Post-ROSC",
@@ -241,7 +278,17 @@
       "Pain": "-",
       "GCS": "4",
       "Pupils": "4 react",
-      "other": "Occasional PVCs. Gags on SGA - reassess airway"
+      "other": "Occasional PVCs. Gags on SGA - reassess airway",
+      "monitor": {
+        "rhythm": "sinus",
+        "rate": 96,
+        "st": -1,
+        "capno": {
+          "pattern": "normal",
+          "etco2": 38,
+          "rr": 10
+        }
+      }
     },
     {
       "stage": "F Over-bag",
@@ -260,7 +307,17 @@
       "bold": [
         "BP",
         "EtCO2"
-      ]
+      ],
+      "monitor": {
+        "rhythm": "sinus",
+        "rate": 110,
+        "st": -1,
+        "capno": {
+          "pattern": "normal",
+          "etco2": 24,
+          "rr": 24
+        }
+      }
     }
   ],
   "flow": [

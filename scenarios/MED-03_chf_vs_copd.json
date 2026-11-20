@@ -175,7 +175,16 @@
         "BP",
         "RR",
         "SpO2"
-      ]
+      ],
+      "monitor": {
+        "rhythm": "sinus",
+        "rate": 118,
+        "capno": {
+          "pattern": "normal",
+          "etco2": 34,
+          "rr": 34
+        }
+      }
     },
     {
       "stage": "B Neb only",
@@ -193,7 +202,16 @@
       "other": "No better, more anxious, crackles higher",
       "bold": [
         "SpO2"
-      ]
+      ],
+      "monitor": {
+        "rhythm": "sinus",
+        "rate": 126,
+        "capno": {
+          "pattern": "normal",
+          "etco2": 38,
+          "rr": 36
+        }
+      }
     },
     {
       "stage": "C CPAP",
@@ -208,7 +226,16 @@
       "Pain": "2",
       "GCS": "15",
       "Pupils": "-",
-      "other": "Less work of breathing, 3-4 word sentences"
+      "other": "Less work of breathing, 3-4 word sentences",
+      "monitor": {
+        "rhythm": "sinus",
+        "rate": 108,
+        "capno": {
+          "pattern": "normal",
+          "etco2": 35,
+          "rr": 26
+        }
+      }
     },
     {
       "stage": "D CPAP + NTG",
@@ -223,7 +250,16 @@
       "Pain": "1",
       "GCS": "15",
       "Pupils": "-",
-      "other": "Crackles bases only. Talking full sentences"
+      "other": "Crackles bases only. Talking full sentences",
+      "monitor": {
+        "rhythm": "sinus",
+        "rate": 100,
+        "capno": {
+          "pattern": "normal",
+          "etco2": 36,
+          "rr": 22
+        }
+      }
     },
     {
       "stage": "E Fatigue",
@@ -244,7 +280,16 @@
         "SpO2",
         "EtCO2",
         "GCS"
-      ]
+      ],
+      "monitor": {
+        "rhythm": "sinus",
+        "rate": 130,
+        "capno": {
+          "pattern": "normal",
+          "etco2": 58,
+          "rr": 10
+        }
+      }
     }
   ],
   "flow": [

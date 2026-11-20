@@ -172,7 +172,17 @@
       "other": "Pale/cool/diaphoretic. Lungs clear. Sinus brady (show 12-lead card)",
       "bold": [
         "HR"
-      ]
+      ],
+      "monitor": {
+        "rhythm": "sinus",
+        "rate": 58,
+        "st": 2.5,
+        "capno": {
+          "pattern": "normal",
+          "etco2": 36,
+          "rr": 18
+        }
+      }
     },
     {
       "stage": "B Stable",
@@ -187,7 +197,17 @@
       "Pain": "8",
       "GCS": "15",
       "Pupils": "-",
-      "other": "Unchanged. Nausea worse"
+      "other": "Unchanged. Nausea worse",
+      "monitor": {
+        "rhythm": "sinus",
+        "rate": 56,
+        "st": 2.5,
+        "capno": {
+          "pattern": "normal",
+          "etco2": 36,
+          "rr": 18
+        }
+      }
     },
     {
       "stage": "C Hypo-tension",
@@ -207,7 +227,17 @@
         "BP",
         "HR",
         "GCS"
-      ]
+      ],
+      "monitor": {
+        "rhythm": "sinus",
+        "rate": 50,
+        "st": 2.5,
+        "capno": {
+          "pattern": "normal",
+          "etco2": 32,
+          "rr": 20
+        }
+      }
     },
     {
       "stage": "D Fluid",
@@ -222,7 +252,17 @@
       "Pain": "7",
       "GCS": "15",
       "Pupils": "-",
-      "other": "Mentation back. Lungs still clear"
+      "other": "Mentation back. Lungs still clear",
+      "monitor": {
+        "rhythm": "sinus",
+        "rate": 58,
+        "st": 2.5,
+        "capno": {
+          "pattern": "normal",
+          "etco2": 35,
+          "rr": 18
+        }
+      }
     },
     {
       "stage": "E Transport",
@@ -237,7 +277,17 @@
       "Pain": "7",
       "GCS": "15",
       "Pupils": "-",
-      "other": "Repeat 12-lead unchanged"
+      "other": "Repeat 12-lead unchanged",
+      "monitor": {
+        "rhythm": "sinus",
+        "rate": 60,
+        "st": 2.5,
+        "capno": {
+          "pattern": "normal",
+          "etco2": 36,
+          "rr": 18
+        }
+      }
     },
     {
       "stage": "F Worsening",
@@ -257,7 +307,17 @@
         "HR",
         "BP",
         "GCS"
-      ]
+      ],
+      "monitor": {
+        "rhythm": "sinus",
+        "rate": 46,
+        "st": 2.5,
+        "capno": {
+          "pattern": "normal",
+          "etco2": 30,
+          "rr": 22
+        }
+      }
     }
   ],
   "blank_vitals_rows": 2,

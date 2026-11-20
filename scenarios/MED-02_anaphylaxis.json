@@ -172,7 +172,16 @@
         "BP",
         "HR",
         "SpO2"
-      ]
+      ],
+      "monitor": {
+        "rhythm": "sinus",
+        "rate": 128,
+        "capno": {
+          "pattern": "shark",
+          "etco2": 32,
+          "rr": 28
+        }
+      }
     },
     {
       "stage": "B Epi #2",
@@ -187,7 +196,16 @@
       "Pain": "-",
       "GCS": "15",
       "Pupils": "-",
-      "other": "Voice clearer, wheeze less, hives fading"
+      "other": "Voice clearer, wheeze less, hives fading",
+      "monitor": {
+        "rhythm": "sinus",
+        "rate": 120,
+        "capno": {
+          "pattern": "shark",
+          "etco2": 35,
+          "rr": 22
+        }
+      }
     },
     {
       "stage": "C Fluids/ neb",
@@ -202,7 +220,16 @@
       "Pain": "-",
       "GCS": "15",
       "Pupils": "-",
-      "other": "Few scattered wheezes. Normal capno"
+      "other": "Few scattered wheezes. Normal capno",
+      "monitor": {
+        "rhythm": "sinus",
+        "rate": 108,
+        "capno": {
+          "pattern": "normal",
+          "etco2": 36,
+          "rr": 20
+        }
+      }
     },
     {
       "stage": "D Rebound",
@@ -220,7 +247,16 @@
       "other": "Throat tight again, hoarse. -> epi #3 (max 3; MD for more)",
       "bold": [
         "BP"
-      ]
+      ],
+      "monitor": {
+        "rhythm": "sinus",
+        "rate": 124,
+        "capno": {
+          "pattern": "normal",
+          "etco2": 33,
+          "rr": 26
+        }
+      }
     },
     {
       "stage": "E Crash",
@@ -240,7 +276,16 @@
         "BP",
         "SpO2",
         "GCS"
-      ]
+      ],
+      "monitor": {
+        "rhythm": "sinus",
+        "rate": 140,
+        "capno": {
+          "pattern": "normal",
+          "etco2": 28,
+          "rr": 34
+        }
+      }
     }
   ],
   "flow": [

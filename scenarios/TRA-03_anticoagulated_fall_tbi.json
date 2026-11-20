@@ -170,7 +170,16 @@
       "Pain": "3",
       "GCS": "15",
       "Pupils": "3 PERRL",
-      "other": "Afib on monitor. Repeats \"did I fall?\""
+      "other": "Afib on monitor. Repeats \"did I fall?\"",
+      "monitor": {
+        "rhythm": "afib",
+        "rate": 84,
+        "capno": {
+          "pattern": "normal",
+          "etco2": 38,
+          "rr": 16
+        }
+      }
     },
     {
       "stage": "B Decline",
@@ -188,7 +197,16 @@
       "other": "Vomits x1, sleepy, headache worse",
       "bold": [
         "GCS"
-      ]
+      ],
+      "monitor": {
+        "rhythm": "afib",
+        "rate": 76,
+        "capno": {
+          "pattern": "normal",
+          "etco2": 37,
+          "rr": 18
+        }
+      }
     },
     {
       "stage": "C Herniation signs",
@@ -210,7 +228,16 @@
         "RR",
         "GCS",
         "Pupils"
-      ]
+      ],
+      "monitor": {
+        "rhythm": "afib",
+        "rate": 58,
+        "capno": {
+          "pattern": "normal",
+          "etco2": 44,
+          "rr": 10
+        }
+      }
     },
     {
       "stage": "D Hypervent",
@@ -228,7 +255,16 @@
       "other": "Point out on capno; correct to 10/min",
       "bold": [
         "EtCO2"
-      ]
+      ],
+      "monitor": {
+        "rhythm": "afib",
+        "rate": 60,
+        "capno": {
+          "pattern": "normal",
+          "etco2": 26,
+          "rr": 24
+        }
+      }
     },
     {
       "stage": "E Managed",
@@ -243,7 +279,16 @@
       "Pain": "-",
       "GCS": "11",
       "Pupils": "R 5 / L 3",
-      "other": "Stable en route; suction ready"
+      "other": "Stable en route; suction ready",
+      "monitor": {
+        "rhythm": "afib",
+        "rate": 62,
+        "capno": {
+          "pattern": "normal",
+          "etco2": 38,
+          "rr": 12
+        }
+      }
     },
     {
       "stage": "F BP drop",
@@ -261,7 +306,16 @@
       "other": "SBP < 110 in TBI (GCS/pupils unchanged). After NS 1 L: BP 118/70. HR blunted by metoprolol",
       "bold": [
         "BP"
-      ]
+      ],
+      "monitor": {
+        "rhythm": "afib",
+        "rate": 88,
+        "capno": {
+          "pattern": "normal",
+          "etco2": 36,
+          "rr": 16
+        }
+      }
     }
   ],
   "flow": [
