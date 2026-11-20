@@ -18,7 +18,7 @@ const TABS: [Tab, string][] = [
 export default function ScenarioShell({ entryKey, tab }: { entryKey: string; tab: Tab }) {
   const entry = findEntry(entryKey);
   const ctx = useRun();
-  const { run, start, sc, pendingResume } = ctx;
+  const { run, start, sc, openDisplay, displayConnected, pendingResume } = ctx;
   const [conflict, setConflict] = useState(false);
 
   // Opening a scenario starts a run for it, unless another run with events is in progress (ask first).
@@ -89,6 +89,10 @@ export default function ScenarioShell({ entryKey, tab }: { entryKey: string; tab
         </div>
         <div className="flex gap-1 items-stretch no-print">
           <Clock />
+          <button type="button" className="sheet-btn" onClick={openDisplay} data-testid="open-display" title="Opens the student display in a new window">
+            Student screen
+            <span className={`ml-1 text-xs ${displayConnected ? "font-bold" : "text-rule"}`}>{displayConnected ? "(on)" : "(off)"}</span>
+          </button>
         </div>
       </header>
 

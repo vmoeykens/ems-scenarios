@@ -6,13 +6,16 @@ import { fmtT } from "./lib/run/reducer.ts";
 import Library from "./screens/Library.tsx";
 import ScenarioShell from "./screens/ScenarioShell.tsx";
 import Runs from "./screens/Runs.tsx";
+import Display from "./screens/Display.tsx";
 
 export default function App() {
   const route = useRoute();
+  // The student display is a separate window with its own (display-only) state: no run context, no autosave prompt.
+  if (route.name === "display") return <Display />;
   return (
     <RunProvider>
       <ResumePrompt />
-      {(route.name === "library" || route.name === "display") && <Library />}
+      {route.name === "library" && <Library />}
       {route.name === "runs" && <Runs />}
       {route.name === "scenario" && <ScenarioShell key={route.key} entryKey={route.key} tab={route.tab} />}
     </RunProvider>

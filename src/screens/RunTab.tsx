@@ -2,8 +2,10 @@ import { useState } from "react";
 import { describeEvent } from "../lib/run/describe.ts";
 import { fmtT, historyKey, lastUndoable } from "../lib/run/reducer.ts";
 import type { HistorySection } from "../lib/run/types.ts";
+import { cardFace } from "../lib/display/toDisplay.ts";
 import type { Pair } from "../lib/scenario/types.ts";
 import { useRun } from "../state/RunContext.tsx";
+import { CardFace } from "../ui/CardFace.tsx";
 import { Box, Md, Section, useLongPress } from "../ui/primitives.tsx";
 import { VitalsTable } from "./run/VitalsTable.tsx";
 
@@ -32,7 +34,7 @@ export default function RunTab() {
 }
 
 function ControlStrip() {
-  const { sc, state, run, dispatch, undo } = useRun();
+  const { sc, state, run, dispatch, undo, autoSwitch, setAutoSwitch } = useRun();
   if (!sc || !state || !run) return null;
   const phase = sc.phases.find((p) => p.id === state.phaseId);
   const pi = phase ? phase.index : -1;
@@ -60,6 +62,45 @@ function ControlStrip() {
         <span className="cs-value active-mark" data-testid="current-stage">
           {stage?.stage ?? "-"}
         </span>
+      </div>
+      <div className="cs-cell">
+        <span className="cs-label">Student screen</span>
+        <div className="flex items-stretch">
+          {(["monitor", "info"] as const).map((v) => (
+            <button
+              key={v}
+              type="button"
+              className={`sheet-btn seg ${state.view === v ? "seg-on" : ""}`}
+              aria-pressed={state.view === v}
+              onClick={() => dispatch({ kind: "display", view: v })}
+              data-testid={`view-${v}`}
+            >
+              {v === "monitor" ? "Monitor" : "Info / cards"}
+            </button>
+          ))}
+          <button
+            type="button"
+            className={`sheet-btn seg ml-1 ${state.ecgOn ? "seg-on" : ""}`}
+            aria-pressed={state.ecgOn}
+            onClick={() => dispatch({ kind: "display", ecg: !state.ecgOn })}
+            title="ECG trace on the student monitor (auto-on when HR is given)"
+          >
+            ECG
+          </button>
+          <button
+            type="button"
+            className={`sheet-btn seg ${state.capnoOn ? "seg-on" : ""}`}
+            aria-pressed={state.capnoOn}
+            onClick={() => dispatch({ kind: "display", capno: !state.capnoOn })}
+            title="Capnography trace (auto-on when EtCO2 is given)"
+          >
+            CO2
+          </button>
+        </div>
+        <label className="flex items-center gap-1 text-xs min-h-6">
+          <input type="checkbox" className="box" checked={autoSwitch} onChange={(e) => setAutoSwitch(e.target.checked)} />
+          switch to Info when a card is pushed
+        </label>
       </div>
       <div className="cs-cell ml-auto">
         <span className="cs-label">Undo</span>
@@ -227,12 +268,13 @@ function CriticalPanel() {
 }
 
 function ShowCardsPanel() {
-  const { sc, state, dispatch } = useRun();
+  const { sc, state, dispatch, autoSwitch } = useRun();
+  const [preview, setPreview] = useState<number | null>(null);
   if (!sc || !state) return null;
   const cards = sc.source.show_cards ?? [];
   if (!cards.length) return null;
   return (
-    <Section title="Show cards" right="cue = instructor only; Show = log that the card was handed over">
+    <Section title="Show cards" right="cue = instructor only; Show = push face to student screen">
       {cards.map((c, i) => {
         const shown = state.cards.find((x) => x.cardIndex === i);
         const override = state.ecgOverride === i || state.capnoOverride === i;
@@ -245,6 +287,11 @@ function ShowCardsPanel() {
                 {override && <span className="text-xs font-normal ml-1">(driving monitor)</span>}
               </div>
               {c.cue && <div className="cue">INSTRUCTOR: {c.cue}</div>}
+              {preview === i && (
+                <div className="mt-1 border border-ink p-1">
+                  <CardFace card={cardFace(c, i)} />
+                </div>
+              )}
             </div>
             <div className="flex gap-1 items-stretch shrink-0">
               {shown ? (
@@ -256,11 +303,16 @@ function ShowCardsPanel() {
                   type="button"
                   className="sheet-btn font-bold w-24 text-center"
                   data-testid={`show-card-${i}`}
-                  onClick={() => dispatch({ kind: "card", cardIndex: i, action: "show" })}
+                  onClick={() =>
+                    dispatch({ kind: "card", cardIndex: i, action: "show" }, ...(autoSwitch ? [{ kind: "display" as const, view: "info" as const }] : []))
+                  }
                 >
                   Show
                 </button>
               )}
+              <button type="button" className="sheet-btn text-xs w-16 text-center" onClick={() => setPreview(preview === i ? null : i)} aria-expanded={preview === i}>
+                {preview === i ? "Hide" : "Preview"}
+              </button>
             </div>
           </div>
         );
@@ -270,12 +322,12 @@ function ShowCardsPanel() {
 }
 
 function TagsPanel() {
-  const { sc, state, dispatch } = useRun();
+  const { sc, state, dispatch, autoSwitch } = useRun();
   if (!sc || !state) return null;
   const tags = sc.source.moulage_tags ?? [];
   if (!tags.length) return null;
   return (
-    <Section title="Moulage tags" right="Show = log that the tag finding was given" collapsible>
+    <Section title="Moulage tags" right="Show pushes region + finding (never the cue)" collapsible>
       {tags.map((t, i) => {
         const shown = state.tags.find((x) => x.tagIndex === i);
         return (
@@ -295,7 +347,7 @@ function TagsPanel() {
               <button
                 type="button"
                 className="sheet-btn font-bold w-24 shrink-0"
-                onClick={() => dispatch({ kind: "tag", tagIndex: i, action: "show" })}
+                onClick={() => dispatch({ kind: "tag", tagIndex: i, action: "show" }, ...(autoSwitch ? [{ kind: "display" as const, view: "info" as const }] : []))}
               >
                 Show
               </button>

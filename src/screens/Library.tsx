@@ -15,7 +15,7 @@ import { Footer, Section } from "../ui/primitives.tsx";
 export default function Library() {
   const imported = useSyncExternalStore(subscribeLibrary, importedEntries);
   const all = [...bundledEntries(), ...imported];
-  const { run } = useRun();
+  const { run, openDisplay } = useRun();
   const [errors, setErrors] = useState<{ file: string; errors: string[] }[]>([]);
   const [drag, setDrag] = useState(false);
 
@@ -42,6 +42,9 @@ export default function Library() {
           <a className="sheet-btn flex items-center" href={href.runs()}>
             Runs (open files)
           </a>
+          <button type="button" className="sheet-btn" onClick={openDisplay}>
+            Open student screen
+          </button>
         </div>
       </header>
       <p className="text-sm mb-2">
