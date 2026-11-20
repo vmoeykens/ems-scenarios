@@ -1,6 +1,7 @@
 import { href, navigate, useRoute } from "./lib/router.ts";
 import { findEntry, restoreImported } from "./lib/scenario/library.ts";
 import { RunProvider, useRun } from "./state/RunContext.tsx";
+import { ProtocolProvider } from "./state/ProtocolContext.tsx";
 import { Modal } from "./ui/primitives.tsx";
 import { fmtT } from "./lib/run/reducer.ts";
 import Library from "./screens/Library.tsx";
@@ -14,10 +15,12 @@ export default function App() {
   if (route.name === "display") return <Display />;
   return (
     <RunProvider>
-      <ResumePrompt />
-      {route.name === "library" && <Library />}
-      {route.name === "runs" && <Runs />}
-      {route.name === "scenario" && <ScenarioShell key={route.key} entryKey={route.key} tab={route.tab} />}
+      <ProtocolProvider>
+        <ResumePrompt />
+        {route.name === "library" && <Library />}
+        {route.name === "runs" && <Runs />}
+        {route.name === "scenario" && <ScenarioShell key={route.key} entryKey={route.key} tab={route.tab} />}
+      </ProtocolProvider>
     </RunProvider>
   );
 }

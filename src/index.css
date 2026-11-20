@@ -155,6 +155,13 @@
   .qr svg { width: 100%; height: 100%; }
   .card-face { @apply bg-paper text-ink; }
 
+  /* ---- protocol links + viewer (drawer on wide screens, full-screen sheet on tablets) ---- */
+  .proto-link { @apply underline decoration-1 underline-offset-2 font-bold; }
+  .proto-link:hover { @apply bg-head; }
+  .proto-drawer { @apply fixed z-40 inset-0 bg-paper flex flex-col border-ink xl:left-auto xl:w-[min(52rem,50vw)] xl:border-l-2; }
+  .proto-toolbar { @apply flex flex-wrap items-center gap-1 p-1 border-b border-ink; }
+  .proto-body { @apply flex-1 overflow-auto p-2 bg-zebra; }
+
   /* ---- student display ---- */
   .display { @apply min-h-screen flex flex-col; }
   .display-monitor { @apply bg-monitor-bg text-monitor-fg; }

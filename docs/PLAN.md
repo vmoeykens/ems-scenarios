@@ -177,6 +177,10 @@ v1 implements `BroadcastChannelTransport` only (same browser, second window). Sn
 - Phase 0 (done): vitest - all 10 pass; 21 bad fixtures fail with the exact Python messages; Python cross-check on all 33 files (rule errors + learn prompt); normalize defaults/explicit ids; every branch target resolves.
 - Phase 1/2 (done): `tests/run.test.ts` (clock, branch navigation, undo/event log, exports), `tests/display.test.ts` (leak test over every scenario, monitor follows stage/override, monitor block on every bundled stage), `tests/waveforms.test.ts` (shapes, ST shift, capno patterns); monitor schema fixtures in `validator.test.ts`. Playwright smoke `npm run e2e` (not in CI; uses $CHROME_PATH or /usr/bin/google-chrome): load scenario, start clock, reveal BP, push card, display window updates, branch switches stage, export JSON; autosave resume.
 
+## 10b. Protocol viewer (commit f)
+
+See SPEC.md "Protocol viewer". Files: `src/lib/protocols/{refs,locate,pdf}.ts`, `src/state/ProtocolContext.tsx`, `src/ui/ProtocolDrawer.tsx`, `src/data/protocol-index.json`, `scripts/build-protocol-index.ts`, `tests/protocols.test.ts`, `e2e/fixtures/protocols-sample.pdf` (6-page test fixture, not the real protocols). Status: index seeded (titles, `page: null`); page step has not run on the real PDF yet (file not in `public/protocols/`).
+
 ## 11. Open questions - resolved (Nov 2026)
 
 1. Strictness: **keep** - app validator stricter than the generator (no `jsonschema` pip dependency).

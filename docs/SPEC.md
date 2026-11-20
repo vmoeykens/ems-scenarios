@@ -64,6 +64,15 @@ User requirement (Nov 2026): "The UI of the application should match the paper o
 5. **Branches** with `goto_stage` switch the vitals stage when tapped, including examiner injects. No automatic phase advance (instructor advances; `goto_phase` is honoured if present).
 6. Keep: IF length 75; app validator stricter than the generator; index ids + scenario sha-256 in each run record; images (if ever used) bundled under `public/scenario-assets/`.
 
+## Protocol viewer (Nov 2026 request)
+
+User request: "Embed the current VT EMS protocols PDF in the web app; when scenarios reference a protocol, hyperlink it to a pop-out or sidebar showing that protocol."
+
+- **PDF**: `public/protocols/vt-ems-protocols-2025.pdf` (official file: https://www.healthvermont.gov/sites/default/files/document/eprip-2025-EMS-Protocols_0.pdf; the document permits reproduction and distribution). Not committed yet - the user adds it. The app works without it: one same-origin HEAD request at start decides; if the file is missing, protocol links are plain links to the official PDF in a new tab (the only external link; no other runtime network calls).
+- **Viewer**: pdf.js (`pdfjs-dist`, worker bundled locally as a hashed asset, relative-base safe), loaded with `import()` only when the first protocol is opened. Right-side drawer on wide screens (>= 1280 px), full-screen sheet on tablets; opens at the protocol's first page; prev/next page, zoom, "Open full PDF" (new tab at that page), close (Esc). Chrome is paper/greyscale; the PDF itself renders in its own colors (its provider-level color coding matters).
+- **Index**: `src/data/protocol-index.json` = `{ "<number>": { title, page } }`, seeded from the TOC of `docs/reference/eprip-2025-EMS-Protocols_0.pdf` (a text extraction; 127 entries incl. 5.x, 9.x, A.1-A.8; `page: null`). `scripts/build-protocol-index.ts` (`npm run protocol-index`, also `prebuild`) reads the real PDF with pdfjs-dist and fills `page` (title words + Adult/Pediatric + base number on a non-TOC page); it skips quietly when the PDF is absent. If a page is still null, the viewer runs the same text search in the browser at open time.
+- **Linkify** (`src/lib/protocols/refs.ts`): protocol numbers in any scenario text rendered through `Md` on instructor screens (protocols list, flow give/expected/branches, critical, objectives, debrief, differentials, history ...) become links: `3.0A`, `(2.8A)`, `per 2.24A`, `4.9`, `8.15`, `2.22A/P` (two links), `A.1`. Only numbers present in the index link; doses/volumes/temps/versions/times never do (unit lookahead + index check; tested on all scenario text). The student display has no protocol provider, so it never shows links.
+
 ## Deployment
 
 - GitHub Pages, built by GitHub Actions (`.github/workflows/pages.yml`) on every push to `main`: `npm ci`, `npm run validate`, `npm test`, `npm run build`, deploy `dist/`. Also runnable manually (workflow_dispatch).

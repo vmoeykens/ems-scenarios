@@ -10,7 +10,7 @@ import {
   type LibraryEntry,
 } from "../lib/scenario/library.ts";
 import { useRun } from "../state/RunContext.tsx";
-import { Footer, Section } from "../ui/primitives.tsx";
+import { Footer, Md, Section } from "../ui/primitives.tsx";
 
 export default function Library() {
   const imported = useSyncExternalStore(subscribeLibrary, importedEntries);
@@ -142,7 +142,9 @@ function Row({ e }: { e: LibraryEntry }) {
       </td>
       <td>{sc.difficulty ?? ""}</td>
       <td>{sc.run_time ?? ""}</td>
-      <td className="text-xs hide-narrow">{(sc.protocols ?? []).join(" | ")}</td>
+      <td className="text-xs hide-narrow">
+        <Md text={(sc.protocols ?? []).join(" | ")} />
+      </td>
     </tr>
   );
 }

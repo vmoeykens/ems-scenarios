@@ -1,5 +1,6 @@
 import { expect, test } from "@playwright/test";
 import { readFileSync } from "node:fs";
+import path from "node:path";
 
 test("load scenario, start clock, reveal BP, push card, display updates, export", async ({ page, context }) => {
   await page.goto("./");
@@ -54,4 +55,38 @@ test("autosave offers resume after reload", async ({ page }) => {
   await expect(page.getByRole("dialog", { name: "Resume run in progress?" })).toBeVisible();
   await page.getByRole("button", { name: "Resume run" }).click();
   await expect(page.getByTestId("vital-A-HR")).toHaveAttribute("aria-pressed", "true");
+});
+
+test("protocol links: official PDF when no local copy; drawer with the local copy", async ({ page }) => {
+  // no local PDF in this build -> link goes to the official PDF in a new tab
+  await page.goto("./#/s/CARD-01_inferior_stemi/prebrief");
+  const link = page.locator('a.proto-link[data-protocol="3.0A"]').first();
+  await expect(link).toHaveAttribute("href", /healthvermont\.gov\/.*eprip-2025-EMS-Protocols_0\.pdf$/);
+  await expect(link).toHaveAttribute("target", "_blank");
+  // doses / temps never link
+  await expect(page.locator("a.proto-link", { hasText: "98.2" })).toHaveCount(0);
+
+  // serve a small fixture PDF as the local copy -> link opens the in-app drawer at the protocol's page
+  const fixture = path.join(import.meta.dirname, "fixtures", "protocols-sample.pdf");
+  await page.route("**/protocols/vt-ems-protocols-2025.pdf", (r) => r.fulfill({ path: fixture, contentType: "application/pdf" }));
+  await page.reload();
+  const local = page.locator('a.proto-link[data-protocol="3.0A"]').first();
+  await expect(local).toHaveAttribute("href", /^protocols\/vt-ems-protocols-2025\.pdf#page=/);
+  await local.click();
+  const drawer = page.getByTestId("protocol-drawer");
+  await expect(drawer).toBeVisible();
+  await expect(drawer).toContainText("3.0A Acute Coronary Syndrome");
+  await expect(page.getByTestId("protocol-page")).toHaveText("p. 3 / 6"); // located by text search (index page is null)
+  await page.getByRole("button", { name: "Next page" }).click();
+  await expect(page.getByTestId("protocol-page")).toHaveText("p. 4 / 6");
+  await page.getByRole("button", { name: "Close protocol" }).click();
+  await expect(drawer).toHaveCount(0);
+});
+
+test("student display never shows protocol links", async ({ page, context }) => {
+  await page.goto("./#/s/MED-02_anaphylaxis/run");
+  const [display] = await Promise.all([context.waitForEvent("page"), page.getByTestId("open-display").click()]);
+  await page.getByTestId("show-card-0").click();
+  await expect(display.getByTestId("info")).toBeVisible();
+  await expect(display.locator("a")).toHaveCount(0);
 });

@@ -11,6 +11,7 @@ export default defineConfig({
   use: {
     baseURL: "http://localhost:4174/",
     viewport: { width: 1180, height: 820 },
+    serviceWorkers: "block", // page.route() must see every request (the app SW is network-first anyway)
     launchOptions: chrome ? { executablePath: chrome, args: ["--no-sandbox"] } : {},
   },
   webServer: { command: "npm run build && npx vite preview --port 4174 --strictPort", url: "http://localhost:4174/", reuseExistingServer: false, timeout: 120_000 },

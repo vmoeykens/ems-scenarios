@@ -12,10 +12,13 @@
     "test": "vitest run",
     "validate": "tsx scripts/validate.ts scenarios",
     "pdf": "python3 tools/build_pdfs.py scenarios out",
-    "e2e": "playwright test"
+    "e2e": "playwright test",
+    "prebuild": "tsx scripts/build-protocol-index.ts",
+    "protocol-index": "tsx scripts/build-protocol-index.ts"
   },
   "dependencies": {
     "ajv": "^8.20.0",
+    "pdfjs-dist": "^6.5.438",
     "qrcode-generator": "^2.0.4",
     "react": "^19.3.1",
     "react-dom": "^19.3.1"

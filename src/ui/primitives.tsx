@@ -1,8 +1,29 @@
 // Paper-sheet primitives: the web equivalents of section(), grid(), Box and CutLine in tools/ems_scenario.py.
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { FOOTER } from "../lib/scenario/constants.ts";
+import { linkifyProtocols } from "../lib/protocols/refs.ts";
+import { ProtocolLink, useProtocols } from "../state/ProtocolContext.tsx";
 
-/** **bold** / ***bold*** + "->" arrow + newlines, like md() in the generator. */
+/** Plain text with VT protocol numbers turned into links (only inside a ProtocolProvider = instructor screens). */
+function Linked({ text }: { text: string }) {
+  const ctx = useProtocols();
+  if (!ctx) return <>{text}</>;
+  return (
+    <>
+      {linkifyProtocols(text).map((s, i) =>
+        s.ref ? (
+          <ProtocolLink key={i} num={s.ref}>
+            {s.text}
+          </ProtocolLink>
+        ) : (
+          <span key={i}>{s.text}</span>
+        ),
+      )}
+    </>
+  );
+}
+
+/** **bold** / ***bold*** + "->" arrow + newlines, like md() in the generator; protocol refs become links. */
 export function Md({ text, className }: { text: unknown; className?: string }) {
   const s = String(text ?? "");
   const lines = s.split("\n");
@@ -14,7 +35,13 @@ export function Md({ text, className }: { text: unknown; className?: string }) {
           {ln.split(/(\*\*\*.+?\*\*\*|\*\*.+?\*\*)/g).map((part, i) => {
             const m = /^\*\*\*?(.+?)\*?\*\*$/.exec(part);
             const t = (m ? m[1] : part).replace(/->/g, "→");
-            return m ? <b key={i}>{t}</b> : <span key={i}>{t}</span>;
+            return m ? (
+              <b key={i}>
+                <Linked text={t} />
+              </b>
+            ) : (
+              <Linked key={i} text={t} />
+            );
           })}
         </span>
       ))}

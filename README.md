@@ -23,7 +23,12 @@ apt-get install -y graphviz poppler-utils                              # dot, pd
 | `npm run pdf` | Build every scenario PDF to `out/` and check 5 pages / p.3 flowchart / p.4 handouts |
 | `python3 tools/ems_scenario.py scenarios/X.json X.pdf` | Build one PDF (validates first) |
 | `npm run dev` / `npm run build` | Run / build the web app (`npm run preview` serves `dist/`) |
+| `npm run protocol-index` | Fill protocol page numbers in `src/data/protocol-index.json` from `public/protocols/vt-ems-protocols-2025.pdf` (skips if absent; also runs before every build) |
 | `npm run e2e` | Playwright smoke test (not in CI; needs Chrome/Chromium: `$CHROME_PATH`, `/usr/bin/google-chrome`, or `npx playwright install chromium`) |
+
+## Protocols PDF (optional)
+
+Put the official VT protocols PDF at `public/protocols/vt-ems-protocols-2025.pdf` and commit it. Protocol numbers in scenario text then open an in-app viewer at the right page (`npm run build` runs `npm run protocol-index` first to record each protocol's page in `src/data/protocol-index.json`; commit the updated index). Without the file, the links open the official PDF on healthvermont.gov in a new tab.
 
 ## Adding a scenario
 

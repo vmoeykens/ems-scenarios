@@ -86,6 +86,8 @@ export function RunProvider({ children }: { children: ReactNode }) {
   // autosave every change (single key); cleared on export/discard
   useEffect(() => {
     if (!run || run.exported) return;
+    const r = run.record;
+    if (!r.events.length && !r.trainee && !r.evaluator && !r.result) return; // nothing worth resuming yet
     saveAutosave({
       entryKey: run.entry.key,
       imported: run.entry.source === "import" ? { file: run.entry.file, raw: run.entry.raw } : undefined,
