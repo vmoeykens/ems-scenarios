@@ -8,7 +8,8 @@ import { badFixtureFiles, FIXTURE_DIR, pythonCheck, readJson, scenarioFiles } fr
 
 describe("bundled scenarios", () => {
   const files = scenarioFiles();
-  it("there are 10", () => expect(files).toHaveLength(10));
+  // More scenarios get added over time; the original 10 must always be there.
+  it("there are at least 10", () => expect(files.length).toBeGreaterThanOrEqual(10));
   it.each(files.map((f) => [basename(f), f]))("%s passes schema + rules", (_n, f) => {
     const r = validateScenario(readJson(f));
     expect(r.errors).toEqual([]);
@@ -44,6 +45,8 @@ const BAD: Record<string, { rules: string[]; schema: boolean }> = {
   },
   "if-too-long": { rules: ["flow 'Arrival': IF text > 75 chars"], schema: true },
   "learn-more-too-long": { rules: ["learn_more prompt 552 chars > 480 (QR too dense to scan) - shorten focus"], schema: false },
+  "monitor-rhythm": { rules: [], schema: true }, // schema-only (generator ignores vitals[].monitor)
+  "monitor-shape": { rules: [], schema: true },
   "no-expected": { rules: ["flow 'Transport': no expected actions"], schema: true },
   rhythm: { rules: ["bad rhythm torsades"], schema: true },
   "scene-safety": { rules: ["scene.safety present - scene safety is trained outside scenarios; remove it"], schema: true },
@@ -63,6 +66,19 @@ describe("known-bad fixtures", () => {
     expect(r.ok).toBe(false);
     expect(r.ruleErrors).toEqual(BAD[name].rules);
     expect(r.schemaErrors.length > 0).toBe(BAD[name].schema);
+  });
+});
+
+describe("vitals[].monitor", () => {
+  it("accepts the optional monitor block", () => {
+    expect(validateScenario(readJson(join(FIXTURE_DIR, "good-new-fields.json"))).ok).toBe(true);
+  });
+  it("rejects bad rhythm / types / capno pattern with readable messages", () => {
+    expect(schemaErrors(readJson(join(FIXTURE_DIR, "bad", "monitor-rhythm.json"))).join("\n")).toMatch(/\/vitals\/0\/monitor\/rhythm: must be equal to one of the allowed values/);
+    const e = schemaErrors(readJson(join(FIXTURE_DIR, "bad", "monitor-shape.json"))).join("\n");
+    expect(e).toMatch(/\/vitals\/0\/monitor\/rate: must be number/);
+    expect(e).toMatch(/\/vitals\/0\/monitor\/capno: must have required property 'rr'/);
+    expect(e).toMatch(/\/vitals\/0\/monitor\/capno\/pattern/);
   });
 });
 

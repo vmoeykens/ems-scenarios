@@ -13,7 +13,21 @@ export type VitalsRow = {
   trigger?: string;
   other?: string;
   bold?: (VitalKey | "other")[];
+  monitor?: Monitor;
 } & Partial<Record<VitalKey, string | number>>;
+
+export type CapnoPattern = "normal" | "shark" | "cpr";
+
+/** Optional live-monitor settings per vitals stage (student display only; the PDF generator ignores it). */
+export interface Monitor {
+  rhythm: Rhythm;
+  rate: number;
+  /** atrial rate (chb) / flutter-wave rate (flutter) */
+  p_rate?: number;
+  /** lead II ST shift in mm (+ elevation) */
+  st?: number;
+  capno?: { pattern: CapnoPattern; etco2: number; rr: number };
+}
 
 export interface Branch {
   id?: string;
@@ -39,7 +53,7 @@ type CardBase = { title?: string; caption?: string; cue?: string; width?: "full"
 export type ShowCard =
   | (CardBase & { type: "12lead"; rhythm?: Rhythm; rate?: number; p_rate?: number; st?: Partial<Record<Lead, number>> })
   | (CardBase & { type: "strip"; rhythm?: Rhythm; rate?: number; p_rate?: number; lead?: Lead; st?: number; seconds?: number })
-  | (CardBase & { type: "capno"; pattern?: "normal" | "shark" | "cpr"; etco2?: number; rr?: number })
+  | (CardBase & { type: "capno"; pattern?: CapnoPattern; etco2?: number; rr?: number })
   | (Omit<CardBase, "caption"> & { type: "text"; body?: string })
   | (CardBase & { type: "image"; path: string });
 

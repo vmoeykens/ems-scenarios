@@ -135,7 +135,8 @@
         "GCS": { "$ref": "#/$defs/vitalCell" },
         "Pupils": { "$ref": "#/$defs/vitalCell" },
         "other": { "type": "string" },
-        "bold": { "type": "array", "items": { "$ref": "#/$defs/vitalName" } }
+        "bold": { "type": "array", "items": { "$ref": "#/$defs/vitalName" } },
+        "monitor": { "$ref": "#/$defs/monitor", "description": "optional Scenario Runner live monitor for this stage; ignored by the PDF generator" }
       }
     },
     "checkItem": {
@@ -178,6 +179,28 @@
       }
     },
     "rhythm": { "enum": ["sinus", "afib", "svt", "vt", "vf", "asystole", "chb", "avb1", "flutter"] },
+    "monitor": {
+      "description": "Student-display monitor for a vitals stage: ECG rhythm + rate (p_rate = atrial rate for chb / flutter rate; st = lead II ST shift in mm) and optional capnography. Waveform only; never rendered as text.",
+      "type": "object",
+      "required": ["rhythm", "rate"],
+      "additionalProperties": false,
+      "properties": {
+        "rhythm": { "$ref": "#/$defs/rhythm" },
+        "rate": { "type": "number", "minimum": 0, "maximum": 300 },
+        "p_rate": { "type": "number", "minimum": 0, "maximum": 400 },
+        "st": { "type": "number", "minimum": -10, "maximum": 10 },
+        "capno": {
+          "type": "object",
+          "required": ["pattern", "etco2", "rr"],
+          "additionalProperties": false,
+          "properties": {
+            "pattern": { "enum": ["normal", "shark", "cpr"] },
+            "etco2": { "type": "number", "minimum": 0, "maximum": 150 },
+            "rr": { "type": "number", "minimum": 0, "maximum": 80 }
+          }
+        }
+      }
+    },
     "lead": { "enum": ["I", "II", "III", "aVR", "aVL", "aVF", "V1", "V2", "V3", "V4", "V5", "V6"] },
     "width": { "enum": ["full", "half"] },
     "showCard": {
