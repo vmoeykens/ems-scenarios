@@ -238,6 +238,26 @@
       "GCS": "15",
       "Pupils": "-",
       "other": "Repeat 12-lead unchanged"
+    },
+    {
+      "stage": "F Worsening",
+      "trigger": "IF no action within 2 min of Stage C",
+      "HR": "46",
+      "BP": "**74/44**",
+      "RR": "22",
+      "SpO2": "93%",
+      "EtCO2": "30",
+      "BGL": "-",
+      "Temp": "-",
+      "Pain": "7",
+      "GCS": "**13**",
+      "Pupils": "-",
+      "other": "Grey, eyes closed, responds to voice slowly. Lungs clear",
+      "bold": [
+        "HR",
+        "BP",
+        "GCS"
+      ]
     }
   ],
   "blank_vitals_rows": 2,
@@ -316,7 +336,8 @@
         },
         {
           "if": "No action within 2 min",
-          "then": "BP 74/44, GCS 13; prompt via wife"
+          "then": "Stage **F**; prompt via wife",
+          "goto_stage": "F"
         }
       ],
       "expected": [

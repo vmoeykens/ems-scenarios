@@ -258,6 +258,27 @@
       "bold": [
         "GCS"
       ]
+    },
+    {
+      "stage": "G Re-sedation",
+      "trigger": "Examiner inject en route (naloxone wearing off)",
+      "HR": "58",
+      "BP": "108/66",
+      "RR": "**6**",
+      "SpO2": "**84%**",
+      "EtCO2": "**58**",
+      "BGL": "-",
+      "Temp": "-",
+      "Pain": "-",
+      "GCS": "**8**",
+      "Pupils": "1 mm",
+      "other": "Snoring respirations, slumped. After BVM + titrated naloxone -> Stage E values",
+      "bold": [
+        "RR",
+        "SpO2",
+        "EtCO2",
+        "GCS"
+      ]
     }
   ],
   "flow": [
@@ -342,7 +363,8 @@
         {
           "type": "inject",
           "if": "Pt re-sedates en route (naloxone wearing off)",
-          "then": "RR 6, SpO2 84%, EtCO2 58; expect BVM, repeat titrated naloxone"
+          "then": "Stage **G**; expect BVM, repeat titrated naloxone",
+          "goto_stage": "G"
         }
       ]
     },
