@@ -1,0 +1,435 @@
+{
+  "id": "ARR-02",
+  "title": "Unwitnessed asystole - termination & family",
+  "version": "v1.1 | VT Protocols 2025 | UVM Rescue",
+  "category": "Cardiac arrest",
+  "level": "AEMT CCIT",
+  "run_time": "25-30 min",
+  "difficulty": "Moderate",
+  "crew": "CC + 2 (1 FD EMR)",
+  "protocols": [
+    "3.2A Cardiac Arrest",
+    "3.6 Team Focused CPR",
+    "8.7 DNR/COLST",
+    "8.17 Resuscitation Initiation & Termination",
+    "8.6 Crime Scene"
+  ],
+  "objectives": [
+    "Decide to start (no obvious death signs, no DNR/COLST)",
+    "Non-shockable: epi ASAP, IV/IO, SGA after 8 min, H's & T's",
+    "Apply TOR rule at 20 min; contact Med Direction",
+    "Pronouncement steps: time, law enforcement, scene preservation",
+    "Family communication + crew wellbeing"
+  ],
+  "resources": "AED/monitor, BVM, SGA, IV/IO, epi 0.1 mg/mL, capno, metronome. Medical Direction by radio/phone. UVMMC ~15 min",
+  "dispatch": "UVM Rescue, respond to 18 Cobble Hill Rd for a 67-year-old male, unresponsive, not breathing. Caller is his wife. CPR instructions given. Time out 0705.",
+  "scene": {
+    "location": "Upstairs bathroom, cramped, pt wedged between toilet and tub.",
+    "setup": "Manikin on bathroom floor. Wife doing CPR. No medical paperwork visible.",
+    "moulage": "Pale/blue lips, warm to touch, no lividity, no rigor.",
+    "roles": "Wife (family member to manage); FD EMR; evaluator calls rhythm."
+  },
+  "patient": {
+    "name": "Gary Wheeler",
+    "age": "67",
+    "sex": "M",
+    "weight_kg": "104",
+    "cc": "Found unresponsive",
+    "on_arrival": "Unresponsive, apneic, pulseless, warm. Wife CPR - shallow."
+  },
+  "history": {
+    "SAMPLE": [
+      [
+        "S",
+        "Wife: \"He got up at 6 to shower, I heard a thump at ~0650\""
+      ],
+      [
+        "A",
+        "NKDA"
+      ],
+      [
+        "M",
+        "Metformin, lisinopril, atorvastatin, insulin glargine"
+      ],
+      [
+        "P",
+        "T2DM, HTN, CAD (stent 2021), obesity"
+      ],
+      [
+        "L",
+        "Dinner last night"
+      ],
+      [
+        "E",
+        "Last seen normal ~0600; thump ~0650; found ~0700"
+      ]
+    ],
+    "OPQRST": [
+      [
+        "O",
+        "Unwitnessed; last seen well 0600"
+      ],
+      [
+        "P",
+        "-"
+      ],
+      [
+        "Q",
+        "Complained of indigestion last night"
+      ],
+      [
+        "R",
+        "-"
+      ],
+      [
+        "S",
+        "-"
+      ],
+      [
+        "T",
+        "Estimated downtime 10-15+ min before CPR"
+      ]
+    ]
+  },
+  "primary": [
+    [
+      "X / hemorrhage",
+      "None"
+    ],
+    [
+      "Airway",
+      "Apneic, OPA + BVM"
+    ],
+    [
+      "Breathing",
+      "None"
+    ],
+    [
+      "Circulation",
+      "Pulseless, warm, no lividity -> start CPR"
+    ],
+    [
+      "Disability",
+      "Unresponsive, pupils fixed/dilated"
+    ],
+    [
+      "Exposure",
+      "Small scalp lac (fall); no other trauma"
+    ],
+    [
+      "Priority / impression",
+      "Unwitnessed arrest, non-shockable. Move to space first?"
+    ]
+  ],
+  "secondary": [
+    [
+      "Obvious death signs",
+      "**None** (no rigor, lividity, decomposition)"
+    ],
+    [
+      "DNR / COLST",
+      "None - wife: \"we never did that\""
+    ],
+    [
+      "Head",
+      "1 cm scalp lac occiput (fall)"
+    ],
+    [
+      "BGL",
+      "142 (if checked)"
+    ],
+    [
+      "Temp",
+      "Normothermic, warm house"
+    ],
+    [
+      "H's & T's",
+      "No obvious reversible cause"
+    ],
+    [
+      "Scene",
+      "Nothing suspicious; bathroom tidy"
+    ],
+    [
+      "Weight",
+      "Large - 4-person move to hallway"
+    ]
+  ],
+  "vitals_note": "Stages are 2-min cycles from EMS contact. Rhythm stays non-shockable throughout.",
+  "vitals": [
+    {
+      "stage": "A Contact",
+      "trigger": "Analysis 1",
+      "HR": "0",
+      "BP": "-",
+      "RR": "0",
+      "SpO2": "-",
+      "EtCO2": "10 CPR",
+      "BGL": "142",
+      "Temp": "-",
+      "Pain": "-",
+      "GCS": "3",
+      "Pupils": "6 fixed",
+      "other": "**Asystole** - no shock advised"
+    },
+    {
+      "stage": "B 8 min",
+      "trigger": "Analysis 4 (epi given x2)",
+      "HR": "0",
+      "BP": "-",
+      "RR": "BVM/SGA",
+      "SpO2": "-",
+      "EtCO2": "9",
+      "BGL": "-",
+      "Temp": "-",
+      "Pain": "-",
+      "GCS": "3",
+      "Pupils": "6 fixed",
+      "other": "Asystole"
+    },
+    {
+      "stage": "C Poor CPR",
+      "trigger": "IF CPR left in cramped bathroom/ long pauses",
+      "HR": "0",
+      "BP": "-",
+      "RR": "-",
+      "SpO2": "-",
+      "EtCO2": "**5**",
+      "BGL": "-",
+      "Temp": "-",
+      "Pain": "-",
+      "GCS": "3",
+      "Pupils": "-",
+      "other": "Quality debrief point",
+      "bold": [
+        "EtCO2"
+      ]
+    },
+    {
+      "stage": "D 14 min",
+      "trigger": "Analysis 7",
+      "HR": "0",
+      "BP": "-",
+      "RR": "SGA",
+      "SpO2": "-",
+      "EtCO2": "8",
+      "BGL": "-",
+      "Temp": "-",
+      "Pain": "-",
+      "GCS": "3",
+      "Pupils": "6 fixed",
+      "other": "Asystole - confirm leads + gain"
+    },
+    {
+      "stage": "E 20 min",
+      "trigger": "Analysis 10 - TOR check",
+      "HR": "0",
+      "BP": "-",
+      "RR": "SGA",
+      "SpO2": "-",
+      "EtCO2": "**7**",
+      "BGL": "-",
+      "Temp": "-",
+      "Pain": "-",
+      "GCS": "3",
+      "Pupils": "6 fixed",
+      "other": "Asystole. All 3 TOR criteria met -> contact MD",
+      "bold": [
+        "EtCO2"
+      ]
+    }
+  ],
+  "flow": [
+    {
+      "time": "0-2",
+      "phase": "Arrival / start decision",
+      "give": "Wife doing CPR on bathroom floor: \"Please do something!\" Warm, no lividity.",
+      "branches": [
+        {
+          "if": "Crew doesn't start (\"been down too long\")",
+          "then": "critical (evaluator discretion) - no obvious death signs, no DNR"
+        }
+      ],
+      "expected": [
+        "Decision to start; pt moved to hallway/space",
+        "Roles assigned (3.6), CC = code commander",
+        "AED analyze ASAP"
+      ]
+    },
+    {
+      "time": "2-8",
+      "phase": "Non-shockable care",
+      "give": "Stage **A**, **B**. Cramped space.",
+      "branches": [
+        {
+          "if": "CPR left in bathroom / pauses",
+          "then": "Stage **C**",
+          "goto_stage": "C"
+        }
+      ],
+      "expected": [
+        "Epi 1 mg (0.1 mg/mL) ASAP, then every other cycle",
+        "IV/IO; NS 500 mL",
+        "SGA after 8 min w/o stopping CPR; capno"
+      ]
+    },
+    {
+      "time": "8-16",
+      "phase": "Reversible causes / family",
+      "give": "Stage **D**. Wife: \"Is he going to be OK? Should I call our son?\"",
+      "expected": [
+        "H's & T's reviewed (BGL, hypoxia, OD)",
+        "Family member assigned/updated",
+        "Paramedic intercept status checked"
+      ],
+      "branches": [
+        {
+          "type": "inject",
+          "if": "Wife finds a signed COLST/DNR in a drawer",
+          "then": "expect verify validity (8.7), contact MD, stop if valid"
+        }
+      ]
+    },
+    {
+      "time": "16-22",
+      "phase": "TOR decision",
+      "give": "Stage **E** at 20 min. If MD contacted: \"Agree, terminate. Time?\"",
+      "branches": [
+        {
+          "if": "Crew transports with CPR without reason",
+          "then": "debrief 8.17 (CPR quality in moving ambulance)"
+        }
+      ],
+      "expected": [
+        "TOR criteria stated: unwitnessed by EMS, no ROSC 20 min, no shock advised",
+        "Med Direction contacted",
+        "Time of death documented"
+      ]
+    },
+    {
+      "time": "22-30",
+      "phase": "After termination",
+      "give": "Wife: \"Can I see him? Can I hold him?\" PD arrives T+25.",
+      "expected": [
+        "Death notification: plain words (\"died\"), sit down",
+        "Law enforcement notified; tubes/lines left in place",
+        "Support for wife (son/clergy), crew check-in"
+      ],
+      "branches": [
+        {
+          "type": "inject",
+          "if": "Son arrives: \"Why did you stop? Take him to UVMMC!\"",
+          "then": "CC explains calmly; MD decision stands; involve PD/support"
+        }
+      ]
+    }
+  ],
+  "critical": [
+    "Resuscitation not started without obvious death signs or valid DNR/COLST",
+    "Epi delayed in non-shockable rhythm / wrong concentration",
+    "Compressions interrupted > 10 s for airway/IV",
+    "TOR without Medical Direction contact (8.17)",
+    "TOR criteria misapplied (e.g., hypothermic, shock was advised)",
+    "Law enforcement not notified after termination",
+    "Family not informed/supported"
+  ],
+  "differentials": [
+    [
+      "Cardiac (MI) arrest (dx)",
+      "CAD, stent, 'indigestion', thump",
+      "-"
+    ],
+    [
+      "Hypoglycemia (insulin)",
+      "Insulin glargine",
+      "BGL 142"
+    ],
+    [
+      "PE",
+      "Obesity, sudden",
+      "No signs; unknowable in field"
+    ],
+    [
+      "Head trauma from fall",
+      "Scalp lac",
+      "Small lac; fall likely result"
+    ],
+    [
+      "Opioid / OD",
+      "Bathroom arrest",
+      "No paraphernalia/meds"
+    ],
+    [
+      "Hypothermia",
+      "Bathroom",
+      "Warm house, warm body"
+    ]
+  ],
+  "debrief": [
+    "What made you start resuscitation, and what would have made you not start?",
+    "Recite the 3 TOR criteria. What if one is missing?",
+    "Why does working in a cramped bathroom hurt outcomes?",
+    "Walk through your death notification wording.",
+    "How did the crew feel - what is the agency's peer support plan?"
+  ],
+  "crew_card": {
+    "dispatch": "18 Cobble Hill Rd. 67 y/o M, unresponsive, not breathing. Caller: wife. CPR instructions given.",
+    "on_arrival": "Upstairs bathroom. Large man on floor wedged between toilet and tub. Wife kneeling, pushing on his chest, crying."
+  },
+  "actor_card": {
+    "Wife": "Crying, keeps asking \"is he going to be okay?\" Will answer history if asked calmly.",
+    "Paperwork": "\"We never did any of those papers.\"",
+    "After termination": "\"Can I see him? Can I hold his hand?\" Asks for son's number to be called.",
+    "If crew is cold/rushed": "Get angry: \"You're just giving up on him!\"",
+    "Evaluator": "Rhythm always asystole. No ROSC in this scenario."
+  },
+  "show_cards": [
+    {
+      "type": "strip",
+      "width": "full",
+      "title": "AED / MONITOR",
+      "caption": "NO SHOCK ADVISED",
+      "rhythm": "asystole",
+      "rate": 0,
+      "cue": "Every analysis. If crew checks leads/gain: still flat"
+    },
+    {
+      "type": "capno",
+      "width": "half",
+      "title": "CAPNOGRAPHY",
+      "caption": "EtCO2 9",
+      "pattern": "cpr",
+      "etco2": 9,
+      "rr": 10,
+      "cue": "During CPR, every cycle"
+    },
+    {
+      "type": "text",
+      "width": "half",
+      "title": "PATIENT EXAM",
+      "body": "Warm to touch.\nNo stiffness. No pooling of blood.\nPupils large, fixed."
+    }
+  ],
+  "moulage_tags": [
+    {
+      "region": "Back of head",
+      "text": "1 cm laceration"
+    },
+    {
+      "region": "Skin",
+      "text": "Warm. No stiffness. No pooled blood in low areas"
+    },
+    {
+      "region": "Lips",
+      "text": "Blue"
+    },
+    {
+      "region": "Eyes",
+      "text": "Pupils 6 mm, fixed"
+    }
+  ],
+  "learn_more": {
+    "topic": "unwitnessed out-of-hospital cardiac arrest in asystole",
+    "focus": "termination-of-resuscitation rules, EtCO2 as a prognostic sign, why transport with CPR rarely helps, and death notification"
+  }
+}

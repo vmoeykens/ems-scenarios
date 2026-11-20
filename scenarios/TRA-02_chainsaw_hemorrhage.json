@@ -1,0 +1,473 @@
+{
+  "id": "TRA-02",
+  "title": "Chainsaw thigh - woods extraction",
+  "version": "v1.1 | VT Protocols 2025 | UVM Rescue",
+  "category": "Trauma",
+  "level": "AEMT CCIT",
+  "run_time": "25-30 min",
+  "difficulty": "Hard",
+  "crew": "CC + 1, FD for carry-out",
+  "protocols": [
+    "1.2 Routine Pt Care",
+    "4.4 Hemorrhage Control",
+    "4.12 Traumatic Emergencies",
+    "4.9 Trauma Triage",
+    "2.24A Shock",
+    "2.20A Pain"
+  ],
+  "objectives": [
+    "Tourniquet within 1 min of reaching pt; 2nd TQ if bleeding persists",
+    "Note & communicate TQ time; never loosen",
+    "Resource management for remote extraction (FD, UTV, LZ)",
+    "Hemorrhagic shock: permissive 250 mL boluses, warm",
+    "TRAUMA ALERT: active bleeding requiring TQ = Level 1 criteria"
+  ],
+  "resources": "CAT TQ x2, hemostatic gauze, IV, NS, blankets, Stokes/sked, FD UTV. Pt 1/4 mi from road; UVMMC (Level 1) ~20 min from road",
+  "dispatch": "UVM Rescue, respond to the end of Pleasant Valley Rd, Underhill, logging operation, for a 52-year-old male with a chainsaw injury to the leg, heavy bleeding. Caller is a coworker. Fire is also responding. Time out 1030.",
+  "scene": {
+    "location": "Logging site, 1/4 mile up skid trail from road. 35 F, mud, slash piles.",
+    "setup": "Pt on ground against log. Coworker holding bloody shirt on wound + leather belt around thigh (loose).",
+    "moulage": "Large lac R anterior mid-thigh, chaps cut through, blood-soaked pants, puddle.",
+    "roles": "Pt actor; coworker (bystander - later asks to loosen TQ); FD arrives T+10."
+  },
+  "patient": {
+    "name": "Dale Corbett",
+    "age": "52",
+    "sex": "M",
+    "weight_kg": "95",
+    "cc": "Cut leg with saw",
+    "on_arrival": "Pale, sweaty, anxious, talking. Bright red blood pulsing through shirt. Belt not controlling it."
+  },
+  "history": {
+    "SAMPLE": [
+      [
+        "S",
+        "Leg pain, dizzy, thirsty, cold"
+      ],
+      [
+        "A",
+        "Codeine (nausea)"
+      ],
+      [
+        "M",
+        "Atorvastatin, **aspirin 81 mg daily**"
+      ],
+      [
+        "P",
+        "High cholesterol"
+      ],
+      [
+        "L",
+        "Breakfast 0600, coffee"
+      ],
+      [
+        "E",
+        "Saw kicked back at 1015 limbing a tree. Coworker applied belt"
+      ]
+    ],
+    "OPQRST": [
+      [
+        "O",
+        "~15 min ago, instant"
+      ],
+      [
+        "P",
+        "Worse with any movement"
+      ],
+      [
+        "Q",
+        "Burning, throbbing"
+      ],
+      [
+        "R",
+        "Thigh only"
+      ],
+      [
+        "S",
+        "8/10 -> TQ pain 10/10"
+      ],
+      [
+        "T",
+        "Constant"
+      ]
+    ]
+  },
+  "primary": [
+    [
+      "X / hemorrhage",
+      "**Arterial bleeding R thigh - TQ high & tight / 2-3 in above wound**"
+    ],
+    [
+      "Airway",
+      "Patent, talking"
+    ],
+    [
+      "Breathing",
+      "RR 26, clear"
+    ],
+    [
+      "Circulation",
+      "Radial weak/thready. Pale, cool, diaphoretic. ~1.5 L on ground"
+    ],
+    [
+      "Disability",
+      "GCS 15 -> trends down if bleeding uncontrolled"
+    ],
+    [
+      "Exposure",
+      "Cut away pants; only wound. Cold, wet ground - insulate"
+    ],
+    [
+      "Priority / impression",
+      "**HIGH**: class III hemorrhage. TQ, warm, move"
+    ]
+  ],
+  "secondary": [
+    [
+      "Wound",
+      "8 in gaping lac anterior/medial mid-thigh, muscle exposed"
+    ],
+    [
+      "R leg distal",
+      "After TQ: no DP/PT pulses, bleeding stopped"
+    ],
+    [
+      "Femur",
+      "Stable, no deformity"
+    ],
+    [
+      "Head / neck",
+      "Hard hat on, no trauma"
+    ],
+    [
+      "Chest / abd",
+      "Normal"
+    ],
+    [
+      "L leg / arms",
+      "Normal"
+    ],
+    [
+      "Skin",
+      "Cold, wet clothing"
+    ],
+    [
+      "Other wounds",
+      "None (checked all 4 limbs)"
+    ]
+  ],
+  "vitals": [
+    {
+      "stage": "A Initial",
+      "trigger": "First set (after TQ)",
+      "HR": "**132**",
+      "BP": "**88/58**",
+      "RR": "26",
+      "SpO2": "95% RA",
+      "EtCO2": "28",
+      "BGL": "112",
+      "Temp": "96.0",
+      "Pain": "10",
+      "GCS": "15",
+      "Pupils": "4 PERRL",
+      "other": "Pale/cool/diaphoretic. Sinus tach",
+      "bold": [
+        "HR",
+        "BP"
+      ]
+    },
+    {
+      "stage": "B Ongoing bleed",
+      "trigger": "IF single TQ not tight / belt only (~T+5)",
+      "HR": "**148**",
+      "BP": "**70/40**",
+      "RR": "30",
+      "SpO2": "93%",
+      "EtCO2": "**20**",
+      "BGL": "-",
+      "Temp": "-",
+      "Pain": "-",
+      "GCS": "**13**",
+      "Pupils": "-",
+      "other": "Oozing past TQ, distal pulse present -> tighten / 2nd TQ",
+      "bold": [
+        "HR",
+        "BP",
+        "GCS",
+        "EtCO2"
+      ]
+    },
+    {
+      "stage": "C Controlled",
+      "trigger": "Bleeding controlled + warm + 250 mL NS",
+      "HR": "122",
+      "BP": "92/60",
+      "RR": "24",
+      "SpO2": "96%",
+      "EtCO2": "30",
+      "BGL": "-",
+      "Temp": "-",
+      "Pain": "9",
+      "GCS": "15",
+      "Pupils": "-",
+      "other": "Radial palpable"
+    },
+    {
+      "stage": "D Carry-out",
+      "trigger": "During carry (~T+15), no warming",
+      "HR": "126",
+      "BP": "88/56",
+      "RR": "24",
+      "SpO2": "95%",
+      "EtCO2": "29",
+      "BGL": "-",
+      "Temp": "**95.0**",
+      "Pain": "9",
+      "GCS": "15",
+      "Pupils": "-",
+      "other": "Shivering hard. Warm -> Stage E",
+      "bold": [
+        "Temp"
+      ]
+    },
+    {
+      "stage": "E Transport",
+      "trigger": "In rig, heat on, 2nd bolus",
+      "HR": "118",
+      "BP": "96/62",
+      "RR": "22",
+      "SpO2": "97%",
+      "EtCO2": "31",
+      "BGL": "-",
+      "Temp": "96.2",
+      "Pain": "8",
+      "GCS": "15",
+      "Pupils": "-",
+      "other": "TQ holding, no distal pulse"
+    }
+  ],
+  "flow": [
+    {
+      "time": "0-2",
+      "phase": "Arrival",
+      "give": "Coworker waving from skid trail: \"Hurry, he's bleeding bad!\"",
+      "expected": [
+        "Carry minimal gear fast: TQ, gauze, O2, BVM",
+        "FD carry team + UTV requested early"
+      ]
+    },
+    {
+      "time": "2-4",
+      "phase": "Hemorrhage control",
+      "give": "Show WOUND card. Belt loose, blood pulsing.",
+      "branches": [
+        {
+          "if": "TQ high & tight / 2-3 in proximal, tightened",
+          "then": "bleeding stops; Stage **A**",
+          "goto_stage": "A"
+        },
+        {
+          "if": "Direct pressure / belt left alone",
+          "then": "Stage **B** at +3 min",
+          "goto_stage": "B"
+        }
+      ],
+      "expected": [
+        "TQ applied <= 1 min of reaching pt",
+        "TQ time noted (write on TQ/forehead)",
+        "Distal pulse absent confirmed"
+      ]
+    },
+    {
+      "time": "4-8",
+      "phase": "Reassess",
+      "give": "If one TQ: some ooze continues at +3 min (big thigh).",
+      "branches": [
+        {
+          "if": "2nd TQ just proximal to 1st",
+          "then": "controlled; Stage **C**",
+          "goto_stage": "C"
+        },
+        {
+          "if": "Ooze ignored",
+          "then": "Stage **B**",
+          "goto_stage": "B"
+        }
+      ],
+      "expected": [
+        "2nd TQ applied proximal to 1st",
+        "Wound dressed/packed if oozing",
+        "Insulated from ground, wet clothes cut off"
+      ]
+    },
+    {
+      "time": "8-12",
+      "phase": "Bystander pressure",
+      "give": "Coworker: \"Shouldn't you loosen that? He'll lose his leg!\"",
+      "branches": [
+        {
+          "if": "TQ loosened",
+          "then": "re-bleed, Stage **B**; critical (evaluator discretion)",
+          "goto_stage": "B"
+        }
+      ],
+      "expected": [
+        "TQ left in place; coworker reassured",
+        "IV / fluids started en route or at road",
+        "Pain addressed (2.20A: AEMT options; intercept for opioids)"
+      ]
+    },
+    {
+      "time": "10-20",
+      "phase": "Extraction",
+      "give": "FD arrives with UTV + Stokes at T+10. Stage **D** if not warmed.",
+      "expected": [
+        "CC directs carry-out, keeps eyes on TQ",
+        "Hypothermia prevention throughout",
+        "TRAUMA ALERT; direct to UVMMC (Level 1)"
+      ],
+      "branches": [
+        {
+          "type": "inject",
+          "if": "TQ #1 slips during carry; bleeding resumes",
+          "then": "Stage **B** values; expect stop, tighten/2nd TQ, re-mark time",
+          "goto_stage": "B"
+        },
+        {
+          "type": "inject",
+          "if": "UTV stuck in mud: hand carry 1/4 mi",
+          "then": "CC rotates FD carriers, keeps TQ visible, keeps pt warm"
+        }
+      ]
+    },
+    {
+      "time": "20+",
+      "phase": "Transport + report",
+      "give": "Stage **E**. Evaluator plays UVMMC trauma team.",
+      "expected": [
+        "Report: TQ time(s), est. blood loss, fluid total",
+        "Aspirin use reported",
+        "SIREN; TQ time communicated"
+      ]
+    }
+  ],
+  "critical": [
+    "No TQ within 1 min of reaching pt with arterial bleeding",
+    "Time-consuming care before hemorrhage control",
+    "TQ placed loosely (distal pulse/bleeding persists) and not corrected",
+    "TQ loosened/removed in field",
+    "TQ time not documented/communicated",
+    "No hypothermia prevention",
+    "No TRAUMA ALERT / Level 1 consideration (4.9)"
+  ],
+  "differentials": [
+    [
+      "Femoral artery lac (dx)",
+      "Pulsatile bright red, location, shock",
+      "-"
+    ],
+    [
+      "Venous bleed",
+      "Large wound",
+      "Pulsatile, rapid shock"
+    ],
+    [
+      "Femur fx",
+      "Mechanism",
+      "Stable, no deformity"
+    ],
+    [
+      "Compartment / crush",
+      "Logging",
+      "Saw mechanism, no entrapment"
+    ],
+    [
+      "Cardiac (ACS) from stress",
+      "52M, aspirin",
+      "Clear hemorrhagic cause"
+    ],
+    [
+      "Hypothermia contribution",
+      "35 F, wet, blood loss",
+      "Coexists - treat both"
+    ]
+  ],
+  "debrief": [
+    "What should be the first thing out of the bag on this call?",
+    "Why a second TQ instead of loosening and re-applying?",
+    "How did you handle the coworker's push to loosen it?",
+    "What resources did you call, and when?",
+    "What is the lethal triad, and how did you address it?"
+  ],
+  "crew_card": {
+    "dispatch": "End of Pleasant Valley Rd, Underhill, logging operation. 52 y/o M, chainsaw injury to leg, heavy bleeding. Caller: coworker. FD responding.",
+    "on_arrival": "Coworker waving you up a muddy skid trail. ~1/4 mile in: man sitting against a log, pants soaked red, coworker pressing a shirt on his thigh."
+  },
+  "actor_card": {
+    "Act": "Pale, shaky, cold. Talk fast, scared. \"Am I gonna lose my leg?\"",
+    "TQ tightened": "Yell - it hurts more than the cut. Don't fight it.",
+    "If bleeding not controlled": "Get quiet and confused, eyes closing.",
+    "Coworker at ~T+8": "\"Shouldn't you loosen that so his leg gets blood?\" Push once, then accept explanation.",
+    "Volunteer": "Only if asked: \"I take a baby aspirin every day.\""
+  },
+  "show_cards": [
+    {
+      "type": "text",
+      "width": "half",
+      "title": "WOUND - R THIGH",
+      "body": "8 in gash front/inside mid-thigh through chaps.\nBright red blood **pulsing**.\nBelt above it, loose."
+    },
+    {
+      "type": "text",
+      "width": "half",
+      "title": "R THIGH - REASSESS",
+      "body": "Slow ooze from wound.\nFaint pulse top of foot.",
+      "cue": "Give 3 min after a single TQ. If tightened / 2nd TQ placed: say bleeding stops, no distal pulse"
+    },
+    {
+      "type": "strip",
+      "width": "half",
+      "title": "MONITOR - Lead II",
+      "caption": "Initial",
+      "rhythm": "sinus",
+      "rate": 132
+    },
+    {
+      "type": "text",
+      "width": "half",
+      "title": "GROUND",
+      "body": "Blood pooled ~ size of a large dinner tray (~1.5 L) on mud and leaves."
+    }
+  ],
+  "moulage_tags": [
+    {
+      "region": "R thigh",
+      "text": "8 in gash front/inside of thigh; bright red blood PULSING"
+    },
+    {
+      "region": "R foot",
+      "text": "Faint pulse top of foot",
+      "cue": "Remove/flip once TQ is tight: no pulse"
+    },
+    {
+      "region": "Skin",
+      "text": "Pale, cold, wet clothing, shivering"
+    },
+    {
+      "region": "Head",
+      "text": "Hard hat on; no injury"
+    },
+    {
+      "region": "L leg / both arms",
+      "text": "No injuries"
+    },
+    {
+      "region": "Chest / abdomen",
+      "text": "No injuries; lungs clear"
+    }
+  ],
+  "learn_more": {
+    "topic": "femoral artery hemorrhage from a chainsaw injury",
+    "focus": "tourniquet placement and conversion, second tourniquets, and preventing hypothermia in trauma (lethal triad)"
+  }
+}

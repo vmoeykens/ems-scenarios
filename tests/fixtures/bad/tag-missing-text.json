@@ -1,0 +1,88 @@
+{
+  "id": "MED-99",
+  "title": "Fixture - minimal valid scenario",
+  "version": "test",
+  "scene": {
+    "location": "Test room"
+  },
+  "patient": {
+    "name": "Test Patient",
+    "age": "50",
+    "sex": "M",
+    "weight_kg": "80",
+    "cc": "Test",
+    "on_arrival": "Sitting up"
+  },
+  "vitals": [
+    {
+      "stage": "A Initial",
+      "trigger": "First set",
+      "HR": "100",
+      "BP": "120/80",
+      "RR": "16",
+      "SpO2": "97%",
+      "other": "-"
+    },
+    {
+      "stage": "B Better",
+      "trigger": "After tx",
+      "HR": "90",
+      "BP": "118/78",
+      "RR": "14",
+      "SpO2": "98%",
+      "other": "-"
+    }
+  ],
+  "flow": [
+    {
+      "time": "0-5",
+      "phase": "Arrival",
+      "give": "Stage **A**.",
+      "expected": [
+        "Roles assigned",
+        "Vitals obtained"
+      ],
+      "branches": [
+        {
+          "if": "Crew treats promptly",
+          "then": "Stage **B**"
+        }
+      ]
+    },
+    {
+      "time": "5+",
+      "phase": "Transport",
+      "give": "Stage **B**.",
+      "expected": [
+        "Report given",
+        "Reassess q5"
+      ]
+    }
+  ],
+  "critical": [
+    "No vitals obtained"
+  ],
+  "show_cards": [
+    {
+      "type": "strip",
+      "width": "half",
+      "title": "MONITOR - Lead II",
+      "caption": "Initial",
+      "rhythm": "sinus",
+      "rate": 100
+    }
+  ],
+  "moulage_tags": [
+    {
+      "region": "Skin",
+      "text": "Warm, dry"
+    },
+    {
+      "region": "Chest"
+    }
+  ],
+  "learn_more": {
+    "topic": "test topic",
+    "focus": "test focus"
+  }
+}

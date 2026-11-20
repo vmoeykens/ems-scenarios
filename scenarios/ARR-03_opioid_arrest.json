@@ -1,0 +1,477 @@
+{
+  "id": "ARR-03",
+  "title": "Opioid overdose arrest - ventilate first",
+  "version": "v1.1 | VT Protocols 2025 | UVM Rescue",
+  "category": "Cardiac arrest",
+  "level": "AEMT CCIT",
+  "run_time": "25 min",
+  "difficulty": "Moderate",
+  "crew": "CC + 2 (1 FD EMR)",
+  "protocols": [
+    "3.2A Cardiac Arrest",
+    "2.21A Poisoning/OD",
+    "3.4A Post Resuscitative Care",
+    "8.11 Naloxone Leave Behind",
+    "6.6 Restraints"
+  ],
+  "objectives": [
+    "Non-cardiac arrest: prioritize oxygenation/ventilation + compressions over naloxone",
+    "AEMT: epi ASAP (PEA), naloxone 2-4 mg IV/IO/IN as adjunct",
+    "Post-ROSC: ventilate 10/min, EtCO2 35-45; titrate naloxone to breathing, not waking",
+    "Leave-behind naloxone kit for bystander (8.11)"
+  ],
+  "resources": "AED/monitor, BVM, OPA/NPA, suction, SGA, IV/IO, epi 0.1 mg/mL, naloxone, capno, leave-behind kit. UVMMC ~8 min",
+  "dispatch": "UVM Rescue, respond to the Mobil station, 77 Shelburne Rd (Route 7), rear lot, for a 31-year-old female, overdose, not breathing. Caller is a friend, Narcan given. Police en route. Time out 2140.",
+  "scene": {
+    "location": "Rear parking lot, pt in driver seat of sedan, 30 F, dark, sleet.",
+    "setup": "Friend pulled pt halfway out of car, used Narcan 4 mg IN x1 ~4 min ago (empty device).",
+    "moulage": "Cyanotic lips (blue lipstick), pinpoint pupils, track marks L AC.",
+    "roles": "Friend (anxious, fears police); PD officer; evaluator calls rhythm."
+  },
+  "patient": {
+    "name": "Ashley Russo",
+    "age": "31",
+    "sex": "F",
+    "weight_kg": "55",
+    "cc": "Overdose, not breathing",
+    "on_arrival": "Half out of car, limp, blue, no breathing, no pulse. Friend yelling her name."
+  },
+  "history": {
+    "SAMPLE": [
+      [
+        "S",
+        "Friend: \"She did a bag, said it was strong, then just stopped\""
+      ],
+      [
+        "A",
+        "Unknown"
+      ],
+      [
+        "M",
+        "Friend: \"She was on Suboxone, stopped a month ago\""
+      ],
+      [
+        "P",
+        "Opioid use disorder, prior OD x1"
+      ],
+      [
+        "L",
+        "Unknown"
+      ],
+      [
+        "E",
+        "Used ~2125, friend found her ~2132, called 911, Narcan 2136"
+      ]
+    ],
+    "OPQRST": [
+      [
+        "O",
+        "~15 min before EMS contact"
+      ],
+      [
+        "P",
+        "-"
+      ],
+      [
+        "Q",
+        "\"Fentanyl probably\""
+      ],
+      [
+        "R",
+        "-"
+      ],
+      [
+        "S",
+        "-"
+      ],
+      [
+        "T",
+        "Stopped breathing ~2132; pulse unknown"
+      ]
+    ]
+  },
+  "primary": [
+    [
+      "X / hemorrhage",
+      "None"
+    ],
+    [
+      "Airway",
+      "Snoring -> apneic; vomitus in mouth -> suction"
+    ],
+    [
+      "Breathing",
+      "Apneic"
+    ],
+    [
+      "Circulation",
+      "Pulseless (carotid) -> CPR"
+    ],
+    [
+      "Disability",
+      "Unresponsive, pinpoint pupils"
+    ],
+    [
+      "Exposure",
+      "Track marks; cold - get out of sleet"
+    ],
+    [
+      "Priority / impression",
+      "Hypoxic (respiratory) arrest - **airway/oxygen is the treatment**"
+    ]
+  ],
+  "secondary": [
+    [
+      "Mouth",
+      "Vomit - suction before BVM"
+    ],
+    [
+      "Pupils",
+      "Pinpoint 1 mm"
+    ],
+    [
+      "Arms",
+      "Track marks L AC, poor veins -> IO"
+    ],
+    [
+      "Chest",
+      "No trauma"
+    ],
+    [
+      "Skin",
+      "Cyanotic, cold, wet"
+    ],
+    [
+      "Post-ROSC",
+      "Pulse 64 -> spontaneous breaths after naloxone titration"
+    ],
+    [
+      "BGL",
+      "96"
+    ],
+    [
+      "Scene",
+      "Syringe, powder - do not touch; PD secures"
+    ]
+  ],
+  "vitals_note": "Stages are 2-min cycles from EMS contact.",
+  "vitals": [
+    {
+      "stage": "A Contact",
+      "trigger": "Analysis 1 (after moving to ground)",
+      "HR": "0",
+      "BP": "-",
+      "RR": "0",
+      "SpO2": "-",
+      "EtCO2": "**58** first breaths",
+      "BGL": "96",
+      "Temp": "95.8",
+      "Pain": "-",
+      "GCS": "3",
+      "Pupils": "1 mm",
+      "other": "**PEA** (sinus brady 38, no pulse) - no shock",
+      "bold": [
+        "EtCO2"
+      ]
+    },
+    {
+      "stage": "B Good vent",
+      "trigger": "Cycle 2: BVM 1:10 w/ O2, quality CPR, epi #1",
+      "HR": "0",
+      "BP": "-",
+      "RR": "BVM",
+      "SpO2": "-",
+      "EtCO2": "32",
+      "BGL": "-",
+      "Temp": "-",
+      "Pain": "-",
+      "GCS": "3",
+      "Pupils": "-",
+      "other": "PEA rate 50s. Capno falling = CO2 cleared"
+    },
+    {
+      "stage": "C Narcan only",
+      "trigger": "IF focus on naloxone, no BVM by T+3",
+      "HR": "0",
+      "BP": "-",
+      "RR": "0",
+      "SpO2": "-",
+      "EtCO2": "-",
+      "BGL": "-",
+      "Temp": "-",
+      "Pain": "-",
+      "GCS": "3",
+      "Pupils": "-",
+      "other": "**Asystole** at next check (worse prognosis)",
+      "bold": [
+        "HR"
+      ]
+    },
+    {
+      "stage": "D ROSC",
+      "trigger": "~T+6 after vent + epi (cycle 3)",
+      "HR": "64",
+      "BP": "**86/52**",
+      "RR": "0 -> BVM",
+      "SpO2": "88%",
+      "EtCO2": "**48**",
+      "BGL": "-",
+      "Temp": "-",
+      "Pain": "-",
+      "GCS": "3",
+      "Pupils": "1 mm",
+      "other": "Sinus. Still apneic -> ventilate 10/min",
+      "bold": [
+        "BP",
+        "EtCO2"
+      ]
+    },
+    {
+      "stage": "E Titrated",
+      "trigger": "Naloxone 0.4-2 mg IV, titrated",
+      "HR": "96",
+      "BP": "104/64",
+      "RR": "12",
+      "SpO2": "95%",
+      "EtCO2": "40",
+      "BGL": "-",
+      "Temp": "-",
+      "Pain": "-",
+      "GCS": "10",
+      "Pupils": "3 mm",
+      "other": "Breathing on own, groggy, protecting airway"
+    },
+    {
+      "stage": "F Big dose",
+      "trigger": "IF 4 mg+ bolus after ROSC",
+      "HR": "128",
+      "BP": "150/92",
+      "RR": "28",
+      "SpO2": "94%",
+      "EtCO2": "32",
+      "BGL": "-",
+      "Temp": "-",
+      "Pain": "-",
+      "GCS": "15",
+      "Pupils": "4 mm",
+      "other": "**Combative**, pulls SGA/IO, vomits, withdrawal",
+      "bold": [
+        "GCS"
+      ]
+    }
+  ],
+  "flow": [
+    {
+      "time": "0-2",
+      "phase": "Arrival",
+      "give": "Point out syringe + powder. Friend: \"I gave her the Narcan, it didn't work!\"",
+      "expected": [
+        "Pt moved to firm flat surface, out of sleet",
+        "Pulse check -> CPR + AED"
+      ]
+    },
+    {
+      "time": "2-6",
+      "phase": "Ventilate + compress",
+      "give": "Stage **A**. Vomit in mouth.",
+      "branches": [
+        {
+          "if": "BVM w/ O2 + suction prioritized",
+          "then": "Stage **B**",
+          "goto_stage": "B"
+        },
+        {
+          "if": "Crew focuses on Narcan, no BVM by T+3",
+          "then": "Stage **C**",
+          "goto_stage": "C"
+        }
+      ],
+      "expected": [
+        "Suction, OPA/NPA, BVM 1 breath/10 compressions w/ O2",
+        "Roles assigned; capno on",
+        "Epi 1 mg (0.1 mg/mL) ASAP via IO/IV (PEA)"
+      ]
+    },
+    {
+      "time": "4-8",
+      "phase": "Adjuncts / ROSC",
+      "give": "Poor veins -> IO. Stage **D** at ~T+6 if B path.",
+      "expected": [
+        "Naloxone 2-4 mg IV/IO/IN (adjunct, 3.2A)",
+        "ROSC recognized; CPR stopped appropriately",
+        "Paramedic intercept requested"
+      ]
+    },
+    {
+      "time": "8-14",
+      "phase": "Post-ROSC",
+      "give": "Pt still apneic with pulse.",
+      "branches": [
+        {
+          "if": "Naloxone titrated 0.4 mg increments",
+          "then": "Stage **E**",
+          "goto_stage": "E"
+        },
+        {
+          "if": "Large bolus",
+          "then": "Stage **F** - manage safely (6.6)",
+          "goto_stage": "F"
+        },
+        {
+          "type": "inject",
+          "if": "Pt vomits after ROSC",
+          "then": "expect suction, reposition, keep ventilating"
+        }
+      ],
+      "expected": [
+        "Vent 10/min, EtCO2 35-45, SpO2 94-98",
+        "Naloxone titrated to resp effort, not GCS 15",
+        "SBP < 90 -> NS 500 mL (3.4A)"
+      ]
+    },
+    {
+      "time": "14-20",
+      "phase": "Patient wakes / refusal",
+      "give": "Pt: \"I'm fine, don't take me, I'll lose my kid.\"",
+      "expected": [
+        "Transport: naloxone given -> ED (2.21A); post-arrest",
+        "Capacity/refusal not valid post-arrest/AMS",
+        "Calm, non-judgmental approach"
+      ],
+      "branches": [
+        {
+          "type": "inject",
+          "if": "Pt re-sedates en route (naloxone wearing off)",
+          "then": "RR 6, SpO2 84%, EtCO2 58; expect BVM, repeat titrated naloxone"
+        }
+      ]
+    },
+    {
+      "time": "20+",
+      "phase": "Leave-behind / report",
+      "give": "Friend: \"Can I get another Narcan?\"",
+      "expected": [
+        "Leave-behind naloxone kit to friend (8.11)",
+        "Report: downtime, bystander naloxone, ROSC time",
+        "SIREN documentation"
+      ]
+    }
+  ],
+  "critical": [
+    "Naloxone prioritized over CPR + ventilation in pulseless pt",
+    "No BVM ventilation / airway not suctioned",
+    "Epi delayed in PEA / wrong concentration",
+    "ROSC not recognized",
+    "Post-ROSC apnea not ventilated while waiting for naloxone",
+    "Refusal accepted after arrest/naloxone"
+  ],
+  "differentials": [
+    [
+      "Opioid OD -> hypoxic arrest (dx)",
+      "Use, pinpoint pupils, bystander report, PEA",
+      "-"
+    ],
+    [
+      "Mixed OD (benzo/xylazine)",
+      "Street supply",
+      "Unknown - ventilate regardless"
+    ],
+    [
+      "Hypoglycemia",
+      "AMS",
+      "BGL 96"
+    ],
+    [
+      "Hypothermia",
+      "Sleet, 30 F",
+      "95.8 - mild; warm her"
+    ],
+    [
+      "Stimulant / cardiac arrhythmia",
+      "Drug use",
+      "Pinpoint pupils, slow PEA"
+    ],
+    [
+      "Head injury",
+      "Found in car",
+      "No trauma"
+    ]
+  ],
+  "debrief": [
+    "Why didn't the bystander's Narcan work - and why doesn't more Narcan fix a pulseless pt?",
+    "What did the first EtCO2 of 58 tell you?",
+    "Why titrate naloxone after ROSC?",
+    "How did you handle the refusal and the 'lose my kid' fear?",
+    "Who gets a leave-behind kit and why?"
+  ],
+  "crew_card": {
+    "dispatch": "Mobil station, 77 Shelburne Rd (Route 7), rear lot. 31 y/o F, overdose, not breathing. Friend gave Narcan. PD en route.",
+    "on_arrival": "Dark rear lot, sleet. Woman half out of a car's driver door, limp and blue. Friend shouting her name, empty Narcan device on ground."
+  },
+  "actor_card": {
+    "Friend": "Panicky. \"I gave her the Narcan, it didn't work!\" Scared of police - more open if crew is calm.",
+    "Patient after ROSC + titrated naloxone": "Groggy, slow to answer, breathing on own.",
+    "If big naloxone dose": "Wake up swinging, pull at mask/lines, vomit, yell \"what did you do?\"",
+    "When awake": "\"I'm fine, don't take me, I'll lose my kid.\"",
+    "Evaluator": "ROSC only after effective BVM ventilation + epi."
+  },
+  "show_cards": [
+    {
+      "type": "strip",
+      "width": "half",
+      "title": "AED / MONITOR",
+      "caption": "NO SHOCK ADVISED",
+      "rhythm": "sinus",
+      "rate": 38,
+      "cue": "Analysis 1. No pulse on check (PEA)"
+    },
+    {
+      "type": "capno",
+      "width": "half",
+      "title": "CAPNOGRAPHY",
+      "caption": "EtCO2 50",
+      "pattern": "cpr",
+      "etco2": 50,
+      "rr": 10,
+      "cue": "First BVM breaths (retained CO2); falls toward 30s with effective ventilation"
+    },
+    {
+      "type": "text",
+      "width": "half",
+      "title": "CAR / SCENE",
+      "body": "Uncapped syringe on driver floorboard.\nSmall bag of white powder on console.\nEmpty Narcan 4 mg device on ground."
+    },
+    {
+      "type": "text",
+      "width": "half",
+      "title": "PATIENT",
+      "body": "Lips blue. Pupils pinpoint.\nVomit in mouth.\nTrack marks L inner elbow."
+    }
+  ],
+  "moulage_tags": [
+    {
+      "region": "L inner elbow",
+      "text": "Track marks"
+    },
+    {
+      "region": "Lips",
+      "text": "Blue"
+    },
+    {
+      "region": "Eyes",
+      "text": "Pupils pinpoint (1 mm)"
+    },
+    {
+      "region": "Mouth",
+      "text": "Vomit in mouth"
+    },
+    {
+      "region": "Skin",
+      "text": "Cold, wet (sleet)"
+    }
+  ],
+  "learn_more": {
+    "topic": "opioid overdose cardiac arrest",
+    "focus": "why ventilation and CPR come before naloxone, naloxone titration after ROSC, fentanyl/xylazine trends, and leave-behind naloxone programs"
+  }
+}

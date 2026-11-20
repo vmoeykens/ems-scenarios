@@ -1,0 +1,490 @@
+{
+  "id": "ARR-01",
+  "title": "Witnessed VF arrest - ROSC to STEMI",
+  "version": "v1.1 | VT Protocols 2025 | UVM Rescue",
+  "category": "Cardiac arrest",
+  "level": "AEMT CCIT",
+  "run_time": "25-30 min",
+  "difficulty": "Hard",
+  "crew": "CC + 3 (2 FD EMRs)",
+  "protocols": [
+    "3.2A Cardiac Arrest",
+    "3.6 Team Focused CPR",
+    "3.4A Post Resuscitative Care",
+    "3.0A ACS",
+    "6.2 ECG",
+    "6.9 Capnography"
+  ],
+  "objectives": [
+    "Pit-crew roles assigned in first 60 s; CC as code commander",
+    "Shocks without delay; compressions resume immediately",
+    "AEMT meds/airway timing: epi after 1st cycle (shockable), q every other cycle; SGA after 8 min",
+    "Recognize ROSC on capno; post-ROSC ventilation 10/min, EtCO2 35-45, SpO2 94-98",
+    "Post-ROSC 12-lead -> STEMI ALERT, PCI destination"
+  ],
+  "resources": "AED/monitor, BVM, OPA, SGA, IV/IO, epi 0.1 mg/mL x4, NS, capno, metronome, 12-lead. UVMMC (PCI) ~5 min",
+  "dispatch": "UVM Rescue and Engine 2, respond to Green Mountain Fitness, 220 Main St, for a 56-year-old male collapsed, CPR in progress. Gym AED on scene. Time out 0612.",
+  "scene": {
+    "location": "Gym floor between treadmills. Bright, space is tight - move equipment.",
+    "setup": "Manikin supine, staff member doing CPR, gym AED attached (1 shock delivered before arrival).",
+    "moulage": "Gym clothes, AED pads on.",
+    "roles": "Bystander CPR (gym staff); 2 FD EMRs arrive with crew; evaluator calls rhythms."
+  },
+  "patient": {
+    "name": "Paul Desrochers",
+    "age": "56",
+    "sex": "M",
+    "weight_kg": "90",
+    "cc": "Collapsed on treadmill",
+    "on_arrival": "Unresponsive, apneic/agonal, pulseless. Bystander CPR adequate depth, rate ~90."
+  },
+  "history": {
+    "SAMPLE": [
+      [
+        "S",
+        "Witness: \"rubbed his chest, then dropped\""
+      ],
+      [
+        "A",
+        "Unknown (wife arrives T+15: NKDA)"
+      ],
+      [
+        "M",
+        "Wife: \"blood pressure pill\""
+      ],
+      [
+        "P",
+        "HTN, smoker"
+      ],
+      [
+        "L",
+        "Unknown"
+      ],
+      [
+        "E",
+        "Collapse 0608 witnessed; CPR started 0609; AED shock 0611"
+      ]
+    ],
+    "OPQRST": [
+      [
+        "O",
+        "Witnessed collapse 0608"
+      ],
+      [
+        "P",
+        "-"
+      ],
+      [
+        "Q",
+        "Chest rubbing before collapse"
+      ],
+      [
+        "R",
+        "-"
+      ],
+      [
+        "S",
+        "-"
+      ],
+      [
+        "T",
+        "Downtime ~4 min to EMS contact"
+      ]
+    ]
+  },
+  "primary": [
+    [
+      "X / hemorrhage",
+      "None"
+    ],
+    [
+      "Airway",
+      "Agonal gasps; OPA + BVM"
+    ],
+    [
+      "Breathing",
+      "Apneic/agonal - ventilate 1:10 compressions"
+    ],
+    [
+      "Circulation",
+      "Pulseless -> CPR; AED analyze"
+    ],
+    [
+      "Disability",
+      "Unresponsive"
+    ],
+    [
+      "Exposure",
+      "No trauma, no medic alert, no DNR"
+    ],
+    [
+      "Priority / impression",
+      "Witnessed VF arrest with bystander CPR - **high survival potential**"
+    ]
+  ],
+  "secondary": [
+    [
+      "Head",
+      "Small abrasion forehead (fall)"
+    ],
+    [
+      "Chest",
+      "No implanted device"
+    ],
+    [
+      "Post-ROSC lungs",
+      "Clear bilat with BVM/SGA"
+    ],
+    [
+      "Post-ROSC neuro",
+      "Unresponsive, pupils 4 sluggish"
+    ],
+    [
+      "Post-ROSC skin",
+      "Pale, warming"
+    ],
+    [
+      "Wife (T+15)",
+      "HTN, lisinopril, smoker, \"chest tightness this week\""
+    ],
+    [
+      "Reversible",
+      "H's & T's: thrombosis (MI) most likely"
+    ],
+    [
+      "Temp",
+      "Normothermic"
+    ]
+  ],
+  "vitals_note": "Arrest stages are 2-min cycles from EMS contact. Pulse 0 = CPR.",
+  "vitals": [
+    {
+      "stage": "A Contact",
+      "trigger": "Cycle 1 analyze (T+0-2)",
+      "HR": "0",
+      "BP": "-",
+      "RR": "agonal",
+      "SpO2": "-",
+      "EtCO2": "16 CPR",
+      "BGL": "-",
+      "Temp": "-",
+      "Pain": "-",
+      "GCS": "3",
+      "Pupils": "5 fixed",
+      "other": "**VF** - shock advised",
+      "bold": [
+        "EtCO2"
+      ]
+    },
+    {
+      "stage": "B Cycle 2",
+      "trigger": "Analyze ~T+4",
+      "HR": "0",
+      "BP": "-",
+      "RR": "BVM",
+      "SpO2": "-",
+      "EtCO2": "18",
+      "BGL": "-",
+      "Temp": "-",
+      "Pain": "-",
+      "GCS": "3",
+      "Pupils": "-",
+      "other": "**VF** - shock #3 total. Epi #1 after this cycle (IV/IO)"
+    },
+    {
+      "stage": "C Poor CPR",
+      "trigger": "IF rate < 100/ >120, long pauses, leaning",
+      "HR": "0",
+      "BP": "-",
+      "RR": "-",
+      "SpO2": "-",
+      "EtCO2": "**8**",
+      "BGL": "-",
+      "Temp": "-",
+      "Pain": "-",
+      "GCS": "3",
+      "Pupils": "-",
+      "other": "Point to capno; no ROSC until fixed",
+      "bold": [
+        "EtCO2"
+      ]
+    },
+    {
+      "stage": "D ROSC",
+      "trigger": "~T+8: capno jumps after shock #4",
+      "HR": "104",
+      "BP": "**84/50**",
+      "RR": "BVM",
+      "SpO2": "92%",
+      "EtCO2": "**44**",
+      "BGL": "168",
+      "Temp": "98.0",
+      "Pain": "-",
+      "GCS": "3",
+      "Pupils": "4 sluggish",
+      "other": "Sinus tach, pulses present -> 12-lead",
+      "bold": [
+        "BP",
+        "EtCO2"
+      ]
+    },
+    {
+      "stage": "E Post-ROSC",
+      "trigger": "After NS 500 mL, vent 10/min",
+      "HR": "96",
+      "BP": "98/62",
+      "RR": "10 vent",
+      "SpO2": "96%",
+      "EtCO2": "38",
+      "BGL": "-",
+      "Temp": "-",
+      "Pain": "-",
+      "GCS": "4",
+      "Pupils": "4 react",
+      "other": "Occasional PVCs. Gags on SGA - reassess airway"
+    },
+    {
+      "stage": "F Over-bag",
+      "trigger": "IF vent > 12/min post-ROSC",
+      "HR": "110",
+      "BP": "**76/40**",
+      "RR": "24 bag",
+      "SpO2": "99%",
+      "EtCO2": "**24**",
+      "BGL": "-",
+      "Temp": "-",
+      "Pain": "-",
+      "GCS": "3",
+      "Pupils": "-",
+      "other": "Hyperventilation -> hypotension",
+      "bold": [
+        "BP",
+        "EtCO2"
+      ]
+    }
+  ],
+  "flow": [
+    {
+      "time": "0-1",
+      "phase": "Arrival / roles",
+      "give": "Bystander CPR in progress, gym AED attached, 1 shock given. Stage **A**.",
+      "expected": [
+        "Pit-crew roles assigned (3.6), CC = code commander",
+        "Crew's monitor/AED swapped w/o long pause",
+        "Metronome 100-120; compressor swaps q2 min"
+      ]
+    },
+    {
+      "time": "1-4",
+      "phase": "Cycles 1-2",
+      "give": "Call VF at each analysis. Watch hands-off time.",
+      "branches": [
+        {
+          "if": "Pauses > 10 s / poor rate",
+          "then": "Stage **C**",
+          "goto_stage": "C"
+        },
+        {
+          "type": "inject",
+          "if": "Crew monitor battery dies at T+6",
+          "then": "switch back to gym AED; CPR gap must stay < 10 s"
+        }
+      ],
+      "expected": [
+        "Shock delivered, compressions resume immediately",
+        "OPA + BVM 1 breath/10 compressions",
+        "IV (preferred) or IO; capno attached"
+      ]
+    },
+    {
+      "time": "4-8",
+      "phase": "Meds / H&T",
+      "give": "Stage **B**. Wife arrives at T+15 (cue if CC isn't talking to family).",
+      "expected": [
+        "Epi 1 mg (0.1 mg/mL) after 1st cycle, then q every other cycle",
+        "NS 500 mL bolus (no pulmonary edema)",
+        "Paramedic intercept requested (antiarrhythmics)"
+      ],
+      "branches": [
+        {
+          "if": "Crew loads with CPR in progress (\"UVMMC is 5 min\")",
+          "then": "debrief 8.17: resuscitate on scene; moving CPR is poor"
+        }
+      ]
+    },
+    {
+      "time": "8-10",
+      "phase": "ROSC",
+      "give": "After shock #4 -> EtCO2 jumps to 44. Stage **D** on pulse check.",
+      "branches": [
+        {
+          "if": "CPR continued on ROSC pt",
+          "then": "prompt: \"he's moving his arm\""
+        }
+      ],
+      "expected": [
+        "ROSC recognized (capno + pulse)",
+        "SGA if not placed (after 8 min) / maintain airway",
+        "Pads stay on; monitor rhythm"
+      ]
+    },
+    {
+      "time": "10-18",
+      "phase": "Post-ROSC care",
+      "give": "Show **12-lead** card. Give Stage **E** or **F** based on vent rate.",
+      "expected": [
+        "Vent 10/min, EtCO2 35-45, SpO2 94-98",
+        "SBP < 90 -> NS 500 mL; MD for more",
+        "12-lead transmitted; STEMI ALERT"
+      ]
+    },
+    {
+      "time": "18+",
+      "phase": "Packaging + transport",
+      "give": "Narrow gym hallway.",
+      "branches": [
+        {
+          "type": "inject",
+          "if": "Re-arrest (VF) in hallway/elevator",
+          "then": "back to 3.2A: shock, CPR; work it in open space"
+        }
+      ],
+      "expected": [
+        "Direct to UVMMC; STEMI ALERT",
+        "Family informed, ride arrangements",
+        "Report: downtime, shocks, epi doses, ROSC time"
+      ]
+    }
+  ],
+  "critical": [
+    "Roles not assigned / no code commander",
+    "Shock delayed when advised",
+    "Compressions stopped > 10 s for airway/IV/meds",
+    "Epi wrong concentration (1 mg/mL IV) or wrong timing",
+    "SGA placed during first 8 min with patent airway",
+    "ROSC not recognized; or CPR continued on pulse",
+    "Hyperventilation post-ROSC not corrected",
+    "No post-ROSC 12-lead / STEMI ALERT to UVMMC"
+  ],
+  "differentials": [
+    [
+      "STEMI -> VF (dx)",
+      "Chest rubbing pre-collapse, exertion, risk factors, post-ROSC STE",
+      "-"
+    ],
+    [
+      "Commotio / structural (HCM)",
+      "Exertional collapse",
+      "Age 56, ischemic prodrome"
+    ],
+    [
+      "Pulmonary embolism",
+      "Sudden collapse",
+      "VF (not PEA), no DVT hx"
+    ],
+    [
+      "Hypoglycemia",
+      "Exercise, collapse",
+      "BGL 168 post-ROSC"
+    ],
+    [
+      "Hyperkalemia",
+      "VF",
+      "No renal hx/dialysis"
+    ],
+    [
+      "Aortic dissection",
+      "Chest pain, HTN",
+      "Shockable rhythm; ROSC w/ STE"
+    ]
+  ],
+  "debrief": [
+    "How did you assign roles and who watched CPR quality?",
+    "What did capnography tell you during and after the arrest?",
+    "Why epi after the first cycle in VF but ASAP in asystole?",
+    "Post-ROSC: what are your ventilation, SpO2 and BP targets?",
+    "Why work the arrest on scene when UVMMC is 5 min away?"
+  ],
+  "crew_card": {
+    "dispatch": "Green Mountain Fitness, 220 Main St. 56 y/o M collapsed, CPR in progress. Gym AED on scene.",
+    "on_arrival": "Man on gym floor between treadmills. Staff member doing CPR, gym AED attached. Crowd watching."
+  },
+  "actor_card": {
+    "Gym staff": "Doing CPR (a bit slow). \"The AED shocked him once. He was rubbing his chest, then went down.\"",
+    "Wife (T+15)": "Arrives frantic. \"Is he alive?\" Gives history only if someone talks to her.",
+    "Evaluator": "Call rhythm only at analysis. ROSC only after shock #4 AND acceptable CPR quality."
+  },
+  "show_cards": [
+    {
+      "type": "strip",
+      "width": "full",
+      "title": "AED / MONITOR",
+      "caption": "SHOCK ADVISED",
+      "rhythm": "vf",
+      "rate": 0,
+      "cue": "Every analysis until ROSC after shock #4"
+    },
+    {
+      "type": "capno",
+      "width": "half",
+      "title": "CAPNOGRAPHY",
+      "caption": "EtCO2 17",
+      "pattern": "cpr",
+      "etco2": 17,
+      "rr": 10,
+      "cue": "During CPR with adequate compressions (Stage A/B)"
+    },
+    {
+      "type": "capno",
+      "width": "half",
+      "title": "CAPNOGRAPHY",
+      "caption": "EtCO2 44",
+      "pattern": "normal",
+      "etco2": 44,
+      "rr": 10,
+      "cue": "Give at ROSC (after shock #4)"
+    },
+    {
+      "type": "12lead",
+      "title": "12-LEAD",
+      "caption": "Computer interpretation: Sinus tachycardia 104  ***ACUTE MI SUSPECTED*** Anterior/septal injury. Simulated - not to scale.",
+      "rhythm": "sinus",
+      "rate": 104,
+      "st": {
+        "V1": 1.5,
+        "V2": 3,
+        "V3": 3,
+        "V4": 2.5,
+        "I": 1,
+        "aVL": 1,
+        "II": -1,
+        "III": -1.5,
+        "aVF": -1
+      },
+      "cue": "After ROSC, when acquired"
+    }
+  ],
+  "moulage_tags": [
+    {
+      "region": "Forehead",
+      "text": "Small abrasion"
+    },
+    {
+      "region": "Chest",
+      "text": "Gym AED pads in place"
+    },
+    {
+      "region": "Skin",
+      "text": "Pale, gray"
+    },
+    {
+      "region": "Eyes",
+      "text": "Pupils 5 mm, not reacting",
+      "cue": "Swap to '4 mm, sluggish' after ROSC"
+    }
+  ],
+  "learn_more": {
+    "topic": "witnessed VF cardiac arrest with return of circulation and STEMI",
+    "focus": "high-performance / pit-crew CPR, epinephrine timing in shockable rhythms, capnography, and post-arrest ventilation and blood pressure targets"
+  }
+}
