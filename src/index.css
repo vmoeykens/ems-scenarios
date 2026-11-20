@@ -19,7 +19,6 @@
   /* student display (/display) exception */
   --color-monitor-bg: #000000;
   --color-monitor-fg: #ffffff;
-  --color-monitor-wave: #22c55e;
   --color-transparent: transparent;
   --color-current: currentColor;
 
@@ -32,6 +31,16 @@
   --drop-shadow-*: initial;
   --radius-*: initial;
   --radius-xs: 2px;
+}
+
+/* Student MONITOR view only: per-parameter colors in the style of a ZOLL X Series (waveform + its numeric).
+   Approximations, not official values - check against the agency's monitor (docs/SPEC.md). Change them here only. */
+@theme static {
+  --color-zoll-ecg: #00ff00;  /* ECG traces + HR */
+  --color-zoll-spo2: #00c8ff; /* pleth + SpO2 */
+  --color-zoll-co2: #ffff00;  /* capnography + EtCO2 + BR */
+  --color-zoll-nibp: #ffffff; /* NIBP */
+  --color-zoll-temp: #ffffff; /* temperature + other numerics */
 }
 
 @layer base {
@@ -173,17 +182,27 @@
   .display-info .dtab-on { @apply bg-ink text-paper; }
   .display-sim { @apply ml-auto self-center px-3 text-sm font-bold tracking-wide; }
   .display-footer { @apply text-xs text-rule px-3 py-1; }
-  .monitor { @apply flex-1 grid gap-2 p-2 grid-cols-1 content-start md:grid-cols-[minmax(0,1fr)_20rem]; }
-  .monitor-waves { @apply flex flex-col gap-2 relative; }
+  .monitor { @apply flex-1 grid gap-1.5 p-1.5 grid-cols-1 content-start md:grid-cols-[minmax(0,1fr)_17rem]; }
+  .monitor-waves { @apply flex flex-col gap-1 relative; }
   .monitor-sim { @apply absolute right-2 bottom-1 text-xs font-bold text-rule tracking-widest; }
-  .monitor-nums { @apply grid grid-cols-2 md:grid-cols-1 gap-1; }
-  .monitor-row { @apply grid grid-cols-5 gap-1 md:col-span-2; }
-  .num { @apply border border-rule px-2 py-1 flex flex-col; }
-  .num-label { @apply text-sm font-bold text-rule; }
-  .num-unit { @apply text-xs font-normal text-rule; }
+  .monitor-nums { @apply grid grid-cols-2 md:grid-cols-1 gap-1 content-start; }
+  .monitor-row { @apply grid grid-cols-4 gap-1 md:col-span-2; }
+  .trace { @apply border-b border-[#222]; }
+  .trace-label { @apply absolute left-2 top-1 text-sm font-bold; }
+  .trace-scale { @apply absolute right-2 top-1 text-xs font-bold opacity-80; }
+  .trace-off { @apply absolute inset-0 flex items-center justify-center text-lg font-bold opacity-60; }
+  .twelve-label { @apply absolute text-xs font-bold pt-0.5; }
+  .num { @apply border border-[#333] px-2 py-1 flex flex-col; color: var(--num-color, var(--color-zoll-temp)); }
+  .num-head { @apply flex justify-between items-baseline text-sm font-bold; }
+  .num-unit { @apply text-xs font-normal opacity-80; }
+  .num-row { @apply flex items-baseline gap-2; }
   .num-value { @apply text-4xl font-bold leading-none; }
+  .num-sub { @apply text-base font-bold opacity-90; }
   .num-big .num-value { @apply text-7xl; }
   .num-small .num-value { @apply text-2xl; }
+  .lead-toggle { @apply flex items-stretch self-center mr-2; }
+  .lead-toggle button { @apply min-h-11 px-3 text-sm font-bold border border-rule text-rule; }
+  .lead-toggle button[aria-pressed="true"] { @apply text-monitor-bg; background: var(--color-zoll-ecg); border-color: var(--color-zoll-ecg); }
   .info { @apply flex-1 grid gap-3 p-3 grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]; }
   .info-cards { @apply flex flex-col gap-3; }
   .info-card { @apply border border-ink p-3; }

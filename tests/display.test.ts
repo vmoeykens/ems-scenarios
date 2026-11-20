@@ -80,7 +80,7 @@ describe("toDisplay leak test", () => {
   it("snapshot has only the documented keys", () => {
     const sc = normalize(readJson(files[0]) as Scenario);
     const snap = scriptedRun(sc).at(-1)!;
-    expect(Object.keys(snap).sort()).toEqual(["capno", "cards", "crewCard", "ecg", "run", "v", "view", "viewSeq", "vitals"]);
+    expect(Object.keys(snap).sort()).toEqual(["capno", "cards", "crewCard", "ecg", "layout", "layoutSeq", "leadSt", "pleth", "run", "v", "view", "viewSeq", "vitals"]);
     for (const c of snap.cards) for (const k of Object.keys(c)) expect(["key", "kind", "title", "caption", "body", "rhythm", "rate", "p_rate", "st", "lead", "seconds", "pattern", "etco2", "rr", "src"]).toContain(k);
   });
 });
@@ -122,5 +122,44 @@ describe("every bundled scenario stage has a monitor block", () => {
       if (v.monitor!.rhythm === "vf" || v.monitor!.rhythm === "asystole") expect(v.monitor!.rate).toBe(0);
       else if (hr > 0) expect(v.monitor!.rate, v.stage).toBe(hr);
     }
+  });
+});
+
+describe("SpO2 pleth + 12-lead on the display", () => {
+  const T = Date.parse("2026-11-20T10:00:00Z");
+  const load = (id: string) => normalize(readJson(files.find((f) => f.includes(id))!) as Scenario);
+  it("pleth only after SpO2 is given; amplitude from stage SBP; follows the ECG rhythm", () => {
+    const sc = load("CARD-01");
+    let ev = append(sc, [], [{ kind: "reveal", stageKey: "A", vital: "HR", value: "58" }], T);
+    expect(toDisplay(sc, reduce(sc, ev), "r").pleth).toBeNull();
+    ev = append(sc, ev, [{ kind: "reveal", stageKey: "A", vital: "SpO2", value: "95% RA" }], T + 1000);
+    const a = toDisplay(sc, reduce(sc, ev), "r").pleth!;
+    expect(a).toMatchObject({ rhythm: "sinus", rate: 58 });
+    ev = append(sc, ev, [{ kind: "stage", stageKey: "F" }], T + 2000); // BP 74/44
+    const f = toDisplay(sc, reduce(sc, ev), "r").pleth!;
+    expect(f.amp).toBeLessThan(a.amp);
+    expect(f.rate).toBe(46);
+    ev = append(sc, ev, [{ kind: "display", pleth: false }], T + 3000);
+    expect(toDisplay(sc, reduce(sc, ev), "r").pleth).toBeNull();
+  });
+  it("no pulse (VF, asystole, PEA with HR 0) -> no pleth and SpO2 shows --", () => {
+    const sc = load("ARR-01");
+    const ev = append(sc, [], [{ kind: "stage", stageKey: "D" }, { kind: "reveal", stageKey: "D", vital: "SpO2", value: "92%" }, { kind: "stage", stageKey: "A" }], T);
+    const d = toDisplay(sc, reduce(sc, ev), "r");
+    expect(d.pleth).toBeNull();
+    expect(d.vitals.SpO2).toBeUndefined();
+    const pea = load("ARR-03"); // stage A: organized rhythm on the monitor, HR 0
+    const e2 = append(pea, [], [{ kind: "reveal", stageKey: "A", vital: "HR", value: "0" }, { kind: "display", pleth: true }], T);
+    expect(toDisplay(pea, reduce(pea, e2), "r").pleth).toBeNull();
+  });
+  it("12-lead layout is an instructor-controlled display event; ST from the last pushed 12-lead card", () => {
+    const sc = load("CARD-01");
+    let ev = append(sc, [], [{ kind: "reveal", stageKey: "A", vital: "HR", value: "58" }, { kind: "display", layout: "12lead" }], T);
+    let d = toDisplay(sc, reduce(sc, ev), "r");
+    expect([d.layout, d.layoutSeq > 0]).toEqual(["12lead", true]);
+    expect(d.leadSt).toEqual({ II: 2.5 }); // stage monitor.st only
+    ev = append(sc, ev, [{ kind: "card", cardIndex: 0, action: "show" }], T + 1000);
+    d = toDisplay(sc, reduce(sc, ev), "r");
+    expect(d.leadSt).toMatchObject({ II: 2.5, III: 3.5, aVF: 3, aVL: -2 });
   });
 });

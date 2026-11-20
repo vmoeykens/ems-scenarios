@@ -8,13 +8,20 @@ import type { CapnoPattern, Lead, Monitor, Rhythm, ShowCard, VitalKey } from "..
 import { VITAL_KEYS } from "../scenario/types.ts";
 import { stripMarkup } from "../scenario/text.ts";
 import type { RunState } from "../run/reducer.ts";
-import type { DisplayView } from "../run/types.ts";
+import type { DisplayView, MonitorLayout } from "../run/types.ts";
+import { plethAmplitude } from "../waveforms/pleth.ts";
 
 export interface EcgParams {
   rhythm: Rhythm;
   rate: number;
   p_rate?: number;
   st?: number;
+}
+export interface PlethParams {
+  rhythm: Rhythm;
+  rate: number;
+  /** 0..1 relative amplitude from the stage SBP */
+  amp: number;
 }
 export interface CapnoParams {
   pattern: CapnoPattern;
@@ -38,6 +45,12 @@ export interface DisplaySnapshot {
   viewSeq: number;
   vitals: Partial<Record<VitalKey, string>>;
   ecg: EcgParams | null;
+  /** SpO2 pleth; null until SpO2 is given, or when the current stage has no perfusing pulse */
+  pleth: PlethParams | null;
+  /** ST shift (mm) per lead for the live 12-lead view: last pushed 12-lead card, else lead II from the monitor */
+  leadSt: Partial<Record<Lead, number>>;
+  layout: MonitorLayout;
+  layoutSeq: number;
   capno: CapnoParams | null;
   crewCard: { dispatch: string; on_arrival: string };
   /** pushed show cards and moulage tags, newest first */
@@ -108,6 +121,27 @@ export function toDisplay(sc: NormalizedScenario, s: RunState, runId: string): D
     else if (mon?.capno) capno = { pattern: mon.capno.pattern, etco2: mon.capno.etco2, rr: mon.capno.rr };
   }
 
+  // Perfusion of the current stage: pulse = HR > 0 in the stage row and an organized rhythm; SBP from the stage
+  // (walking back through earlier stages when the cell is "-" = unchanged).
+  const stIdx = sc.stages.findIndex((x) => x.key === s.stageKey);
+  const row = sc.stages[stIdx];
+  const hrNum = Number.parseFloat(stripMarkup(row?.HR ?? ""));
+  const rhythmNow = ecg?.rhythm ?? mon?.rhythm;
+  const pulse = !!row && !(Number.isFinite(hrNum) && hrNum <= 0) && rhythmNow !== "vf" && rhythmNow !== "asystole" && (ecg?.rate ?? mon?.rate ?? 0) > 0;
+  let sbp: number | null = null;
+  for (let k = stIdx; k >= 0 && sbp === null; k--) {
+    const m = /(\d{2,3})\s*\/\s*(\d{2,3})/.exec(stripMarkup(sc.stages[k]?.BP ?? ""));
+    if (m) sbp = Number(m[1]);
+  }
+  if (!pulse) delete vitals.SpO2; // no pulse -> no SpO2 reading ("--"), like a real oximeter
+  let pleth: PlethParams | null = null;
+  const src = ecg ?? mon;
+  if (s.plethOn && pulse && src && vitals.SpO2) pleth = { rhythm: src.rhythm, rate: src.rate, amp: Math.round(plethAmplitude(sbp) * 100) / 100 };
+
+  const last12 = s.cards.map((c) => cards[c.cardIndex]).find((c) => c?.type === "12lead");
+  const leadSt: Partial<Record<Lead, number>> =
+    last12 && last12.type === "12lead" ? { ...(last12.st ?? {}) } : ecg?.st ? { II: ecg.st } : {};
+
   // Merge pushed cards and tags newest first.
   const pushed = [
     ...s.cards.filter((c) => cards[c.cardIndex]).map((c) => ({ seq: c.seq, card: cardFace(cards[c.cardIndex], c.cardIndex) })),
@@ -127,7 +161,11 @@ export function toDisplay(sc: NormalizedScenario, s: RunState, runId: string): D
     viewSeq: s.viewSeq,
     vitals,
     ecg,
+    pleth,
     capno,
+    leadSt,
+    layout: s.layout,
+    layoutSeq: s.layoutSeq,
     crewCard: { dispatch: stripMarkup(crew.dispatch ?? sc.source.dispatch ?? ""), on_arrival: stripMarkup(crew.on_arrival ?? "") },
     cards: pushed.map((p) => p.card),
   };
@@ -135,5 +173,6 @@ export function toDisplay(sc: NormalizedScenario, s: RunState, runId: string): D
 
 /** Snapshot before any run exists (display opened first). */
 export const EMPTY_SNAPSHOT: DisplaySnapshot = {
-  v: 1, run: "", view: "monitor", viewSeq: 0, vitals: {}, ecg: null, capno: null, crewCard: { dispatch: "", on_arrival: "" }, cards: [],
+  v: 1, run: "", view: "monitor", viewSeq: 0, vitals: {}, ecg: null, pleth: null, capno: null, leadSt: {}, layout: "single", layoutSeq: 0,
+  crewCard: { dispatch: "", on_arrival: "" }, cards: [],
 };
