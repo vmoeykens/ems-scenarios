@@ -62,12 +62,137 @@
   .cue { @apply italic text-cue text-xs; }
   /* flat button that looks like a sheet element; >= 44px touch target */
   .sheet-btn { @apply min-h-11 border border-ink bg-paper px-2 text-left hover:bg-zebra active:bg-head; }
+  .sheet-btn:disabled { @apply text-rule border-rule bg-paper cursor-not-allowed; }
+
+  /* ---- page / header (PDF title row + page decoration) ---- */
+  .page { @apply max-w-6xl mx-auto p-2 pb-4; }
+  .sheet-head { @apply flex items-end justify-between gap-2 border-b-2 border-ink pb-1 mb-2; }
+  .sheet-title { @apply text-xl font-bold leading-tight; }
+  .sheet-headblock { @apply flex flex-wrap items-end justify-between gap-x-4 gap-y-1 border-b-2 border-ink pb-1 mb-1; }
+  .sheet-footer { @apply text-xs text-rule mt-3 pt-1 border-t border-rule; }
+  .kv { @apply w-full border-collapse text-sm; }
+  .kv th { @apply font-bold text-left align-top px-1.5 py-0.5; }
+  .kv td { @apply align-top px-1.5 py-0.5; }
+  .kv tr + tr th, .kv tr + tr td { @apply border-t border-rule; }
+  .read-aloud { @apply text-lg font-bold leading-snug p-2; }
+  .grid-2 { @apply grid gap-2 grid-cols-1 lg:grid-cols-2; }
+  .grid-run { @apply grid gap-2 grid-cols-1 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)]; }
+  .hide-narrow { @apply hidden md:table-cell; }
+  .row-link { @apply cursor-pointer; }
+  .row-link:hover td, .row-link:focus td { @apply bg-head; }
+  .lib-table td { @apply py-2; }
+  .dropzone { @apply flex items-center min-h-16 p-2 m-1.5 border border-dashed border-ink cursor-pointer text-sm; }
+  .dropzone-on { @apply bg-head; }
+  .field { @apply min-h-11 border border-ink px-1.5 bg-paper w-full; }
+  .meter { @apply h-2 border border-ink mt-1; }
+  .meter > div { @apply h-full bg-ink; }
+
+  /* ---- scenario shell: sticky header + bottom tabs (one-handed) ---- */
+  .shell { @apply min-h-screen flex flex-col; }
+  .run-head { @apply sticky top-0 z-20 bg-paper border-b-2 border-ink flex items-center justify-between gap-2 px-2 py-1; }
+  .shell-main { @apply flex-1 p-2 pb-20 max-w-[1400px] w-full mx-auto; }
+  .tabbar { @apply fixed bottom-0 inset-x-0 z-20 bg-paper border-t-2 border-ink flex; }
+  .tab { @apply flex-1 min-h-12 flex items-center justify-center font-bold uppercase text-sm border-r border-ink last:border-r-0; }
+  .tab-on { @apply bg-ink text-paper; }
+  .clock-face { @apply min-h-11 min-w-28 border-2 border-ink px-2 flex items-center justify-center gap-1.5 font-bold text-xl; }
+  .live-dot { @apply inline-block w-2.5 h-2.5 bg-live; border-radius: 50%; }
+
+  /* ---- run tab ---- */
+  .control-strip { @apply flex flex-wrap gap-x-3 gap-y-1 border border-ink p-1.5 bg-paper; }
+  .cs-cell { @apply flex flex-col gap-0.5; }
+  .cs-label { @apply block text-[10px] font-bold uppercase text-cue; }
+  .cs-value { @apply min-h-11 flex items-center px-2 font-bold border border-ink; }
+  .active-mark { @apply border-l-4 border-l-active; }
+  .seg { @apply text-center text-sm; }
+  .seg + .seg { @apply border-l-0; }
+  .seg-on { @apply bg-ink text-paper font-bold hover:bg-ink active:bg-ink; }
+  .seg-missed { @apply bg-paper text-alert font-bold border-alert border-2; }
+  .flag-banner { @apply border-2 border-alert text-alert font-bold px-2 py-1 m-1; }
+
+  .vitals-table { @apply text-sm; }
+  .vitals-table td { height: 1px; } /* lets cell buttons fill the row height */
+  .vitals-table td > button { height: 100%; }
+  .vitals-table td, .vitals-table th { @apply text-center; }
+  .vitals-table td:nth-child(2), .vitals-table td:last-child, .vitals-table th:nth-child(2), .vitals-table th:last-child { @apply text-left; }
+  .row-active td:first-child { box-shadow: inset 4px 0 0 var(--color-active); }
+  .stage-cell { @apply w-full min-h-11 text-left px-1.5 py-1 hover:bg-head; }
+  .stage-cell-on { @apply cursor-default hover:bg-transparent; }
+  .vital-cell { @apply w-full min-h-11 min-w-12 flex flex-col items-center justify-center px-0.5 leading-tight; }
+  .vital-off { @apply text-rule border border-dashed border-rule hover:text-ink hover:border-ink; }
+  .vital-on { @apply text-ink bg-paper; }
+  .vital-time { @apply text-[10px] font-normal flex items-center gap-0.5; }
+  .pushed-dot { @apply inline-block w-2 h-2 bg-pushed mr-1 align-middle; border-radius: 50%; }
+  .adlib-row td { @apply bg-paper; }
+  .adlib-input { @apply w-full min-h-11 min-w-12 px-0.5 text-center border-0 bg-transparent; }
+  .adlib-input:focus { outline: 2px solid var(--color-ink); outline-offset: -2px; }
+
+  .phase { @apply border-t border-ink first:border-t-0; }
+  .phase-on { box-shadow: inset 4px 0 0 var(--color-active); }
+  .phase-head { @apply w-full min-h-11 flex items-center gap-2 px-2 bg-head text-sm; }
+  .phase-on .phase-head { @apply pl-3; }
+  .phase-body { @apply flex flex-col gap-1 p-1.5 pl-3; }
+  .phase-give { @apply text-sm; }
+  .branch { @apply w-full min-h-11 border border-ink bg-paper flex items-center justify-between gap-2 px-2 py-1 text-left text-sm hover:bg-zebra active:bg-head; }
+  .branch-inject { @apply bg-head border-dashed hover:bg-zebra; }
+  .branch-taken { @apply border-2; }
+  .branch-meta { @apply flex flex-col items-end gap-0.5 text-xs shrink-0; }
+  .checklist { @apply border border-ink; }
+  .checklist-head { @apply flex justify-between bg-head text-xs font-bold px-1.5 py-0.5 border-b border-ink; }
+  .check-row { @apply w-full min-h-11 flex items-center gap-2 px-1.5 text-sm border-t border-ink first:border-t-0 hover:bg-zebra select-none; }
+  .checklist-head + .check-row { @apply border-t-0; }
+  .check-time { @apply text-xs w-16 text-right tabular-nums; }
+  .check-cell { @apply w-full min-h-11 flex items-center justify-center; }
+  .hist-row:nth-child(even) { @apply bg-zebra; }
+  .item-row { @apply flex gap-2 items-start p-1.5 border-t border-ink first:border-t-0 text-sm; }
+  .note-input { @apply flex-1 border border-ink p-1 text-sm min-h-11; }
+
+  /* square checkbox (visual) */
+  .sq { @apply inline-block shrink-0 w-4 h-4 border border-ink bg-paper; }
+  .sq-on { background: linear-gradient(var(--color-ink), var(--color-ink)) center / 60% 60% no-repeat var(--color-paper); }
+
+  .modal-backdrop { @apply fixed inset-0 z-50 flex items-center justify-center p-3; background: rgb(0 0 0 / 0.35); }
+  .modal { @apply bg-paper w-full max-w-lg max-h-[90vh] overflow-auto; }
+  .qr svg { width: 100%; height: 100%; }
+  .card-face { @apply bg-paper text-ink; }
+
+  /* ---- student display ---- */
+  .display { @apply min-h-screen flex flex-col; }
+  .display-monitor { @apply bg-monitor-bg text-monitor-fg; }
+  .display-info { @apply bg-paper text-ink; }
+  .display-tabs { @apply flex items-stretch border-b-2 border-rule; }
+  .dtab { @apply min-h-14 px-6 text-xl font-bold border-r-2 border-rule; }
+  .display-monitor .dtab { @apply text-rule; }
+  .display-monitor .dtab-on { @apply bg-monitor-fg text-monitor-bg; }
+  .display-info .dtab-on { @apply bg-ink text-paper; }
+  .display-sim { @apply ml-auto self-center px-3 text-sm font-bold tracking-wide; }
+  .display-footer { @apply text-xs text-rule px-3 py-1; }
+  .monitor { @apply flex-1 grid gap-2 p-2 grid-cols-1 content-start md:grid-cols-[minmax(0,1fr)_20rem]; }
+  .monitor-waves { @apply flex flex-col gap-2 relative; }
+  .monitor-sim { @apply absolute right-2 bottom-1 text-xs font-bold text-rule tracking-widest; }
+  .monitor-nums { @apply grid grid-cols-2 md:grid-cols-1 gap-1; }
+  .monitor-row { @apply grid grid-cols-5 gap-1 md:col-span-2; }
+  .num { @apply border border-rule px-2 py-1 flex flex-col; }
+  .num-label { @apply text-sm font-bold text-rule; }
+  .num-unit { @apply text-xs font-normal text-rule; }
+  .num-value { @apply text-4xl font-bold leading-none; }
+  .num-big .num-value { @apply text-7xl; }
+  .num-small .num-value { @apply text-2xl; }
+  .info { @apply flex-1 grid gap-3 p-3 grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]; }
+  .info-cards { @apply flex flex-col gap-3; }
+  .info-card { @apply border border-ink p-3; }
+  .info-card-new { @apply border-2; }
 }
 
 @media print {
   @page { size: letter; margin: 0.4in; }
   html { font-size: 10px; }
   .no-print { display: none !important; }
+  .run-head, .tabbar { position: static !important; }
+  .shell-main { padding-bottom: 0 !important; }
+  .vital-off { border-style: solid !important; color: var(--color-ink) !important; }
+  .seg-missed { border-width: 1px !important; }
+  .row-active td:first-child, .phase-on { box-shadow: none !important; }
+  .section { break-inside: avoid; }
   /* accents print as black; meaning carried by bold text/labels */
   .text-alert, .text-live, .text-active, .text-pushed { color: var(--color-ink) !important; font-weight: bold; }
   .border-alert, .border-live, .border-active, .border-pushed { border-color: var(--color-ink) !important; }

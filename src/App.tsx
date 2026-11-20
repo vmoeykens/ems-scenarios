@@ -1,43 +1,82 @@
-import { bundledScenarios } from "./lib/scenario/bundled.ts";
-import { FOOTER } from "./lib/scenario/constants.ts";
+import { href, navigate, useRoute } from "./lib/router.ts";
+import { findEntry, restoreImported } from "./lib/scenario/library.ts";
+import { RunProvider, useRun } from "./state/RunContext.tsx";
+import { Modal } from "./ui/primitives.tsx";
+import { fmtT } from "./lib/run/reducer.ts";
+import Library from "./screens/Library.tsx";
+import ScenarioShell from "./screens/ScenarioShell.tsx";
+import Runs from "./screens/Runs.tsx";
 
-// Phase 0 placeholder in the "paper" theme: proves the bundled scenarios load and validate in the browser.
-// The instructor console (Phase 1) replaces this.
 export default function App() {
-  const list = bundledScenarios();
+  const route = useRoute();
   return (
-    <div className="min-h-screen flex flex-col">
-      <main className="flex-1 p-3 max-w-4xl mx-auto w-full">
-        <h1 className="text-xl font-bold border-b-2 border-ink mb-2">Scenario Runner</h1>
-        <p className="mb-3 text-sm">Phase 0 build: schema + validator only. Instructor console comes in Phase 1.</p>
-        <section className="section">
-          <div className="section-bar">
-            <span>Scenario library</span>
-            <span className="italic normal-case font-normal">schema + rules</span>
-          </div>
-          <table className="sheet-table zebra">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Title</th>
-                <th>Validation</th>
-              </tr>
-            </thead>
-            <tbody>
-              {list.map(({ file, scenario, result }) => (
-                <tr key={file}>
-                  <td className="font-bold">{scenario.id}</td>
-                  <td>{scenario.title}</td>
-                  <td className={result.ok ? "" : "text-alert font-bold"}>
-                    {result.ok ? "valid" : `${result.errors.length} problems`}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </section>
-      </main>
-      <footer className="px-3 py-1 text-xs text-rule">{FOOTER}</footer>
-    </div>
+    <RunProvider>
+      <ResumePrompt />
+      {(route.name === "library" || route.name === "display") && <Library />}
+      {route.name === "runs" && <Runs />}
+      {route.name === "scenario" && <ScenarioShell key={route.key} entryKey={route.key} tab={route.tab} />}
+    </RunProvider>
+  );
+}
+
+/** On load: offer to resume the autosaved in-progress run. */
+function ResumePrompt() {
+  const { run, resume, pendingResume: saved, clearPendingResume } = useRun();
+  if (!saved || run) return null;
+  const r = saved.record;
+  const last = r.events[r.events.length - 1];
+  const doResume = () => {
+    const entry = saved.imported ? restoreImported(saved.entryKey, saved.imported.file, saved.imported.raw) : findEntry(saved.entryKey);
+    if (!entry?.norm) {
+      alert("The scenario for this run is no longer available; the run cannot be resumed.");
+      clearPendingResume(false);
+      return;
+    }
+    resume(entry, r);
+    navigate(href.scenario(entry.key, "run"));
+  };
+  return (
+    <Modal title="Resume run in progress?">
+      <table className="sheet-table mb-2">
+        <tbody>
+          <tr>
+            <th className="bg-head w-32">Scenario</th>
+            <td>
+              <b>{r.scenarioId}</b> {r.scenarioTitle}
+            </td>
+          </tr>
+          <tr>
+            <th className="bg-head">Trainee</th>
+            <td>{r.trainee || "-"}</td>
+          </tr>
+          <tr>
+            <th className="bg-head">Started</th>
+            <td>{new Date(r.createdAt).toLocaleString()}</td>
+          </tr>
+          <tr>
+            <th className="bg-head">Events</th>
+            <td>
+              {r.events.length}
+              {last ? ` (last at ${fmtT(last.t)})` : ""}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <p className="text-sm mb-2">This run was autosaved in this browser and not exported yet.</p>
+      <div className="flex gap-2">
+        <button type="button" className="sheet-btn font-bold flex-1" onClick={doResume}>
+          Resume run
+        </button>
+        <button
+          type="button"
+          className="sheet-btn flex-1"
+          onClick={() => {
+            if (confirm("Discard the autosaved run? It has not been exported.")) clearPendingResume(true);
+          }}
+        >
+          Discard
+        </button>
+      </div>
+    </Modal>
   );
 }

@@ -15,5 +15,5 @@
     "skipLibCheck": true,
     "types": ["node"]
   },
-  "include": ["vite.config.ts", "scripts", "tests"]
+  "include": ["vite.config.ts", "playwright.config.ts", "scripts", "tests", "e2e"]
 }
