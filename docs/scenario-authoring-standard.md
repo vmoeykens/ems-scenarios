@@ -52,7 +52,10 @@ patient: {name, age, sex, weight_kg, cc, on_arrival}
 history: {SAMPLE: [["S",".."],...6], OPQRST: [["O",".."],...6]}
 primary:   [[label, finding], ...]   (X/hemorrhage, Airway, Breathing, Circulation, Disability, Exposure, Priority / impression)
 secondary: [[region, finding], ...]  (6-10 rows)
-vitals: [{stage, trigger, HR, BP, RR, SpO2, EtCO2, BGL, Temp, Pain, GCS, Pupils, other, bold:[keys]}]
+vitals: [{stage, trigger, HR, BP, RR, SpO2, EtCO2, BGL, Temp, Pain, GCS, Pupils, other, bold:[keys],
+          monitor?: {rhythm, rate, p_rate?, st?, capno?: {pattern, etco2, rr}}}]   # app student monitor only; PDF ignores it.
+          # Derive from the row: rate = HR (0 for vf/asystole), rhythm as named in other/cards, st = lead II mm,
+          # capno pattern cpr (arrest) | shark (bronchospasm) | normal, etco2/rr from the row; omit capno if EtCO2 is "-".
 blank_vitals_rows: int (default 2)    vitals_note: str
 flow: [{time, phase, give, expected:[str],
         branches:[{if, then} | {type:"inject", if, then}]}]

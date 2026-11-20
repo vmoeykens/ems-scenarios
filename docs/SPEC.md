@@ -23,7 +23,7 @@ Origin: viability assessment + Claude Code prompt from the "EMS Scenarios" claud
 ## Stack
 
 - Vite + React + TypeScript. Static build, deployable to any static host (GitHub Pages is fine).
-- PWA, offline after first load (training rooms / rigs have poor signal).
+- Offline after first load (training rooms / rigs have poor signal): a small network-first service worker (`public/sw.js`, registered relative to the page) instead of a full PWA plugin; no manifest/installability.
 - Tailwind for styling.
 - ajv (or zod generated from the schema) validating against `schema/scenario.schema.json`.
 
@@ -53,7 +53,16 @@ User requirement (Nov 2026): "The UI of the application should match the paper o
 
   Revealed vs hidden vitals is greyscale first (hidden = dashed grey cell "tap", revealed = solid value); `pushed` is only added if testing shows that is ambiguous. Any new accent needs a row in this table.
 - **Print**: a print stylesheet renders the screens as the paper sheet: accents become black (MISSED prints as bold "MISSED"), interactive chrome hidden, footer kept. The debrief summary export uses the same stylesheet.
-- **Student display exception**: the `/display` monitor keeps the patient-monitor look (black background, large white numerals); waveforms may use a single accent (`monitor-wave`). This is the only dark/colored screen. (Open question in `docs/PLAN.md`: confirm, or use a paper-style display instead.)
+- **Student display exception** (confirmed Nov 2026): the `/display` MONITOR view keeps the patient-monitor look (black background, large white numerals); waveforms use a single accent (`monitor-wave`). This is the only dark/colored screen. The display's INFO / CARDS view is paper-style.
+
+## User decisions (Nov 2026, before Phase 1)
+
+1. **Stateless**: no backend, no DB, no IndexedDB; static GitHub Pages (relative base + hash routes). Run state in memory + one localStorage autosave key for the in-progress run (resume prompt on load; cleared on export/discard). Imported scenarios are session-only. Runs screen = open exported run JSON files. Exports: JSON run record, CSV events, printable B&W HTML summary.
+2. **Paper on the web** for all instructor screens (section names/order as the PDF), greyscale except the four accents below; print stylesheet ~= the paper sheet.
+3. **Student screen** = separate window `#/display` with two crew-switchable views (large tabs): **MONITOR** (default; black monitor, large numerals for revealed vitals only, `--` otherwise, live ECG + capno sweep, labelled SIMULATED) and **INFO / CARDS** (paper: crew card from the start + pushed show cards / moulage tag findings, newest first, persisting for the run; 12-lead/strip/capno rendered static). The instructor can push a card and optionally auto-switch the display to INFO. Only `toDisplay()` builds what crosses the transport; a leak test covers every scenario.
+4. **Monitor per stage**: optional `vitals[].monitor: {rhythm, rate, p_rate?, st?, capno?: {pattern, etco2, rr}}` (schema + app validator; the PDF generator ignores it). Populated for every stage of the 10 scenarios from what each already states. The display monitor follows the selected stage; pushing a strip/capno card overrides until the stage changes.
+5. **Branches** with `goto_stage` switch the vitals stage when tapped, including examiner injects. No automatic phase advance (instructor advances; `goto_phase` is honoured if present).
+6. Keep: IF length 75; app validator stricter than the generator; index ids + scenario sha-256 in each run record; images (if ever used) bundled under `public/scenario-assets/`.
 
 ## Deployment
 
@@ -95,10 +104,10 @@ User requirement (Nov 2026): "The UI of the application should match the paper o
 
 ## Phase 2 - Student display
 
-- "Open student screen" opens `/display` in a new window. Sync via BroadcastChannel behind a `SyncTransport` interface so WebSocket/Supabase can drop in later (don't build those now).
-- Looks like a simple patient monitor: black background, large numerals for revealed vitals only (unrevealed = "--"), animated ECG and capnography when the current stage/card specifies them, plus a card viewer for pushed show cards (text cards in large type; 12-lead/strip/capno rendered).
+- "Open student screen" opens `#/display` in a new window. Sync via BroadcastChannel behind a `SyncTransport` interface so WebSocket/Supabase can drop in later (don't build those now).
+- Two views (decision 3): MONITOR (black, large numerals for revealed vitals only, "--" otherwise, animated ECG lead II + capnography from the current stage's `monitor` or a pushed strip/capno card) and INFO / CARDS (paper; crew card + pushed cards/tags newest first; text in large type; 12-lead/strip/capno rendered static).
 - Port ECG/capno synthesis from `tools/ems_scenario.py` (`ecg()`, `twelve_png()`, `strip_png()`, `capno_png()`) to TypeScript on `<canvas>`: same rhythms (sinus, afib, svt, vt, vf, asystole, chb with p_rate, avb1, flutter with p_rate), same per-lead R/S/T/P amplitudes and ST-shift model, same capno patterns (normal, shark, cpr). Static render for cards, scrolling sweep for the live monitor. Label everything "SIMULATED".
-- The student display must never show instructor-only content: cues, stage names/triggers, branch text, critical list, differentials.
+- The student display must never show instructor-only content: cues, stage names/triggers, the vitals `other` column, branch text, critical list, differentials, actor card, scenario title.
 
 ## Constraints
 

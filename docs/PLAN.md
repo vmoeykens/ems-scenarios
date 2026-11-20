@@ -1,6 +1,6 @@
 # Scenario Runner - Plan
 
-Status: **Phase 0 done (schema, shared validator, generator compat, goto_stage upgrade). Stopped for review before Phase 1.**
+Status: **Phases 0, 1 and 2 done** (branch `app-phase-1-2`). User decisions recorded in SPEC.md "User decisions"; section 11 questions resolved below.
 Spec: `docs/SPEC.md`. Content rules: `docs/scenario-authoring-standard.md`.
 
 ## 1. Repo layout (after Phase 0)
@@ -31,7 +31,8 @@ Describes the format exactly as the 10 files use it, plus the optional Runner fi
 | `patient` | `{name, age, sex, weight_kg, cc, on_arrival}` | age/weight string or number |
 | `history` | `{SAMPLE: [[k,v]...], OPQRST: [[k,v]...]}` | |
 | `primary, secondary` | `[[label, finding], ...]` | |
-| `vitals[]` | `{stage (req), key?, trigger, HR, BP, RR, SpO2, EtCO2, BGL, Temp, Pain, GCS, Pupils, other, bold[]}` | cells string or number; `key` `^[A-Z]$` (default = first char of `stage`); `bold` items from the column enum |
+| `vitals[]` | `{stage (req), key?, trigger, HR, BP, RR, SpO2, EtCO2, BGL, Temp, Pain, GCS, Pupils, other, bold[], monitor?}` | cells string or number; `key` `^[A-Z]$` (default = first char of `stage`); `bold` items from the column enum |
+| `vitals[].monitor` | `{rhythm (req), rate (req), p_rate?, st?, capno?: {pattern, etco2, rr}}` | student-display monitor only; rhythm enum = generator RHYTHMS; `st` = lead II mm; schema-only (generator ignores it, PDFs pixel-identical) |
 | `blank_vitals_rows` | integer >= 0 | |
 | `flow[]` | `{id?, time, phase, give, expected[] (>=1, req), branches[]}` | `id` default `p<index>` |
 | `flow[].expected[]`, `critical[]` | string **or** `{id, text}` | |
@@ -95,7 +96,9 @@ Minimal, no layout changes. All 50 pages of the 10 PDFs are pixel-identical at 7
 
 ## 6. Phase 1 - Instructor console (routes + components)
 
-Router: hash routes (static hosting, no server rewrites). PWA via `vite-plugin-pwa` (precache all assets + bundled scenarios).
+Router: hash routes (static hosting, no server rewrites). Offline: hand-written network-first service worker `public/sw.js` (vite-plugin-pwa not used; simpler with the relative base).
+
+As built: `src/lib/run/` (types, reducer, actions, describe, export), `src/state/` (RunContext, autosave), `src/screens/` (Library, ScenarioShell, Prebrief, RunTab, run/VitalsTable, Debrief, Runs, Display), `src/ui/` (primitives, Clock, QR, waves, CardFace, LiveTrace). Run tab = control strip (phase prev/next, current stage, display view + ECG/CO2 toggles, undo) -> Vitals progression table (tap cell = reveal, tap stage = switch, ad-lib row) -> two columns: Scenario flow + Critical | Show cards, Moulage tags, Notes, SAMPLE/OPQRST/Primary/Secondary. Not built: the interactive p.3 flowchart view and a separate Handouts tab (cards/tags live on the Run tab, crew/actor cards on Pre-brief).
 
 | Route | Screen | Main components |
 |---|---|---|
@@ -111,7 +114,7 @@ Branch tap: log `branch` event; if `target_stage` (goto_stage, else Stage ref) -
 
 ## 7. Phase 2 - Student display
 
-`#/display` opened via `window.open` from the console. The one deliberate exception to the paper look (Q13): black monitor UI (`monitor-bg/fg`, waveforms in the single `monitor-wave` accent): numerals for **revealed** vitals only (others "--"); live ECG sweep + capno on `<canvas>`; card viewer for pushed show cards (text cards large type; 12-lead/strip/capno rendered). Everything labelled "SIMULATED".
+`#/display` opened via `window.open` from the console. Two views, switchable by the crew (large tabs) and by the instructor: MONITOR - the one deliberate exception to the paper look: black (`monitor-bg/fg`, waveforms in the single `monitor-wave` accent), numerals for **revealed** vitals only (others "--"), live ECG lead II sweep + capno on `<canvas>`; INFO / CARDS - paper: crew card + pushed cards/tags newest first (static renders). Everything labelled "SIMULATED". ECG/capno come from the current stage's `vitals[].monitor`; a pushed strip/capno card overrides until the next stage change; traces switch on when HR / EtCO2 is first given (or by the console toggles).
 `src/lib/waveforms/`: TS port of `ecg()`, `beat_times()`, `LEADS`, ST model, `capno` patterns from the generator; seeded RNG (port numpy's default_rng is impractical -> use a small seeded PRNG; shapes match, exact samples won't). Tests check output shape (length = dur*500, no NaN, VF/asystole have no beats, ST shift visible in V-leads).
 **Only display-safe payloads cross the transport** (typed `DisplayMessage`, built by a single `toDisplay()` function): vital values, card face (`title/caption/body` + waveform params), tag `region/text`. Never: `cue`, stage names/triggers, `other`, branches, critical, differentials. A test asserts no instructor-only strings from any scenario appear in any `DisplayMessage` produced during a scripted run.
 
@@ -154,15 +157,17 @@ export interface SyncTransport {
   onMessage(cb: (msg: DisplayMessage | ControlMessage) => void): () => void; // returns unsubscribe
   close(): void;
 }
-type DisplayMessage =
-  | { type: "state"; snapshot: DisplaySnapshot }  // full state: sent on connect + after every change (idempotent, late joiners ok)
-  | { type: "hello"; role: "display" };           // display -> console, asks for snapshot
-interface DisplaySnapshot {
-  vitals: Partial<Record<VitalKey, string>>;      // revealed only, markup stripped
-  monitor?: { rhythm: Rhythm; rate: number; p_rate?: number; capno?: { pattern: string; etco2: number; rr: number } };
-  card?: { kind: ShowCard["type"]; title?: string; caption?: string; body?: string; wave?: object } | null;
-  tag?: { region: string; text: string } | null;
-  scenarioTitle?: string;                         // optional; Q8
+type SyncMessage =
+  | { type: "state"; snapshot: DisplaySnapshot }  // full state: sent after every change + on hello (idempotent, late joiners ok)
+  | { type: "hello"; role: "display" }            // display -> console, asks for snapshot
+  | { type: "bye"; role: "display" };
+interface DisplaySnapshot {                       // src/lib/display/toDisplay.ts
+  v: 1; run: string; view: "monitor" | "info"; viewSeq: number;
+  vitals: Partial<Record<VitalKey, string>>;      // latest revealed value per vital, markup stripped
+  ecg: { rhythm; rate; p_rate?; st? } | null;     // stage monitor or pushed strip card
+  capno: { pattern; etco2; rr } | null;
+  crewCard: { dispatch: string; on_arrival: string };
+  cards: DisplayCard[];                           // pushed show-card faces + moulage tags, newest first; no scenario title
 }
 ```
 v1 implements `BroadcastChannelTransport` only (same browser, second window). Snapshots rather than deltas keep a later WebSocket/Supabase room (6-digit code) trivial.
@@ -170,21 +175,23 @@ v1 implements `BroadcastChannelTransport` only (same browser, second window). Sn
 ## 10. Tests
 
 - Phase 0 (done): vitest - all 10 pass; 21 bad fixtures fail with the exact Python messages; Python cross-check on all 33 files (rule errors + learn prompt); normalize defaults/explicit ids; every branch target resolves.
-- Phase 1/2: branch navigation reducer, event logging/undo, export shape, `toDisplay()` leak test, waveform shape; Playwright smoke (load scenario, start clock, reveal BP, push card, display window updates, export debrief).
+- Phase 1/2 (done): `tests/run.test.ts` (clock, branch navigation, undo/event log, exports), `tests/display.test.ts` (leak test over every scenario, monitor follows stage/override, monitor block on every bundled stage), `tests/waveforms.test.ts` (shapes, ST shift, capno patterns); monitor schema fixtures in `validator.test.ts`. Playwright smoke `npm run e2e` (not in CI; uses $CHROME_PATH or /usr/bin/google-chrome): load scenario, start clock, reveal BP, push card, display window updates, branch switches stage, export JSON; autosave resume.
 
-## 11. Open questions for the user
+## 11. Open questions - resolved (Nov 2026)
 
-1. **Strictness vs the PDF generator.** The schema rejects unknown keys and wrong types; `ems_scenario.py` silently ignores unknown keys outside branches. So a file can build a PDF but fail `npm run validate` (never the reverse). Keep it that way (catches typos like `expeted`), or should the generator also check the JSON Schema (adds a `jsonschema` pip dependency)?
-2. **IF length**: authoring standard says <= 60 chars, generator enforces 75. I mirrored 75. Tighten both to 60?
-3. **Branches with outcome vitals but no stage row** (left without `goto_stage`): CARD-01 "No action within 2 min" -> "BP 74/44, GCS 13" (Stage C is 82/50); ARR-03 inject "Pt re-sedates en route" -> "RR 6, SpO2 84%, EtCO2 58". Add stage rows (F) + `goto_stage`? That is a content change, so your call.
-4. **Inject branches that cite stage values** ("Stage **C** values; expect ..." in TRA-01, "Stage **B** values" in TRA-02, MED-02 stridor, TRA-03 BP drop) now carry `goto_stage`, so tapping them will switch the vitals stage. Is that what you want for examiner injects?
-5. **Explicit ids**: none of the files have `flow[].id` / item ids, so run logs use index ids (`p2.e1`). If you later edit a scenario that has past runs, old logs may point at the wrong item. Add explicit ids to all 10 now (structural commit), or accept index ids + store the scenario hash/version in each run (planned either way)?
-6. **`goto_phase`**: nothing in the text links branches to phases, so none were added. Should a branch ever auto-advance the phase, or does the instructor always advance manually?
-7. **Live monitor rhythm**: vitals rows have no rhythm/capno fields (rhythm is only in `other` text, e.g. "**VF** - shock advised"). For the Phase 2 animated monitor, either (a) add optional `vitals[].monitor: {rhythm, rate, p_rate?, capno?: {pattern, etco2}}` (structural, generator ignores it), or (b) drive the monitor only from the last pushed strip/12-lead/capno card. I recommend (a).
-8. **`other` column on the student display**: it mixes patient findings with instructor notes ("Point to capno; no ROSC until fixed", "(show 12-lead card)"), so the plan never sends it to the display; skin/lung findings reach the crew via moulage tags or verbally. OK? And may the display show the scenario title (it can hint the diagnosis, e.g. "Anaphylaxis")? Default: no title.
-9. **Image show cards**: unused today; `path` is a local file path the browser can't load from an imported JSON. Bundle under `public/scenario-assets/` and/or allow `data:` URIs?
-10. **Trainee/evaluator names** in the autosaved run and exports: fine to store locally (staff names, no patient data)? Any retention rule?
-11. ~~Hosting~~ Decided: GitHub Pages via Actions on push to `main` (vmoeykens/ems-scenarios).
-12. **Bundle**: ajv compiles the schema at runtime (uses `new Function`; ~455 kB JS now). If you plan a strict Content-Security-Policy, I'll switch to ajv's precompiled standalone validator in Phase 1.
-13. **Student display look**: per the paper-on-the-web direction, every screen is greyscale paper except `/display`, which I plan to keep as a patient-monitor (black background, large white numerals, waveforms in one green accent) because that is what the crew would see on a real monitor and it reads well on a projector. Confirm, or should the display also be paper-style (white background, black numerals/waveforms like the printed show cards)?
-14. **Accent set**: four accents (`alert` red, `live` green, `active` blue, `pushed` amber) as tabled in SPEC.md. OK, or fewer (e.g. drop `pushed` and mark pushed items with a black outline)?
+1. Strictness: **keep** - app validator stricter than the generator (no `jsonschema` pip dependency).
+2. IF length: **keep 75** in both.
+3. Outcome-vitals branches: **done** in content (CARD-01 Stage F, ARR-03 Stage G) with `goto_stage`.
+4. Inject branches with `goto_stage`: **yes**, tapping switches the vitals stage.
+5. Explicit ids: **no**; index ids + scenario sha-256 + version stored in each run record.
+6. `goto_phase`: **no auto phase advance**; instructor advances (goto_phase honoured if an author adds one).
+7. Live monitor: **(a)** optional `vitals[].monitor`, populated for all stages.
+8. `other` column never sent to the display; **no scenario title** on the display.
+9. Image cards: bundle under `public/scenario-assets/` (data: URIs also accepted); none used yet.
+10. Trainee/evaluator names: staff names only, kept in the autosave until export/discard; no retention rule set.
+11. Hosting: GitHub Pages via Actions.
+12. Bundle/CSP: ajv still compiles at runtime (no strict CSP planned); revisit if a CSP is added.
+13. Student display: **monitor look confirmed**, plus a paper INFO / CARDS view.
+14. Accents: **keep all four**.
+
+Still open: see the Phase 1/2 report (interactive flowchart view not built; ARR-03 Stage B "PEA rate 50s" taken as 50; MED-02 D/E capno pattern).
