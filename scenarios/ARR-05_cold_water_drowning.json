@@ -1,0 +1,228 @@
+{
+  "id": "ARR-05",
+  "title": "Cold-water drowning - hypothermic arrest",
+  "version": "v1.0 | VT Protocols 2025 | UVM Rescue",
+  "category": "Cardiac arrest",
+  "level": "AEMT CCIT",
+  "run_time": "30 min",
+  "difficulty": "Hard",
+  "crew": "CC + 2 + FD ice team",
+  "protocols": [
+    "4.2 Drowning/Submersion",
+    "2.13 Hypothermia",
+    "3.2A Cardiac Arrest",
+    "8.17 Resuscitation Initiation & Termination",
+    "3.6 Team Focused CPR"
+  ],
+  "objectives": [
+    "Start decision: < 6 C water, submerged < 90 min -> full resuscitation; stiffness/fixed pupils are not death (2.13/4.2)",
+    "Ventilation first: airway + breaths before compressions; no draining water",
+    "Hypothermia limits: 60-s pulse check, gentle handling, 1 shock max, no epi while presumed < 30 C (MD)",
+    "No TOR until rewarmed to 32 C; transport with CPR to CPB/ECMO center (UVMMC) via MD",
+    "Pre-arrival prep: heated unit, warm fluids, timeline (immersion vs submersion)"
+  ],
+  "resources": "AED/monitor, BVM, OPA, suction, SGA, IV/IO, warm NS (40-42 C), epi 0.1 mg/mL, heat packs, blankets, Stokes basket, capno, metronome. Shelburne FD ice team. UVMMC (cardiac surgery/CPB) ~18 min",
+  "dispatch": "UVM Rescue and Shelburne Fire, respond to Shelburne Pond, Pond Rd fishing access, for an adult male through the ice. Caller is his wife. Fire ice rescue en route. Time out 1556.",
+  "scene": {
+    "location": "Shelburne Pond fishing access, dusk, 28 F, wind. Thin early ice. 80 m steep path from shore to ambulance.",
+    "setup": "Crew stages on shore while FD ice team works. Pt slips under ~1612; FD hands him over on a tarp at T+0 (~1621). Manikin wet (spray bottle).",
+    "moulage": "Wet jacket w/ ice chips, blue-gray lips, froth at mouth (shaving cream), vomit 1-2 min into BVM.",
+    "roles": "Wife (frantic); FD ice rescuers (1 joins CPR); evaluator calls AED + pulse."
+  },
+  "patient": {
+    "name": "Mark Gagnon",
+    "age": "44",
+    "sex": "M",
+    "weight_kg": "82",
+    "cc": "Through the ice, pulled from water",
+    "on_arrival": "Limp, gray, soaked, ice on clothes. Not breathing. Jaw and limbs stiff."
+  },
+  "history": {
+    "SAMPLE": [
+      ["S", "Wife: \"He went out after the dog, the ice broke\""],
+      ["A", "Penicillin"],
+      ["M", "None"],
+      ["P", "Healthy, runs"],
+      ["L", "Lunch ~1230; no alcohol"],
+      ["E", "Through ice ~1550, holding edge + talking; under ~1612; out ~1621"]
+    ],
+    "OPQRST": [
+      ["O", "Through ice ~1550"],
+      ["P", "-"],
+      ["Q", "Water ~2 C (36 F) per FD"],
+      ["R", "-"],
+      ["S", "-"],
+      ["T", "~20 min immersed (cooling), then ~9 min submerged"]
+    ]
+  },
+  "primary": [
+    ["X / hemorrhage", "None"],
+    ["Airway", "Froth at mouth; vomit after breaths -> suction. No draining water"],
+    ["Breathing", "Apneic -> a few BVM breaths w/ O2 first"],
+    ["Circulation", "No pulse on 60-s check -> CPR + AED"],
+    ["Disability", "Unresponsive, pupils 6 fixed"],
+    ["Exposure", "Soaked, ice on clothes -> cut off, dry, wrap, heat packs"],
+    ["Priority / impression", "Hypothermic arrest after immersion -> **resuscitate, transport with CPR**"]
+  ],
+  "secondary": [
+    ["'Signs of death'", "Stiff jaw/limbs + fixed pupils = **cold, not death** (2.13)"],
+    ["Trunk", "Ice-cold to touch (chest/back)"],
+    ["Head / neck", "No visible injury; no collar needed (4.2)"],
+    ["Lungs (BVM)", "Coarse crackles bilat"],
+    ["Temp", "Tympanic 'LO' - not a core temp (4.2 Pearl)"],
+    ["BGL", "88 (if checked)"],
+    ["Skin", "Blue-gray, mottled"],
+    ["Water", "~2 C (36 F); submerged ~9 min"]
+  ],
+  "vitals_note": "Arrest stages are 2-min cycles from contact on shore. Pulse 0 = CPR. Temp LO = below thermometer range.",
+  "vitals": [
+    {"stage": "A Shore", "trigger": "T+0: 60-s pulse/breathing check, analysis 1", "HR": "0", "BP": "-", "RR": "0", "SpO2": "no read", "EtCO2": "10 1st breaths", "BGL": "-", "Temp": "**LO**", "Pain": "-", "GCS": "3", "Pupils": "6 fixed", "other": "Cold, stiff, blue-gray. **VF** - shock advised", "bold": ["Temp"],
+     "monitor": {"rhythm": "vf", "rate": 0, "capno": {"pattern": "cpr", "etco2": 10, "rr": 10}}},
+    {"stage": "B After shock", "trigger": "Analyses 2-4 (T+2-8), 1 shock given", "HR": "0", "BP": "-", "RR": "BVM", "SpO2": "-", "EtCO2": "9", "BGL": "88", "Temp": "LO", "Pain": "-", "GCS": "3", "Pupils": "6 fixed", "other": "**VF persists** - AED advises shock again. Core presumed < 30 C",
+     "monitor": {"rhythm": "vf", "rate": 0, "capno": {"pattern": "cpr", "etco2": 9, "rr": 10}}},
+    {"stage": "C Poor vent", "trigger": "IF compressions w/o breaths, no chest rise, or vomit not suctioned", "HR": "0", "BP": "-", "RR": "-", "SpO2": "-", "EtCO2": "**3**", "BGL": "-", "Temp": "-", "Pain": "-", "GCS": "3", "Pupils": "-", "other": "No chest rise, gurgling. Fix airway -> back to Stage B values", "bold": ["EtCO2"],
+     "monitor": {"rhythm": "vf", "rate": 0, "capno": {"pattern": "cpr", "etco2": 3, "rr": 10}}},
+    {"stage": "D 20 min", "trigger": "Analysis ~10 (T+20), en route", "HR": "0", "BP": "-", "RR": "SGA", "SpO2": "-", "EtCO2": "**7**", "BGL": "-", "Temp": "LO", "Pain": "-", "GCS": "3", "Pupils": "6 fixed", "other": "VF continues. Hypothermic - TOR rule not applicable (8.17)", "bold": ["EtCO2"],
+     "monitor": {"rhythm": "vf", "rate": 0, "capno": {"pattern": "cpr", "etco2": 7, "rr": 10}}},
+    {"stage": "E Slow pulse", "trigger": "Examiner inject en route ~T+26 (analysis: no shock)", "HR": "**28**", "BP": "**60/38**", "RR": "SGA ~5", "SpO2": "no read", "EtCO2": "24", "BGL": "-", "Temp": "LO", "Pain": "-", "GCS": "3", "Pupils": "6 sluggish", "other": "Faint carotid on 60-s check. Stop CPR; gentle; warm NS", "bold": ["HR", "BP"],
+     "monitor": {"rhythm": "sinus", "rate": 28, "capno": {"pattern": "normal", "etco2": 24, "rr": 5}}},
+    {"stage": "F Jolted", "trigger": "IF rough handling/fast move after Stage E", "HR": "**0**", "BP": "-", "RR": "SGA", "SpO2": "-", "EtCO2": "8 CPR", "BGL": "-", "Temp": "LO", "Pain": "-", "GCS": "3", "Pupils": "6 fixed", "other": "**VF** - pulse lost. Resume CPR; MD before any further shock", "bold": ["HR"],
+     "monitor": {"rhythm": "vf", "rate": 0, "capno": {"pattern": "cpr", "etco2": 8, "rr": 10}}}
+  ],
+  "flow": [
+    {
+      "time": "pre",
+      "phase": "Staging / prep",
+      "give": "Man holding ice edge ~40 yd out; FD team going out. He slips under ~1612. Wife: \"He was talking to me, then he went under!\"",
+      "expected": [
+        "Unit heated to 24 C; heat packs, blankets, warm NS (40-42 C) ready (2.13)",
+        "Timeline: time in water, time under, water temp (4.2)",
+        "Intercept requested; MD/UVMMC early re: CPB/ECMO destination"
+      ]
+    },
+    {
+      "time": "0-2",
+      "phase": "Shore: breaths first",
+      "give": "Pt handed over. Stage **A**. FF: \"He's stiff and his pupils are blown - he's gone, right?\"",
+      "branches": [
+        {"if": "Crew withholds: stiff, fixed pupils, 'under too long'", "then": "critical (evaluator discretion) - not death signs in hypothermia; < 6 C + < 90 min -> resuscitate (2.13/4.2)"},
+        {"if": "Compressions first, no breaths / no chest rise", "then": "Stage **C**"}
+      ],
+      "expected": [
+        "Gentle, horizontal; pulse/breathing check up to 60 s (2.13)",
+        "Airway + a few BVM breaths w/ O2 before compressions (4.2)",
+        "CPR + AED; no collar w/o trauma; no draining water"
+      ]
+    },
+    {
+      "time": "2-8",
+      "phase": "One shock / warm",
+      "give": "Analysis 1 VF -> shock. Stage **B**: AED advises shock again each analysis.",
+      "branches": [
+        {"if": "Crew shocks at every analysis", "then": "debrief 2.13: 1 shock if < 30 C, warm before more"},
+        {"type": "inject", "if": "Pt vomits during BVM", "then": "expect suction, turn as a unit, keep ventilating; ignored -> Stage **C**"}
+      ],
+      "expected": [
+        "1 shock max, then CPR only - no further shocks (2.13)",
+        "Wet clothes off, dry, heat packs neck/axilla/groin, wrap",
+        "IV/IO w/o pausing CPR; warm NS 500 mL (2.13)"
+      ]
+    },
+    {
+      "time": "6-12",
+      "phase": "Meds / airway / move",
+      "give": "Steep 80 m path. If MD asked about epi: \"Hold epi while he's this cold.\"",
+      "branches": [
+        {"if": "Epi given q other cycle per routine 3.2A", "then": "debrief 2.13: no vasoactive drugs < 30 C; MD first"}
+      ],
+      "expected": [
+        "Epi withheld: core presumed < 30 C, no core temp -> MD (2.13)",
+        "SGA after 8 min; capno; vent 1:10",
+        "Flat in Stokes; CPR continuous, or 5 on/5 off only if needed to evacuate (2.13)"
+      ]
+    },
+    {
+      "time": "12-24",
+      "phase": "Transport, no early TOR",
+      "give": "En route UVMMC. Stage **D** at T+20. Partner: \"20 minutes, EtCO2 7 - do we call it?\"",
+      "branches": [
+        {"if": "Crew asks MD for TOR at 20 min", "then": "critical (evaluator discretion) - no TOR until rewarmed to 32 C (8.17/2.13); low EtCO2 not predictive (4.2)"}
+      ],
+      "expected": [
+        "CPR continued to UVMMC; compressor swaps q2 min, belted",
+        "UVMMC alerted: hypothermic arrest, CPB/ECMO (2.13)",
+        "Warming continued; unit heat up"
+      ]
+    },
+    {
+      "time": "24+",
+      "phase": "Pulse / handoff",
+      "give": "Inject below, else arrive UVMMC with CPR running.",
+      "branches": [
+        {"type": "inject", "if": "Slow organized rhythm, faint pulse en route", "then": "Stage **E**; expect 60-s check, stop CPR, gentle"},
+        {"if": "Rough move/handling after pulse returns", "then": "Stage **F** - VF; CPR, MD re: shocks"}
+      ],
+      "expected": [
+        "HR 28 w/ pulse = no CPR; very gentle handling (2.13 Pearl)",
+        "SGA vent ~5/min (half rate, 2.13); warm NS if SBP < 90",
+        "Report: time in water/under, water temp, 1 shock, no epi"
+      ]
+    }
+  ],
+  "critical": [
+    "Resuscitation withheld for stiffness/fixed pupils/'too long' (< 6 C water, < 90 min) (4.2/2.13)",
+    "No ventilation-first approach / no BVM w/ O2 (4.2)",
+    "Pulse check rushed (< 60 s) or rough handling (2.13)",
+    "Repeated shocks after 1st shock with core presumed < 30 C (2.13)",
+    "Epi given with core presumed < 30 C, no MD contact (2.13)",
+    "No active warming / wet clothes left on (2.13)",
+    "TOR requested or CPR stopped before rewarming (8.17)",
+    "CPB/ECMO destination not discussed with MD/UVMMC (2.13)"
+  ],
+  "differentials": [
+    ["Hypothermic arrest after immersion (dx)", "~20 min clinging (cooled first), 2 C water, VF, temp LO", "-"],
+    ["Primary drowning (hypoxic) arrest", "Submerged ~9 min, froth, vomit", "Cooled before going under - better prognosis"],
+    ["Cardiac event -> fall in water", "Age 44, exertion, VF", "Talking + holding on ~20 min first"],
+    ["Trauma (head/c-spine)", "Fell through ice", "No dive or fall from height; no injury seen"],
+    ["Cold-shock arrhythmia on entry", "Sudden cold immersion", "Talking ~20 min after entry"],
+    ["Alcohol / hypoglycemia", "Thin ice, poor judgment", "Wife: no drinking; BGL 88"]
+  ],
+  "debrief": [
+    "Immersion vs submersion: why does it matter that he held on for 20 min first?",
+    "Why breaths before compressions here, and why not drain the water?",
+    "What changes for shocks and epi in hypothermic arrest? Who decides?",
+    "Why no TOR at 20 min, and what does a low EtCO2 mean in a cold patient?",
+    "Why does UVMMC (bypass/ECMO) matter, and why not wait for air medical?"
+  ],
+  "crew_card": {
+    "dispatch": "Shelburne Pond, Pond Rd fishing access, Shelburne. Adult male through the ice. Caller: wife. Shelburne Fire ice rescue en route.",
+    "on_arrival": "Dusk, 28 F, wind. A man in the water ~40 yd out, arms on the ice edge, barely moving. Wife screaming on shore, wet dog beside her. Fire ice team heading out on the ice."
+  },
+  "actor_card": {
+    "Wife": "\"He went after the dog. He was holding on and talking to me - then he went under!\" Gives times if asked calmly. Wants to ride.",
+    "FD rescuer": "At hand-over: \"He's stiff and his pupils are blown - he's gone, right?\" Does CPR if assigned.",
+    "Partner (T+20)": "\"20 minutes, EtCO2 7 - do we call it?\"",
+    "Medical Direction": "If asked about epi: \"Hold epi while he's this cold.\" Destination: UVMMC, notify for bypass/ECMO.",
+    "Evaluator": "Analysis 1: VF, shock advised. VF continues, AED keeps advising. No pulse unless you inject Stage E."
+  },
+  "show_cards": [
+    {"type": "strip", "width": "full", "title": "AED / MONITOR", "caption": "SHOCK ADVISED", "rhythm": "vf", "rate": 0, "cue": "Every analysis (Stages A-D, F). Expect 1 shock only (2.13)"},
+    {"type": "capno", "width": "half", "title": "CAPNOGRAPHY", "caption": "EtCO2 9", "pattern": "cpr", "etco2": 9, "rr": 10, "cue": "CPR Stages A-D (7 at T+20). Low EtCO2 not predictive when cold (4.2)"},
+    {"type": "text", "width": "half", "title": "THERMOMETER", "body": "Tympanic: LO", "cue": "Any temp attempt. Not a core temp (4.2 Pearl)"},
+    {"type": "strip", "width": "half", "title": "AED / MONITOR", "caption": "NO SHOCK ADVISED", "rhythm": "sinus", "rate": 28, "cue": "Inject Stage E only: faint carotid on 60-s check"},
+    {"type": "text", "width": "half", "title": "FIRE ICE TEAM", "body": "In water ~20 min holding the ice.\nWent under ~1612.\nOut of water ~1621.\nWater ~36 F.", "cue": "Hand over at shore if crew asks for times"}
+  ],
+  "moulage_tags": [
+    {"region": "Lips", "text": "Blue-gray"},
+    {"region": "Mouth", "text": "Pink-white froth", "cue": "Add vomit 1-2 min into BVM"},
+    {"region": "Jaw / limbs", "text": "Stiff, hard to move"},
+    {"region": "Eyes", "text": "Pupils 6 mm, not reacting"},
+    {"region": "Chest / back", "text": "Ice-cold to the touch"},
+    {"region": "Clothes", "text": "Soaked, ice crusted"},
+    {"region": "Back (lung sounds)", "text": "Crackles both sides"}
+  ],
+  "learn_more": {
+    "topic": "hypothermic cardiac arrest after cold-water drowning",
+    "focus": "ventilation first, shock and epinephrine limits, gentle handling, no early termination, ECMO destination"
+  }
+}

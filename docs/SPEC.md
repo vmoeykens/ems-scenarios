@@ -6,7 +6,7 @@ Origin: viability assessment + Claude Code prompt from the "EMS Scenarios" claud
 
 ## Context
 
-- Users: instructors running AEMT crew-chief-in-training (CCIT) scenarios at **UVM Rescue** (Vermont). Scenarios follow VT Statewide EMS Protocols 2025 (`docs/reference/eprip-2025-EMS-Protocols_0.pdf`).
+- Users: instructors running AEMT crew-chief-in-training (CCIT) scenarios at **UVM Rescue** (Vermont). Scenarios follow VT Statewide EMS Protocols 2025 (text: `docs/reference/eprip-2025-EMS-Protocols-text.txt`; PDF: `public/protocols/vt-ems-protocols-2025.pdf`).
 - Content source of truth: `scenarios/*.json` (CARD-01, MED-01..03, TRA-01..03, ARR-01..03).
 - Print path: `python3 tools/ems_scenario.py scenarios/X.json X.pdf` (needs reportlab, matplotlib, numpy, segno, Graphviz `dot`). It **validates first** and refuses to build on problems. The PDF and the app must keep working from the same JSON.
 - Authoring rules for scenario content: `docs/scenario-authoring-standard.md` (the skill used to write the scenarios). Read it before touching JSON - it defines the schema, the "no hints on card faces" rule, AEMT scope limits, stage-letter conventions, etc.
@@ -23,7 +23,7 @@ Origin: viability assessment + Claude Code prompt from the "EMS Scenarios" claud
 ## Stack
 
 - Vite + React + TypeScript. Static build, deployable to any static host (GitHub Pages is fine).
-- PWA, offline after first load (training rooms / rigs have poor signal).
+- Offline after first load (training rooms / rigs have poor signal): a small network-first service worker (`public/sw.js`, registered relative to the page) instead of a full PWA plugin; no manifest/installability.
 - Tailwind for styling.
 - ajv (or zod generated from the schema) validating against `schema/scenario.schema.json`.
 
@@ -53,7 +53,25 @@ User requirement (Nov 2026): "The UI of the application should match the paper o
 
   Revealed vs hidden vitals is greyscale first (hidden = dashed grey cell "tap", revealed = solid value); `pushed` is only added if testing shows that is ambiguous. Any new accent needs a row in this table.
 - **Print**: a print stylesheet renders the screens as the paper sheet: accents become black (MISSED prints as bold "MISSED"), interactive chrome hidden, footer kept. The debrief summary export uses the same stylesheet.
-- **Student display exception**: the `/display` monitor keeps the patient-monitor look (black background, large white numerals); waveforms may use a single accent (`monitor-wave`). This is the only dark/colored screen. (Open question in `docs/PLAN.md`: confirm, or use a paper-style display instead.)
+- **Student display exception** (confirmed Nov 2026): the `/display` MONITOR view keeps the patient-monitor look (black background, large white numerals); waveforms use a single accent (`monitor-wave`). This is the only dark/colored screen. The display's INFO / CARDS view is paper-style.
+
+## User decisions (Nov 2026, before Phase 1)
+
+1. **Stateless**: no backend, no DB, no IndexedDB; static GitHub Pages (relative base + hash routes). Run state in memory + one localStorage autosave key for the in-progress run (resume prompt on load; cleared on export/discard). Imported scenarios are session-only. Runs screen = open exported run JSON files. Exports: JSON run record, CSV events, printable B&W HTML summary.
+2. **Paper on the web** for all instructor screens (section names/order as the PDF), greyscale except the four accents below; print stylesheet ~= the paper sheet.
+3. **Student screen** = separate window `#/display` with two crew-switchable views (large tabs): **MONITOR** (default; black monitor, large numerals for revealed vitals only, `--` otherwise, live ECG + capno sweep, labelled SIMULATED) and **INFO / CARDS** (paper: crew card from the start + pushed show cards / moulage tag findings, newest first, persisting for the run; 12-lead/strip/capno rendered static). The instructor can push a card and optionally auto-switch the display to INFO. Only `toDisplay()` builds what crosses the transport; a leak test covers every scenario.
+4. **Monitor per stage**: optional `vitals[].monitor: {rhythm, rate, p_rate?, st?, capno?: {pattern, etco2, rr}}` (schema + app validator; the PDF generator ignores it). Populated for every stage of the 10 scenarios from what each already states. The display monitor follows the selected stage; pushing a strip/capno card overrides until the stage changes.
+5. **Branches** with `goto_stage` switch the vitals stage when tapped, including examiner injects. No automatic phase advance (instructor advances; `goto_phase` is honoured if present).
+6. Keep: IF length 75; app validator stricter than the generator; index ids + scenario sha-256 in each run record; images (if ever used) bundled under `public/scenario-assets/`.
+
+## Protocol viewer (Nov 2026 request)
+
+User request: "Embed the current VT EMS protocols PDF in the web app; when scenarios reference a protocol, hyperlink it to a pop-out or sidebar showing that protocol."
+
+- **PDF**: `public/protocols/vt-ems-protocols-2025.pdf` (official file: https://www.healthvermont.gov/sites/default/files/document/eprip-2025-EMS-Protocols_0.pdf; the document permits reproduction and distribution). Not committed yet - the user adds it. The app works without it: one same-origin HEAD request at start decides; if the file is missing, protocol links are plain links to the official PDF in a new tab (the only external link; no other runtime network calls).
+- **Viewer**: pdf.js (`pdfjs-dist`, worker bundled locally as a hashed asset, relative-base safe), loaded with `import()` only when the first protocol is opened. Right-side drawer on wide screens (>= 1280 px), full-screen sheet on tablets; opens at the protocol's first page; prev/next page, zoom, "Open full PDF" (new tab at that page), close (Esc). Chrome is paper/greyscale; the PDF itself renders in its own colors (its provider-level color coding matters).
+- **Index**: `src/data/protocol-index.json` = `{ "<number>": { title, page } }`, seeded from the TOC of `docs/reference/eprip-2025-EMS-Protocols-text.txt` (a text extraction; 127 entries incl. 5.x, 9.x, A.1-A.8; `page: null`). `scripts/build-protocol-index.ts` (`npm run protocol-index`, also `prebuild`) reads the real PDF with pdfjs-dist and fills `page` (title words + Adult/Pediatric + base number on a non-TOC page); it skips quietly when the PDF is absent. If a page is still null, the viewer runs the same text search in the browser at open time.
+- **Linkify** (`src/lib/protocols/refs.ts`): protocol numbers in any scenario text rendered through `Md` on instructor screens (protocols list, flow give/expected/branches, critical, objectives, debrief, differentials, history ...) become links: `3.0A`, `(2.8A)`, `per 2.24A`, `4.9`, `8.15`, `2.22A/P` (two links), `A.1`. Only numbers present in the index link; doses/volumes/temps/versions/times never do (unit lookahead + index check; tested on all scenario text). The student display has no protocol provider, so it never shows links.
 
 ## Deployment
 
@@ -95,10 +113,10 @@ User requirement (Nov 2026): "The UI of the application should match the paper o
 
 ## Phase 2 - Student display
 
-- "Open student screen" opens `/display` in a new window. Sync via BroadcastChannel behind a `SyncTransport` interface so WebSocket/Supabase can drop in later (don't build those now).
-- Looks like a simple patient monitor: black background, large numerals for revealed vitals only (unrevealed = "--"), animated ECG and capnography when the current stage/card specifies them, plus a card viewer for pushed show cards (text cards in large type; 12-lead/strip/capno rendered).
+- "Open student screen" opens `#/display` in a new window. Sync via BroadcastChannel behind a `SyncTransport` interface so WebSocket/Supabase can drop in later (don't build those now).
+- Two views (decision 3): MONITOR (black, large numerals for revealed vitals only, "--" otherwise, animated ECG lead II + capnography from the current stage's `monitor` or a pushed strip/capno card) and INFO / CARDS (paper; crew card + pushed cards/tags newest first; text in large type; 12-lead/strip/capno rendered static).
 - Port ECG/capno synthesis from `tools/ems_scenario.py` (`ecg()`, `twelve_png()`, `strip_png()`, `capno_png()`) to TypeScript on `<canvas>`: same rhythms (sinus, afib, svt, vt, vf, asystole, chb with p_rate, avb1, flutter with p_rate), same per-lead R/S/T/P amplitudes and ST-shift model, same capno patterns (normal, shark, cpr). Static render for cards, scrolling sweep for the live monitor. Label everything "SIMULATED".
-- The student display must never show instructor-only content: cues, stage names/triggers, branch text, critical list, differentials.
+- The student display must never show instructor-only content: cues, stage names/triggers, the vitals `other` column, branch text, critical list, differentials, actor card, scenario title.
 
 ## Constraints
 

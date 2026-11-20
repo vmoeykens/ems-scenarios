@@ -1,0 +1,290 @@
+{
+  "id": "TRA-06",
+  "title": "House fire - burns + smoke inhalation",
+  "version": "v1.1 | VT Protocols 2025 | UVM Rescue",
+  "category": "Trauma",
+  "level": "AEMT CCIT",
+  "run_time": "20-25 min",
+  "difficulty": "Hard",
+  "crew": "CC + 2, FD on scene",
+  "protocols": [
+    "1.2 Routine Pt Care",
+    "4.0 Burns",
+    "2.25 Smoke Inhalation / CO",
+    "5.1A Airway Mgmt",
+    "2.20A Pain",
+    "8.0 Air Medical"
+  ],
+  "objectives": [
+    "Suspect CO despite SpO2 98%; 100% O2 by NRB (2.25)",
+    "Recognize airway burn signs; early airway alert + intercept, no delay (4.0)",
+    "Rule of nines: ~23% partial thickness; exclude 1st degree (4.0)",
+    "Stop burning, dry cover, prevent hypothermia; no prolonged cooling",
+    "2 large-bore IVs, warm LR 500 mL/hr (4.0); direct to UVMMC"
+  ],
+  "resources": "O2/NRB, BVM, suction, capno, SpCO (CO-oximeter) if carried, dry sterile sheets, blankets, IV x2, warm LR, albuterol. UVMMC (Level 1; no burn center in VT) ~10 min; intercept ETA 12 min",
+  "dispatch": "UVM Rescue, respond to 41 Pheasant Way, South Burlington, for a working structure fire. Fire reports one occupant removed from the house with burns. Time out 0615.",
+  "scene": {
+    "location": "Front lawn of single-family home, 0620, dark, 24 F. ~10 min from UVMMC. Fire knocked down.",
+    "setup": "FD carried pt out of smoky kitchen 2 min ago. Pt sitting on a tarp. FD put a nasal cannula on him at 2 L.",
+    "moulage": "Soot on face/nares, singed brows, blistered R arm + upper chest + back of L hand, red L forearm; charred wet shirt; watch on R wrist.",
+    "roles": "Pt actor; FD lieutenant (\"His sat's 98, he's good\"); wife (got out unhurt, gives history)."
+  },
+  "patient": {
+    "name": "Robert Gagnon",
+    "age": "61",
+    "sex": "M",
+    "weight_kg": "85",
+    "cc": "Burns from kitchen fire",
+    "on_arrival": "Sitting on tarp, coughing, hoarse, soot on face. Blistered R arm/chest. Unsure what time it is."
+  },
+  "history": {
+    "SAMPLE": [
+      ["S", "Burning pain, headache, nausea, cough, \"throat scratchy\""],
+      ["A", "NKDA"],
+      ["M", "Lisinopril, metformin"],
+      ["P", "HTN, type 2 DM"],
+      ["L", "Dinner 1900"],
+      ["E", "Grease fire ~0555; beat at it, shirt caught. ~10 min in smoky kitchen"]
+    ],
+    "OPQRST": [
+      ["O", "~0555"],
+      ["P", "Touch, air on burns"],
+      ["Q", "Burning, stinging"],
+      ["R", "R arm, chest, face, L hand"],
+      ["S", "8/10"],
+      ["T", "Constant; headache worse"]
+    ]
+  },
+  "primary": [
+    ["X / hemorrhage", "None"],
+    ["Airway", "Patent but **hoarse**; soot in mouth, singed nasal hairs"],
+    ["Breathing", "RR 26, cough, black-flecked sputum, scattered wheezes"],
+    ["Circulation", "Radial strong, rapid. Unburned skin warm"],
+    ["Disability", "GCS 14 (confused to time), headache"],
+    ["Exposure", "Stop burning, cut off smoldering shirt, remove watch. Cover, keep warm"],
+    ["Priority / impression", "**HIGH**: inhalation injury, CO, ~23% TBSA"]
+  ],
+  "secondary": [
+    ["Face", "Red/blistered forehead + cheeks (~4.5%); brows singed"],
+    ["Mouth / nose", "Soot on tongue, singed nares; no swelling yet"],
+    ["Neck / voice", "Hoarse; no stridor yet"],
+    ["Chest", "Upper anterior chest blistered (~9%); wheezes"],
+    ["R arm", "Blistered, circumferential, shoulder-fingers (~9%); radial present"],
+    ["L hand / forearm", "Back of hand blistered (~1%); forearm red only (exclude)"],
+    ["Abd / back / legs", "Unburned"],
+    ["TBSA", "**~23% partial thickness** (do not count red-only skin)"]
+  ],
+  "vitals": [
+    {
+      "stage": "A Initial",
+      "trigger": "First set (FD nasal cannula 2 L)",
+      "HR": "**118**", "BP": "**152/94**", "RR": "**26**", "SpO2": "**98% NC**", "EtCO2": "33",
+      "BGL": "148", "Temp": "97.6", "Pain": "8", "GCS": "**14**", "Pupils": "4 PERRL",
+      "other": "Hoarse, black sputum, wheezes. **SpCO 24%** (if carried)",
+      "bold": ["HR", "BP", "RR", "SpO2", "GCS"],
+      "monitor": {"rhythm": "sinus", "rate": 118, "capno": {"pattern": "normal", "etco2": 33, "rr": 26}}
+    },
+    {
+      "stage": "B NRB",
+      "trigger": "NRB 15 L, covered, warm (~T+8)",
+      "HR": "108", "BP": "146/90", "RR": "22", "SpO2": "100% NRB", "EtCO2": "35",
+      "BGL": "-", "Temp": "97.4", "Pain": "7", "GCS": "15", "Pupils": "-",
+      "other": "Headache persists, confusion clearing. SpCO 19%",
+      "monitor": {"rhythm": "sinus", "rate": 108, "capno": {"pattern": "normal", "etco2": 35, "rr": 22}}
+    },
+    {
+      "stage": "C Chilled",
+      "trigger": "IF burns wet/cooled > 15 min or left uncovered",
+      "HR": "122", "BP": "140/88", "RR": "24", "SpO2": "-", "EtCO2": "33",
+      "BGL": "-", "Temp": "**95.4**", "Pain": "8", "GCS": "-", "Pupils": "-",
+      "other": "Shivering hard, mottled unburned skin",
+      "bold": ["Temp"],
+      "monitor": {"rhythm": "sinus", "rate": 122, "capno": {"pattern": "normal", "etco2": 33, "rr": 24}}
+    },
+    {
+      "stage": "D Airway swelling",
+      "trigger": "Examiner inject (~T+12)",
+      "HR": "**126**", "BP": "156/96", "RR": "**30**", "SpO2": "**93% NRB**", "EtCO2": "**40**",
+      "BGL": "-", "Temp": "-", "Pain": "8", "GCS": "15", "Pupils": "-",
+      "other": "**Stridor**, muffled voice, drooling, tripoding",
+      "bold": ["HR", "RR", "SpO2", "EtCO2"],
+      "monitor": {"rhythm": "sinus", "rate": 126, "capno": {"pattern": "normal", "etco2": 40, "rr": 30}}
+    },
+    {
+      "stage": "E Low O2",
+      "trigger": "IF left on NC because SpO2 98% (~T+8)",
+      "HR": "**124**", "BP": "158/96", "RR": "26", "SpO2": "98% NC", "EtCO2": "32",
+      "BGL": "-", "Temp": "-", "Pain": "8", "GCS": "**13**", "Pupils": "-",
+      "other": "Vomits, more confused. SpCO 26%",
+      "bold": ["HR", "GCS"],
+      "monitor": {"rhythm": "sinus", "rate": 124, "capno": {"pattern": "normal", "etco2": 32, "rr": 26}}
+    },
+    {
+      "stage": "F Handoff",
+      "trigger": "Arrival UVMMC (~T+22)",
+      "HR": "106", "BP": "144/88", "RR": "22", "SpO2": "100% NRB", "EtCO2": "36",
+      "BGL": "-", "Temp": "97.2", "Pain": "6", "GCS": "15", "Pupils": "-",
+      "other": "Warm LR 500 mL/hr x2 lines. Hoarse, no stridor (unless D used)",
+      "monitor": {"rhythm": "sinus", "rate": 106, "capno": {"pattern": "normal", "etco2": 36, "rr": 22}}
+    }
+  ],
+  "flow": [
+    {
+      "time": "0-2",
+      "phase": "Arrival",
+      "give": "Read dispatch. FD Lt: \"His sat's 98 on the cannula, he's good.\"",
+      "branches": [
+        {"if": "Leaves NC on because SpO2 98%", "then": "Stage **E** at T+8; critical (evaluator discretion)"},
+        {"if": "NRB 15 L right away", "then": "Stage **B** by T+8"}
+      ],
+      "expected": [
+        "NRB 100% O2 regardless of SpO2 (2.25)",
+        "CO suspected: SpO2 unreliable",
+        "Roles assigned; pt into warm rig early"
+      ]
+    },
+    {
+      "time": "2-7",
+      "phase": "Airway / primary",
+      "give": "Stage **A**. Show MOUTH / THROAT card. SpCO card only if CO-oximeter used.",
+      "branches": [
+        {"if": "Airway burn signs not identified", "then": "no airway pre-alert; debrief when Stage **D** hits"}
+      ],
+      "expected": [
+        "Airway burn signs named: soot, singed nares, hoarse, sputum (4.0)",
+        "Intercept requested; UVMMC airway pre-alert",
+        "Albuterol 2.5 mg neb w/ O2 for wheezes (2.25)"
+      ]
+    },
+    {
+      "time": "5-10",
+      "phase": "Burn care / size",
+      "give": "Show BURNS card. Wife: \"Get the hose, put cold water on it!\"",
+      "branches": [
+        {"if": "Wet/cooled large area > 15 min", "then": "Stage **C**"},
+        {"if": "Red-only forearm counted in TBSA", "then": "TBSA overcalled (~27%); debrief rule of nines"}
+      ],
+      "expected": [
+        "TBSA ~23% partial thickness by rule of nines (4.0)",
+        "Burning stopped; clothing + watch removed",
+        "Dry sterile sheets, blankets, heat on (4.0)"
+      ]
+    },
+    {
+      "time": "8-12",
+      "phase": "Destination",
+      "give": "FD Lt: \"Want the helicopter for a burn?\" UVMMC 10 min; intercept 12 min.",
+      "branches": [
+        {"if": "Waits on scene for intercept or air", "then": "delay; debrief 8.0 (air not faster here)"}
+      ],
+      "expected": [
+        "Direct to UVMMC (Level 1; no VT burn center)",
+        "Notify early: inhalation injury, TBSA, SpCO",
+        "Intercept en route only, no delay"
+      ]
+    },
+    {
+      "time": "10-18",
+      "phase": "Treatment en route",
+      "give": "IV hard (R arm burned). Pt asks for \"something for the pain.\"",
+      "branches": [
+        {"type": "inject", "if": "Stridor + muffled voice (~T+12)", "then": "Stage **D**; expect upright, NRB, BVM + suction ready, Med Direction, UVMMC airway alert, no stop"},
+        {"if": "Wide-open fluid bolus for burns", "then": "debrief 4.0 rate 500 mL/hr; look for other shock cause"},
+        {"if": "Nitrous given while confused", "then": "contraindicated (AMS, 2.20A); debrief"}
+      ],
+      "expected": [
+        "2 large-bore IVs, unburned skin (> 20% TBSA, 4.0)",
+        "Warm LR 500 mL/hr; 12-lead + BGL (2.25)",
+        "Pain: IV acetaminophen (2.20A); opioids via intercept"
+      ]
+    },
+    {
+      "time": "18+",
+      "phase": "Report / handoff",
+      "give": "Stage **F**. Evaluator = UVMMC ED.",
+      "expected": [
+        "Report: TBSA, airway signs, SpCO, time in smoke",
+        "Fluid type/rate/volume and start time",
+        "SIREN: burn diagram, O2 start time"
+      ]
+    }
+  ],
+  "critical": [
+    "O2 not maximized because SpO2 normal (2.25)",
+    "Airway burn signs missed / no early airway alert (4.0)",
+    "TBSA not estimated or 1st degree counted (4.0)",
+    "Large-area wet cooling or no hypothermia prevention (4.0)",
+    "Scene delay for intercept/air with UVMMC 10 min (8.0)",
+    "< 2 IVs or wrong fluid plan for > 20% TBSA (4.0)",
+    "Nitrous with AMS / paramedic meds given by AEMT (2.20A)",
+    "Watch/jewelry left on circumferential arm burn"
+  ],
+  "differentials": [
+    ["CO poisoning (dx, w/ burns)", "Headache, confusion, nausea, SpCO 24", "-"],
+    ["Cyanide toxicity", "Closed-space smoke, confusion", "BP high, improving on O2; intercept if worse"],
+    ["Upper airway thermal injury", "Hoarse, soot, singed nares", "Coexists - expect swelling"],
+    ["Smoke bronchospasm", "Wheezes, cough", "Coexists - albuterol"],
+    ["Hypoglycemia (DM)", "Metformin, confusion", "BGL 148"],
+    ["Head injury (fall)", "Confusion", "No trauma found, pupils equal"],
+    ["ACS (CO-induced)", "61 M, HTN, DM, tachy", "12-lead: sinus tach, no CP"]
+  ],
+  "debrief": [
+    "Why was SpO2 98% misleading here?",
+    "Which findings told you the airway was burned?",
+    "How did you get your TBSA, and what did you exclude?",
+    "Why not cool these burns with the hose?",
+    "Where should he go, and does air help? What fluid rate?"
+  ],
+  "crew_card": {
+    "dispatch": "41 Pheasant Way, South Burlington. Working structure fire, FD removed one occupant with burns. 0615, dark, 24 F.",
+    "on_arrival": "Fire knocked down. Man in his 60s sitting on a tarp on the lawn, coughing, face black with soot, R sleeve burned off. FD has a nasal cannula on him."
+  },
+  "actor_card": {
+    "Act": "Cough often, hoarse raspy voice. Rub your head: \"My head is pounding.\"",
+    "Confusion": "Unsure of time/day. Ask \"Is Linda out?\" twice.",
+    "Burns touched": "Flinch, \"That burns!\"",
+    "Airway swelling (on cue)": "Noisy high-pitched breathing in, muffled voice, sit forward, drool.",
+    "Wife (Linda)": "\"Get the hose on him!\" Gives meds/history when asked.",
+    "On NRB": "Clearer over 5-10 min; headache stays."
+  },
+  "show_cards": [
+    {
+      "type": "text", "width": "half", "title": "MOUTH / THROAT",
+      "body": "Soot on tongue and in nostrils.\nNose hairs singed.\nVoice hoarse.\nCoughing black-flecked sputum."
+    },
+    {
+      "type": "text", "width": "half", "title": "BURNS",
+      "body": "Face: forehead/cheeks red, blistered; brows singed.\nR arm: blistered, wet, shoulder to fingers, all the way around. Watch on wrist.\nUpper front chest: blistered.\nBack of L hand: blistered.\nL forearm: red, no blisters."
+    },
+    {
+      "type": "text", "width": "half", "title": "PULSE CO-OXIMETER",
+      "body": "SpO2 98%\nSpCO 24%\nPR 118",
+      "cue": "Only if crew uses a CO-oximeter (Stage A). Stage B: SpCO 19%. Stage E: SpCO 26%"
+    },
+    {
+      "type": "capno", "width": "half", "title": "CAPNOGRAPHY",
+      "caption": "EtCO2 33   RR 26", "pattern": "normal", "etco2": 33, "rr": 26,
+      "cue": "Stage A"
+    },
+    {
+      "type": "12lead", "title": "12-LEAD",
+      "caption": "Sinus tachycardia. Otherwise normal ECG.", "rhythm": "sinus", "rate": 118,
+      "cue": "Stage A (2.25: acquire + transmit). Machine read only"
+    }
+  ],
+  "moulage_tags": [
+    {"region": "Face", "text": "Forehead/cheeks red and blistered; brows singed"},
+    {"region": "Nose / mouth", "text": "Nose hairs singed; soot on tongue"},
+    {"region": "Neck (voice)", "text": "Hoarse voice", "cue": "Stage D: add stridor, muffled voice"},
+    {"region": "R arm (whole)", "text": "Blistered, wet, shoulder to fingers, all the way around; watch on wrist"},
+    {"region": "Upper chest", "text": "Blistered, weeping"},
+    {"region": "Back of L hand", "text": "Blistered"},
+    {"region": "L forearm", "text": "Red, no blisters"},
+    {"region": "Back (lung sounds)", "text": "Scattered wheezes both sides"}
+  ],
+  "learn_more": {
+    "topic": "major burns with smoke inhalation and carbon monoxide poisoning",
+    "focus": "airway burn signs, why SpO2 misleads in CO, rule of nines, cooling vs hypothermia, burn fluid rates"
+  }
+}

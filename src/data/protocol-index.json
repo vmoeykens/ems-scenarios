@@ -1,0 +1,510 @@
+{
+ "1.0": {
+  "title": "Routine Patient Care (VEFR)",
+  "page": null
+ },
+ "1.1": {
+  "title": "Routine Patient Care (EMR)",
+  "page": null
+ },
+ "1.2": {
+  "title": "Routine Patient Care",
+  "page": null
+ },
+ "1.3": {
+  "title": "Extended Care Guidelines",
+  "page": null
+ },
+ "2.0": {
+  "title": "Abdominal Pain (Non Traumatic) – Adult & Pediatric",
+  "page": null
+ },
+ "2.1": {
+  "title": "Adrenal Insufficiency – Adult/Pediatric",
+  "page": null
+ },
+ "2.2A": {
+  "title": "Allergic Reaction/Anaphylaxis – Adult",
+  "page": null
+ },
+ "2.2P": {
+  "title": "Allergic Reaction/Anaphylaxis – Pediatric",
+  "page": null
+ },
+ "2.3A": {
+  "title": "Altered Mental Status – Adult",
+  "page": null
+ },
+ "2.3P": {
+  "title": "Altered Mental Status – Pediatric",
+  "page": null
+ },
+ "2.4A": {
+  "title": "Asthma/COPD/RAD – Adult",
+  "page": null
+ },
+ "2.4P": {
+  "title": "Asthma/Bronchiolitis/RAD/Croup – Pediatric",
+  "page": null
+ },
+ "2.5": {
+  "title": "Behavioral Emergencies Including Suicide Attempts & Threats – Adult/Pediatric",
+  "page": null
+ },
+ "2.6P": {
+  "title": "Brief Resolved Unexplained Event (BRUE) – Pediatric",
+  "page": null
+ },
+ "2.7": {
+  "title": "Diabetic Emergencies (Hyperglycemia) – Adult & Pediatric",
+  "page": null
+ },
+ "2.8A": {
+  "title": "Diabetic Emergencies (Hypoglycemia) – Adult",
+  "page": null
+ },
+ "2.8P": {
+  "title": "Diabetic Emergencies (Hypoglycemia) – Pediatric",
+  "page": null
+ },
+ "2.9": {
+  "title": "Epistaxis / Nosebleed",
+  "page": null
+ },
+ "2.10": {
+  "title": "Exertional Heat Stroke",
+  "page": null
+ },
+ "2.11": {
+  "title": "Hyperkalemia & Renal Failure",
+  "page": null
+ },
+ "2.12": {
+  "title": "Hyperthermia (Environmental) – Adult & Pediatric",
+  "page": null
+ },
+ "2.13": {
+  "title": "Hypothermia (Environmental) – Adult & Pediatric",
+  "page": null
+ },
+ "2.14": {
+  "title": "Nausea/Vomiting – Adult & Pediatric",
+  "page": null
+ },
+ "2.15A": {
+  "title": "Nerve Agent/Organophosphate Poisoning – Adult",
+  "page": null
+ },
+ "2.15P": {
+  "title": "Nerve Agent/Organophosphate Poisoning – Pediatric",
+  "page": null
+ },
+ "2.16": {
+  "title": "Newborn Care",
+  "page": null
+ },
+ "2.17": {
+  "title": "Newborn Resuscitation",
+  "page": null
+ },
+ "2.18": {
+  "title": "Normal Labor and Delivery",
+  "page": null
+ },
+ "2.19": {
+  "title": "Obstetrical Emergencies",
+  "page": null
+ },
+ "2.20A": {
+  "title": "Pain Management – Adult",
+  "page": null
+ },
+ "2.20P": {
+  "title": "Pain Management – Pediatric",
+  "page": null
+ },
+ "2.21A": {
+  "title": "Poisoning/Substance Abuse/Overdose – Adult",
+  "page": null
+ },
+ "2.21P": {
+  "title": "Poisoning/Substance Abuse/Overdose – Pediatric",
+  "page": null
+ },
+ "2.22A": {
+  "title": "Seizures – Adult",
+  "page": null
+ },
+ "2.22P": {
+  "title": "Seizures – Pediatric",
+  "page": null
+ },
+ "2.23A": {
+  "title": "Sepsis – Adult",
+  "page": null
+ },
+ "2.23P": {
+  "title": "Sepsis – Pediatric",
+  "page": null
+ },
+ "2.24A": {
+  "title": "Shock – Adult",
+  "page": null
+ },
+ "2.24P": {
+  "title": "Shock – Pediatric",
+  "page": null
+ },
+ "2.25": {
+  "title": "Smoke Inhalation/Carbon Monoxide Poisoning",
+  "page": null
+ },
+ "2.26A": {
+  "title": "Stroke – Adult",
+  "page": null
+ },
+ "2.27": {
+  "title": "Syncope – Adult & Pediatric",
+  "page": null
+ },
+ "3.0A": {
+  "title": "Acute Coronary Syndrome – Adult",
+  "page": null
+ },
+ "3.1A": {
+  "title": "Bradycardia – Adult",
+  "page": null
+ },
+ "3.1P": {
+  "title": "Bradycardia – Pediatric",
+  "page": null
+ },
+ "3.2A": {
+  "title": "Cardiac Arrest – Adult",
+  "page": null
+ },
+ "3.2P": {
+  "title": "Cardiac Arrest – Pediatric",
+  "page": null
+ },
+ "3.3A": {
+  "title": "Congestive Heart Failure (Pulmonary Edema) – Adult",
+  "page": null
+ },
+ "3.4A": {
+  "title": "Post Resuscitative Care – Adult",
+  "page": null
+ },
+ "3.4P": {
+  "title": "Post Resuscitative Care – Pediatric",
+  "page": null
+ },
+ "3.5A": {
+  "title": "Tachycardia – Adult",
+  "page": null
+ },
+ "3.5P": {
+  "title": "Tachycardia – Pediatric",
+  "page": null
+ },
+ "3.6": {
+  "title": "Team Focused CPR – Adult & Pediatric",
+  "page": null
+ },
+ "4.0": {
+  "title": "Burns/Electrocution/Lightning – Adult & Pediatric",
+  "page": null
+ },
+ "4.1": {
+  "title": "Crush/Suspension Injury – Adult & Pediatric",
+  "page": null
+ },
+ "4.2": {
+  "title": "Drowning/Submersion Injuries – Adult & Pediatric",
+  "page": null
+ },
+ "4.3": {
+  "title": "Eye & Dental Injuries – Adult & Pediatric",
+  "page": null
+ },
+ "4.4": {
+  "title": "Hemorrhage Control – Adult & Pediatric",
+  "page": null
+ },
+ "4.5": {
+  "title": "Musculoskeletal Injuries – Adult & Pediatric",
+  "page": null
+ },
+ "4.6": {
+  "title": "Spinal Trauma and Assessment",
+  "page": null
+ },
+ "4.7": {
+  "title": "Strangulation",
+  "page": null
+ },
+ "4.8": {
+  "title": "Thoracic and Abdominal Injuries – Adult & Pediatric",
+  "page": null
+ },
+ "4.9": {
+  "title": "Trauma Triage and Transport Decision",
+  "page": null
+ },
+ "4.10": {
+  "title": "Traumatic Brain Injury – Adult & Pediatric",
+  "page": null
+ },
+ "4.11": {
+  "title": "Traumatic Cardiac Arrest",
+  "page": null
+ },
+ "4.12": {
+  "title": "Traumatic Emergencies",
+  "page": null
+ },
+ "5.0": {
+  "title": "Airway Management Procedure",
+  "page": null
+ },
+ "5.1A": {
+  "title": "Airway Management – Adult",
+  "page": null
+ },
+ "5.1P": {
+  "title": "Airway Management – Pediatric",
+  "page": null
+ },
+ "5.2": {
+  "title": "Automated Transport Ventilator",
+  "page": null
+ },
+ "5.3A": {
+  "title": "Bilevel Positive Airway Pressure (BiPAP) – Adult",
+  "page": null
+ },
+ "5.4": {
+  "title": "Continuous Positive Airway Pressure (CPAP) – Adult & Pediatric",
+  "page": null
+ },
+ "5.5A": {
+  "title": "Endotracheal Tube Introducer (“Bougie”) – Adult",
+  "page": null
+ },
+ "5.6": {
+  "title": "Foreign-Body Obstruction",
+  "page": null
+ },
+ "5.7": {
+  "title": "High Flow Nasal Canula",
+  "page": null
+ },
+ "5.8": {
+  "title": "Nasotracheal Intubation",
+  "page": null
+ },
+ "5.9": {
+  "title": "Orotracheal Intubation",
+  "page": null
+ },
+ "5.10": {
+  "title": "Percutaneous Cricothyrotomy",
+  "page": null
+ },
+ "5.11": {
+  "title": "Suctioning of Inserted Airway",
+  "page": null
+ },
+ "5.12": {
+  "title": "Supraglottic Airway – Adult & Pediatric",
+  "page": null
+ },
+ "5.13": {
+  "title": "Surgical Cricothyrotomy",
+  "page": null
+ },
+ "5.14": {
+  "title": "Tracheostomy Care – Adult & Pediatric",
+  "page": null
+ },
+ "6.0": {
+  "title": "Children With Special Health Needs (CSHN)",
+  "page": null
+ },
+ "6.1": {
+  "title": "Double Sequential Defibrillation",
+  "page": null
+ },
+ "6.2": {
+  "title": "ECG Acquisition, Transmission and Interpretation",
+  "page": null
+ },
+ "6.3": {
+  "title": "High Consequence Pathogen – Maintenance & Considerations",
+  "page": null
+ },
+ "6.4": {
+  "title": "Intraosseous Access",
+  "page": null
+ },
+ "6.5": {
+  "title": "Needle Decompression Thoracostomy (NDT)",
+  "page": null
+ },
+ "6.6": {
+  "title": "Restraints",
+  "page": null
+ },
+ "6.7": {
+  "title": "Taser (Conducted Electrical Weapon) Probe Removal and Assessment",
+  "page": null
+ },
+ "6.8": {
+  "title": "Vascular Access Via Pre-Existing Central Catheter",
+  "page": null
+ },
+ "6.9": {
+  "title": "Waveform Capnography",
+  "page": null
+ },
+ "7.0": {
+  "title": "Interfacility Transfer",
+  "page": null
+ },
+ "7.1": {
+  "title": "Interfacility Transport of Patients with IV Heparin by Paramedics",
+  "page": null
+ },
+ "7.2": {
+  "title": "Point of Care Ultrasound (POCUS)",
+  "page": null
+ },
+ "7.3": {
+  "title": "Rapid Sequence Intubation (RSI)",
+  "page": null
+ },
+ "8.0": {
+  "title": "Air Medical Transport",
+  "page": null
+ },
+ "8.1": {
+  "title": "Baby Safe Haven",
+  "page": null
+ },
+ "8.2": {
+  "title": "Bariatric Triage, Care & Transport",
+  "page": null
+ },
+ "8.3": {
+  "title": "Communications",
+  "page": null
+ },
+ "8.4": {
+  "title": "Communications Failure",
+  "page": null
+ },
+ "8.5": {
+  "title": "Consent for Treatment of a Minor",
+  "page": null
+ },
+ "8.6": {
+  "title": "Crime Scene/Preservation of Evidence",
+  "page": null
+ },
+ "8.7": {
+  "title": "Do Not Resuscitate (DNR) & Clinician Orders (COLST) and DNR/COLST Form",
+  "page": null
+ },
+ "8.8": {
+  "title": "Hospice",
+  "page": null
+ },
+ "8.9": {
+  "title": "Implantable Ventricular Assist Device (VAD)",
+  "page": null
+ },
+ "8.10": {
+  "title": "Lift Assist",
+  "page": null
+ },
+ "8.11": {
+  "title": "Naloxone Leave Behind Overdose Rescue Program",
+  "page": null
+ },
+ "8.12": {
+  "title": "Non-EMS Personnel at the Emergency Scene",
+  "page": null
+ },
+ "8.13": {
+  "title": "Pediatric Transportation",
+  "page": null
+ },
+ "8.14": {
+  "title": "Police Custody",
+  "page": null
+ },
+ "8.15": {
+  "title": "Refusal of Care and Patient Non-Transport Form",
+  "page": null
+ },
+ "8.16": {
+  "title": "Rehabilitation – Scene and Training Guidelines for EMS",
+  "page": null
+ },
+ "8.17": {
+  "title": "Resuscitation Initiation and Termination",
+  "page": null
+ },
+ "8.18": {
+  "title": "Safe Response and Transportation Guidelines",
+  "page": null
+ },
+ "8.19": {
+  "title": "Victims of Violence",
+  "page": null
+ },
+ "9.0": {
+  "title": "Hazardous Materials Exposure",
+  "page": null
+ },
+ "9.1": {
+  "title": "Mass/Multiple Casualty Triage",
+  "page": null
+ },
+ "9.2": {
+  "title": "Radiation Injuries – Adult & Pediatric",
+  "page": null
+ },
+ "A.1": {
+  "title": "Cardiac & CPAP Algorithms",
+  "page": null
+ },
+ "A.2": {
+  "title": "Adult Drip Rate Charts",
+  "page": null
+ },
+ "A.3": {
+  "title": "High Consequence Pathogens (COVID-19, Ebola, Measles)",
+  "page": null
+ },
+ "A.4": {
+  "title": "Vermont Adult Medication Reference",
+  "page": null
+ },
+ "A.5": {
+  "title": "Pediatric Color Coded Appendix",
+  "page": null
+ },
+ "A.6": {
+  "title": "Scope of Practice",
+  "page": null
+ },
+ "A.7": {
+  "title": "VT Interfacility Transfer Scope of Practice",
+  "page": null
+ },
+ "A.8": {
+  "title": "BEFAST",
+  "page": null
+ }
+}

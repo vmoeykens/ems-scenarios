@@ -1,0 +1,306 @@
+{
+  "id": "TRA-05",
+  "title": "Snowmobile vs tree - 2 patients",
+  "version": "v1.1 | VT Protocols 2025 | UVM Rescue",
+  "category": "Trauma",
+  "level": "AEMT CCIT",
+  "run_time": "25-30 min",
+  "difficulty": "Hard",
+  "crew": "CC + 2 (AEMT, EMT), FD w/ tracked UTV",
+  "protocols": [
+    "1.2 Routine Pt Care",
+    "9.1 MCI Triage (SALT)",
+    "4.12 Traumatic Emergencies",
+    "4.9 Trauma Triage",
+    "8.0 Air Medical",
+    "2.24A Shock",
+    "4.6 Spinal",
+    "4.5 Musculoskeletal",
+    "2.13 Hypothermia"
+  ],
+  "objectives": [
+    "Triage both pts fast; quiet Pt 1 (shock, AMS) before loud Pt 2 (9.1)",
+    "Request 2nd ambulance + intercept early; split crew, name a Pt 2 owner",
+    "SMR (motorized rec vehicle + AMS, 4.6); insulate from snow (2.13)",
+    "Destination per 4.9; air vs ground per 8.0 with stated rationale",
+    "Pt 1: 250 mL warm boluses (2.24A). Pt 2: traction splint, CMS (4.5)"
+  ],
+  "resources": "FD tracked UTV + rescue sled (pts 1.5 mi in, ~8 min ride), 2nd ambulance ETA 20 min once requested, paramedic intercept 15 min, air medical ETA 30 min to trailhead LZ. Trailhead -> UVMMC (Level 1) ~25 min ground",
+  "dispatch": "UVM Rescue, respond to the VAST trailhead on Browns Trace Rd, Jericho, for a snowmobile crash on the trail. Caller reports two riders hurt, one is not making sense. Fire is responding with their UTV. Time out 1415.",
+  "scene": {
+    "location": "VAST trail 1.5 mi from Browns Trace Rd trailhead, Jericho. 18 F, light snow, wind. Sled left trail on a curve and hit a tree.",
+    "setup": "FD UTV shuttles crew + gear. Pt 1 (driver) in snow by tree, helmet on. Pt 2 (passenger) 20 ft away, sitting up, screaming. Friend rode up on 2nd sled.",
+    "moulage": "Pt 1: helmet scuffed L, jacket torn L chest, wet, pale. Pt 2: L thigh deformity (padding under snow pants), snow-covered.",
+    "roles": "Pt 1 actor (quiet); Pt 2 actor (loud); FD officer (\"Which one first?\" / \"Want the helicopter?\"); friend."
+  },
+  "patient": {
+    "name": "Josh Larrabee (Pt 1, driver)",
+    "age": "38",
+    "sex": "M",
+    "weight_kg": "90",
+    "cc": "\"My side hurts... what happened?\"",
+    "on_arrival": "Lying on L side in snow by tree, helmet on. Quiet, slow to answer, grunting with breaths, pale."
+  },
+  "history": {
+    "SAMPLE": [
+      ["S", "L ribs/belly pain, SOB, cold, L shoulder pain"],
+      ["A", "Penicillin (rash)"],
+      ["M", "None"],
+      ["P", "None"],
+      ["L", "Lunch 1200; 2 beers (per friend)"],
+      ["E", "Driver, ~35 mph, L side into tree, thrown off. ~25 min in snow"]
+    ],
+    "OPQRST": [
+      ["O", "At crash, ~25 min ago"],
+      ["P", "Breathing in, any movement"],
+      ["Q", "Sharp ribs; deep ache belly"],
+      ["R", "L lower ribs -> L shoulder"],
+      ["S", "8/10"],
+      ["T", "Constant, worse"]
+    ]
+  },
+  "primary": [
+    ["X / hemorrhage", "No external bleeding"],
+    ["Airway", "Patent; helmet on - remove w/ 2 people for access"],
+    ["Breathing", "RR 26 shallow, splinting. L lower ribs crepitus; L base decreased"],
+    ["Circulation", "Radial weak, rapid. Pale, cool. **Shock**"],
+    ["Disability", "GCS 14 (repeats questions). Moves all 4"],
+    ["Exposure", "LUQ tender, firm. Wet clothes, lying in snow - insulate"],
+    ["Priority / impression", "**RED / Pt 1 first**: shock, chest + abd. Pt 2 = YELLOW"]
+  ],
+  "secondary": [
+    ["Head", "Helmet scuffed L; no deformity after removal"],
+    ["Neck", "Unreliable exam (AMS) -> SMR (4.6)"],
+    ["Chest", "L ribs 8-10 crepitus, tender; no paradoxical movement"],
+    ["Abdomen", "LUQ tender, guarding, mild distension"],
+    ["Pelvis", "Stable, non-tender (one gentle check)"],
+    ["Extremities", "No deformity; CMS intact x4"],
+    ["Back / flank", "L flank tender"],
+    ["Skin / temp", "Wet, cold, shivering"]
+  ],
+  "vitals": [
+    {
+      "stage": "A Initial",
+      "trigger": "Pt 1 first set (in snow, ~T+3)",
+      "HR": "**124**", "BP": "**96/64**", "RR": "26", "SpO2": "**92% RA**", "EtCO2": "30",
+      "BGL": "118", "Temp": "**95.4**", "Pain": "8", "GCS": "**14**", "Pupils": "4 PERRL",
+      "other": "Pale, cool, grunting. **HR > SBP**",
+      "bold": ["HR", "BP", "SpO2", "Temp", "GCS"],
+      "monitor": {"rhythm": "sinus", "rate": 124, "capno": {"pattern": "normal", "etco2": 30, "rr": 26}}
+    },
+    {
+      "stage": "B Packaged",
+      "trigger": "O2, SMR, insulated, on sled (~T+12)",
+      "HR": "120", "BP": "94/62", "RR": "24", "SpO2": "96% NRB", "EtCO2": "31",
+      "BGL": "-", "Temp": "95.4", "Pain": "8", "GCS": "14", "Pupils": "-",
+      "other": "Radial weak but present",
+      "monitor": {"rhythm": "sinus", "rate": 120, "capno": {"pattern": "normal", "etco2": 31, "rr": 24}}
+    },
+    {
+      "stage": "C Delay / cold",
+      "trigger": "IF CC tied up w/ Pt 2, scene > 20 min, or not insulated",
+      "HR": "**142**", "BP": "**72/44**", "RR": "**32**", "SpO2": "91% NRB", "EtCO2": "**21**",
+      "BGL": "-", "Temp": "**94.0**", "Pain": "-", "GCS": "**12**", "Pupils": "-",
+      "other": "Radial lost, abd distended, shivering stops",
+      "bold": ["HR", "BP", "RR", "EtCO2", "Temp", "GCS"],
+      "monitor": {"rhythm": "sinus", "rate": 142, "capno": {"pattern": "normal", "etco2": 21, "rr": 32}}
+    },
+    {
+      "stage": "D Boluses",
+      "trigger": "En route, 250 mL warm NS x1-2 (~T+30)",
+      "HR": "116", "BP": "90/60", "RR": "22", "SpO2": "96% NRB", "EtCO2": "31",
+      "BGL": "-", "Temp": "95.2", "Pain": "8", "GCS": "15", "Pupils": "-",
+      "other": "Radial palpable, more alert. Heat on",
+      "monitor": {"rhythm": "sinus", "rate": 116, "capno": {"pattern": "normal", "etco2": 31, "rr": 22}}
+    },
+    {
+      "stage": "E UVMMC",
+      "trigger": "Arrival UVMMC (~T+50)",
+      "HR": "114", "BP": "92/62", "RR": "22", "SpO2": "96% NRB", "EtCO2": "32",
+      "BGL": "-", "Temp": "95.6", "Pain": "7", "GCS": "15", "Pupils": "-",
+      "other": "500 mL total. Abd still tender, firm",
+      "monitor": {"rhythm": "sinus", "rate": 114, "capno": {"pattern": "normal", "etco2": 32, "rr": 22}}
+    },
+    {
+      "stage": "P Pt 2",
+      "trigger": "Pt 2 (passenger) any time; stays stable",
+      "HR": "104", "BP": "134/86", "RR": "22", "SpO2": "97% RA", "EtCO2": "36",
+      "BGL": "96", "Temp": "96.0", "Pain": "10", "GCS": "15", "Pupils": "3 PERRL",
+      "other": "**Pt 2 only**: L midshaft femur deformity; pedal pulse present; shivering",
+      "monitor": {"rhythm": "sinus", "rate": 104, "capno": {"pattern": "normal", "etco2": 36, "rr": 22}}
+    }
+  ],
+  "flow": [
+    {
+      "time": "0-4",
+      "phase": "Dispatch / approach",
+      "give": "Read dispatch. FD at trailhead: \"UTV takes 2 of you + gear, 8 min ride.\"",
+      "expected": [
+        "2nd ambulance + intercept requested now (2 pts)",
+        "Roles pre-assigned: who triages, who stays with Pt 2",
+        "Gear: O2, BVM, suction, splints, blankets, TQ"
+      ]
+    },
+    {
+      "time": "4-7",
+      "phase": "Triage / split",
+      "give": "Pt 2 screaming \"Help me first! My leg!\" Pt 1 quiet by tree. FD: \"Which one first?\" Show PT 2 card when Pt 2 assessed.",
+      "branches": [
+        {"if": "CC splints loud Pt 2 before assessing Pt 1", "then": "Stage **C** by T+15; critical (evaluator discretion)"},
+        {"if": "Both triaged < 1 min each; Pt 1 RED", "then": "Stage **A**; EMT + FD to Pt 2"}
+      ],
+      "expected": [
+        "Both pts rapid-triaged (SALT, 9.1)",
+        "Pt 1 = priority: AMS, shock (HR > SBP)",
+        "Pt 2 = YELLOW; named owner (EMT) + FD"
+      ]
+    },
+    {
+      "time": "7-14",
+      "phase": "Pt 1 care / package",
+      "give": "Stage **A**. Show PT 1 - CHEST / ABDOMEN card. Helmet still on.",
+      "branches": [
+        {"if": "Full secondary on snow before moving", "then": "scene time grows; Stage **C**"},
+        {"if": "SMR, O2, insulated, on sled < 10 min", "then": "Stage **B**"}
+      ],
+      "expected": [
+        "Helmet off (2-person), collar, SMR to sled (4.6)",
+        "O2 NRB; SpO2 94-98; capno",
+        "Wet layers off/vapor barrier, blankets, off the snow (2.13)"
+      ]
+    },
+    {
+      "time": "12-18",
+      "phase": "Resources / destination",
+      "give": "FD: \"Want me to put up the helicopter? LZ at the trailhead field.\" Show RESOURCES card.",
+      "branches": [
+        {"if": "Holds Pt 1 at trailhead for air", "then": "air not faster (8.0); Stage **C**; debrief"},
+        {"if": "Ground direct to UVMMC + TRAUMA ALERT", "then": "Stage **D** en route"},
+        {"type": "inject", "if": "Air medical declines (snow, low ceiling)", "then": "expect ground direct to UVMMC, no wait; intercept en route"}
+      ],
+      "expected": [
+        "TRAUMA ALERT to UVMMC (4.9: HR > SBP, AMS)",
+        "Air vs ground rationale stated (8.0)",
+        "Intercept en route only, no delay"
+      ]
+    },
+    {
+      "time": "14-22",
+      "phase": "Pt 2 handoff",
+      "give": "EMT reports on Pt 2 (Stage **P**). 2nd ambulance at trailhead ~T+20.",
+      "branches": [
+        {"if": "Both pts put in one rig", "then": "CC care split; debrief (only if no 2nd unit soon)"},
+        {"if": "Pt 2 left with FD only", "then": "no provider w/ pt; debrief 9.1 resources"}
+      ],
+      "expected": [
+        "Pt 2: traction splint, CMS before/after (4.5)",
+        "Pt 2 warmed; pain plan (2.20A; intercept for opioids)",
+        "Pt 2 to UVMMC by 2nd unit; report to that crew"
+      ]
+    },
+    {
+      "time": "18-30",
+      "phase": "Transport Pt 1",
+      "give": "Sled ride to trailhead, then rig. IV hard (cold).",
+      "branches": [
+        {"if": "Wide-open fluids", "then": "BP 110s, then more bleeding, colder; debrief 2.24A"},
+        {"type": "inject", "if": "Pt 1 vomits on sled in SMR", "then": "expect tilt sled/log-roll as unit, suction, reassess airway"}
+      ],
+      "expected": [
+        "IV x2, warm NS; 250 mL boluses to radial/mentation",
+        "Med Direction after 1 L (2.24A)",
+        "Heat on high; reassess q5"
+      ]
+    },
+    {
+      "time": "30+",
+      "phase": "Report / handoff",
+      "give": "Stage **E**. Evaluator = UVMMC trauma team.",
+      "expected": [
+        "MIST report; Pt 2 status + unit named",
+        "Scene, extraction, cold-exposure times",
+        "SIREN: separate PCR per pt"
+      ]
+    }
+  ],
+  "critical": [
+    "Loud Pt 2 treated first; Pt 1 shock not recognized (9.1)",
+    "No 2nd ambulance / resources requested early",
+    "No SMR with AMS + motorized rec vehicle (4.6)",
+    "No hypothermia prevention (2.13, 4.12 MARCH-H)",
+    "Scene/trailhead delay for air or intercept without rationale (8.0)",
+    "No TRAUMA ALERT / inappropriate destination (4.9)",
+    "Unrestricted fluids / no reassessment (2.24A)",
+    "Pt 2 left without a provider or CMS check (4.5)"
+  ],
+  "differentials": [
+    ["Splenic / intra-abd bleed (dx)", "LUQ tender, Kehr sign, L rib fx, shock", "-"],
+    ["L hemo-/pneumothorax", "Rib crepitus, L base decreased, SpO2 92", "No JVD, sounds present; coexists"],
+    ["TBI", "Helmet strike, GCS 14", "Pupils equal; shock explains AMS"],
+    ["Hypothermia", "95.4 F, wet, in snow", "Does not explain HR > SBP"],
+    ["Alcohol", "2 beers per friend", "Never blame AMS on alcohol in shock"],
+    ["Neurogenic shock", "Mechanism, hypotension", "Tachy, cool, moves all 4"]
+  ],
+  "debrief": [
+    "How did you decide who was sicker in the first minute?",
+    "What did you request, and when? What would you do differently?",
+    "Did air medical make sense here (8.0)? When would it?",
+    "Who owned Pt 2, and how did you know Pt 2 was okay?",
+    "How did you keep both patients warm?"
+  ],
+  "crew_card": {
+    "dispatch": "VAST trailhead, Browns Trace Rd, Jericho. Snowmobile crash on trail, 2 riders hurt, one \"not making sense\". FD w/ UTV responding. 18 F, light snow.",
+    "on_arrival": "Sled wrapped on a tree at a curve. Man lying in the snow by the tree, helmet on, quiet. Woman 20 ft away sitting in the snow, screaming, holding her L leg."
+  },
+  "actor_card": {
+    "Pt 1 act": "Quiet, grunt with each breath, slow answers, ask \"what happened?\" twice. Hold L side.",
+    "Pt 1 belly pressed": "Wince: \"My left shoulder hurts.\"",
+    "Pt 1 worse (Stage C)": "Eyes closing, mumble, stop shivering.",
+    "Pt 2 act (Amy, 36 F)": "Scream \"Help me first! My leg!\" until someone stays with you; calmer once splinted.",
+    "Pt 2 info": "NKDA, no meds, no PMH. \"Thrown into the snowbank.\" No LOC.",
+    "Friend": "If asked: \"They had a couple beers at lunch.\""
+  },
+  "show_cards": [
+    {
+      "type": "text", "width": "half", "title": "PATIENT 2 - PASSENGER",
+      "body": "Amy Larrabee, 36 F. Alert, oriented, crying.\nL mid-thigh: deformed, swollen, angulated.\nL foot: pulse present, warm, moves toes.\nNo other injuries found. Shivering.\nHR 104  BP 134/86  RR 22  SpO2 97%  GCS 15"
+    },
+    {
+      "type": "text", "width": "half", "title": "PT 1 - CHEST / ABDOMEN",
+      "body": "L lower ribs: crackling under fingers, tender.\nChest moves evenly.\nUpper L belly: tender, firm, guarding.\nL shoulder pain when belly pressed."
+    },
+    {
+      "type": "text", "width": "half", "title": "SCENE",
+      "body": "Sled front end crushed on L side against tree.\nBoth riders wore helmets. Driver helmet scuffed L.\nFriend: \"They took the curve way too fast, maybe 35.\""
+    },
+    {
+      "type": "text", "width": "half", "title": "RESOURCES",
+      "body": "Air medical: ETA 30 min to trailhead LZ.\nTrailhead to UVMMC: 25 min ground.\n2nd ambulance: 20 min once requested.\nParamedic intercept: 15 min.",
+      "cue": "Give at Resources / destination phase (~T+12)"
+    },
+    {
+      "type": "strip", "width": "half", "title": "MONITOR - Lead II",
+      "caption": "Pt 1  HR 124", "rhythm": "sinus", "rate": 124,
+      "cue": "Pt 1 Stage A"
+    },
+    {
+      "type": "capno", "width": "half", "title": "CAPNOGRAPHY",
+      "caption": "Pt 1  EtCO2 30   RR 26", "pattern": "normal", "etco2": 30, "rr": 26,
+      "cue": "Pt 1 Stage A. Stage C: EtCO2 21, RR 32"
+    }
+  ],
+  "moulage_tags": [
+    {"region": "Pt 1 - L lower ribs", "text": "Crackling under fingers; tender"},
+    {"region": "Pt 1 - L upper abdomen", "text": "Tender, firm, guarding; L shoulder pain when pressed"},
+    {"region": "Pt 1 - Back (lung sounds)", "text": "L base quieter than R"},
+    {"region": "Pt 1 - Wrist (radial)", "text": "Fast, weak", "cue": "Stage C: absent. Stage D: palpable"},
+    {"region": "Pt 1 - Skin", "text": "Pale, cold, wet clothing, shivering", "cue": "Stage C: shivering stops"},
+    {"region": "Pt 1 - Helmet", "text": "Scuffed on L side"},
+    {"region": "Pt 2 - L thigh", "text": "Mid-thigh deformed, swollen, very painful"},
+    {"region": "Pt 2 - L foot", "text": "Pulse present; warm; moves toes"}
+  ],
+  "learn_more": {
+    "topic": "a two-patient snowmobile crash with splenic injury and hemorrhagic shock",
+    "focus": "triaging a quiet vs a loud patient, splitting crews and calling resources, air vs ground, hypothermia in trauma"
+  }
+}

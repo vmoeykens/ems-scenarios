@@ -170,7 +170,16 @@
       "Pain": "-",
       "GCS": "3",
       "Pupils": "6 fixed",
-      "other": "**Asystole** - no shock advised"
+      "other": "**Asystole** - no shock advised",
+      "monitor": {
+        "rhythm": "asystole",
+        "rate": 0,
+        "capno": {
+          "pattern": "cpr",
+          "etco2": 10,
+          "rr": 10
+        }
+      }
     },
     {
       "stage": "B 8 min",
@@ -185,7 +194,16 @@
       "Pain": "-",
       "GCS": "3",
       "Pupils": "6 fixed",
-      "other": "Asystole"
+      "other": "Asystole",
+      "monitor": {
+        "rhythm": "asystole",
+        "rate": 0,
+        "capno": {
+          "pattern": "cpr",
+          "etco2": 9,
+          "rr": 10
+        }
+      }
     },
     {
       "stage": "C Poor CPR",
@@ -203,7 +221,16 @@
       "other": "Quality debrief point",
       "bold": [
         "EtCO2"
-      ]
+      ],
+      "monitor": {
+        "rhythm": "asystole",
+        "rate": 0,
+        "capno": {
+          "pattern": "cpr",
+          "etco2": 5,
+          "rr": 10
+        }
+      }
     },
     {
       "stage": "D 14 min",
@@ -218,7 +245,16 @@
       "Pain": "-",
       "GCS": "3",
       "Pupils": "6 fixed",
-      "other": "Asystole - confirm leads + gain"
+      "other": "Asystole - confirm leads + gain",
+      "monitor": {
+        "rhythm": "asystole",
+        "rate": 0,
+        "capno": {
+          "pattern": "cpr",
+          "etco2": 8,
+          "rr": 10
+        }
+      }
     },
     {
       "stage": "E 20 min",
@@ -236,7 +272,16 @@
       "other": "Asystole. All 3 TOR criteria met -> contact MD",
       "bold": [
         "EtCO2"
-      ]
+      ],
+      "monitor": {
+        "rhythm": "asystole",
+        "rate": 0,
+        "capno": {
+          "pattern": "cpr",
+          "etco2": 7,
+          "rr": 10
+        }
+      }
     }
   ],
   "flow": [

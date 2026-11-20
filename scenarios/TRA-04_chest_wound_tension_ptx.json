@@ -1,0 +1,292 @@
+{
+  "id": "TRA-04",
+  "title": "Stab wound chest - tension PTX",
+  "version": "v1.1 | VT Protocols 2025 | UVM Rescue",
+  "category": "Trauma",
+  "level": "AEMT CCIT",
+  "run_time": "20-25 min",
+  "difficulty": "Hard",
+  "crew": "CC + 2, PD on scene",
+  "protocols": [
+    "1.2 Routine Pt Care",
+    "4.8 Thoracic & Abd Injuries",
+    "6.5 Needle Decompression (Paramedic)",
+    "4.12 Traumatic Emergencies",
+    "2.24A Shock",
+    "4.9 Trauma Triage",
+    "2.20A Pain"
+  ],
+  "objectives": [
+    "Seal open chest wound at once (vented/occlusive, 4.8); check back and axillae",
+    "Recognize tension PTX (4.8 criteria) and burp/remove the seal",
+    "NDT is paramedic-only (6.5): intercept only if no delay; rapid to UVMMC",
+    "Penetrating torso: fluids only to SBP 80-90 / radial / mentation (2.24A)",
+    "Scene < 10 min; TRAUMA ALERT to UVMMC Level 1 (4.9)"
+  ],
+  "resources": "Vented chest seal x2 (+ unvented), gauze, O2/NRB, BVM, capno, IV x2, NS. UVMMC (Level 1) ~15 min ground; paramedic intercept ETA 8 min",
+  "dispatch": "UVM Rescue, respond to Bayside Apartments, 120 Blakely Rd, Colchester, for a 24-year-old male stabbed in the chest. Patient is conscious. PD is on scene. Time out 2215.",
+  "scene": {
+    "location": "Ground-floor apartment living room, ~15 min from UVMMC. Party breaking up; PD has the suspect outside.",
+    "setup": "Pt sitting on couch, leaning forward, pressing a bloody towel to L side. Kitchen knife bagged by PD.",
+    "moulage": "2 cm slit L lateral chest (5th ICS, ant axillary line), bubbling; 1 cm shallow cut below L scapula; pale, sweaty.",
+    "roles": "Pt actor; PD officer; roommate (\"medics are 8 min out, shouldn't you wait?\")."
+  },
+  "patient": {
+    "name": "Tyler Brennan",
+    "age": "24",
+    "sex": "M",
+    "weight_kg": "75",
+    "cc": "\"I got stabbed, I can't breathe\"",
+    "on_arrival": "Upright, tripoding, 3-4 word sentences, pale, sweaty. Towel on L side, sucking sound with breaths."
+  },
+  "history": {
+    "SAMPLE": [
+      ["S", "L chest pain, SOB, \"can't get a full breath\""],
+      ["A", "NKDA"],
+      ["M", "None"],
+      ["P", "Childhood asthma, none since teens"],
+      ["L", "4 beers, pizza ~2100"],
+      ["E", "Stabbed L side in argument ~2205. Walked to couch"]
+    ],
+    "OPQRST": [
+      ["O", "~10 min ago, sudden"],
+      ["P", "Worse with breathing in"],
+      ["Q", "Sharp, stabbing"],
+      ["R", "L side -> L shoulder"],
+      ["S", "8/10"],
+      ["T", "Constant; SOB getting worse"]
+    ]
+  },
+  "primary": [
+    ["X / hemorrhage", "Minimal external bleeding. **Open chest wound** - gloved hand over it now"],
+    ["Airway", "Patent, talking short sentences"],
+    ["Breathing", "RR 28, labored. Sucking wound L. L sounds decreased"],
+    ["Circulation", "Radial present, rapid. Pale, diaphoretic"],
+    ["Disability", "GCS 15, anxious. Moves all 4"],
+    ["Exposure", "Full exposure: shallow cut below L scapula. No other wounds"],
+    ["Priority / impression", "**HIGH**: open PTX, risk of tension. Seal, load and go"]
+  ],
+  "secondary": [
+    ["Head / face", "No trauma"],
+    ["Neck", "Trachea midline, neck veins flat (initially)"],
+    ["Chest", "2 cm slit L 5th ICS ant axillary line; no crepitus"],
+    ["Lungs", "L decreased, R clear"],
+    ["Abdomen", "Soft, non-tender (wound below nipple line - watch)"],
+    ["Back", "1 cm shallow cut below L scapula, oozing, no bubbles"],
+    ["Pelvis / extremities", "Stable; CMS intact x4"],
+    ["Spine", "Penetrating only, no neuro deficit -> no SMR (4.6)"]
+  ],
+  "vitals": [
+    {
+      "stage": "A Initial",
+      "trigger": "First set (couch, RA)",
+      "HR": "**118**", "BP": "112/74", "RR": "**28**", "SpO2": "**91% RA**", "EtCO2": "33",
+      "BGL": "104", "Temp": "97.8", "Pain": "8", "GCS": "15", "Pupils": "4 PERRL",
+      "other": "Sucking wound L. L sounds decreased",
+      "bold": ["HR", "RR", "SpO2"],
+      "monitor": {"rhythm": "sinus", "rate": 118, "capno": {"pattern": "normal", "etco2": 33, "rr": 28}}
+    },
+    {
+      "stage": "B Sealed",
+      "trigger": "Vented seal + NRB (~T+4)",
+      "HR": "110", "BP": "116/76", "RR": "24", "SpO2": "96% NRB", "EtCO2": "35",
+      "BGL": "-", "Temp": "-", "Pain": "7", "GCS": "15", "Pupils": "-",
+      "other": "Less distress, seal intact. Full sentences",
+      "monitor": {"rhythm": "sinus", "rate": 110, "capno": {"pattern": "normal", "etco2": 35, "rr": 24}}
+    },
+    {
+      "stage": "C Tension",
+      "trigger": "In rig ~T+10 (~T+7 if unvented seal)",
+      "HR": "**136**", "BP": "**86/60**", "RR": "**34**", "SpO2": "**85% NRB**", "EtCO2": "**28**",
+      "BGL": "-", "Temp": "-", "Pain": "8", "GCS": "14", "Pupils": "-",
+      "other": "**JVD, L sounds absent**, agitated, radial weak. Trachea midline",
+      "bold": ["HR", "BP", "RR", "SpO2", "EtCO2"],
+      "monitor": {"rhythm": "sinus", "rate": 136, "capno": {"pattern": "normal", "etco2": 28, "rr": 34}}
+    },
+    {
+      "stage": "D Burped",
+      "trigger": "Seal lifted/burped -> air rush",
+      "HR": "116", "BP": "104/70", "RR": "26", "SpO2": "93% NRB", "EtCO2": "33",
+      "BGL": "-", "Temp": "-", "Pain": "7", "GCS": "15", "Pupils": "-",
+      "other": "Distress eases, JVD less, L sounds faint",
+      "monitor": {"rhythm": "sinus", "rate": 116, "capno": {"pattern": "normal", "etco2": 33, "rr": 26}}
+    },
+    {
+      "stage": "E Extremis",
+      "trigger": "IF not burped by ~T+13, or burp fails",
+      "HR": "**148**", "BP": "**64/40**", "RR": "**40**", "SpO2": "**76%**", "EtCO2": "**20**",
+      "BGL": "-", "Temp": "-", "Pain": "-", "GCS": "**10**", "Pupils": "-",
+      "other": "Shallow, cyanotic, radial absent, trachea shifted R. Peri-arrest",
+      "bold": ["HR", "BP", "RR", "SpO2", "EtCO2", "GCS"],
+      "monitor": {"rhythm": "sinus", "rate": 148, "capno": {"pattern": "normal", "etco2": 20, "rr": 40}}
+    },
+    {
+      "stage": "F Handoff",
+      "trigger": "Arrival UVMMC (~T+22)",
+      "HR": "112", "BP": "100/68", "RR": "24", "SpO2": "95% NRB", "EtCO2": "34",
+      "BGL": "-", "Temp": "97.4", "Pain": "7", "GCS": "15", "Pupils": "-",
+      "other": "Seal vented, 0-250 mL NS given",
+      "monitor": {"rhythm": "sinus", "rate": 112, "capno": {"pattern": "normal", "etco2": 34, "rr": 24}}
+    }
+  ],
+  "flow": [
+    {
+      "time": "0-2",
+      "phase": "Arrival",
+      "give": "Read dispatch. PD: \"One stab wound, left side.\" Pt tripoding, towel on L chest.",
+      "expected": [
+        "Gloved hand over wound immediately",
+        "Roles assigned (seal, O2/vitals, IV/packaging)",
+        "Penetrating torso = TRAUMA ALERT plan (4.9)"
+      ]
+    },
+    {
+      "time": "2-6",
+      "phase": "Primary / seal",
+      "give": "Stage **A**. Show WOUND card. BACK card only if back checked.",
+      "branches": [
+        {"if": "Unvented seal taped on all 4 sides", "then": "tension sooner (~T+7); Stage **C**"},
+        {"if": "Vented seal at end-exhalation + NRB", "then": "Stage **B**"}
+      ],
+      "expected": [
+        "Vented/occlusive seal on chest wound (4.8)",
+        "Back and axillae checked; back cut dressed",
+        "O2 NRB; SpO2/EtCO2 monitored"
+      ]
+    },
+    {
+      "time": "6-10",
+      "phase": "Package / decision",
+      "give": "Roommate: \"Medics are 8 min out, shouldn't you wait for them?\" UVMMC 15 min.",
+      "branches": [
+        {"if": "Waits on scene for intercept", "then": "Stage **C** on scene; critical (evaluator discretion)"},
+        {"if": "Rapid load; intercept met en route", "then": "Stage **B** holds to ~T+10"}
+      ],
+      "expected": [
+        "Position of comfort, upright; no SMR (4.6)",
+        "TRAUMA ALERT to UVMMC (Level 1)",
+        "Intercept en route only, no delay (4.8)"
+      ]
+    },
+    {
+      "time": "10-15",
+      "phase": "Deterioration",
+      "give": "Stage **C** in rig. Show NECK / L CHEST card. Pt: \"It's getting worse!\"",
+      "branches": [
+        {"if": "Seal burped / lifted at once", "then": "air rush; Stage **D**"},
+        {"if": "Not recognized; BVM / more O2 only", "then": "Stage **E**; critical (evaluator discretion)"},
+        {"type": "inject", "if": "Burp fails: wound clotted, no air rush", "then": "Stage **E** values; expect rapid UVMMC, Med Direction, NDT only via intercept (6.5)"}
+      ],
+      "expected": [
+        "Tension recognized (4.8: distress + shock + JVD/absent sounds)",
+        "Seal removed momentarily, then reapplied (4.8)",
+        "Reassess sounds, SpO2, BP after burp"
+      ]
+    },
+    {
+      "time": "13-20",
+      "phase": "Treatment en route",
+      "give": "Intercept meets you 6 min from UVMMC. Pt asks for \"the gas\" for pain.",
+      "branches": [
+        {"if": "Wide-open fluids for SBP 86", "then": "SBP 120s, then more bleeding; debrief 2.24A target"},
+        {"if": "Nitrous given / offered for pain", "then": "contraindicated w/ PTX/chest trauma (2.20A); debrief"},
+        {"type": "inject", "if": "Seal peels off (blood/sweat), sucking again", "then": "expect gloved hand, new seal, reassess for tension"}
+      ],
+      "expected": [
+        "IV x2 en route; 250 mL only if SBP < 80-90 / no radial / AMS",
+        "Seal + breath sounds rechecked q5; burp as needed",
+        "Medic rides in; no vehicle transfer delay"
+      ]
+    },
+    {
+      "time": "20+",
+      "phase": "Report / handoff",
+      "give": "Stage **F**. Evaluator = UVMMC trauma team.",
+      "expected": [
+        "MIST: wound sites, seal type, burp times",
+        "Fluid total, scene time (goal < 10 min)",
+        "SIREN incl. back wound and tension timeline"
+      ]
+    }
+  ],
+  "critical": [
+    "Open chest wound not sealed promptly (4.8)",
+    "Back / axillae not checked for more wounds",
+    "Tension signs not recognized / seal not burped (4.8)",
+    "AEMT attempts needle decompression (paramedic only, 6.5)",
+    "Scene delayed waiting for intercept (4.8: minimize scene time)",
+    "No TRAUMA ALERT / not direct to UVMMC Level 1 (4.9)",
+    "Unrestricted fluids in penetrating torso trauma (2.24A)",
+    "Nitrous oxide given with chest trauma (2.20A)"
+  ],
+  "differentials": [
+    ["Tension PTX (dx)", "Distress, shock, JVD, absent L sounds", "-"],
+    ["Open (simple) PTX", "Sucking wound, decreased L sounds", "Shock + JVD at Stage C"],
+    ["Massive hemothorax", "Penetrating L chest, shock", "JVD (flat veins expected); air rush on burp"],
+    ["Cardiac tamponade", "Shock, JVD, penetrating chest", "Lateral wound, unilateral absent sounds"],
+    ["Abd injury (diaphragm/spleen)", "Wound at 5th ICS, below nipple", "Abd soft, non-tender (reassess)"],
+    ["Anxiety / alcohol", "Tachypnea, 4 beers", "Hypoxia, wound - never attribute"]
+  ],
+  "debrief": [
+    "Which findings told you this became a tension PTX?",
+    "Why burp the seal instead of bagging harder?",
+    "Why not wait for the medic who was 8 min out?",
+    "What fluid target did you use, and why for penetrating torso?",
+    "Why no collar for this patient?"
+  ],
+  "crew_card": {
+    "dispatch": "Bayside Apartments, 120 Blakely Rd, Colchester. 24 y/o M stabbed in the chest, conscious. PD on scene.",
+    "on_arrival": "Young man on a couch, leaning forward, holding a bloody towel to his L side, breathing fast. PD officer with him."
+  },
+  "actor_card": {
+    "Act": "Short sentences, gasping. Lean forward. \"I can't get a breath.\"",
+    "Wound uncovered": "Breathe noisily; hiss/suck sound with each breath.",
+    "Getting worse (~T+10)": "More panic: \"It's getting worse!\" Then stop talking, gasp.",
+    "After seal burped": "\"Okay... that's a little better.\"",
+    "If never burped": "Eyes close, respond only to loud voice.",
+    "Ask": "\"Am I gonna die? Don't call my mom.\""
+  },
+  "show_cards": [
+    {
+      "type": "text", "width": "half", "title": "WOUND - L CHEST",
+      "body": "2 cm slit, side of L chest under the arm, 5th rib space.\nBubbles and a sucking sound with each breath.\nLittle bleeding."
+    },
+    {
+      "type": "text", "width": "half", "title": "BACK",
+      "body": "1 cm shallow cut below L shoulder blade.\nOozing. No bubbles.",
+      "cue": "Give only when crew checks the back"
+    },
+    {
+      "type": "text", "width": "half", "title": "NECK / L CHEST",
+      "body": "Neck veins swollen.\nL chest: no air movement heard.\nR chest: clear.\nTrachea midline.",
+      "cue": "Give at Stage C (~T+10). Burp -> rush of air, L sounds faint (Stage D)"
+    },
+    {
+      "type": "strip", "width": "half", "title": "MONITOR - Lead II",
+      "caption": "HR 118", "rhythm": "sinus", "rate": 118,
+      "cue": "Stage A"
+    },
+    {
+      "type": "strip", "width": "half", "title": "MONITOR - Lead II",
+      "caption": "HR 136", "rhythm": "sinus", "rate": 136,
+      "cue": "Stage C (tension)"
+    },
+    {
+      "type": "capno", "width": "half", "title": "CAPNOGRAPHY",
+      "caption": "EtCO2 28   RR 34", "pattern": "normal", "etco2": 28, "rr": 34,
+      "cue": "Stage C (low perfusion)"
+    }
+  ],
+  "moulage_tags": [
+    {"region": "L side of chest (under arm)", "text": "2 cm cut; bubbles and sucking sound with breaths"},
+    {"region": "Below L shoulder blade", "text": "1 cm shallow cut, oozing"},
+    {"region": "Neck", "text": "Neck veins flat", "cue": "Swap to 'Neck veins swollen' at Stage C"},
+    {"region": "Back (lung sounds)", "text": "L quieter than R", "cue": "Stage C: L silent. Stage D: L faint"},
+    {"region": "Wrist (radial)", "text": "Fast, present", "cue": "Stage C: weak. Stage E: absent"},
+    {"region": "Skin", "text": "Pale, sweaty", "cue": "Stage E: lips blue"}
+  ],
+  "learn_more": {
+    "topic": "open chest wound progressing to tension pneumothorax",
+    "focus": "vented vs unvented chest seals, burping the seal, early tension signs, permissive fluids in penetrating torso trauma"
+  }
+}

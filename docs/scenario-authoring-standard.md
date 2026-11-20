@@ -18,7 +18,7 @@ Print: p.1-2 duplex (one sheet), p.3 single, p.4-5 cut apart.
 
 ## Workflow
 1. Get the chief complaint / protocols to hit. Ask only if the target protocol or difficulty is truly unclear.
-2. **Read the protocols**: project doc `eprip-2025-EMS-Protocols_0.pdf` (VT Statewide EMS Protocols 2025) via Projects `project_read`; grep the local text for the sections. Pull exact EMT / **ADVANCED EMT** standing orders, doses, contraindications, Pearls. Text extraction scrambles columns - if AEMT vs Paramedic ownership of an order is unclear, treat it as paramedic (intercept) and tell the user.
+2. **Read the protocols**: project doc `eprip-2025-EMS-Protocols_0.pdf` (VT Statewide EMS Protocols 2025) via Projects `project_read`, or in the repo `docs/reference/eprip-2025-EMS-Protocols-text.txt`; grep the text for the sections. Pull exact EMT / **ADVANCED EMT** standing orders, doses, contraindications, Pearls. Text extraction scrambles columns - if AEMT vs Paramedic ownership of an order is unclear, treat it as paramedic (intercept) and tell the user.
 3. Write the scenario JSON (schema below). Read 1-2 examples under `claude/scenarios/` in the project first and match their density.
 4. Get the generator: Projects `project_read` path `claude/tools/ems_scenario.py` -> write it to `ems_scenario.py` (single source of truth; never retype it). Needs reportlab, matplotlib, numpy, segno and Graphviz `dot` (`pip install --break-system-packages reportlab segno`; `apt-get install -y graphviz` if `which dot` fails).
 5. Run `python3 ems_scenario.py scenario.json <ID>.pdf`. It **validates first** and refuses to build on problems (bad Stage refs, non-condition IFs, hints on card/tag faces, 'critical fail' wording, scene.safety present, prompt too long for QR). Fix the JSON, not the validator.
@@ -52,7 +52,10 @@ patient: {name, age, sex, weight_kg, cc, on_arrival}
 history: {SAMPLE: [["S",".."],...6], OPQRST: [["O",".."],...6]}
 primary:   [[label, finding], ...]   (X/hemorrhage, Airway, Breathing, Circulation, Disability, Exposure, Priority / impression)
 secondary: [[region, finding], ...]  (6-10 rows)
-vitals: [{stage, trigger, HR, BP, RR, SpO2, EtCO2, BGL, Temp, Pain, GCS, Pupils, other, bold:[keys]}]
+vitals: [{stage, trigger, HR, BP, RR, SpO2, EtCO2, BGL, Temp, Pain, GCS, Pupils, other, bold:[keys],
+          monitor?: {rhythm, rate, p_rate?, st?, capno?: {pattern, etco2, rr}}}]   # app student monitor only; PDF ignores it.
+          # Derive from the row: rate = HR (0 for vf/asystole), rhythm as named in other/cards, st = lead II mm,
+          # capno pattern cpr (arrest) | shark (bronchospasm) | normal, etco2/rr from the row; omit capno if EtCO2 is "-".
 blank_vitals_rows: int (default 2)    vitals_note: str
 flow: [{time, phase, give, expected:[str],
         branches:[{if, then} | {type:"inject", if, then}]}]

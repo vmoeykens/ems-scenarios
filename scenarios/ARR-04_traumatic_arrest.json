@@ -1,0 +1,229 @@
+{
+  "id": "ARR-04",
+  "title": "Traumatic arrest at a crash - withhold vs. work + go",
+  "version": "v1.0 | VT Protocols 2025 | UVM Rescue",
+  "category": "Cardiac arrest",
+  "level": "AEMT CCIT",
+  "run_time": "25 min",
+  "difficulty": "Hard",
+  "crew": "CC + 2 + Engine (3 FF/EMR)",
+  "protocols": [
+    "4.11 Traumatic Cardiac Arrest",
+    "8.17 Resuscitation Initiation & Termination",
+    "3.2A Cardiac Arrest",
+    "4.12 Traumatic Emergencies",
+    "4.4 Hemorrhage Control",
+    "2.24A Shock",
+    "8.6 Crime Scene"
+  ],
+  "objectives": [
+    "Start/withhold per 4.11 + 8.17: DOA passenger (5 signs + factor of death) vs EMS-witnessed arrest in driver",
+    "TCA priorities: TQ, pelvic binder, airway + BVM 1:10 - compressions alone do little",
+    "Scene < 10 min; direct to UVMMC (Level 1), trauma alert + 'in arrest'",
+    "AEMT: IV/IO w/o pausing CPR, warmed NS 500-1000 mL, epi per 3.2A, SGA + capno",
+    "Bilateral needle decompression is paramedic: rendezvous en route, never wait on scene"
+  ],
+  "resources": "AED/monitor, BVM, OPA, suction, SGA, IV/IO, warmed NS, epi 0.1 mg/mL, TQ x2, pelvic binder, capno, metronome. Engine 1 (3 FF). Paramedic intercept available. UVMMC (Level 1) ~12 min",
+  "dispatch": "UVM Rescue and Williston Engine 1, respond to Route 2A, St. George Rd near Industrial Ave, Williston, for a single car into a tree, 2 occupants, one not moving. Caller is a passing motorist. State Police en route. Time out 2310.",
+  "scene": {
+    "location": "Route 2A shoulder, dark, 25 F, dry. Sedan front-end into tree, heavy intrusion passenger side.",
+    "setup": "Manikin 1 (driver) on ground beside open driver door - motorist pulled him out. Manikin 2 (passenger) belted in passenger seat.",
+    "moulage": "Driver: open L thigh wound w/ pulsatile bleed (pump/squeeze bottle), unstable pelvis, R chest bruise, blood in mouth. Passenger: PASSENGER card + head tag (no gore needed).",
+    "roles": "Motorist; 3 FF/EMRs; Trooper arrives T+6; evaluator calls AED + pulse."
+  },
+  "patient": {
+    "name": "Tyler Benoit",
+    "age": "22",
+    "sex": "M",
+    "weight_kg": "80",
+    "cc": "Car vs tree, unrestrained driver",
+    "on_arrival": "On ground, gurgling, barely moving. Dark pool under L thigh. Weak carotid, no radial."
+  },
+  "history": {
+    "SAMPLE": [
+      ["S", "Motorist: \"He was moaning when I pulled him out, now he's quiet\""],
+      ["A", "Unknown"],
+      ["M", "Unknown"],
+      ["P", "Unknown (ID in wallet only)"],
+      ["L", "Unknown"],
+      ["E", "Car vs tree ~2300 at speed, no skid marks; unrestrained, airbag deployed"]
+    ],
+    "OPQRST": [
+      ["O", "Crash ~2300; ~10 min to EMS contact"],
+      ["P", "-"],
+      ["Q", "-"],
+      ["R", "-"],
+      ["S", "-"],
+      ["T", "Pulse lost at T+3 in front of crew (EMS-witnessed)"]
+    ]
+  },
+  "primary": [
+    ["X / hemorrhage", "**Pulsatile bleed L thigh** -> TQ high and tight, first"],
+    ["Airway", "Gurgling, blood -> suction, OPA, jaw thrust; no collar"],
+    ["Breathing", "RR 36 shallow; R chest bruised, crepitus, diminished BS"],
+    ["Circulation", "Weak carotid 148, no radial; pelvis unstable -> binder"],
+    ["Disability", "GCS 6 (E1 V2 M3), pupils 4 sluggish"],
+    ["Exposure", "Cut clothes, no other major bleed; cold ground -> blankets"],
+    ["Priority / impression", "Hemorrhagic + obstructive shock -> **arrest at T+3 (EMS-witnessed)**: work it + go"]
+  ],
+  "secondary": [
+    ["Passenger", "**Apneic, no pulses, no heart sounds, pupils fixed + deformed skull** -> DOA (8.17)"],
+    ["Head (driver)", "Scalp lac, blood in mouth; skull intact"],
+    ["Neck", "Trachea midline, neck veins flat"],
+    ["Chest", "R lateral bruise + crepitus; poor R rise w/ BVM"],
+    ["Abdomen", "Firm, L flank bruise"],
+    ["Pelvis", "Unstable on one gentle squeeze -> bind, no rocking"],
+    ["L thigh", "Open midshaft deformity, pulsatile bleed"],
+    ["Skin / temp", "Pale, cool, sweaty; 25 F ambient"]
+  ],
+  "vitals_note": "Arrest stages are 2-min cycles from EMS contact. Pulse 0 = CPR. AED never advises a shock.",
+  "vitals": [
+    {"stage": "A Contact", "trigger": "First set (T+0-2), driver", "HR": "**148** weak", "BP": "**no radial**", "RR": "**36** shallow", "SpO2": "**82%**", "EtCO2": "24", "BGL": "-", "Temp": "-", "Pain": "-", "GCS": "**6**", "Pupils": "4 sluggish", "other": "Carotid only. R BS diminished. Pulsatile thigh bleed", "bold": ["HR", "BP", "RR", "SpO2", "GCS"],
+     "monitor": {"rhythm": "sinus", "rate": 148, "capno": {"pattern": "normal", "etco2": 24, "rr": 36}}},
+    {"stage": "B Arrest", "trigger": "T+3, whatever crew is doing", "HR": "**0**", "BP": "-", "RR": "0 -> BVM", "SpO2": "-", "EtCO2": "12 CPR", "BGL": "-", "Temp": "-", "Pain": "-", "GCS": "3", "Pupils": "5 sluggish", "other": "**No shock advised**; organized complexes ~120 on screen, no pulse (PEA)", "bold": ["HR"],
+     "monitor": {"rhythm": "sinus", "rate": 120, "capno": {"pattern": "cpr", "etco2": 12, "rr": 10}}},
+    {"stage": "C Controlled", "trigger": "TQ + binder + NS + BVM 1:10, en route ~T+8", "HR": "0", "BP": "-", "RR": "BVM/SGA", "SpO2": "-", "EtCO2": "18", "BGL": "-", "Temp": "-", "Pain": "-", "GCS": "3", "Pupils": "-", "other": "No shock. Organized ~110 (PEA). R chest still poor rise",
+     "monitor": {"rhythm": "sinus", "rate": 110, "capno": {"pattern": "cpr", "etco2": 18, "rr": 10}}},
+    {"stage": "D ROSC", "trigger": "IF medic does bilat NDT at rendezvous (~T+12)", "HR": "**136**", "BP": "**64/40**", "RR": "BVM", "SpO2": "**86%**", "EtCO2": "30", "BGL": "-", "Temp": "-", "Pain": "-", "GCS": "3", "Pupils": "4 sluggish", "other": "Rush of air R chest; better rise. Weak carotid + femoral pulse", "bold": ["BP", "SpO2"],
+     "monitor": {"rhythm": "sinus", "rate": 136, "capno": {"pattern": "normal", "etco2": 30, "rr": 10}}},
+    {"stage": "E Delay", "trigger": "IF scene > 10 min, no TQ by T+5, or waits for intercept", "HR": "0", "BP": "-", "RR": "-", "SpO2": "-", "EtCO2": "**6**", "BGL": "-", "Temp": "-", "Pain": "-", "GCS": "3", "Pupils": "6 fixed", "other": "**Asystole** at next analysis - poor prognosis", "bold": ["EtCO2"],
+     "monitor": {"rhythm": "asystole", "rate": 0, "capno": {"pattern": "cpr", "etco2": 6, "rr": 10}}},
+    {"stage": "F Fluids", "trigger": "Post-ROSC: NS 250 mL x2, vent 10/min", "HR": "124", "BP": "**84/52**", "RR": "10 vent", "SpO2": "93%", "EtCO2": "34", "BGL": "112", "Temp": "95.6", "Pain": "-", "GCS": "3", "Pupils": "4 react", "other": "Pads stay on. Keep warm. MD after 1000 mL", "bold": ["BP"],
+     "monitor": {"rhythm": "sinus", "rate": 124, "capno": {"pattern": "normal", "etco2": 34, "rr": 10}}}
+  ],
+  "flow": [
+    {
+      "time": "0-2",
+      "phase": "Arrival / triage",
+      "give": "Motorist: \"Help him, the other guy hasn't moved.\" Show **PASSENGER** card when checked. Stage **A** (driver).",
+      "branches": [
+        {"if": "Crew starts CPR on the DOA passenger", "then": "debrief 8.17: 5 signs + factor of death; driver unattended -> Stage **E**"}
+      ],
+      "expected": [
+        "Passenger: 5 signs + factor of death -> withhold, leave in place (8.17/8.6)",
+        "Driver = priority; roles assigned, CC = commander",
+        "Paramedic intercept requested (no scene wait)"
+      ]
+    },
+    {
+      "time": "1-3",
+      "phase": "MARCH on driver",
+      "give": "Pulsatile thigh bleed, gurgling airway. Pulse lost at T+3 regardless.",
+      "branches": [
+        {"if": "Compressions started, thigh still bleeding", "then": "prompt: \"blood is pumping out of his leg!\" - no TQ by T+5 -> Stage **E**"}
+      ],
+      "expected": [
+        "TQ high and tight L thigh, time noted (4.4)",
+        "Suction, OPA, jaw thrust, BVM w/ O2",
+        "Pelvic binder; stretcher + blankets ready"
+      ]
+    },
+    {
+      "time": "3-6",
+      "phase": "Arrest: start decision",
+      "give": "Stage **B**. Trooper (T+6): \"A wreck like this - is there any point?\"",
+      "branches": [
+        {"if": "Crew withholds/stops: \"blunt arrest = dead\"", "then": "critical (evaluator discretion) - EMS-witnessed blunt arrest -> resuscitate + transport (4.11)"}
+      ],
+      "expected": [
+        "CPR + AED; BVM 1 breath/10 compressions; no collar before ROSC (4.11)",
+        "Bleeding controlled + binder before/with compressions",
+        "Moving to ambulance by ~T+6; scene < 10 min"
+      ]
+    },
+    {
+      "time": "6-12",
+      "phase": "Load + go",
+      "give": "Stage **C** in the ambulance. Intercept calls (option).",
+      "branches": [
+        {"if": "Rendezvous en route; medic does bilat NDT", "then": "Stage **D**"},
+        {"type": "inject", "if": "Medic: \"We're 5 out - hold on scene for us\"", "then": "expect CC declines, sets rendezvous en route; if crew waits -> Stage **E**"}
+      ],
+      "expected": [
+        "IV/IO w/o pausing CPR; warmed NS 500-1000 mL (4.11)",
+        "Epi 1 mg (0.1 mg/mL) IV/IO ASAP, q other cycle (3.2A)",
+        "SGA + capno; CPR quality in moving unit (belts, smooth driving)"
+      ]
+    },
+    {
+      "time": "12-16",
+      "phase": "ROSC / post-ROSC",
+      "give": "Stage **D**, then **F** w/ fluids. Medic gives TXA (paramedic, 4.4/4.11).",
+      "branches": [
+        {"type": "inject", "if": "Bleeding resumes past the TQ en route", "then": "expect tighten, 2nd TQ just proximal (4.4), new time noted"}
+      ],
+      "expected": [
+        "ROSC recognized (capno jump + pulse); vent 10/min, EtCO2 35-45",
+        "NS 250 mL boluses to SBP >= 90; MD after 1000 mL (2.24A)",
+        "SMR/collar now (4.11); keep warm"
+      ]
+    },
+    {
+      "time": "16+",
+      "phase": "Handoff / after",
+      "give": "UVMMC trauma bay. Trooper (radio): \"What did you touch on the passenger?\"",
+      "expected": [
+        "Early trauma alert + 'in arrest/ROSC' to UVMMC",
+        "Report: TQ time, binder, fluids, epi, arrest + ROSC times",
+        "SIREN for both pts incl. DOA findings; crew check-in"
+      ]
+    }
+  ],
+  "critical": [
+    "Resuscitation started on DOA passenger, delaying driver care (8.17)",
+    "Resuscitation withheld/stopped on EMS-witnessed blunt arrest (4.11)",
+    "Life-threatening thigh bleed not controlled before/with CPR (4.4)",
+    "No BVM ventilation / airway not suctioned (4.11)",
+    "Scene time > 10 min, or waits on scene for intercept (4.11)",
+    "Compressions paused > 10 s for IV/IO, airway or moving",
+    "Epi wrong concentration (1 mg/mL IV) or delayed in PEA (3.2A)",
+    "No trauma alert / 'in arrest' notification to UVMMC"
+  ],
+  "differentials": [
+    ["Hemorrhagic shock -> TCA (dx)", "Pulsatile femur bleed, unstable pelvis, flat neck veins", "-"],
+    ["Tension pneumothorax", "R chest bruise/crepitus, poor rise, better after NDT", "Trachea midline; flat veins (hypovolemia hides JVD)"],
+    ["Medical arrest -> crash", "No skid marks; 4.11 Pearl", "Moaning pre-EMS, obvious bleed, age 22"],
+    ["Severe TBI", "GCS 6, scalp lac", "Pupils equal; shock explains arrest"],
+    ["Blunt cardiac injury / tamponade", "Steering wheel impact, PEA", "R chest + thigh findings explain it"],
+    ["Hypothermia", "25 F, night, blood loss", "Short exposure - still cover/warm"],
+    ["Hypoglycemia / intoxication", "Young driver at night, AMS", "Doesn't explain shock; BGL 112 post-ROSC"]
+  ],
+  "debrief": [
+    "Why withhold on the passenger but work the driver? Recite the signs + factors of death.",
+    "In TCA, what comes before compressions - and why does CPR alone do little?",
+    "What can an AEMT do for a tension pneumothorax in arrest? How did you get it done?",
+    "UVMMC is 12 min: why < 10 min on scene, and why not wait for the medic?",
+    "How do you document and hand off a DOA patient left at a crash?"
+  ],
+  "crew_card": {
+    "dispatch": "Route 2A, St. George Rd near Industrial Ave, Williston. Single car into a tree, 2 occupants, one not moving. State Police en route.",
+    "on_arrival": "Dark roadside, 25 F. Sedan smashed into a tree, passenger side caved in. Young man on the ground by the driver door, gurgling; dark pool under his left leg. Passenger still belted in, not moving. Motorist waving you over."
+  },
+  "actor_card": {
+    "Motorist": "Shaken. \"I pulled him out, he was moaning. The other guy hasn't moved.\" Points to driver.",
+    "Driver": "Moans and gurgles at first; goes silent and limp at T+3.",
+    "Trooper (T+6)": "\"A wreck like this - is there any point?\" Asks crew not to move debris or the passenger.",
+    "Paramedic intercept": "By radio: \"We're 5 out - hold on scene for us.\" Meets the ambulance en route if asked.",
+    "Evaluator": "Pulse lost at T+3 regardless. AED never shocks. ROSC only with TQ + binder + BVM + scene < 10 min + medic NDT en route."
+  },
+  "show_cards": [
+    {"type": "text", "width": "half", "title": "PASSENGER", "body": "Belted in seat. Not breathing.\nNeck, wrist, groin: nothing felt.\nNo heart sounds.\nPupils large, not reacting.\nSkull visibly deformed.", "cue": "When crew checks passenger: all 5 signs + factor of death (8.17)"},
+    {"type": "text", "width": "half", "title": "VEHICLE", "body": "Driver airbag deployed.\nSteering wheel bent.\nNo skid marks.\nPassenger door pushed in ~2 ft.", "cue": "If crew asks about mechanism"},
+    {"type": "strip", "width": "full", "title": "AED / MONITOR", "caption": "NO SHOCK ADVISED", "rhythm": "sinus", "rate": 120, "cue": "Every analysis from T+3 (PEA, no pulse). Stage E: switch to flat line, still no shock"},
+    {"type": "capno", "width": "half", "title": "CAPNOGRAPHY", "caption": "EtCO2 12", "pattern": "cpr", "etco2": 12, "rr": 10, "cue": "CPR, Stage B (18 in Stage C, 6 in Stage E)"},
+    {"type": "capno", "width": "half", "title": "CAPNOGRAPHY", "caption": "EtCO2 30", "pattern": "normal", "etco2": 30, "rr": 10, "cue": "ROSC after medic NDT (Stage D)"}
+  ],
+  "moulage_tags": [
+    {"region": "L thigh", "text": "Open wound, thigh bent, bright red blood spurting", "cue": "Swap to 'oozing' once TQ tight"},
+    {"region": "Pelvis", "text": "Grinding, moves when gently pressed"},
+    {"region": "R chest", "text": "Bruised; crackly under skin; quiet breath sounds R", "cue": "Breath sounds return R once medic decompresses"},
+    {"region": "Mouth", "text": "Blood, gurgling"},
+    {"region": "L flank / belly", "text": "Bruised, belly firm"},
+    {"region": "Skin", "text": "Pale, cool, sweaty"},
+    {"region": "Passenger head", "text": "Skull visibly deformed"}
+  ],
+  "learn_more": {
+    "topic": "traumatic cardiac arrest after blunt trauma",
+    "focus": "withhold vs start, hemorrhage control and ventilation before compressions, short scene time, tension pneumothorax"
+  }
+}
