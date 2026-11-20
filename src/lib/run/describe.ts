@@ -50,6 +50,8 @@ export function describeEvent(sc: NormalizedScenario, e: RunEvent): string {
       if (e.view) parts.push(`view ${e.view}`);
       if (e.ecg !== undefined) parts.push(`ECG ${e.ecg ? "on" : "off"}`);
       if (e.capno !== undefined) parts.push(`capno ${e.capno ? "on" : "off"}`);
+      if (e.pleth !== undefined) parts.push(`SpO2 pleth ${e.pleth ? "on" : "off"}`);
+      if (e.layout) parts.push(e.layout === "12lead" ? "12-lead view" : "single-lead view");
       return `Student display: ${parts.join(", ")}`;
     }
     case "undo":

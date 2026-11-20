@@ -53,7 +53,19 @@ User requirement (Nov 2026): "The UI of the application should match the paper o
 
   Revealed vs hidden vitals is greyscale first (hidden = dashed grey cell "tap", revealed = solid value); `pushed` is only added if testing shows that is ambiguous. Any new accent needs a row in this table.
 - **Print**: a print stylesheet renders the screens as the paper sheet: accents become black (MISSED prints as bold "MISSED"), interactive chrome hidden, footer kept. The debrief summary export uses the same stylesheet.
-- **Student display exception** (confirmed Nov 2026): the `/display` MONITOR view keeps the patient-monitor look (black background, large white numerals); waveforms use a single accent (`monitor-wave`). This is the only dark/colored screen. The display's INFO / CARDS view is paper-style.
+- **Student display exception** (confirmed Nov 2026): the `/display` MONITOR view keeps the patient-monitor look (black background). This is the only dark/colored screen; the display's INFO / CARDS view is paper-style. Monitor colors (Nov 2026 request: "match the color scheme of a zoll monitor") are per parameter, waveform and its numeric tile alike, defined once as `@theme static` tokens in `src/index.css`:
+
+  | Token | Value | Use (MONITOR view only) |
+  |---|---|---|
+  | `zoll-ecg` | #00ff00 | ECG traces (lead II, live 12-lead) + HR |
+  | `zoll-spo2` | #00c8ff | SpO2 pleth + SpO2 |
+  | `zoll-co2` | #ffff00 | capnography + EtCO2 + BR |
+  | `zoll-nibp` | #ffffff | NIBP (MAP in parentheses) |
+  | `zoll-temp` | #ffffff | T1 and other numerics (BGL, GCS, pain, pupils) |
+
+  These are **approximations** (no official ZOLL color values were found); check them against the agency's actual monitor and adjust the tokens. No ZOLL name or logo appears in the UI. Layout follows an X Series style: traces left (ECG II with "x1.0 25 mm/s", SpO2 pleth, CO2), numeric tiles right (HR bpm, NIBP mmHg (MAP), SpO2 %, EtCO2 mmHg with BR, T1); "SIMULATED" stays visible.
+- **Monitor traces**: ECG lead II, **SpO2 pleth** (`src/lib/waveforms/pleth.ts`: one pulse per QRS with the ECG's beat times, 0.22 s pulse-transit delay, dicrotic notch; amplitude from the stage SBP (`-` walks back to the last stage with a BP); irregular with afib incl. smaller pulses after short R-R), capnography. Each trace appears once its numeric has been given (HR -> ECG, SpO2 -> pleth, EtCO2 -> CO2) or by the instructor's ECG / SpO2 / CO2 toggles. No perfusing pulse in the current stage (stage HR 0, VF, asystole, PEA) = no pleth and SpO2 shows "--", even if SpO2 was given earlier.
+- **Live 12-lead**: the display has a "Lead II | 12-lead" toggle (crew) and the Run tab a "12-lead" button (instructor, logged). 12-lead layout = 3 x 4 (I/aVR/V1/V4, II/aVL/V2/V5, III/aVF/V3/V6, 2.5 s each, sweeping across 10 s) + lead II rhythm strip, from the per-lead R/S/T/P model with the current rhythm/rate. ST map: the most recently pushed (still shown) 12-lead show card's `st`, else only lead II = the stage's `monitor.st` (no invented reciprocal changes). Available for every rhythm; VF/asystole simply look the same in every lead.
 
 ## User decisions (Nov 2026, before Phase 1)
 

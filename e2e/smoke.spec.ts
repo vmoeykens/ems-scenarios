@@ -22,6 +22,15 @@ test("load scenario, start clock, reveal BP, push card, display updates, export"
   await expect(display.getByTestId("num-BP")).toContainText("112/74");
   await expect(display.getByTestId("num-HR")).toContainText("--"); // not revealed
 
+  // SpO2 given -> pleth trace + cyan numeric; instructor switches the monitor to the live 12-lead and back
+  await page.getByTestId("vital-A-SpO2").click();
+  await expect(display.getByTestId("num-SpO2")).toContainText("95");
+  await page.getByTestId("layout-12lead-btn").click();
+  await expect(display.getByTestId("monitor")).toHaveAttribute("data-layout", "12lead");
+  await expect(display.getByTestId("twelve-live").locator("[data-lead]")).toHaveCount(12);
+  await display.getByTestId("layout-single").click(); // crew can switch locally
+  await expect(display.getByTestId("monitor")).toHaveAttribute("data-layout", "single");
+
   // push the lung-sounds text card -> display switches to INFO and shows it
   await page.getByTestId("show-card-3").click();
   await expect(display.getByTestId("display")).toHaveAttribute("data-view", "info");

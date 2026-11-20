@@ -96,6 +96,25 @@ function ControlStrip() {
           >
             CO2
           </button>
+          <button
+            type="button"
+            className={`sheet-btn seg ${state.plethOn ? "seg-on" : ""}`}
+            aria-pressed={state.plethOn}
+            onClick={() => dispatch({ kind: "display", pleth: !state.plethOn })}
+            title="SpO2 pleth trace (auto-on when SpO2 is given; never shown without a pulse)"
+          >
+            SpO2
+          </button>
+          <button
+            type="button"
+            className={`sheet-btn seg ml-1 ${state.layout === "12lead" ? "seg-on" : ""}`}
+            aria-pressed={state.layout === "12lead"}
+            onClick={() => dispatch({ kind: "display", layout: state.layout === "12lead" ? "single" : "12lead" })}
+            title="Student monitor: live 12-lead instead of lead II + SpO2 + CO2"
+            data-testid="layout-12lead-btn"
+          >
+            12-lead
+          </button>
         </div>
         <label className="flex items-center gap-1 text-xs min-h-6">
           <input type="checkbox" className="box" checked={autoSwitch} onChange={(e) => setAutoSwitch(e.target.checked)} />

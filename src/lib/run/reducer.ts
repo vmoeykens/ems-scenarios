@@ -1,7 +1,7 @@
 // reduce(events) -> RunState. Pure; the whole UI and the student display derive from this.
 import type { NormalizedScenario } from "../scenario/normalize.ts";
 import type { VitalKey } from "../scenario/types.ts";
-import type { DisplayView, HistorySection, RunEvent } from "./types.ts";
+import type { DisplayView, HistorySection, MonitorLayout, RunEvent } from "./types.ts";
 
 export interface Stamp {
   t: number;
@@ -45,6 +45,11 @@ export interface RunState {
   viewSeq: number;
   ecgOn: boolean;
   capnoOn: boolean;
+  /** SpO2 pleth trace (auto-on when SpO2 is given) */
+  plethOn: boolean;
+  layout: MonitorLayout;
+  /** bumps on every explicit layout change so the display can follow it */
+  layoutSeq: number;
   /** strip / capno card currently overriding the stage monitor (cleared on stage change) */
   ecgOverride: number | null;
   capnoOverride: number | null;
@@ -75,6 +80,9 @@ export function initialState(sc: NormalizedScenario): RunState {
     viewSeq: 0,
     ecgOn: false,
     capnoOn: false,
+    plethOn: false,
+    layout: "single",
+    layoutSeq: 0,
     ecgOverride: null,
     capnoOverride: null,
     undone: new Set(),
@@ -132,6 +140,7 @@ export function reduce(sc: NormalizedScenario, events: readonly RunEvent[]): Run
         s.latest[e.vital] = r;
         if (e.vital === "HR") s.ecgOn = true;
         if (e.vital === "EtCO2") s.capnoOn = true;
+        if (e.vital === "SpO2") s.plethOn = true;
         break;
       }
       case "history": {
@@ -181,6 +190,11 @@ export function reduce(sc: NormalizedScenario, events: readonly RunEvent[]): Run
         }
         if (e.ecg !== undefined) s.ecgOn = e.ecg;
         if (e.capno !== undefined) s.capnoOn = e.capno;
+        if (e.pleth !== undefined) s.plethOn = e.pleth;
+        if (e.layout) {
+          s.layout = e.layout;
+          s.layoutSeq = e.seq;
+        }
         break;
     }
   }

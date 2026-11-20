@@ -3,6 +3,8 @@ import type { VitalKey } from "../scenario/types.ts";
 
 export type HistorySection = "SAMPLE" | "OPQRST" | "primary" | "secondary";
 export type DisplayView = "monitor" | "info";
+/** student MONITOR layout: lead II + SpO2 + CO2 traces, or a live 12-lead */
+export type MonitorLayout = "single" | "12lead";
 
 export type RunEventBody =
   | { kind: "clock"; action: "start" | "pause" | "resume" | "reset" }
@@ -17,7 +19,7 @@ export type RunEventBody =
   | { kind: "setup"; tagIndex: number; done: boolean }
   | { kind: "critical"; itemId: string; status: "met" | "missed" | null }
   | { kind: "note"; text: string; quick?: boolean }
-  | { kind: "display"; view?: DisplayView; ecg?: boolean; capno?: boolean }
+  | { kind: "display"; view?: DisplayView; ecg?: boolean; capno?: boolean; pleth?: boolean; layout?: MonitorLayout }
   | { kind: "undo"; target: number /* seq of the undone event */ };
 
 export type RunEvent = RunEventBody & {
