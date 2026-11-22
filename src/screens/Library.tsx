@@ -1,14 +1,16 @@
-import { useState, useSyncExternalStore } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import { href, navigate } from "../lib/router.ts";
 import {
   bundledEntries,
   CATEGORY_ORDER,
+  checkInLibrary,
   categoryOf,
   importedEntries,
   importScenarioText,
   subscribeLibrary,
   type LibraryEntry,
 } from "../lib/scenario/library.ts";
+import type { CheckResult } from "../lib/scenario/check.ts";
 import { useRun } from "../state/RunContext.tsx";
 import { RemoteButton } from "../ui/RemotePanel.tsx";
 import { Footer, Md, Section } from "../ui/primitives.tsx";
@@ -89,6 +91,8 @@ export default function Library() {
       ))}
 
       <Section title="Import scenario JSON" right="session only - add to scenarios/ to keep it" className="mb-2 no-print">
+        <PasteImport />
+        <div className="section-sub">Or upload a file</div>
         <label
           className={`dropzone ${drag ? "dropzone-on" : ""}`}
           onDragOver={(e) => {
@@ -102,7 +106,7 @@ export default function Library() {
             void onFiles(e.dataTransfer.files);
           }}
         >
-          <input type="file" accept=".json,application/json" multiple className="sr-only" onChange={(e) => e.target.files && void onFiles(e.target.files)} />
+          <input type="file" accept=".json,.txt,application/json,text/plain" multiple className="sr-only" onChange={(e) => e.target.files && void onFiles(e.target.files)} />
           <span>
             <b>Choose file</b> or drop scenario <code>.json</code> here. Validated with the same schema + rules as <code>npm run validate</code>.
           </span>
@@ -112,7 +116,7 @@ export default function Library() {
             <div className="text-alert font-bold">Not imported: {er.file}</div>
             <ul className="text-sm list-disc pl-5">
               {er.errors.map((m, i) => (
-                <li key={i} className="font-mono text-xs">
+                <li key={i} className="font-mono text-xs whitespace-pre-wrap">
                   {m}
                 </li>
               ))}
@@ -148,5 +152,117 @@ function Row({ e }: { e: LibraryEntry }) {
         <Md text={(sc.protocols ?? []).join(" | ")} />
       </td>
     </tr>
+  );
+}
+
+/** Paste box: validates live (debounced) with the same schema + rules as file import. */
+function PasteImport() {
+  const [text, setText] = useState("");
+  const [check, setCheck] = useState<CheckResult>({ state: "empty" });
+  const [done, setDone] = useState<string | null>(null);
+  const [copied, setCopied] = useState(false);
+
+  useEffect(() => {
+    const t = setTimeout(() => setCheck(checkInLibrary(text)), 250);
+    return () => clearTimeout(t);
+  }, [text]);
+
+  const errorList = check.state === "invalid" ? check.errors : check.state === "json-error" ? [check.error] : [];
+
+  function doImport(open: boolean) {
+    if (check.state !== "valid") return;
+    const name = `${check.scenario.id ?? "pasted"}_pasted.json`;
+    const r = importScenarioText(name, text);
+    if (!r.ok) return; // cannot happen: same checks as checkScenarioText
+    setText("");
+    setCheck({ state: "empty" });
+    setDone(`Imported ${r.entry.scenario.id} ${r.entry.scenario.title} (this session only).`);
+    if (open) navigate(href.scenario(r.entry.key));
+  }
+
+  async function copyErrors() {
+    const body = `Fix these validation errors in the scenario JSON, then give me the complete corrected JSON:\n${errorList.map((e, i) => `${i + 1}. ${e}`).join("\n")}`;
+    try {
+      await navigator.clipboard.writeText(body);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      /* clipboard blocked: the list is still visible to select by hand */
+    }
+  }
+
+  return (
+    <div className="p-1.5" data-testid="paste-import">
+      <label htmlFor="paste-json" className="block text-sm mb-1">
+        <b>Paste scenario JSON</b> - a whole AI chat reply is fine; text and <code>```</code> fences around the JSON are ignored. Checked as you type.
+      </label>
+      <textarea
+        id="paste-json"
+        data-testid="paste-json"
+        className="field font-mono text-xs min-h-40"
+        rows={10}
+        spellCheck={false}
+        placeholder='{ "id": "MED-07", "title": "...", ... }'
+        value={text}
+        onChange={(e) => {
+          setText(e.target.value);
+          setDone(null);
+        }}
+      />
+      <div className="mt-1" data-testid="paste-status" data-state={check.state} aria-live="polite">
+        {check.state === "empty" && done && <div className="font-bold">{done}</div>}
+        {check.state === "json-error" && (
+          <div>
+            <div className="text-alert font-bold">{check.error}</div>
+            {check.snippet && <pre className="font-mono text-xs border border-ink p-1 mt-0.5 overflow-x-auto">{check.snippet}</pre>}
+          </div>
+        )}
+        {check.state === "invalid" && (
+          <div>
+            <div className="text-alert font-bold">
+              {check.scenario.id ?? "Scenario"}: {check.errors.length} validation problem{check.errors.length === 1 ? "" : "s"} - fix the JSON
+            </div>
+            <ol className="list-decimal pl-5 font-mono text-xs" data-testid="paste-errors">
+              {check.errors.map((m, i) => (
+                <li key={i}>{m}</li>
+              ))}
+            </ol>
+          </div>
+        )}
+        {check.state === "valid" && (
+          <div data-testid="paste-valid">
+            <div className="font-bold">
+              Valid: {check.scenario.id} {check.scenario.title}
+            </div>
+            {check.duplicateOf && <div className="text-xs">Same ID as {check.duplicateOf} - it will be added as a separate imported entry.</div>}
+          </div>
+        )}
+        {check.state !== "empty" && check.state !== "json-error" && check.cleaned && (
+          <div className="text-xs italic">Text around the JSON was ignored.</div>
+        )}
+      </div>
+      <div className="flex flex-wrap gap-1 mt-1">
+        <button type="button" className="sheet-btn" disabled={check.state !== "valid"} onClick={() => doImport(true)} data-testid="paste-open">
+          Import &amp; open
+        </button>
+        <button type="button" className="sheet-btn" disabled={check.state !== "valid"} onClick={() => doImport(false)} data-testid="paste-import-btn">
+          Import
+        </button>
+        <button type="button" className="sheet-btn" disabled={errorList.length === 0} onClick={() => void copyErrors()} data-testid="paste-copy-errors">
+          {copied ? "Copied" : "Copy errors (for the AI)"}
+        </button>
+        <button
+          type="button"
+          className="sheet-btn"
+          disabled={!text}
+          onClick={() => {
+            setText("");
+            setDone(null);
+          }}
+        >
+          Clear
+        </button>
+      </div>
+    </div>
   );
 }

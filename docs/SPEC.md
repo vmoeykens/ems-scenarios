@@ -117,7 +117,7 @@ User request: "a 'provider actions' section. On the printed sheet it can be a ch
 
 ## Phase 1 - Instructor console (single device, tablet-first, works on laptop)
 
-- **Library**: scenarios grouped by category (Medical / Trauma / Cardiac / Cardiac arrest), with difficulty, run time, protocols. Bundled scenarios from `scenarios/` (built into the app) + import a JSON via file picker/drag-drop (validated, held in memory for the session; to make it permanent, add it to `scenarios/` and redeploy).
+- **Library**: scenarios grouped by category (Medical / Trauma / Cardiac / Cardiac arrest), with difficulty, run time, protocols. Bundled scenarios from `scenarios/` (built into the app) + import a JSON by **pasting it** or via file picker/drag-drop (validated, held in memory for the session; to make it permanent, add it to `scenarios/` and redeploy). Paste box: validates live (250 ms debounce) with the same schema + rules as file import and `npm run validate`; tolerant of a whole AI chat reply (BOM, prose and ```json fences around the outermost `{...}` are stripped, `src/lib/scenario/parse.ts`); JSON syntax errors show line/column + the offending line; schema/rule problems as a numbered list with "Copy errors (for the AI)" (copies a fix-request + the list); "Import" / "Import & open" only when valid; warns when the ID matches an existing scenario. File uploads use the same tolerant parser (.json or .txt).
 - **Pre-brief tab**: dispatch (large "read aloud" text), scene/setup, resources, objectives, actor card, moulage tags checklist (with cues) for setup.
 - **Run tab**:
   - Scenario clock (start/pause/reset), T+mm:ss. Every event timestamped relative to start.

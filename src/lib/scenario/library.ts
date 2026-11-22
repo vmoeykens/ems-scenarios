@@ -3,6 +3,8 @@ import { bundledScenarios } from "./bundled.ts";
 import { normalize, type NormalizedScenario } from "./normalize.ts";
 import type { Scenario } from "./types.ts";
 import { validateScenario, type ValidationResult } from "../validate/index.ts";
+import { parseScenarioText } from "./parse.ts";
+import { checkScenarioText, type CheckResult } from "./check.ts";
 
 export interface LibraryEntry {
   /** route key: bundled file stem, or "import-N-<stem>" */
@@ -50,16 +52,19 @@ export const importedEntries = () => imports;
 
 export type ImportOutcome = { ok: true; entry: LibraryEntry } | { ok: false; file: string; errors: string[] };
 
+/** Live check of pasted text against the schema + rules, flagging an ID already in the library. */
+export function checkInLibrary(raw: string): CheckResult {
+  return checkScenarioText(raw, [...bundledEntries(), ...imports].map((e) => ({ id: e.scenario.id, title: e.scenario.title })));
+}
+
 export function importScenarioText(file: string, raw: string): ImportOutcome {
-  let data: unknown;
-  try {
-    data = JSON.parse(raw);
-  } catch (e) {
-    return { ok: false, file, errors: [`invalid JSON: ${(e as Error).message}`] };
-  }
+  const p = parseScenarioText(raw);
+  if (!p.ok) return { ok: false, file, errors: [p.error + (p.snippet ? `\n    ${p.snippet}` : "")] };
+  const data = p.data;
   const result = validateScenario(data);
   if (!result.ok) return { ok: false, file, errors: result.errors };
-  const e = entry(`import-${imports.length + 1}-${stem(file).replace(/[^A-Za-z0-9_-]+/g, "_")}`, file, "import", raw, data as Scenario, result);
+  // store the extracted JSON (not the surrounding chat text) so hashes/exports are clean
+  const e = entry(`import-${imports.length + 1}-${stem(file).replace(/[^A-Za-z0-9_-]+/g, "_")}`, file, "import", p.json, data as Scenario, result);
   imports = [...imports, e];
   subs.forEach((cb) => cb());
   return { ok: true, entry: e };

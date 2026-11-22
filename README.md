@@ -34,6 +34,8 @@ Put the official VT protocols PDF at `public/protocols/vt-ems-protocols-2025.pdf
 
 Write `scenarios/<ID>_<slug>.json` following `docs/scenario-authoring-standard.md`, then `npm run validate` and `npm run pdf`. Fix the JSON, not the validator.
 
+To try a scenario without committing it (e.g. one a trainer wrote with ChatGPT), paste it into **Import scenario JSON** on the app's Library page: the whole chat reply is fine, it validates as you type, and **Copy errors (for the AI)** gives the trainer a fix request to paste back. Imports last for the browser session only.
+
 ## One format, two outputs
 
 The same JSON drives the PDF (`tools/ems_scenario.py`) and the app. Optional Runner fields (`vitals[].key`, `vitals[].monitor`, `flow[].id`, `{id, text}` checklist items, branch `goto_stage` / `goto_phase` / `id`, expected-item provider-action links `{text, action, match?}`, `provider_actions`) are accepted by both; the PDF renders `{id, text}` items by their text, ignores `monitor` (student-display ECG/capno for that stage), and prints the linked actions first on the PROVIDER ACTIONS page (catalog: `schema/actions.json`).
