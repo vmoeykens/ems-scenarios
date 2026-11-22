@@ -3,6 +3,7 @@
 import Ajv2020, { type ErrorObject } from "ajv/dist/2020.js";
 import schema from "../../../schema/scenario.schema.json" with { type: "json" };
 import { validateRules } from "./rules.ts";
+import { linkErrors } from "../actions/catalog.ts";
 import type { Scenario } from "../scenario/types.ts";
 
 const ajv = new Ajv2020({ allErrors: true, strict: true, strictRequired: false, allowUnionTypes: true });
@@ -33,7 +34,7 @@ export function schemaErrors(data: unknown): string[] {
 }
 
 export function validateScenario(data: unknown): ValidationResult {
-  const s = schemaErrors(data);
+  const s = [...schemaErrors(data), ...linkErrors(data)];
   let r: string[];
   try {
     r = validateRules(data);

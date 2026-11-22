@@ -23,7 +23,16 @@
       "SpO2": "97%",
       "other": "-",
       "key": "A",
-      "monitor": { "rhythm": "sinus", "rate": 100, "st": 1.5, "capno": { "pattern": "normal", "etco2": 36, "rr": 16 } }
+      "monitor": {
+        "rhythm": "sinus",
+        "rate": 100,
+        "st": 1.5,
+        "capno": {
+          "pattern": "normal",
+          "etco2": 36,
+          "rr": 16
+        }
+      }
     },
     {
       "stage": "Better (after tx)",
@@ -34,7 +43,11 @@
       "SpO2": "98%",
       "other": "-",
       "key": "B",
-      "monitor": { "rhythm": "chb", "rate": 40, "p_rate": 80 }
+      "monitor": {
+        "rhythm": "chb",
+        "rate": 40,
+        "p_rate": 80
+      }
     }
   ],
   "flow": [
@@ -47,7 +60,14 @@
           "id": "roles",
           "text": "Roles assigned"
         },
-        "Vitals obtained"
+        "Vitals obtained",
+        {
+          "text": "O2 by NRB",
+          "action": "oxygen",
+          "match": {
+            "device": "NRB"
+          }
+        }
       ],
       "branches": [
         {
@@ -103,5 +123,9 @@
   "learn_more": {
     "topic": "test topic",
     "focus": "test focus"
-  }
+  },
+  "provider_actions": [
+    "bgl",
+    "iv"
+  ]
 }

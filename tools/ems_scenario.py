@@ -354,6 +354,17 @@ def moulage_page(sc, tmp):
         out.append(KeepTogether(block))
     return out + learn
 
+# ---------------------------------------------------------------- provider-action catalog (schema/actions.json)
+def load_actions():
+    """Shared provider-action catalog next to the generator in the repo; None if absent (standalone use)."""
+    p = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "schema", "actions.json")
+    try:
+        with open(p, encoding="utf-8") as fh: return json.load(fh)
+    except (OSError, ValueError): return None
+
+ACTIONS = load_actions()
+ACTION_IDS = {a["id"] for a in ACTIONS["actions"]} if ACTIONS else None
+
 # ---------------------------------------------------------------- validation
 RHYTHMS = {"sinus", "afib", "svt", "vt", "vf", "asystole", "chb", "avb1", "flutter"}
 def validate(sc):
@@ -371,6 +382,7 @@ def validate(sc):
         if not f.get("expected"): errs.append(f"{pfx}: no expected actions")
         for i in f.get("expected", []) or []:
             if isinstance(i, dict) and not i.get("text"): errs.append(f"{pfx}: expected item object needs text")
+            if isinstance(i, dict) and i.get("action") and ACTION_IDS is not None and i["action"] not in ACTION_IDS: errs.append(f"{pfx}: unknown action {i['action']!r}")
         for b in f.get("branches", []):
             BK = {"if", "then", "type", "goto_stage", "goto_phase", "id"}
             if set(b) - BK: errs.append(f"{pfx}: unknown branch keys {set(b) - BK}")
@@ -388,6 +400,8 @@ def validate(sc):
                 elif refs and g_ not in refs: errs.append(f"{pfx}: goto_stage {g_} disagrees with THEN text Stage {refs}")
             if "goto_phase" in b and b["goto_phase"] not in flow_ids: errs.append(f"{pfx}: goto_phase {b['goto_phase']} is not a flow id {flow_ids}")
             if re.search(r"critical fail|miss = fail", b["then"], re.I): errs.append(f"{pfx}: use 'critical (evaluator discretion)'")
+    for a in sc.get("provider_actions", []):
+        if ACTION_IDS is not None and a not in ACTION_IDS: errs.append(f"provider_actions: unknown action {a!r}")
     LEAK = re.compile(r"\b(if |show when|after |overbag|over-bag|rosc|pea\b|no pulse|stage |normal wave|square|shark|instructor|recheck|use vitals|t\+\d|good |during |analysis)", re.I)
     for c in sc.get("show_cards", []):
         face = " ".join(str(c.get(k, "")) for k in ("title", "caption", "body"))

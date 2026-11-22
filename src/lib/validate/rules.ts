@@ -3,6 +3,10 @@
 // tests/validator.test.ts can compare the two validators' output exactly on the bad fixtures.
 // If you change one, change the other.
 import { learnPrompt, LEARN_PROMPT_MAX, pyLen } from "../scenario/learn.ts";
+import catalog from "../../../schema/actions.json" with { type: "json" };
+
+/** Provider-action ids (schema/actions.json); mirrors ACTION_IDS in the generator. */
+export const ACTION_IDS = new Set((catalog as { actions: { id: string }[] }).actions.map((a) => a.id));
 
 export const RHYTHMS = new Set(["sinus", "afib", "svt", "vt", "vf", "asystole", "chb", "avb1", "flutter"]);
 export const SHOW_CARD_TYPES = ["12lead", "strip", "capno", "text", "image"];
@@ -67,6 +71,7 @@ export function validateRules(sc: Any): string[] {
     if (!expected || (Array.isArray(expected) && expected.length === 0)) errs.push(`${pfx}: no expected actions`);
     for (const i of arr(expected)) {
       if (isObj(i) && !i.text) errs.push(`${pfx}: expected item object needs text`);
+      if (isObj(i) && i.action && !ACTION_IDS.has(i.action)) errs.push(`${pfx}: unknown action ${pyRepr(i.action)}`);
     }
     for (const b of arr(get(f, "branches", []))) {
       if (!isObj(b)) continue;
@@ -99,6 +104,9 @@ export function validateRules(sc: Any): string[] {
         errs.push(`${pfx}: goto_phase ${pyStr(b.goto_phase)} is not a flow id ${pyStr(flowIds)}`);
       if (CRIT_FAIL.test(thenText)) errs.push(`${pfx}: use 'critical (evaluator discretion)'`);
     }
+  }
+  for (const a of arr(get(sc, "provider_actions", []))) {
+    if (!ACTION_IDS.has(a)) errs.push(`provider_actions: unknown action ${pyRepr(a)}`);
   }
   for (const c of arr(get(sc, "show_cards", []))) {
     const face = ["title", "caption", "body"].map((k) => pyStr(get(c, k, ""))).join(" ");

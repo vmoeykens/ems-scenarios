@@ -1,6 +1,6 @@
 // Default keys/ids the app derives when the optional Scenario Runner fields are absent.
 // Must agree with tools/ems_scenario.py validate() (stage letter + flow id defaults).
-import type { Branch, CheckItem, Phase, Scenario, VitalsRow } from "./types.ts";
+import type { Branch, CheckItem, ExpectedItem, Phase, Scenario, VitalsRow } from "./types.ts";
 
 /** Stage letter: vitals[].key, else first char of stage, upper-cased. Mirrors Python `str(v.get("key") or str(v.get("stage","?"))[:1]).upper()`. */
 export function stageKey(row: Partial<VitalsRow>): string {
@@ -13,13 +13,13 @@ export function phaseId(ph: Partial<Phase>, index: number): string {
   return String(ph.id || `p${index}`);
 }
 
-export function itemText(i: CheckItem): string {
+export function itemText(i: CheckItem | ExpectedItem): string {
   return typeof i === "string" ? i : i.text;
 }
 
 /** Item id: own id, else <scope>.<index> (e.g. "p2.e0", "crit3"). */
-export function itemId(i: CheckItem, fallback: string): string {
-  return typeof i === "string" ? fallback : i.id;
+export function itemId(i: CheckItem | ExpectedItem, fallback: string): string {
+  return typeof i === "string" ? fallback : i.id || fallback;
 }
 
 export const STAGE_REF = /Stage \*\*([A-Z])\*\*|Stage ([A-Z])\b/g;
@@ -37,7 +37,7 @@ export function branchStage(b: Branch): string | undefined {
 export interface NormalizedPhase extends Phase {
   id: string;
   index: number;
-  expectedItems: { id: string; text: string }[];
+  expectedItems: { id: string; text: string; action?: string; match?: Record<string, string | number> }[];
   branchList: (Branch & { id: string; target_stage?: string })[];
 }
 
@@ -57,7 +57,11 @@ export function normalize(sc: Scenario): NormalizedScenario {
       ...ph,
       id,
       index: i,
-      expectedItems: ph.expected.map((e, j) => ({ id: itemId(e, `${id}.e${j}`), text: itemText(e) })),
+      expectedItems: ph.expected.map((e, j) => ({
+        id: itemId(e, `${id}.e${j}`),
+        text: itemText(e),
+        ...(typeof e === "object" && e.action ? { action: e.action, ...(e.match ? { match: e.match } : {}) } : {}),
+      })),
       branchList: (ph.branches ?? []).map((b, j) => ({ ...b, id: b.id || `${id}.b${j}`, target_stage: branchStage(b) })),
     };
   });

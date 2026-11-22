@@ -84,6 +84,12 @@
     },
     "show_cards": { "type": "array", "items": { "$ref": "#/$defs/showCard" } },
     "moulage_tags": { "type": "array", "items": { "$ref": "#/$defs/moulageTag" } },
+    "provider_actions": {
+      "description": "extra provider-action ids (schema/actions.json) relevant to this scenario, besides those linked from flow[].expected[]",
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string", "pattern": "^[a-z][a-z0-9_]*$" }
+    },
     "learn_more": {
       "oneOf": [
         {
@@ -151,6 +157,24 @@
         }
       ]
     },
+    "expectedItem": {
+      "description": "plain string, or {text, id?, action?, match?}: action = provider-action id from schema/actions.json; match = {field: value} that the logged action must have to tick this item",
+      "oneOf": [
+        { "type": "string", "minLength": 1 },
+        {
+          "type": "object",
+          "required": ["text"],
+          "additionalProperties": false,
+          "properties": {
+            "id": { "$ref": "#/$defs/id" },
+            "text": { "type": "string", "minLength": 1 },
+            "action": { "type": "string", "pattern": "^[a-z][a-z0-9_]*$" },
+            "match": { "type": "object", "minProperties": 1, "additionalProperties": { "type": ["string", "number"] } }
+          },
+          "dependentRequired": { "match": ["action"] }
+        }
+      ]
+    },
     "branch": {
       "description": "Crew branch {if, then} or examiner option {type:'inject', if, then}. goto_stage/goto_phase/id are optional machine-readable links.",
       "type": "object",
@@ -174,7 +198,7 @@
         "time": { "type": "string" },
         "phase": { "type": "string" },
         "give": { "type": "string" },
-        "expected": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/checkItem" } },
+        "expected": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/expectedItem" } },
         "branches": { "type": "array", "items": { "$ref": "#/$defs/branch" } }
       }
     },
