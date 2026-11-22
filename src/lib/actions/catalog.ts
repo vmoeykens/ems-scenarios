@@ -47,6 +47,7 @@ export function formatValues(action: ActionDef | undefined, values: ActionValues
     if (Array.isArray(v)) parts.push(v.join(" + "));
     else if (f.kind === "number") parts.push(f.unit ? `${v} ${f.unit}` : `${f.label} ${v}`);
     else if (f.kind === "text") parts.push(`${f.label}: ${v}`);
+    else if (v === "Yes" || v === "No") parts.push(`${f.label}: ${v}`);
     else parts.push(String(v));
   }
   return parts.join(", ");
@@ -82,4 +83,13 @@ export function linkErrors(sc: unknown): string[] {
     }),
   );
   return errs;
+}
+
+/** Actions relevant to a scenario: those linked from flow[].expected[] (flow order) + scenario.provider_actions. */
+export function relevantActions(sc: { flow?: { expected: unknown[] }[]; provider_actions?: string[] }): string[] {
+  const ids: string[] = [];
+  for (const ph of sc.flow ?? [])
+    for (const it of ph.expected) if (typeof it === "object" && it && (it as { action?: string }).action) ids.push((it as { action: string }).action);
+  ids.push(...(sc.provider_actions ?? []));
+  return [...new Set(ids)].filter((id) => byId.has(id));
 }

@@ -1,5 +1,6 @@
 // Event-sourced run log (docs/PLAN.md section 8). The run is an append-only list of events; UI state = reduce(events).
 import type { VitalKey } from "../scenario/types.ts";
+import type { ActionValues } from "../actions/catalog.ts";
 
 export type HistorySection = "SAMPLE" | "OPQRST" | "primary" | "secondary";
 export type DisplayView = "monitor" | "info";
@@ -20,6 +21,7 @@ export type RunEventBody =
   | { kind: "critical"; itemId: string; status: "met" | "missed" | null }
   | { kind: "note"; text: string; quick?: boolean }
   | { kind: "display"; view?: DisplayView; ecg?: boolean; capno?: boolean; pleth?: boolean; layout?: MonitorLayout }
+  | { kind: "action"; actionId: string; values: ActionValues; itemId?: string /* expected item it was logged from */ }
   | { kind: "undo"; target: number /* seq of the undone event */ };
 
 export type RunEvent = RunEventBody & {

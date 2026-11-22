@@ -6,6 +6,7 @@ import { stripMarkup } from "../scenario/text.ts";
 import { describeEvent } from "./describe.ts";
 import { completion, fmtT, reduce } from "./reducer.ts";
 import type { RunRecord } from "./types.ts";
+import { actionById, formatValues } from "../actions/catalog.ts";
 
 export function exportJson(rec: RunRecord): string {
   return JSON.stringify({ ...rec, exportedAt: new Date().toISOString() }, null, 2);
@@ -101,6 +102,12 @@ export function summaryHtml(sc: NormalizedScenario, rec: RunRecord): string {
     .filter((e) => e.kind === "reveal")
     .map((e) => (e.kind === "reveal" ? `<tr><td>${fmtT(e.t)}</td><td>${esc(e.stageKey)}${e.adlib ? " (ad lib)" : ""}</td><td>${esc(e.vital)}</td><td>${esc(stripMarkup(e.value))}</td></tr>` : ""))
     .join("");
+  const acts = s.actions
+    .map((a) => {
+      const def = actionById(a.actionId);
+      return `<tr><td>${fmtT(a.t)}</td><td>${esc(def?.label ?? a.actionId)}</td><td>${esc(formatValues(def, a.values))}</td></tr>`;
+    })
+    .join("");
   const notes = s.notes.map((n) => `<tr><td>${fmtT(n.t)}</td><td>${esc(n.text)}</td></tr>`).join("");
   const log = rec.events
     .map((e) => `<tr${s.undone.has(e.seq) ? ' class="muted"' : ""}><td>${e.seq}</td><td>${fmtT(e.t)}</td><td>${esc(describeEvent(sc, e))}${s.undone.has(e.seq) ? " (undone)" : ""}</td></tr>`)
@@ -117,6 +124,7 @@ ${missed.length ? `<div class="flag">FLAGGED FOR EVALUATOR DISCRETION: ${missed.
 ${sec("Critical actions (instructor discretion)", table(["Status", "Item", "Time"], crit))}
 ${sec("Scenario flow - expected actions", `<table><tbody>${flowRows}</tbody></table>`, "time = scenario clock")}
 ${sec("Branches / examiner options taken", table(["Time", "Type", "IF -> THEN"], branches))}
+${sec("Provider actions", table(["Time", "Action", "Details"], acts), "logged on the scenario clock")}
 ${sec("Vitals given", table(["Time", "Stage", "Vital", "Value"], vit))}
 ${sec("Notes", table(["Time", "Note"], notes))}
 ${sec("Learn more", `<div class="pad">${esc(learnPrompt(sc.source))}<br><span class="muted">OpenEvidence: https://www.openevidence.com</span></div>`)}
