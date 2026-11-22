@@ -25,6 +25,8 @@ describe("good fixtures", () => {
 
 // Every bad fixture: exact rule message(s) (= what tools/ems_scenario.py prints) and whether the schema also rejects it.
 const BAD: Record<string, { rules: string[]; schema: boolean }> = {
+  "action-match": { rules: [], schema: true }, // catalog link check (app only)
+  "action-unknown": { rules: ["flow 'Arrival': unknown action 'teleport'", "provider_actions: unknown action 'warp_drive'"], schema: false },
   "branch-missing-if": { rules: ["flow 'Arrival': branch missing if/then"], schema: true },
   "branch-type": { rules: ["flow 'Arrival': branch type must be omitted or 'inject'"], schema: true },
   "card-face-hint": { rules: ["show card 'MONITOR - Lead II': instructor hint on card face ('after ') - move to 'cue'"], schema: false },

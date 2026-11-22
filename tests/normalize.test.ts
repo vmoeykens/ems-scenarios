@@ -21,6 +21,7 @@ describe("normalize", () => {
     expect(n.phases[0].expectedItems).toEqual([
       { id: "roles", text: "Roles assigned" },
       { id: "arrival.e1", text: "Vitals obtained" },
+      { id: "arrival.e2", text: "O2 by NRB", action: "oxygen", match: { device: "NRB" } }, // provider-action link, no explicit id
     ]);
     expect(n.phases[0].branchList.map((b) => [b.id, b.target_stage, b.goto_phase])).toEqual([
       ["treat", "B", "transport"],

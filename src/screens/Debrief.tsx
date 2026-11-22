@@ -7,6 +7,7 @@ import { OE_URL } from "../lib/scenario/constants.ts";
 import { learnPrompt } from "../lib/scenario/learn.ts";
 import type { NormalizedScenario } from "../lib/scenario/normalize.ts";
 import { useRun } from "../state/RunContext.tsx";
+import { actionById, formatValues } from "../lib/actions/catalog.ts";
 import { download, Md, Section } from "../ui/primitives.tsx";
 import { QR } from "../ui/QR.tsx";
 import { href, navigate } from "../lib/router.ts";
@@ -53,6 +54,10 @@ export default function Debrief({ record, sc, readOnly = false }: { record: RunR
                   {met.length} met, <span className={missed.length ? "text-alert font-bold" : ""}>{missed.length} missed</span>,{" "}
                   {sc.critical.length - met.length - missed.length} not marked
                 </td>
+              </tr>
+              <tr>
+                <th className="bg-head">Provider actions</th>
+                <td>{s.actions.length} logged ({new Set(s.actions.map((a) => a.actionId)).size} different)</td>
               </tr>
               <tr>
                 <th className="bg-head">Branches taken</th>
@@ -117,6 +122,38 @@ export default function Debrief({ record, sc, readOnly = false }: { record: RunR
           </table>
         </Section>
       </div>
+
+      <Section title="Provider actions" right="logged on the scenario clock">
+        {s.actions.length ? (
+          <table className="sheet-table zebra" data-testid="debrief-actions">
+            <thead>
+              <tr>
+                <th className="w-20">Time</th>
+                <th>Action</th>
+                <th>Details</th>
+                <th className="w-56">Ticked expected item</th>
+              </tr>
+            </thead>
+            <tbody>
+              {s.actions.map((a) => {
+                const def = actionById(a.actionId);
+                const ticked = Object.entries(s.expected).find(([, v]) => v.byAction === a.seq)?.[0];
+                const item = ticked ? sc.phases.flatMap((p) => p.expectedItems).find((i) => i.id === ticked) : undefined;
+                return (
+                  <tr key={a.seq}>
+                    <td className="text-xs tabular-nums">{fmtT(a.t)}</td>
+                    <td>{def?.label ?? a.actionId}</td>
+                    <td className="text-sm">{formatValues(def, a.values)}</td>
+                    <td className="text-xs">{item ? <Md text={item.text} /> : ""}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        ) : (
+          <p className="p-1.5 text-sm text-cue">No provider actions logged.</p>
+        )}
+      </Section>
 
       <Section title="Debrief prompts">
         <ul className="list-disc pl-6 py-1 pr-2">

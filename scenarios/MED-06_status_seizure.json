@@ -338,7 +338,7 @@
       "expected": [
         "Seizure duration from witness (> 5 min = status)",
         "Protect head, no restraint, nothing forced in mouth",
-        "Paramedic intercept requested now"
+        {"text": "Paramedic intercept requested now", "action": "intercept_request", "match": {"status": "Requested"}}
       ]
     },
     {
@@ -358,7 +358,7 @@
       "expected": [
         "Lateral + suction",
         "NPA + NRB 15 L; BVM if ineffective",
-        "BGL checked (104)",
+        {"text": "BGL checked (104)", "action": "bgl"},
         "Monitor + capno on"
       ]
     },
@@ -381,9 +381,9 @@
         }
       ],
       "expected": [
-        "Rx rescue med assisted (2.22A); MD if unsure",
+        {"text": "Rx rescue med assisted (2.22A); MD if unsure", "action": "assist_own_med", "match": {"type": "Seizure rescue med (IN/buccal/rectal)"}},
         "Load + go to UVMMC; intercept en route",
-        "IV only if no delay (AEMT)"
+        {"text": "IV only if no delay (AEMT)", "action": "iv"}
       ]
     },
     {
@@ -400,7 +400,7 @@
       "expected": [
         "RR + EtCO2 reassessed after benzo",
         "Jaw thrust/NPA; BVM for RR < 10 / EtCO2 > 50",
-        "Recovery position, suction ready"
+        {"text": "Recovery position, suction ready", "action": "airway_position", "match": {"method": "Recovery position"}}
       ]
     },
     {
@@ -416,7 +416,7 @@
       ],
       "expected": [
         "Seizure times + rescue dose logged",
-        "Intercept rendezvous without stopping long",
+        {"text": "Intercept rendezvous without stopping long", "action": "intercept_request", "match": {"status": "Rendezvous set"}},
         "Serial GCS, SpO2, EtCO2"
       ]
     },
@@ -427,7 +427,7 @@
       "expected": [
         "Report: total seizure time, rescue med/time, airway",
         "Trigger: missed Keppra x3 d, no sleep, ETOH",
-        "SIREN: times, doses, BGL, head bump"
+        {"text": "SIREN: times, doses, BGL, head bump", "action": "documentation"}
       ]
     }
   ],

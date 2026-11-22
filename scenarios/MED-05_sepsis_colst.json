@@ -332,7 +332,7 @@
       "give": "RN: \"Dot's a DNR. The family doesn't want anything done - just take her, no needles.\" Hands COLST + face sheet. Stage **A** as obtained.",
       "expected": [
         "Roles; primary w/ temp + BGL",
-        "Paramedic intercept requested (no delay)",
+        {"text": "Paramedic intercept requested (no delay)", "action": "intercept_request", "match": {"status": "Requested"}},
         "Infection source sought (Foley)"
       ]
     },
@@ -372,8 +372,8 @@
       ],
       "expected": [
         "Sepsis screen positive verbalized (2.23A)",
-        "NS rapid, reassess lungs q500 mL",
-        "O2 to SpO2 94-98%",
+        {"text": "NS rapid, reassess lungs q500 mL", "action": "fluid"},
+        {"text": "O2 to SpO2 94-98%", "action": "oxygen"},
         "MAP >= 65 target (SBP >= 90)"
       ]
     },
@@ -388,9 +388,9 @@
         }
       ],
       "expected": [
-        "Sepsis Alert to UVMMC",
+        {"text": "Sepsis Alert to UVMMC", "action": "alert", "match": {"type": "Sepsis"}},
         "COLST copy + face sheet go with pt",
-        "Intercept meets en route, not on scene"
+        {"text": "Intercept meets en route, not on scene", "action": "intercept_request", "match": {"status": "Rendezvous set"}}
       ]
     },
     {
@@ -410,7 +410,7 @@
         }
       ],
       "expected": [
-        "Med Direction for conflict / no response",
+        {"text": "Med Direction for conflict / no response", "action": "md_contact"},
         "Fluids stopped at overload signs",
         "Pressors = paramedic (intercept/MD)"
       ]
@@ -422,7 +422,7 @@
       "expected": [
         "Report: sepsis criteria, source, fluid total, MAP",
         "Code status: DNR/DNI, limited tx",
-        "SIREN: COLST actions + MD name (8.7)"
+        {"text": "SIREN: COLST actions + MD name (8.7)", "action": "documentation"}
       ]
     }
   ],

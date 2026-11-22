@@ -137,7 +137,7 @@
       "give": "Read dispatch. FD at trailhead: \"UTV takes 2 of you + gear, 8 min ride.\"",
       "expected": [
         "2nd ambulance + intercept requested now (2 pts)",
-        "Roles pre-assigned: who triages, who stays with Pt 2",
+        {"text": "Roles pre-assigned: who triages, who stays with Pt 2", "action": "roles"},
         "Gear: O2, BVM, suction, splints, blankets, TQ"
       ]
     },
@@ -164,9 +164,9 @@
         {"if": "SMR, O2, insulated, on sled < 10 min", "then": "Stage **B**"}
       ],
       "expected": [
-        "Helmet off (2-person), collar, SMR to sled (4.6)",
-        "O2 NRB; SpO2 94-98; capno",
-        "Wet layers off/vapor barrier, blankets, off the snow (2.13)"
+        {"text": "Helmet off (2-person), collar, SMR to sled (4.6)", "action": "smr"},
+        {"text": "O2 NRB; SpO2 94-98; capno", "action": "oxygen", "match": {"device": "NRB"}},
+        {"text": "Wet layers off/vapor barrier, blankets, off the snow (2.13)", "action": "warming"}
       ]
     },
     {
@@ -179,7 +179,7 @@
         {"type": "inject", "if": "Air medical declines (snow, low ceiling)", "then": "expect ground direct to UVMMC, no wait; intercept en route"}
       ],
       "expected": [
-        "TRAUMA ALERT to UVMMC (4.9: HR > SBP, AMS)",
+        {"text": "TRAUMA ALERT to UVMMC (4.9: HR > SBP, AMS)", "action": "alert", "match": {"type": "Trauma"}},
         "Air vs ground rationale stated (8.0)",
         "Intercept en route only, no delay"
       ]
@@ -193,7 +193,7 @@
         {"if": "Pt 2 left with FD only", "then": "no provider w/ pt; debrief 9.1 resources"}
       ],
       "expected": [
-        "Pt 2: traction splint, CMS before/after (4.5)",
+        {"text": "Pt 2: traction splint, CMS before/after (4.5)", "action": "splint", "match": {"type": "Traction"}},
         "Pt 2 warmed; pain plan (2.20A; intercept for opioids)",
         "Pt 2 to UVMMC by 2nd unit; report to that crew"
       ]
@@ -208,7 +208,7 @@
       ],
       "expected": [
         "IV x2, warm NS; 250 mL boluses to radial/mentation",
-        "Med Direction after 1 L (2.24A)",
+        {"text": "Med Direction after 1 L (2.24A)", "action": "md_contact"},
         "Heat on high; reassess q5"
       ]
     },
@@ -219,7 +219,7 @@
       "expected": [
         "MIST report; Pt 2 status + unit named",
         "Scene, extraction, cold-exposure times",
-        "SIREN: separate PCR per pt"
+        {"text": "SIREN: separate PCR per pt", "action": "documentation"}
       ]
     }
   ],

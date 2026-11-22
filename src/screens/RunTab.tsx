@@ -8,9 +8,12 @@ import { useRun } from "../state/RunContext.tsx";
 import { CardFace } from "../ui/CardFace.tsx";
 import { Box, Md, Section, useLongPress } from "../ui/primitives.tsx";
 import { VitalsTable } from "./run/VitalsTable.tsx";
+import { ActionPicker, ProviderActionsPanel, type PickerRequest } from "./run/ProviderActions.tsx";
+import { actionById } from "../lib/actions/catalog.ts";
 
 /** Run tab = PDF p.1 vitals + p.2 flow / critical, plus show cards, moulage tags, history and notes. */
 export default function RunTab() {
+  const [picker, setPicker] = useState<PickerRequest | null>(null);
   return (
     <div className="flex flex-col gap-2">
       <ControlStrip />
@@ -19,16 +22,18 @@ export default function RunTab() {
       </Section>
       <div className="grid-run">
         <div className="flex flex-col gap-2 min-w-0">
-          <FlowTimeline />
+          <FlowTimeline onPick={setPicker} />
           <CriticalPanel />
         </div>
         <div className="flex flex-col gap-2 min-w-0">
+          <ProviderActionsPanel onOpen={setPicker} />
           <ShowCardsPanel />
           <TagsPanel />
           <NotesPanel />
           <HistoryPanel />
         </div>
       </div>
+      {picker && <ActionPicker key={`${picker.actionId}:${picker.itemId ?? ""}`} req={picker} onClose={() => setPicker(null)} />}
     </div>
   );
 }
@@ -131,7 +136,7 @@ function ControlStrip() {
   );
 }
 
-function FlowTimeline() {
+function FlowTimeline({ onPick }: { onPick: (r: PickerRequest) => void }) {
   const { sc, state, dispatch, tapBranch } = useRun();
   const [expandAll, setExpandAll] = useState(false);
   if (!sc || !state) return null;
@@ -209,7 +214,13 @@ function FlowTimeline() {
                         key={it.id}
                         text={it.text}
                         stamp={state.expected[it.id]?.t}
-                        onCheck={() => dispatch({ kind: "expected", itemId: it.id, checked: true })}
+                        action={it.action ? actionById(it.action)?.short ?? actionById(it.action)?.label : undefined}
+                        byAction={state.expected[it.id]?.byAction !== undefined}
+                        onCheck={() =>
+                          it.action
+                            ? onPick({ actionId: it.action, prefill: it.match, itemId: it.id, itemText: it.text })
+                            : dispatch({ kind: "expected", itemId: it.id, checked: true })
+                        }
                         onUncheck={() => dispatch({ kind: "expected", itemId: it.id, checked: false })}
                         testId={`exp-${it.id}`}
                       />
@@ -226,7 +237,25 @@ function FlowTimeline() {
 }
 
 /** tap = check + timestamp; press-and-hold = un-check (prevents accidental un-checks on a tablet). */
-function CheckRow({ text, stamp, onCheck, onUncheck, testId }: { text: string; stamp?: number; onCheck: () => void; onUncheck: () => void; testId: string }) {
+function CheckRow({
+  text,
+  stamp,
+  onCheck,
+  onUncheck,
+  testId,
+  action,
+  byAction,
+}: {
+  text: string;
+  stamp?: number;
+  onCheck: () => void;
+  onUncheck: () => void;
+  testId: string;
+  /** linked provider action (short label): tapping opens the action picker */
+  action?: string;
+  /** ticked by a logged provider action */
+  byAction?: boolean;
+}) {
   const checked = stamp !== undefined;
   const lp = useLongPress(() => !checked && onCheck(), () => checked && onUncheck());
   return (
@@ -234,6 +263,12 @@ function CheckRow({ text, stamp, onCheck, onUncheck, testId }: { text: string; s
       <Box checked={checked} />
       <span className="flex-1 text-left">
         <Md text={text} />
+        {action && (
+          <span className="link-tag" title="Linked provider action: tap opens it">
+            {byAction ? "logged: " : ""}
+            {action}
+          </span>
+        )}
       </span>
       <span className="check-time">{checked ? fmtT(stamp) : ""}</span>
     </button>

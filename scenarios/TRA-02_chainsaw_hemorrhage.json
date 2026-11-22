@@ -318,7 +318,7 @@
         }
       ],
       "expected": [
-        "TQ applied <= 1 min of reaching pt",
+        {"text": "TQ applied <= 1 min of reaching pt", "action": "tourniquet"},
         "TQ time noted (write on TQ/forehead)",
         "Distal pulse absent confirmed"
       ]
@@ -340,9 +340,9 @@
         }
       ],
       "expected": [
-        "2nd TQ applied proximal to 1st",
-        "Wound dressed/packed if oozing",
-        "Insulated from ground, wet clothes cut off"
+        {"text": "2nd TQ applied proximal to 1st", "action": "tourniquet", "match": {"number": "2nd"}},
+        {"text": "Wound dressed/packed if oozing", "action": "wound_packing"},
+        {"text": "Insulated from ground, wet clothes cut off", "action": "warming"}
       ]
     },
     {
@@ -368,8 +368,8 @@
       "give": "FD arrives with UTV + Stokes at T+10. Stage **D** if not warmed.",
       "expected": [
         "CC directs carry-out, keeps eyes on TQ",
-        "Hypothermia prevention throughout",
-        "TRAUMA ALERT; direct to UVMMC (Level 1)"
+        {"text": "Hypothermia prevention throughout", "action": "warming"},
+        {"text": "TRAUMA ALERT; direct to UVMMC (Level 1)", "action": "alert", "match": {"type": "Trauma"}}
       ],
       "branches": [
         {
@@ -392,7 +392,7 @@
       "expected": [
         "Report: TQ time(s), est. blood loss, fluid total",
         "Aspirin use reported",
-        "SIREN; TQ time communicated"
+        {"text": "SIREN; TQ time communicated", "action": "documentation"}
       ]
     }
   ],

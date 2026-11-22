@@ -101,8 +101,8 @@
       ],
       "expected": [
         "Passenger: 5 signs + factor of death -> withhold, leave in place (8.17/8.6)",
-        "Driver = priority; roles assigned, CC = commander",
-        "Paramedic intercept requested (no scene wait)"
+        {"text": "Driver = priority; roles assigned, CC = commander", "action": "roles"},
+        {"text": "Paramedic intercept requested (no scene wait)", "action": "intercept_request", "match": {"status": "Requested"}}
       ]
     },
     {
@@ -113,9 +113,9 @@
         {"if": "Compressions started, thigh still bleeding", "then": "prompt: \"blood is pumping out of his leg!\" - no TQ by T+5 -> Stage **E**"}
       ],
       "expected": [
-        "TQ high and tight L thigh, time noted (4.4)",
+        {"text": "TQ high and tight L thigh, time noted (4.4)", "action": "tourniquet"},
         "Suction, OPA, jaw thrust, BVM w/ O2",
-        "Pelvic binder; stretcher + blankets ready"
+        {"text": "Pelvic binder; stretcher + blankets ready", "action": "pelvic_binder"}
       ]
     },
     {
@@ -141,8 +141,8 @@
       ],
       "expected": [
         "IV/IO w/o pausing CPR; warmed NS 500-1000 mL (4.11)",
-        "Epi 1 mg (0.1 mg/mL) IV/IO ASAP, q other cycle (3.2A)",
-        "SGA + capno; CPR quality in moving unit (belts, smooth driving)"
+        {"text": "Epi 1 mg (0.1 mg/mL) IV/IO ASAP, q other cycle (3.2A)", "action": "epi_arrest"},
+        {"text": "SGA + capno; CPR quality in moving unit (belts, smooth driving)", "action": "sga"}
       ]
     },
     {
@@ -153,9 +153,9 @@
         {"type": "inject", "if": "Bleeding resumes past the TQ en route", "then": "expect tighten, 2nd TQ just proximal (4.4), new time noted"}
       ],
       "expected": [
-        "ROSC recognized (capno jump + pulse); vent 10/min, EtCO2 35-45",
-        "NS 250 mL boluses to SBP >= 90; MD after 1000 mL (2.24A)",
-        "SMR/collar now (4.11); keep warm"
+        {"text": "ROSC recognized (capno jump + pulse); vent 10/min, EtCO2 35-45", "action": "rosc"},
+        {"text": "NS 250 mL boluses to SBP >= 90; MD after 1000 mL (2.24A)", "action": "fluid"},
+        {"text": "SMR/collar now (4.11); keep warm", "action": "smr"}
       ]
     },
     {
@@ -163,9 +163,9 @@
       "phase": "Handoff / after",
       "give": "UVMMC trauma bay. Trooper (radio): \"What did you touch on the passenger?\"",
       "expected": [
-        "Early trauma alert + 'in arrest/ROSC' to UVMMC",
+        {"text": "Early trauma alert + 'in arrest/ROSC' to UVMMC", "action": "alert", "match": {"type": "Trauma"}},
         "Report: TQ time, binder, fluids, epi, arrest + ROSC times",
-        "SIREN for both pts incl. DOA findings; crew check-in"
+        {"text": "SIREN for both pts incl. DOA findings; crew check-in", "action": "documentation"}
       ]
     }
   ],

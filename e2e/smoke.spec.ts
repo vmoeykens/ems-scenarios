@@ -99,3 +99,32 @@ test("student display never shows protocol links", async ({ page, context }) => 
   await expect(display.getByTestId("info")).toBeVisible();
   await expect(display.locator("a")).toHaveCount(0);
 });
+
+test("provider actions: log O2 NRB 15 L/min twice -> two timestamped entries + linked expected item ticked", async ({ page }) => {
+  await page.goto("./#/s/TRA-03_anticoagulated_fall_tbi/run");
+  await page.getByRole("button", { name: "Start" }).click();
+  for (let i = 0; i < 2; i++) {
+    await page.getByTestId("action-oxygen").first().click();
+    const picker = page.getByTestId("action-picker");
+    await picker.getByRole("button", { name: "NRB", exact: true }).click();
+    await picker.getByRole("button", { name: "15", exact: true }).click();
+    await page.getByTestId("action-log").click();
+    await expect(picker).toHaveCount(0);
+  }
+  const log = page.getByTestId("action-log-table");
+  await expect(log.locator("tbody tr")).toHaveCount(2);
+  await expect(log.locator("tbody tr").first()).toContainText("NRB, 15 L/min");
+  await expect(log.locator("tbody tr").first()).toContainText(/T\+\d\d:\d\d/);
+  await expect(page.getByTestId("action-count-oxygen").first()).toContainText("x2");
+  // linked expected item "O2 NRB; BVM if RR inadequate at 10/min" (phase 3) is ticked even though it is not the current phase
+  await page.getByRole("button", { name: "expand all", exact: false }).click();
+  await expect(page.getByTestId("exp-p3.e1")).toHaveAttribute("aria-pressed", "true");
+  await expect(page.getByTestId("exp-p3.e1")).toContainText("logged:");
+  // tapping a linked expected item opens the picker pre-filled; Skip just checks it
+  await page.getByTestId("exp-p0.e1").click();
+  await expect(page.getByTestId("action-picker")).toContainText("Crew roles assigned");
+  await page.getByTestId("action-skip").click();
+  await expect(page.getByTestId("exp-p0.e1")).toHaveAttribute("aria-pressed", "true");
+  await page.getByRole("link", { name: "Debrief" }).click();
+  await expect(page.getByTestId("debrief-actions").locator("tbody tr")).toHaveCount(2);
+});

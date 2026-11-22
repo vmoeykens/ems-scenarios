@@ -3,6 +3,8 @@
 
 export type Pair = [string, string];
 export type CheckItem = string | { id: string; text: string };
+/** Expected-action item: string, or object with optional id and a provider-action link (schema/actions.json). */
+export type ExpectedItem = string | { id?: string; text: string; action?: string; match?: Record<string, string | number> };
 
 export const VITAL_KEYS = ["HR", "BP", "RR", "SpO2", "EtCO2", "BGL", "Temp", "Pain", "GCS", "Pupils"] as const;
 export type VitalKey = (typeof VITAL_KEYS)[number];
@@ -43,7 +45,7 @@ export interface Phase {
   time?: string;
   phase?: string;
   give?: string;
-  expected: CheckItem[];
+  expected: ExpectedItem[];
   branches?: Branch[];
 }
 
@@ -88,6 +90,7 @@ export interface Scenario {
   blank_vitals_rows?: number;
   flow?: Phase[];
   critical?: CheckItem[];
+  provider_actions?: string[];
   differentials?: [string, string, string][];
   debrief?: string[];
   crew_card?: { dispatch?: string; on_arrival?: string };

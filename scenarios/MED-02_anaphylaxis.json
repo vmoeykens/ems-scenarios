@@ -295,8 +295,8 @@
       "give": "Nurse: \"I gave his EpiPen at 1358, he got better, now it's back.\" Stage **A**.",
       "expected": [
         "Anaphylaxis recognized (2.2A criteria)",
-        "Roles: one on epi, one on airway/O2",
-        "Paramedic intercept requested at once"
+        {"text": "Roles: one on epi, one on airway/O2", "action": "roles"},
+        {"text": "Paramedic intercept requested at once", "action": "intercept_request", "match": {"status": "Requested"}}
       ]
     },
     {
@@ -320,9 +320,9 @@
         }
       ],
       "expected": [
-        "Epi 0.3 mg IM (1 mg/mL) anterolateral thigh",
+        {"text": "Epi 0.3 mg IM (1 mg/mL) anterolateral thigh", "action": "epi_im"},
         "Pt laid supine, legs flat, not walked",
-        "O2 to SpO2 94-98%"
+        {"text": "O2 to SpO2 94-98%", "action": "oxygen"}
       ]
     },
     {
@@ -331,7 +331,7 @@
       "give": "Pt's veins good. Stinger still in skin if crew looks.",
       "expected": [
         "IV large bore; NS bolus (up to 30 mL/kg) to SBP >= 90",
-        "DuoNeb for persistent wheeze",
+        {"text": "DuoNeb for persistent wheeze", "action": "duoneb"},
         "Stinger scraped out"
       ],
       "branches": [
@@ -355,7 +355,7 @@
         }
       ],
       "expected": [
-        "Stretcher, supine",
+        {"text": "Stretcher, supine", "action": "transport"},
         "Direct to UVMMC vs. intercept decided (no scene delay)",
         "Re-dose plan stated (q5-15 min)"
       ]
@@ -382,8 +382,8 @@
         }
       ],
       "expected": [
-        "Rebound recognized; epi #3 IM",
-        "Med Direction for doses beyond 3",
+        {"text": "Rebound recognized; epi #3 IM", "action": "epi_im"},
+        {"text": "Med Direction for doses beyond 3", "action": "md_contact"},
         "Airway equip ready (BVM, suction, SGA)"
       ]
     },
@@ -392,9 +392,9 @@
       "phase": "Report / handoff",
       "give": "Evaluator plays medic intercept or ED.",
       "expected": [
-        "Handoff: times of all 3 epi doses, fluid total",
+        {"text": "Handoff: times of all 3 epi doses, fluid total", "action": "handoff"},
         "Biphasic/rebound risk noted",
-        "SIREN; epi times on tape/chart"
+        {"text": "SIREN; epi times on tape/chart", "action": "documentation"}
       ]
     }
   ],

@@ -4,7 +4,7 @@ AEMT crew-chief-in-training scenarios (UVM Rescue, VT Statewide EMS Protocols 20
 
 ## Scenario Runner in one minute
 
-Library -> pick a scenario -> Pre-brief (read dispatch, brief the actor, place moulage) -> Run (start the clock, tap vitals as the crew obtains them, tap branches, check expected actions, mark critical MET/MISSED, push cards) -> Debrief (result, learn-more QR, export JSON/CSV/HTML). "Student screen" opens `#/display` in a second window (projector/second monitor): MONITOR and INFO / CARDS views. "Other device" streams the same display to a second device by room code / QR (Supabase Realtime relay, see `docs/remote-display.md`). Nothing is stored on a server; the in-progress run is autosaved in this browser until exported.
+Library -> pick a scenario -> Pre-brief (read dispatch, brief the actor, place moulage) -> Run (start the clock, tap vitals as the crew obtains them, tap branches, check expected actions, log provider actions with details, mark critical MET/MISSED, push cards) -> Debrief (result, learn-more QR, export JSON/CSV/HTML). "Student screen" opens `#/display` in a second window (projector/second monitor): MONITOR and INFO / CARDS views. "Other device" streams the same display to a second device by room code / QR (Supabase Realtime relay, see `docs/remote-display.md`). Nothing is stored on a server; the in-progress run is autosaved in this browser until exported.
 
 ## Setup
 
@@ -20,7 +20,7 @@ apt-get install -y graphviz poppler-utils                              # dot, pd
 |---|---|
 | `npm run validate` | Schema (`schema/scenario.schema.json`) + content rules on every `scenarios/*.json`; exit 1 on problems |
 | `npm test` | vitest: validator (incl. cross-check against the Python validator), normalization |
-| `npm run pdf` | Build every scenario PDF to `out/` and check 5 pages / p.3 flowchart / p.4 handouts |
+| `npm run pdf` | Build every scenario PDF to `out/` and check 6 pages / p.3 flowchart / p.4 provider actions / p.5 handouts |
 | `python3 tools/ems_scenario.py scenarios/X.json X.pdf` | Build one PDF (validates first) |
 | `npm run dev` / `npm run build` | Run / build the web app (`npm run preview` serves `dist/`) |
 | `npm run protocol-index` | Fill protocol page numbers in `src/data/protocol-index.json` from `public/protocols/vt-ems-protocols-2025.pdf` (skips if absent; also runs before every build) |
@@ -36,6 +36,6 @@ Write `scenarios/<ID>_<slug>.json` following `docs/scenario-authoring-standard.m
 
 ## One format, two outputs
 
-The same JSON drives the PDF (`tools/ems_scenario.py`) and the app. Optional Runner fields (`vitals[].key`, `vitals[].monitor`, `flow[].id`, `{id, text}` checklist items, branch `goto_stage` / `goto_phase` / `id`) are accepted by both; the PDF renders `{id, text}` items by their text and ignores `monitor` (student-display ECG/capno for that stage).
+The same JSON drives the PDF (`tools/ems_scenario.py`) and the app. Optional Runner fields (`vitals[].key`, `vitals[].monitor`, `flow[].id`, `{id, text}` checklist items, branch `goto_stage` / `goto_phase` / `id`, expected-item provider-action links `{text, action, match?}`, `provider_actions`) are accepted by both; the PDF renders `{id, text}` items by their text, ignores `monitor` (student-display ECG/capno for that stage), and prints the linked actions first on the PROVIDER ACTIONS page (catalog: `schema/actions.json`).
 
 Simulated training material. Not for patient care. Verify against current VT Statewide EMS Protocols & agency SOPs.

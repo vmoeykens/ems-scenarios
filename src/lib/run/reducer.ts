@@ -1,6 +1,7 @@
 // reduce(events) -> RunState. Pure; the whole UI and the student display derive from this.
 import type { NormalizedScenario } from "../scenario/normalize.ts";
 import type { VitalKey } from "../scenario/types.ts";
+import { matchesLink, type ActionValues } from "../actions/catalog.ts";
 import type { DisplayView, HistorySection, MonitorLayout, RunEvent } from "./types.ts";
 
 export interface Stamp {
@@ -28,7 +29,10 @@ export interface RunState {
   stageKey: string | null;
   stageVia: string | null;
   branches: (Stamp & { branchId: string; phaseId: string; inject: boolean })[];
-  expected: Record<string, Stamp>;
+  /** checked expected items; byAction = seq of the provider-action event that ticked it (synced, not tapped) */
+  expected: Record<string, Stamp & { byAction?: number }>;
+  /** logged provider actions, in order */
+  actions: (Stamp & { actionId: string; values: ActionValues; itemId?: string })[];
   /** per stage, per vital */
   revealed: Record<string, Partial<Record<VitalKey, Revealed>>>;
   /** most recent revealed value per vital (what the display shows) */
@@ -68,6 +72,7 @@ export function initialState(sc: NormalizedScenario): RunState {
     stageVia: null,
     branches: [],
     expected: {},
+    actions: [],
     revealed: {},
     latest: {},
     history: {},
@@ -134,6 +139,12 @@ export function reduce(sc: NormalizedScenario, events: readonly RunEvent[]): Run
         if (e.checked) s.expected[e.itemId] = st;
         else delete s.expected[e.itemId];
         break;
+      case "action": {
+        s.actions.push({ ...st, actionId: e.actionId, values: e.values ?? {}, ...(e.itemId ? { itemId: e.itemId } : {}) });
+        const target = linkedItemFor(sc, s, e.actionId, e.values ?? {}, e.itemId);
+        if (target) s.expected[target] = { ...st, byAction: e.seq };
+        break;
+      }
       case "reveal": {
         const r: Revealed = { ...st, value: e.value, stageKey: e.stageKey, adlib: !!e.adlib };
         (s.revealed[e.stageKey] ??= {})[e.vital] = r;
@@ -199,6 +210,20 @@ export function reduce(sc: NormalizedScenario, events: readonly RunEvent[]): Run
     }
   }
   return s;
+}
+
+/**
+ * Expected item a logged provider action ticks: the item it was logged from (if still unchecked), else the first
+ * unchecked item whose link (action id + match) fits, preferring the current phase, then flow order.
+ */
+export function linkedItemFor(sc: NormalizedScenario, s: RunState, actionId: string, values: ActionValues, itemId?: string): string | undefined {
+  const items = sc.phases.flatMap((p) => p.expectedItems.map((it) => ({ ...it, phaseId: p.id })));
+  if (itemId) {
+    const it = items.find((x) => x.id === itemId);
+    if (it && !s.expected[it.id]) return it.id;
+  }
+  const fits = items.filter((it) => it.action && !s.expected[it.id] && matchesLink({ action: it.action, match: it.match }, actionId, values));
+  return (fits.find((it) => it.phaseId === s.phaseId) ?? fits[0])?.id;
 }
 
 /** Elapsed scenario-clock ms at wall time `now`. */

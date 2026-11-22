@@ -11,7 +11,8 @@ EMS training scenarios for AEMT crew-chief trainees (UVM Rescue, Vermont) plus t
 
 ## Rules
 - Never change clinical content in scenario JSON unless the user asks. Structural/format upgrades are OK when the spec calls for them; keep them in their own commit.
-- JSON must keep building with the PDF generator. After any schema or generator change, rebuild all 10 PDFs and check: 5 pages, p.3 has "DECISION FLOWCHART", p.4 has "HANDOUTS".
+- JSON must keep building with the PDF generator. After any schema or generator change, rebuild all PDFs (`npm run pdf`) and check: 6 pages, p.3 has "DECISION FLOWCHART", p.4 has "PROVIDER ACTIONS", p.5 has "HANDOUTS".
+- `schema/actions.json` is the shared provider-action catalog (app + PDF p.4); AEMT scope only, paramedic-only items only under the `intercept` group.
 - Fix the JSON, not the validator, when content fails validation. Change the validator only to accept new optional format fields.
 - Instructor-only text (`cue`, stage triggers, branches, critical items) never appears on anything shown to the crew/student.
 - Critical items are "evaluator discretion", never automatic fails.

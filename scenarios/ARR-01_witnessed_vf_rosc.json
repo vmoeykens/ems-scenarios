@@ -326,7 +326,7 @@
       "phase": "Arrival / roles",
       "give": "Bystander CPR in progress, gym AED attached, 1 shock given. Stage **A**.",
       "expected": [
-        "Pit-crew roles assigned (3.6), CC = code commander",
+        {"text": "Pit-crew roles assigned (3.6), CC = code commander", "action": "roles"},
         "Crew's monitor/AED swapped w/o long pause",
         "Metronome 100-120; compressor swaps q2 min"
       ]
@@ -348,8 +348,8 @@
         }
       ],
       "expected": [
-        "Shock delivered, compressions resume immediately",
-        "OPA + BVM 1 breath/10 compressions",
+        {"text": "Shock delivered, compressions resume immediately", "action": "aed_analyze", "match": {"shock": "Delivered"}},
+        {"text": "OPA + BVM 1 breath/10 compressions", "action": "bvm"},
         "IV (preferred) or IO; capno attached"
       ]
     },
@@ -358,9 +358,9 @@
       "phase": "Meds / H&T",
       "give": "Stage **B**. Wife arrives at T+15 (cue if CC isn't talking to family).",
       "expected": [
-        "Epi 1 mg (0.1 mg/mL) after 1st cycle, then q every other cycle",
-        "NS 500 mL bolus (no pulmonary edema)",
-        "Paramedic intercept requested (antiarrhythmics)"
+        {"text": "Epi 1 mg (0.1 mg/mL) after 1st cycle, then q every other cycle", "action": "epi_arrest"},
+        {"text": "NS 500 mL bolus (no pulmonary edema)", "action": "fluid"},
+        {"text": "Paramedic intercept requested (antiarrhythmics)", "action": "intercept_request", "match": {"status": "Requested"}}
       ],
       "branches": [
         {
@@ -380,8 +380,8 @@
         }
       ],
       "expected": [
-        "ROSC recognized (capno + pulse)",
-        "SGA if not placed (after 8 min) / maintain airway",
+        {"text": "ROSC recognized (capno + pulse)", "action": "rosc"},
+        {"text": "SGA if not placed (after 8 min) / maintain airway", "action": "sga"},
         "Pads stay on; monitor rhythm"
       ]
     },
@@ -391,7 +391,7 @@
       "give": "Show **12-lead** card. Give Stage **E** or **F** based on vent rate.",
       "expected": [
         "Vent 10/min, EtCO2 35-45, SpO2 94-98",
-        "SBP < 90 -> NS 500 mL; MD for more",
+        {"text": "SBP < 90 -> NS 500 mL; MD for more", "action": "fluid"},
         "12-lead transmitted; STEMI ALERT"
       ]
     },

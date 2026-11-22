@@ -139,9 +139,9 @@
         {"if": "NRB 15 L right away", "then": "Stage **B** by T+8"}
       ],
       "expected": [
-        "NRB 100% O2 regardless of SpO2 (2.25)",
+        {"text": "NRB 100% O2 regardless of SpO2 (2.25)", "action": "oxygen", "match": {"device": "NRB"}},
         "CO suspected: SpO2 unreliable",
-        "Roles assigned; pt into warm rig early"
+        {"text": "Roles assigned; pt into warm rig early", "action": "roles"}
       ]
     },
     {
@@ -154,7 +154,7 @@
       "expected": [
         "Airway burn signs named: soot, singed nares, hoarse, sputum (4.0)",
         "Intercept requested; UVMMC airway pre-alert",
-        "Albuterol 2.5 mg neb w/ O2 for wheezes (2.25)"
+        {"text": "Albuterol 2.5 mg neb w/ O2 for wheezes (2.25)", "action": "albuterol"}
       ]
     },
     {
@@ -166,9 +166,9 @@
         {"if": "Red-only forearm counted in TBSA", "then": "TBSA overcalled (~27%); debrief rule of nines"}
       ],
       "expected": [
-        "TBSA ~23% partial thickness by rule of nines (4.0)",
+        {"text": "TBSA ~23% partial thickness by rule of nines (4.0)", "action": "burn_care"},
         "Burning stopped; clothing + watch removed",
-        "Dry sterile sheets, blankets, heat on (4.0)"
+        {"text": "Dry sterile sheets, blankets, heat on (4.0)", "action": "burn_care", "match": {"care": "Dry sterile dressing"}}
       ]
     },
     {
@@ -179,7 +179,7 @@
         {"if": "Waits on scene for intercept or air", "then": "delay; debrief 8.0 (air not faster here)"}
       ],
       "expected": [
-        "Direct to UVMMC (Level 1; no VT burn center)",
+        {"text": "Direct to UVMMC (Level 1; no VT burn center)", "action": "destination"},
         "Notify early: inhalation injury, TBSA, SpCO",
         "Intercept en route only, no delay"
       ]
@@ -194,9 +194,9 @@
         {"if": "Nitrous given while confused", "then": "contraindicated (AMS, 2.20A); debrief"}
       ],
       "expected": [
-        "2 large-bore IVs, unburned skin (> 20% TBSA, 4.0)",
+        {"text": "2 large-bore IVs, unburned skin (> 20% TBSA, 4.0)", "action": "iv"},
         "Warm LR 500 mL/hr; 12-lead + BGL (2.25)",
-        "Pain: IV acetaminophen (2.20A); opioids via intercept"
+        {"text": "Pain: IV acetaminophen (2.20A); opioids via intercept", "action": "acetaminophen"}
       ]
     },
     {
@@ -206,7 +206,7 @@
       "expected": [
         "Report: TBSA, airway signs, SpCO, time in smoke",
         "Fluid type/rate/volume and start time",
-        "SIREN: burn diagram, O2 start time"
+        {"text": "SIREN: burn diagram, O2 start time", "action": "documentation"}
       ]
     }
   ],

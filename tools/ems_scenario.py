@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """EMS training scenario sheet generator (B&W, print-optimized, US Letter).
 Usage: python3 ems_scenario.py scenario.json out.pdf
-Pages: 1 = setup/patient/vitals, 2 = flow/critical/differentials/notes, 3 = decision flowchart, 4+ = handouts & show cards (+ learn-more card), last = moulage tags.
+Pages: 1 = setup/patient/vitals, 2 = flow/critical/differentials/notes, 3 = decision flowchart, 4 = provider actions
+(needs ../schema/actions.json; skipped if absent), 5+ = handouts & show cards (+ learn-more card), last = moulage tags.
 Requires segno (pip install segno) for QR codes.
 Requires Graphviz `dot` on PATH (apt install graphviz).
 """
@@ -354,6 +355,17 @@ def moulage_page(sc, tmp):
         out.append(KeepTogether(block))
     return out + learn
 
+# ---------------------------------------------------------------- provider-action catalog (schema/actions.json)
+def load_actions():
+    """Shared provider-action catalog next to the generator in the repo; None if absent (standalone use)."""
+    p = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "schema", "actions.json")
+    try:
+        with open(p, encoding="utf-8") as fh: return json.load(fh)
+    except (OSError, ValueError): return None
+
+ACTIONS = load_actions()
+ACTION_IDS = {a["id"] for a in ACTIONS["actions"]} if ACTIONS else None
+
 # ---------------------------------------------------------------- validation
 RHYTHMS = {"sinus", "afib", "svt", "vt", "vf", "asystole", "chb", "avb1", "flutter"}
 def validate(sc):
@@ -371,6 +383,7 @@ def validate(sc):
         if not f.get("expected"): errs.append(f"{pfx}: no expected actions")
         for i in f.get("expected", []) or []:
             if isinstance(i, dict) and not i.get("text"): errs.append(f"{pfx}: expected item object needs text")
+            if isinstance(i, dict) and i.get("action") and ACTION_IDS is not None and i["action"] not in ACTION_IDS: errs.append(f"{pfx}: unknown action {i['action']!r}")
         for b in f.get("branches", []):
             BK = {"if", "then", "type", "goto_stage", "goto_phase", "id"}
             if set(b) - BK: errs.append(f"{pfx}: unknown branch keys {set(b) - BK}")
@@ -388,6 +401,8 @@ def validate(sc):
                 elif refs and g_ not in refs: errs.append(f"{pfx}: goto_stage {g_} disagrees with THEN text Stage {refs}")
             if "goto_phase" in b and b["goto_phase"] not in flow_ids: errs.append(f"{pfx}: goto_phase {b['goto_phase']} is not a flow id {flow_ids}")
             if re.search(r"critical fail|miss = fail", b["then"], re.I): errs.append(f"{pfx}: use 'critical (evaluator discretion)'")
+    for a in sc.get("provider_actions", []):
+        if ACTION_IDS is not None and a not in ACTION_IDS: errs.append(f"provider_actions: unknown action {a!r}")
     LEAK = re.compile(r"\b(if |show when|after |overbag|over-bag|rosc|pea\b|no pulse|stage |normal wave|square|shark|instructor|recheck|use vitals|t\+\d|good |during |analysis)", re.I)
     for c in sc.get("show_cards", []):
         face = " ".join(str(c.get(k, "")) for k in ("title", "caption", "body"))
@@ -400,6 +415,67 @@ def validate(sc):
         elif LEAK.search(t["text"]): errs.append(f"moulage tag '{t['region']}': instructor hint on tag ({LEAK.search(t['text']).group(0)!r}) - move to 'cue'")
     if len(learn_prompt(sc)) > 480: errs.append(f"learn_more prompt {len(learn_prompt(sc))} chars > 480 (QR too dense to scan) - shorten focus")
     return errs
+
+# ---------------------------------------------------------------- provider actions page (p.4)
+def _action_options(a):
+    """Circle-one choices / write-in blanks for an action's fields, e.g. 'Device: NC · NRB · BVM ... | ____ L/min'."""
+    parts, fs = [], a.get("fields", [])
+    for f in fs:
+        k = f.get("kind")
+        if k in ("select", "multi"):
+            lab = f"**{f.get('label', '')}:** " if len(fs) > 1 else ""
+            parts.append(lab + "  \u00b7  ".join(f.get("options", [])))
+        elif k == "number": parts.append(f"____ {f.get('unit', '')}".rstrip())
+        else: parts.append(f"{f.get('label', '')}: ________")
+    return "  |  ".join(parts)
+
+def relevant_action_ids(sc):
+    """Scenario actions: ids linked from flow[].expected[] (flow order) + provider_actions (same rule as the app)."""
+    ids = [i["action"] for f in sc.get("flow", []) for i in f.get("expected", []) if isinstance(i, dict) and i.get("action")]
+    ids += sc.get("provider_actions", [])
+    out = []
+    for i in ids:
+        if i in ACTION_IDS and i not in out: out.append(i)
+    return out
+
+def actions_page(sc):
+    """PROVIDER ACTIONS: checkbox | action | options to circle | 3 time blanks | notes. Scenario actions, then common
+    ones, then blank write-in rows - as many as fit one page (fonts stay at the sheet's normal sizes)."""
+    by_id = {a["id"]: a for a in ACTIONS["actions"]}
+    rel = relevant_action_ids(sc)
+    common = [a["id"] for a in ACTIONS["actions"] if a.get("common") and a["id"] not in rel]
+    widths = [11, 1.3 * inch, 0, .42 * inch, .42 * inch, .42 * inch, .95 * inch]
+    widths[2] = W - sum(widths)
+    head = [[P(h, st("pah", 6.6, FB)) for h in ("", "Action", "Circle what was done / write values", "Time", "Time", "Time", "Notes")]]
+    def row(aid):
+        a = by_id[aid]
+        return [Box(), P(a["label"], SB), P(_action_options(a), SS), "", "", "", ""]
+    def sub(t): return [P(t, st("pas", 6.6, FB)), "", "", "", "", "", ""]
+    def table(rows, subs):
+        ex = [("BACKGROUND", (0, r), (-1, r), LIGHT) for r in subs] + [("SPAN", (0, r), (-1, r)) for r in subs] + [("VALIGN", (0, 1), (0, -1), "MIDDLE")]
+        return grid(head + rows, widths, header=True, extra=ex)
+    avail = PH - 2 * M - 46  # frame minus section bar, legend and notes strip
+    rows, subs = [], []
+    def fits(r, s):
+        return table(r, s).wrap(W, avail)[1] <= avail
+    rows.append(sub("THIS SCENARIO")); subs.append(len(rows))
+    for aid in rel: rows.append(row(aid))
+    if common:
+        r2, s2 = rows + [sub("COMMON ACTIONS")], subs + [len(rows) + 1]
+        if fits(r2, s2):
+            rows, subs = r2, s2
+            for aid in common:
+                if not fits(rows + [row(aid)], subs): break
+                rows.append(row(aid))
+    blank = [Box(), "", "", "", "", "", ""]
+    r2, s2 = rows + [sub("OTHER (WRITE IN)")], subs + [len(rows) + 1]
+    if fits(r2 + [blank], s2):
+        rows, subs = r2, s2
+        while fits(rows + [blank], subs): rows.append(blank)
+    legend = P("Check the box when done; circle the options used and write values; one time per occurrence (actions can repeat). "
+               "Intercept/MD rows = given by the paramedic / ordered by Medical Direction, not AEMT actions. "
+               "The Scenario Runner logs the same actions with timestamps.", SS)
+    return [section("Provider actions", [table(rows, subs), pad(legend)], right="check = done; circle what was done")]
 
 # ---------------------------------------------------------------- page decoration
 def deco(sc, role):
@@ -597,7 +673,8 @@ def build(sc, out_pdf):
     fr = lambda: [Frame(M, M, W, PH - 2 * M, 0, 0, 0, 0)]
     doc.addPageTemplates([PageTemplate("inst", fr(), onPage=deco(sc, "INSTRUCTOR")),
                           PageTemplate("hand", fr(), onPage=deco(sc, "HANDOUTS & SHOW CARDS - cut on dashed lines"))])
-    story = page1(sc) + [PageBreak()] + page2(sc) + [PageBreak()] + flowchart_page(sc, tmp) + [NextPageTemplate("hand"), PageBreak()] + handouts(sc, tmp) + [PageBreak()] + moulage_page(sc, tmp)
+    acts = [PageBreak()] + actions_page(sc) if ACTIONS else []  # p.4 when schema/actions.json is present
+    story = page1(sc) + [PageBreak()] + page2(sc) + [PageBreak()] + flowchart_page(sc, tmp) + acts + [NextPageTemplate("hand"), PageBreak()] + handouts(sc, tmp) + [PageBreak()] + moulage_page(sc, tmp)
     doc.build(story)
     return doc.page
 

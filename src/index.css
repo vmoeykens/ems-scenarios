@@ -150,6 +150,12 @@
   .check-row { @apply w-full min-h-11 flex items-center gap-2 px-1.5 text-sm border-t border-ink first:border-t-0 hover:bg-zebra select-none; }
   .checklist-head + .check-row { @apply border-t-0; }
   .check-time { @apply text-xs w-16 text-right tabular-nums; }
+  .chip { @apply min-h-11 min-w-11 px-2.5 border border-ink bg-paper text-sm hover:bg-zebra; }
+  .chip-on { @apply bg-ink text-paper font-bold hover:bg-ink; }
+  .action-grid { @apply grid gap-1 grid-cols-1 sm:grid-cols-2; }
+  .action-row { @apply min-h-11 flex items-center gap-2 px-2 border border-ink bg-paper text-sm text-left hover:bg-zebra active:bg-head; }
+  .action-group { @apply border border-ink; }
+  .link-tag { @apply ml-1.5 text-[10px] uppercase border border-ink px-1 align-middle whitespace-nowrap; }
   .check-cell { @apply w-full min-h-11 flex items-center justify-center; }
   .hist-row:nth-child(even) { @apply bg-zebra; }
   .item-row { @apply flex gap-2 items-start p-1.5 border-t border-ink first:border-t-0 text-sm; }

@@ -1,0 +1,1848 @@
+{
+  "$schema": "./actions.schema.json",
+  "version": 1,
+  "description": "Shared provider-action catalog (Scenario Runner + PDF 'Provider actions' page). AEMT scope per VT Statewide EMS Protocols 2025; paramedic-only items appear only under 'intercept'. Every field is optional when logging.",
+  "groups": [
+    {
+      "id": "assess",
+      "title": "Assessment / monitoring"
+    },
+    {
+      "id": "airway",
+      "title": "Airway / breathing"
+    },
+    {
+      "id": "oxygen",
+      "title": "Oxygen therapy"
+    },
+    {
+      "id": "vascular",
+      "title": "Vascular access"
+    },
+    {
+      "id": "fluids",
+      "title": "Fluids"
+    },
+    {
+      "id": "meds",
+      "title": "Medications (AEMT scope)"
+    },
+    {
+      "id": "arrest",
+      "title": "Cardiac arrest"
+    },
+    {
+      "id": "trauma",
+      "title": "Trauma"
+    },
+    {
+      "id": "comms",
+      "title": "Communication / transport"
+    },
+    {
+      "id": "intercept",
+      "title": "Intercept / Medical Direction (received, not AEMT)"
+    }
+  ],
+  "actions": [
+    {
+      "id": "vitals",
+      "group": "assess",
+      "label": "Vital signs set",
+      "protocols": [
+        "1.2"
+      ],
+      "common": true,
+      "fields": [
+        {
+          "id": "parts",
+          "label": "Obtained",
+          "kind": "multi",
+          "options": [
+            "HR",
+            "BP",
+            "RR",
+            "SpO2",
+            "Pupils",
+            "Skin",
+            "GCS",
+            "Pain"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ecg12",
+      "group": "assess",
+      "label": "12-lead ECG",
+      "short": "12-lead",
+      "protocols": [
+        "6.2"
+      ],
+      "common": true,
+      "fields": [
+        {
+          "id": "steps",
+          "label": "Steps",
+          "kind": "multi",
+          "options": [
+            "Acquired",
+            "Transmitted",
+            "Repeat"
+          ]
+        },
+        {
+          "id": "read",
+          "label": "Computer read",
+          "kind": "text"
+        }
+      ]
+    },
+    {
+      "id": "monitor",
+      "group": "assess",
+      "label": "Cardiac monitor / pads on",
+      "protocols": [
+        "1.2"
+      ],
+      "fields": [
+        {
+          "id": "leads",
+          "label": "Applied",
+          "kind": "select",
+          "options": [
+            "3/4-lead",
+            "Pads",
+            "Both"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "capnography",
+      "group": "assess",
+      "label": "Waveform capnography",
+      "short": "Capno",
+      "protocols": [
+        "6.9"
+      ],
+      "common": true,
+      "fields": [
+        {
+          "id": "method",
+          "label": "Method",
+          "kind": "select",
+          "options": [
+            "Nasal cannula",
+            "Inline (BVM/SGA)"
+          ]
+        },
+        {
+          "id": "etco2",
+          "label": "EtCO2",
+          "kind": "number",
+          "unit": "mmHg",
+          "min": 0,
+          "max": 150
+        }
+      ]
+    },
+    {
+      "id": "spo2",
+      "group": "assess",
+      "label": "Pulse oximetry",
+      "protocols": [
+        "1.2"
+      ],
+      "common": true,
+      "fields": [
+        {
+          "id": "value",
+          "label": "SpO2",
+          "kind": "number",
+          "unit": "%",
+          "min": 0,
+          "max": 100
+        }
+      ]
+    },
+    {
+      "id": "bgl",
+      "group": "assess",
+      "label": "Blood glucose",
+      "short": "BGL",
+      "protocols": [
+        "2.8A"
+      ],
+      "common": true,
+      "fields": [
+        {
+          "id": "value",
+          "label": "BGL",
+          "kind": "number",
+          "unit": "mg/dL",
+          "min": 0,
+          "max": 999
+        }
+      ]
+    },
+    {
+      "id": "stroke_scale",
+      "group": "assess",
+      "label": "Stroke scale (BE-FAST)",
+      "protocols": [
+        "2.26A",
+        "A.8"
+      ],
+      "fields": [
+        {
+          "id": "result",
+          "label": "Result",
+          "kind": "select",
+          "options": [
+            "Positive",
+            "Negative"
+          ]
+        },
+        {
+          "id": "lkw",
+          "label": "Last known well",
+          "kind": "text"
+        }
+      ]
+    },
+    {
+      "id": "temperature",
+      "group": "assess",
+      "label": "Temperature",
+      "protocols": [
+        "1.2"
+      ],
+      "fields": [
+        {
+          "id": "value",
+          "label": "Temp",
+          "kind": "number",
+          "unit": "F",
+          "min": 60,
+          "max": 115,
+          "step": 0.1
+        },
+        {
+          "id": "site",
+          "label": "Site",
+          "kind": "select",
+          "options": [
+            "Oral",
+            "Tympanic",
+            "Temporal",
+            "Axillary"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "trauma_exam",
+      "group": "assess",
+      "label": "Trauma assessment / triage",
+      "protocols": [
+        "4.9",
+        "4.6"
+      ],
+      "fields": [
+        {
+          "id": "parts",
+          "label": "Done",
+          "kind": "multi",
+          "options": [
+            "Rapid trauma exam",
+            "Spinal assessment (4.6)",
+            "Trauma triage criteria (4.9)"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "airway_position",
+      "group": "airway",
+      "label": "Airway positioning",
+      "protocols": [
+        "5.1A"
+      ],
+      "common": true,
+      "fields": [
+        {
+          "id": "method",
+          "label": "Method",
+          "kind": "select",
+          "options": [
+            "Head tilt-chin lift",
+            "Jaw thrust",
+            "Recovery position",
+            "Ramped / sniffing",
+            "Upright / tripod"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "suction",
+      "group": "airway",
+      "label": "Suction",
+      "protocols": [
+        "5.12"
+      ],
+      "common": true,
+      "fields": [
+        {
+          "id": "type",
+          "label": "Type",
+          "kind": "select",
+          "options": [
+            "Rigid (oral)",
+            "Soft catheter",
+            "Via SGA / inline"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "opa",
+      "group": "airway",
+      "label": "OPA",
+      "protocols": [
+        "5.1A"
+      ],
+      "common": true,
+      "fields": [
+        {
+          "id": "size",
+          "label": "Size",
+          "kind": "text"
+        }
+      ]
+    },
+    {
+      "id": "npa",
+      "group": "airway",
+      "label": "NPA",
+      "protocols": [
+        "5.1A"
+      ],
+      "fields": [
+        {
+          "id": "size",
+          "label": "Size",
+          "kind": "text"
+        },
+        {
+          "id": "side",
+          "label": "Nare",
+          "kind": "select",
+          "options": [
+            "L",
+            "R"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bvm",
+      "group": "airway",
+      "label": "BVM ventilation",
+      "short": "BVM",
+      "protocols": [
+        "5.1A"
+      ],
+      "common": true,
+      "fields": [
+        {
+          "id": "rate",
+          "label": "Rate",
+          "kind": "number",
+          "unit": "/min",
+          "presets": [
+            10,
+            20,
+            30
+          ],
+          "min": 0,
+          "max": 60
+        },
+        {
+          "id": "adjuncts",
+          "label": "With",
+          "kind": "multi",
+          "options": [
+            "O2 15 L/min",
+            "OPA",
+            "NPA",
+            "PEEP valve",
+            "2-person seal"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sga",
+      "group": "airway",
+      "label": "Supraglottic airway",
+      "short": "SGA",
+      "protocols": [
+        "5.13"
+      ],
+      "common": true,
+      "fields": [
+        {
+          "id": "device",
+          "label": "Device",
+          "kind": "select",
+          "options": [
+            "i-gel",
+            "King LT",
+            "LMA"
+          ]
+        },
+        {
+          "id": "size",
+          "label": "Size",
+          "kind": "text"
+        },
+        {
+          "id": "confirm",
+          "label": "Confirmed",
+          "kind": "multi",
+          "options": [
+            "EtCO2 waveform",
+            "Breath sounds",
+            "Chest rise"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cpap",
+      "group": "airway",
+      "label": "CPAP",
+      "protocols": [
+        "5.4"
+      ],
+      "common": true,
+      "fields": [
+        {
+          "id": "peep",
+          "label": "Pressure",
+          "kind": "number",
+          "unit": "cmH2O",
+          "presets": [
+            5,
+            7.5,
+            10
+          ],
+          "min": 0,
+          "max": 15,
+          "step": 0.5
+        }
+      ]
+    },
+    {
+      "id": "fbao",
+      "group": "airway",
+      "label": "Foreign-body airway obstruction",
+      "protocols": [
+        "5.6"
+      ],
+      "fields": [
+        {
+          "id": "maneuver",
+          "label": "Maneuver",
+          "kind": "select",
+          "options": [
+            "Abdominal thrusts",
+            "Chest thrusts",
+            "Back blows + chest thrusts (infant)"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "oxygen",
+      "group": "oxygen",
+      "label": "Oxygen therapy",
+      "short": "O2",
+      "protocols": [
+        "1.2"
+      ],
+      "common": true,
+      "fields": [
+        {
+          "id": "device",
+          "label": "Device",
+          "kind": "select",
+          "options": [
+            "NC",
+            "NRB",
+            "BVM",
+            "CPAP",
+            "Blow-by",
+            "Neb mask"
+          ]
+        },
+        {
+          "id": "rate",
+          "label": "Rate",
+          "kind": "number",
+          "unit": "L/min",
+          "presets": [
+            2,
+            4,
+            6,
+            10,
+            15
+          ],
+          "min": 0,
+          "max": 25,
+          "step": 0.5
+        }
+      ]
+    },
+    {
+      "id": "iv",
+      "group": "vascular",
+      "label": "IV access",
+      "short": "IV",
+      "protocols": [
+        "1.2"
+      ],
+      "common": true,
+      "fields": [
+        {
+          "id": "gauge",
+          "label": "Gauge",
+          "kind": "select",
+          "options": [
+            "14",
+            "16",
+            "18",
+            "20",
+            "22",
+            "24"
+          ]
+        },
+        {
+          "id": "site",
+          "label": "Site",
+          "kind": "select",
+          "options": [
+            "L AC",
+            "R AC",
+            "L forearm",
+            "R forearm",
+            "L hand",
+            "R hand",
+            "Other"
+          ]
+        },
+        {
+          "id": "attempts",
+          "label": "Attempts",
+          "kind": "number",
+          "unit": "",
+          "presets": [
+            1,
+            2
+          ],
+          "min": 1,
+          "max": 5
+        },
+        {
+          "id": "result",
+          "label": "Result",
+          "kind": "select",
+          "options": [
+            "Successful",
+            "Unsuccessful",
+            "Infiltrated"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "io",
+      "group": "vascular",
+      "label": "IO access",
+      "short": "IO",
+      "protocols": [
+        "6.4"
+      ],
+      "common": true,
+      "fields": [
+        {
+          "id": "site",
+          "label": "Site",
+          "kind": "select",
+          "options": [
+            "L humeral",
+            "R humeral",
+            "L proximal tibia",
+            "R proximal tibia",
+            "L distal tibia",
+            "R distal tibia"
+          ]
+        },
+        {
+          "id": "needle",
+          "label": "Needle",
+          "kind": "select",
+          "options": [
+            "15 mm",
+            "25 mm",
+            "45 mm"
+          ]
+        },
+        {
+          "id": "result",
+          "label": "Result",
+          "kind": "select",
+          "options": [
+            "Successful",
+            "Unsuccessful"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "fluid",
+      "group": "fluids",
+      "label": "IV fluid",
+      "short": "Fluids",
+      "protocols": [
+        "2.24A"
+      ],
+      "common": true,
+      "fields": [
+        {
+          "id": "type",
+          "label": "Fluid",
+          "kind": "select",
+          "options": [
+            "0.9% NaCl",
+            "LR"
+          ]
+        },
+        {
+          "id": "volume",
+          "label": "Volume",
+          "kind": "number",
+          "unit": "mL",
+          "presets": [
+            250,
+            500,
+            1000
+          ],
+          "min": 0,
+          "max": 3000,
+          "step": 10
+        },
+        {
+          "id": "mode",
+          "label": "Given as",
+          "kind": "select",
+          "options": [
+            "Bolus",
+            "Titrated (SBP / mentation)",
+            "KVO",
+            "Rate"
+          ]
+        },
+        {
+          "id": "warmed",
+          "label": "Warmed",
+          "kind": "select",
+          "options": [
+            "Yes",
+            "No"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "aspirin",
+      "group": "meds",
+      "label": "Aspirin",
+      "short": "ASA",
+      "protocols": [
+        "3.0A"
+      ],
+      "common": true,
+      "fields": [
+        {
+          "id": "dose",
+          "label": "Dose",
+          "kind": "select",
+          "options": [
+            "324 mg (4 x 81 mg)",
+            "162 mg"
+          ]
+        },
+        {
+          "id": "route",
+          "label": "Route",
+          "kind": "select",
+          "options": [
+            "PO chewed"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ntg",
+      "group": "meds",
+      "label": "Nitroglycerin",
+      "short": "NTG",
+      "protocols": [
+        "3.0A",
+        "3.3A"
+      ],
+      "common": true,
+      "fields": [
+        {
+          "id": "dose",
+          "label": "Dose",
+          "kind": "select",
+          "options": [
+            "0.4 mg",
+            "0.8 mg"
+          ]
+        },
+        {
+          "id": "route",
+          "label": "Route",
+          "kind": "select",
+          "options": [
+            "SL tablet",
+            "SL spray"
+          ]
+        },
+        {
+          "id": "order",
+          "label": "Order",
+          "kind": "select",
+          "options": [
+            "Standing order",
+            "Medical Direction"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "epi_im",
+      "group": "meds",
+      "label": "Epinephrine IM (anaphylaxis)",
+      "short": "Epi IM",
+      "protocols": [
+        "2.2A",
+        "2.2P"
+      ],
+      "common": true,
+      "fields": [
+        {
+          "id": "product",
+          "label": "Product",
+          "kind": "select",
+          "options": [
+            "1 mg/mL syringe",
+            "Auto-injector 0.3 mg",
+            "Auto-injector 0.15 mg"
+          ]
+        },
+        {
+          "id": "dose",
+          "label": "Dose",
+          "kind": "select",
+          "options": [
+            "0.3 mg",
+            "0.15 mg",
+            "0.01 mg/kg"
+          ]
+        },
+        {
+          "id": "site",
+          "label": "Site",
+          "kind": "select",
+          "options": [
+            "L thigh",
+            "R thigh"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "epi_arrest",
+      "group": "meds",
+      "label": "Epinephrine IV/IO (adult cardiac arrest)",
+      "short": "Epi IV/IO",
+      "protocols": [
+        "3.2A"
+      ],
+      "common": true,
+      "fields": [
+        {
+          "id": "dose",
+          "label": "Dose",
+          "kind": "select",
+          "options": [
+            "1 mg (0.1 mg/mL)"
+          ]
+        },
+        {
+          "id": "route",
+          "label": "Route",
+          "kind": "select",
+          "options": [
+            "IV",
+            "IO"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "albuterol",
+      "group": "meds",
+      "label": "Albuterol nebulizer",
+      "protocols": [
+        "2.4A",
+        "2.2A"
+      ],
+      "fields": [
+        {
+          "id": "dose",
+          "label": "Dose",
+          "kind": "select",
+          "options": [
+            "2.5 mg"
+          ]
+        },
+        {
+          "id": "via",
+          "label": "Via",
+          "kind": "select",
+          "options": [
+            "Neb mask",
+            "Inline (CPAP/BVM)"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "duoneb",
+      "group": "meds",
+      "label": "DuoNeb (ipratropium 0.5 mg + albuterol 2.5 mg)",
+      "short": "DuoNeb",
+      "protocols": [
+        "2.4A",
+        "2.2A"
+      ],
+      "fields": [
+        {
+          "id": "via",
+          "label": "Via",
+          "kind": "select",
+          "options": [
+            "Neb mask",
+            "Inline (CPAP/BVM)"
+          ]
+        },
+        {
+          "id": "dose_no",
+          "label": "Dose #",
+          "kind": "number",
+          "unit": "",
+          "presets": [
+            1,
+            2,
+            3
+          ],
+          "min": 1,
+          "max": 3
+        }
+      ]
+    },
+    {
+      "id": "d10",
+      "group": "meds",
+      "label": "Dextrose 10%",
+      "short": "D10",
+      "protocols": [
+        "2.8A",
+        "2.8P"
+      ],
+      "fields": [
+        {
+          "id": "volume",
+          "label": "Volume",
+          "kind": "number",
+          "unit": "mL",
+          "presets": [
+            50,
+            100,
+            150,
+            250
+          ],
+          "min": 0,
+          "max": 250,
+          "step": 5
+        },
+        {
+          "id": "route",
+          "label": "Route",
+          "kind": "select",
+          "options": [
+            "IV",
+            "IO"
+          ]
+        },
+        {
+          "id": "dosing",
+          "label": "Dosing",
+          "kind": "select",
+          "options": [
+            "Titrated to mentation / BGL",
+            "5 mL/kg (pediatric)"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "oral_glucose",
+      "group": "meds",
+      "label": "Oral glucose",
+      "protocols": [
+        "2.8A"
+      ],
+      "fields": [
+        {
+          "id": "dose",
+          "label": "Dose",
+          "kind": "select",
+          "options": [
+            "1 tube (15 g)",
+            "2 tubes"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "glucagon",
+      "group": "meds",
+      "label": "Glucagon",
+      "protocols": [
+        "2.8A",
+        "2.8P"
+      ],
+      "fields": [
+        {
+          "id": "dose",
+          "label": "Dose",
+          "kind": "select",
+          "options": [
+            "1 mg",
+            "0.5 mg"
+          ]
+        },
+        {
+          "id": "route",
+          "label": "Route",
+          "kind": "select",
+          "options": [
+            "IM"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "naloxone",
+      "group": "meds",
+      "label": "Naloxone",
+      "short": "Naloxone",
+      "protocols": [
+        "2.21A",
+        "3.2A"
+      ],
+      "fields": [
+        {
+          "id": "dose",
+          "label": "Dose",
+          "kind": "number",
+          "unit": "mg",
+          "presets": [
+            0.4,
+            1,
+            2,
+            4
+          ],
+          "min": 0,
+          "max": 10,
+          "step": 0.1
+        },
+        {
+          "id": "route",
+          "label": "Route",
+          "kind": "select",
+          "options": [
+            "IV",
+            "IO",
+            "IM",
+            "IN",
+            "SQ"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "acetaminophen",
+      "group": "meds",
+      "label": "Acetaminophen IV",
+      "protocols": [
+        "2.20A",
+        "2.20P"
+      ],
+      "fields": [
+        {
+          "id": "dose",
+          "label": "Dose",
+          "kind": "select",
+          "options": [
+            "1000 mg",
+            "15 mg/kg"
+          ]
+        },
+        {
+          "id": "route",
+          "label": "Route",
+          "kind": "select",
+          "options": [
+            "IV over 10 min"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "nitrous",
+      "group": "meds",
+      "label": "Nitrous oxide (self-administered)",
+      "protocols": [
+        "2.20A"
+      ],
+      "fields": [
+        {
+          "id": "approval",
+          "label": "Local MD approval",
+          "kind": "select",
+          "options": [
+            "Yes"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ondansetron",
+      "group": "meds",
+      "label": "Ondansetron",
+      "protocols": [
+        "2.14"
+      ],
+      "fields": [
+        {
+          "id": "dose",
+          "label": "Dose",
+          "kind": "select",
+          "options": [
+            "4 mg"
+          ]
+        },
+        {
+          "id": "route",
+          "label": "Route",
+          "kind": "select",
+          "options": [
+            "PO/ODT",
+            "IV",
+            "IM"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "assist_own_med",
+      "group": "meds",
+      "label": "Assist with patient's own medication",
+      "protocols": [
+        "1.2",
+        "2.22A"
+      ],
+      "fields": [
+        {
+          "id": "type",
+          "label": "Medication",
+          "kind": "select",
+          "options": [
+            "MDI",
+            "Epinephrine auto-injector",
+            "Seizure rescue med (IN/buccal/rectal)",
+            "Nitroglycerin",
+            "Other"
+          ]
+        },
+        {
+          "id": "name",
+          "label": "Name / dose",
+          "kind": "text"
+        }
+      ]
+    },
+    {
+      "id": "cpr",
+      "group": "arrest",
+      "label": "CPR",
+      "protocols": [
+        "3.2A",
+        "3.6"
+      ],
+      "common": true,
+      "fields": [
+        {
+          "id": "event",
+          "label": "Event",
+          "kind": "select",
+          "options": [
+            "Started",
+            "Resumed",
+            "Paused (analysis / check)",
+            "Stopped"
+          ]
+        },
+        {
+          "id": "mode",
+          "label": "Mode",
+          "kind": "multi",
+          "options": [
+            "Manual",
+            "Mechanical",
+            "Metronome",
+            "30:2",
+            "Continuous + 10/min"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "aed_pads",
+      "group": "arrest",
+      "label": "AED pads applied",
+      "short": "Pads",
+      "protocols": [
+        "3.2A"
+      ],
+      "common": true,
+      "fields": [
+        {
+          "id": "placement",
+          "label": "Placement",
+          "kind": "select",
+          "options": [
+            "Anterior-lateral",
+            "Anterior-posterior"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "aed_analyze",
+      "group": "arrest",
+      "label": "AED analysis",
+      "short": "Analyze",
+      "protocols": [
+        "3.2A"
+      ],
+      "common": true,
+      "fields": [
+        {
+          "id": "result",
+          "label": "Result",
+          "kind": "select",
+          "options": [
+            "Shock advised",
+            "No shock advised"
+          ]
+        },
+        {
+          "id": "shock",
+          "label": "Shock",
+          "kind": "select",
+          "options": [
+            "Delivered",
+            "Not delivered"
+          ]
+        },
+        {
+          "id": "energy",
+          "label": "Energy",
+          "kind": "number",
+          "unit": "J",
+          "min": 0,
+          "max": 400
+        }
+      ]
+    },
+    {
+      "id": "compressor_swap",
+      "group": "arrest",
+      "label": "Compressor swap",
+      "protocols": [
+        "3.6"
+      ],
+      "fields": []
+    },
+    {
+      "id": "pulse_check",
+      "group": "arrest",
+      "label": "Pulse check",
+      "protocols": [
+        "3.2A"
+      ],
+      "fields": [
+        {
+          "id": "result",
+          "label": "Result",
+          "kind": "select",
+          "options": [
+            "No pulse",
+            "Pulse present"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "rosc",
+      "group": "arrest",
+      "label": "ROSC identified",
+      "protocols": [
+        "3.4A"
+      ],
+      "fields": [
+        {
+          "id": "signs",
+          "label": "By",
+          "kind": "multi",
+          "options": [
+            "Pulse",
+            "EtCO2 rise",
+            "Movement / breathing"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tor",
+      "group": "arrest",
+      "label": "Termination of resuscitation",
+      "protocols": [
+        "8.17"
+      ],
+      "fields": [
+        {
+          "id": "steps",
+          "label": "Steps",
+          "kind": "multi",
+          "options": [
+            "Criteria reviewed",
+            "Medical Direction contacted",
+            "Time of death",
+            "Family support"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bleeding_control",
+      "group": "trauma",
+      "label": "Direct pressure / pressure dressing",
+      "protocols": [
+        "4.4"
+      ],
+      "fields": [
+        {
+          "id": "location",
+          "label": "Location",
+          "kind": "text"
+        }
+      ]
+    },
+    {
+      "id": "tourniquet",
+      "group": "trauma",
+      "label": "Tourniquet",
+      "short": "TQ",
+      "protocols": [
+        "4.4"
+      ],
+      "common": true,
+      "fields": [
+        {
+          "id": "location",
+          "label": "Limb",
+          "kind": "select",
+          "options": [
+            "L arm",
+            "R arm",
+            "L leg",
+            "R leg"
+          ]
+        },
+        {
+          "id": "placement",
+          "label": "Placement",
+          "kind": "select",
+          "options": [
+            "High and tight",
+            "2-3 in above wound"
+          ]
+        },
+        {
+          "id": "number",
+          "label": "TQ #",
+          "kind": "select",
+          "options": [
+            "1st",
+            "2nd"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "wound_packing",
+      "group": "trauma",
+      "label": "Wound packing",
+      "protocols": [
+        "4.4"
+      ],
+      "fields": [
+        {
+          "id": "material",
+          "label": "Material",
+          "kind": "select",
+          "options": [
+            "Hemostatic gauze",
+            "Plain gauze"
+          ]
+        },
+        {
+          "id": "location",
+          "label": "Location",
+          "kind": "text"
+        }
+      ]
+    },
+    {
+      "id": "pelvic_binder",
+      "group": "trauma",
+      "label": "Pelvic binder",
+      "protocols": [
+        "4.5"
+      ],
+      "fields": [
+        {
+          "id": "device",
+          "label": "Device",
+          "kind": "select",
+          "options": [
+            "Commercial binder",
+            "Sheet"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "chest_seal",
+      "group": "trauma",
+      "label": "Occlusive chest seal",
+      "protocols": [
+        "4.8"
+      ],
+      "fields": [
+        {
+          "id": "type",
+          "label": "Type",
+          "kind": "select",
+          "options": [
+            "Vented",
+            "Non-vented"
+          ]
+        },
+        {
+          "id": "location",
+          "label": "Location",
+          "kind": "text"
+        },
+        {
+          "id": "burped",
+          "label": "Burped",
+          "kind": "select",
+          "options": [
+            "Yes"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "splint",
+      "group": "trauma",
+      "label": "Splint",
+      "protocols": [
+        "4.5"
+      ],
+      "fields": [
+        {
+          "id": "type",
+          "label": "Type",
+          "kind": "select",
+          "options": [
+            "Rigid",
+            "SAM / malleable",
+            "Vacuum",
+            "Traction",
+            "Sling & swathe"
+          ]
+        },
+        {
+          "id": "location",
+          "label": "Location",
+          "kind": "select",
+          "options": [
+            "L arm",
+            "R arm",
+            "L leg",
+            "R leg",
+            "Other"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "smr",
+      "group": "trauma",
+      "label": "Spinal motion restriction",
+      "short": "SMR",
+      "protocols": [
+        "4.6"
+      ],
+      "common": true,
+      "fields": [
+        {
+          "id": "decision",
+          "label": "Decision",
+          "kind": "select",
+          "options": [
+            "SMR applied",
+            "Not indicated (4.6)"
+          ]
+        },
+        {
+          "id": "method",
+          "label": "Method",
+          "kind": "multi",
+          "options": [
+            "Manual stabilization",
+            "C-collar",
+            "Scoop",
+            "Vacuum mattress",
+            "Long board",
+            "KED"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "warming",
+      "group": "trauma",
+      "label": "Warming / hypothermia prevention",
+      "short": "Warming",
+      "protocols": [
+        "2.13",
+        "4.12"
+      ],
+      "common": true,
+      "fields": [
+        {
+          "id": "method",
+          "label": "Method",
+          "kind": "multi",
+          "options": [
+            "Blankets",
+            "Heat packs",
+            "Warmed IV fluid",
+            "Cabin heat",
+            "Wet clothes removed"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cooling",
+      "group": "trauma",
+      "label": "Cooling",
+      "protocols": [
+        "4.0",
+        "2.10"
+      ],
+      "fields": [
+        {
+          "id": "method",
+          "label": "Method",
+          "kind": "select",
+          "options": [
+            "Burn cooling (water)",
+            "Cold packs",
+            "Cold water immersion"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "burn_care",
+      "group": "trauma",
+      "label": "Burn care",
+      "protocols": [
+        "4.0"
+      ],
+      "fields": [
+        {
+          "id": "tbsa",
+          "label": "TBSA",
+          "kind": "number",
+          "unit": "%",
+          "min": 0,
+          "max": 100
+        },
+        {
+          "id": "care",
+          "label": "Care",
+          "kind": "multi",
+          "options": [
+            "Dry sterile dressing",
+            "Jewelry removed",
+            "Covered / kept warm"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "roles",
+      "group": "comms",
+      "label": "Crew roles assigned",
+      "protocols": [
+        "3.6",
+        "1.2"
+      ],
+      "common": true,
+      "fields": [
+        {
+          "id": "notes",
+          "label": "Roles",
+          "kind": "text"
+        }
+      ]
+    },
+    {
+      "id": "md_contact",
+      "group": "comms",
+      "label": "Medical Direction contact",
+      "short": "MD",
+      "protocols": [
+        "8.3"
+      ],
+      "common": true,
+      "fields": [
+        {
+          "id": "reason",
+          "label": "Reason / order",
+          "kind": "text"
+        }
+      ]
+    },
+    {
+      "id": "intercept_request",
+      "group": "comms",
+      "label": "Paramedic intercept",
+      "short": "Intercept",
+      "protocols": [
+        "1.2"
+      ],
+      "common": true,
+      "fields": [
+        {
+          "id": "status",
+          "label": "Status",
+          "kind": "select",
+          "options": [
+            "Requested",
+            "Rendezvous set",
+            "Met / care transferred",
+            "Declined / cancelled"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "alert",
+      "group": "comms",
+      "label": "Hospital alert",
+      "protocols": [
+        "8.3"
+      ],
+      "common": true,
+      "fields": [
+        {
+          "id": "type",
+          "label": "Alert",
+          "kind": "select",
+          "options": [
+            "STEMI",
+            "Stroke",
+            "Trauma",
+            "Sepsis",
+            "Cardiac arrest",
+            "Other"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "destination",
+      "group": "comms",
+      "label": "Destination decided",
+      "protocols": [
+        "4.9",
+        "3.0A"
+      ],
+      "common": true,
+      "fields": [
+        {
+          "id": "place",
+          "label": "Destination",
+          "kind": "select",
+          "options": [
+            "UVMMC",
+            "Other"
+          ]
+        },
+        {
+          "id": "capability",
+          "label": "For",
+          "kind": "select",
+          "options": [
+            "PCI",
+            "Stroke",
+            "Trauma (Level 1)",
+            "Pediatric",
+            "Closest ED"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "transport",
+      "group": "comms",
+      "label": "Transport / packaging",
+      "protocols": [
+        "8.18"
+      ],
+      "common": true,
+      "fields": [
+        {
+          "id": "mode",
+          "label": "Mode",
+          "kind": "select",
+          "options": [
+            "Emergent",
+            "Non-emergent"
+          ]
+        },
+        {
+          "id": "position",
+          "label": "Position",
+          "kind": "select",
+          "options": [
+            "Supine",
+            "Semi-Fowler",
+            "Fowler / upright",
+            "Left lateral",
+            "Position of comfort"
+          ]
+        },
+        {
+          "id": "device",
+          "label": "Moved by",
+          "kind": "select",
+          "options": [
+            "Stretcher",
+            "Stair chair",
+            "Scoop",
+            "Stokes basket",
+            "Carried"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "radio_report",
+      "group": "comms",
+      "label": "Radio / phone report",
+      "short": "Report",
+      "protocols": [
+        "8.3"
+      ],
+      "common": true,
+      "fields": [
+        {
+          "id": "to",
+          "label": "To",
+          "kind": "select",
+          "options": [
+            "Receiving hospital",
+            "Medical Direction",
+            "Intercept"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "handoff",
+      "group": "comms",
+      "label": "Handoff report at hospital",
+      "protocols": [
+        "8.3"
+      ],
+      "fields": []
+    },
+    {
+      "id": "refusal",
+      "group": "comms",
+      "label": "Refusal process",
+      "protocols": [
+        "8.15"
+      ],
+      "fields": [
+        {
+          "id": "steps",
+          "label": "Steps",
+          "kind": "multi",
+          "options": [
+            "Capacity assessed",
+            "Risks explained",
+            "Alternatives offered",
+            "Medical Direction",
+            "Form signed",
+            "Call-back advice"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "naloxone_leave_behind",
+      "group": "comms",
+      "label": "Naloxone leave-behind kit",
+      "protocols": [
+        "8.11"
+      ],
+      "fields": []
+    },
+    {
+      "id": "documentation",
+      "group": "comms",
+      "label": "Documentation (SIREN)",
+      "protocols": [
+        "8.3"
+      ],
+      "fields": []
+    },
+    {
+      "id": "intercept_med",
+      "group": "intercept",
+      "label": "Intercept/MD: medication given by paramedic",
+      "protocols": [
+        "1.2"
+      ],
+      "note": "Paramedic-only (or unclear ownership) per VT 2025: logged as received from the intercept / ordered by MD, not as an AEMT action.",
+      "fields": [
+        {
+          "id": "drug",
+          "label": "Drug",
+          "kind": "select",
+          "options": [
+            "Fentanyl",
+            "Morphine",
+            "Ketamine",
+            "Ketorolac",
+            "Midazolam",
+            "Diphenhydramine",
+            "Steroid",
+            "Magnesium",
+            "Hydroxocobalamin",
+            "Amiodarone",
+            "Atropine",
+            "Calcium",
+            "TXA",
+            "Epinephrine infusion / push-dose",
+            "Pediatric arrest epinephrine",
+            "Other"
+          ]
+        },
+        {
+          "id": "dose",
+          "label": "Dose",
+          "kind": "text"
+        },
+        {
+          "id": "route",
+          "label": "Route",
+          "kind": "select",
+          "options": [
+            "IV",
+            "IO",
+            "IM",
+            "IN",
+            "Neb",
+            "PO"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "intercept_procedure",
+      "group": "intercept",
+      "label": "Intercept/MD: paramedic procedure",
+      "protocols": [
+        "1.2"
+      ],
+      "note": "Paramedic-only per VT 2025 scope matrix (A.6).",
+      "fields": [
+        {
+          "id": "procedure",
+          "label": "Procedure",
+          "kind": "select",
+          "options": [
+            "Needle decompression",
+            "Transcutaneous pacing",
+            "Synchronized cardioversion",
+            "Manual defibrillation",
+            "Endotracheal intubation",
+            "12-lead interpretation",
+            "Other"
+          ]
+        }
+      ]
+    }
+  ]
+}

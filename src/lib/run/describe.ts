@@ -2,6 +2,7 @@
 import type { NormalizedScenario } from "../scenario/normalize.ts";
 import { stripMarkup } from "../scenario/text.ts";
 import type { RunEvent } from "./types.ts";
+import { actionById, formatValues } from "../actions/catalog.ts";
 
 export function describeEvent(sc: NormalizedScenario, e: RunEvent): string {
   const phase = (id: string) => sc.phases.find((p) => p.id === id);
@@ -53,6 +54,11 @@ export function describeEvent(sc: NormalizedScenario, e: RunEvent): string {
       if (e.pleth !== undefined) parts.push(`SpO2 pleth ${e.pleth ? "on" : "off"}`);
       if (e.layout) parts.push(e.layout === "12lead" ? "12-lead view" : "single-lead view");
       return `Student display: ${parts.join(", ")}`;
+    }
+    case "action": {
+      const a = actionById(e.actionId);
+      const v = formatValues(a, e.values);
+      return `Action: ${a?.label ?? e.actionId}${v ? ` (${v})` : ""}`;
     }
     case "undo":
       return `Undo #${e.target}`;

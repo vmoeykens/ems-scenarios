@@ -194,3 +194,61 @@ describe("exports", () => {
     for (const c of colors) expect(["#000", "#fff", "#e0e0e0", "#f2f2f2", "#404040", "#8c8c8c"]).toContain(c.toLowerCase());
   });
 });
+
+describe("provider actions <-> expected items", () => {
+  const med02 = normalize(readJson(join(SCENARIO_DIR, "MED-02_anaphylaxis.json")) as Scenario);
+  const T = Date.parse("2026-11-21T10:00:00Z");
+  const items = (sc: typeof med02) => sc.phases.flatMap((p) => p.expectedItems);
+  it("logging an action ticks the first unchecked linked item, preferring the current phase; repeats tick the next", () => {
+    const epi = items(med02).filter((i) => i.action === "epi_im").map((i) => i.id);
+    expect(epi.length).toBe(2);
+    let ev = append(med02, [], [{ kind: "action", actionId: "epi_im", values: { dose: "0.3 mg" } }], T);
+    let s = reduce(med02, ev);
+    expect(s.expected[epi[0]]).toMatchObject({ byAction: 1 });
+    expect(s.expected[epi[1]]).toBeUndefined();
+    ev = append(med02, ev, [{ kind: "action", actionId: "epi_im", values: {} }], T + 60_000);
+    s = reduce(med02, ev);
+    expect(s.expected[epi[1]]).toMatchObject({ byAction: 2 });
+    expect(s.actions.map((a) => a.actionId)).toEqual(["epi_im", "epi_im"]);
+    // a third dose is still logged (repeatable) even with no item left to tick
+    ev = append(med02, ev, [{ kind: "action", actionId: "epi_im", values: {} }], T + 120_000);
+    expect(reduce(med02, ev).actions).toHaveLength(3);
+  });
+  it("prefers the current phase", () => {
+    const epi = items(med02).filter((i) => i.action === "epi_im");
+    const later = med02.phases.find((p) => p.expectedItems.some((i) => i.id === epi[1].id))!;
+    const ev = append(med02, [], [{ kind: "phase", phaseId: later.id }, { kind: "action", actionId: "epi_im", values: {} }], T);
+    const s = reduce(med02, ev);
+    expect(s.expected[epi[1].id]).toBeDefined();
+    expect(s.expected[epi[0].id]).toBeUndefined();
+  });
+  it("match must fit (NRB-only item is not ticked by NC); itemId targets the tapped item", () => {
+    const sc = normalize(readJson(join(SCENARIO_DIR, "TRA-03_anticoagulated_fall_tbi.json")) as Scenario);
+    const nrb = items(sc).find((i) => i.action === "oxygen" && i.match?.device === "NRB")!;
+    let ev = append(sc, [], [{ kind: "action", actionId: "oxygen", values: { device: "NC", rate: 4 } }], T);
+    expect(reduce(sc, ev).expected[nrb.id]).toBeUndefined();
+    ev = append(sc, ev, [{ kind: "action", actionId: "oxygen", values: { device: "NRB", rate: 15 } }], T + 1000);
+    expect(reduce(sc, ev).expected[nrb.id]).toBeDefined();
+    const roles = items(sc).find((i) => i.action === "roles")!;
+    const ev2 = append(sc, [], [{ kind: "action", actionId: "roles", values: {}, itemId: roles.id }], T);
+    expect(reduce(sc, ev2).expected[roles.id]).toMatchObject({ byAction: 1 });
+  });
+  it("undoing the action un-ticks the item it ticked", () => {
+    const epi = items(med02).find((i) => i.action === "epi_im")!;
+    let ev = append(med02, [], [{ kind: "action", actionId: "epi_im", values: {} }], T);
+    ev = append(med02, ev, [{ kind: "undo", target: lastUndoable(ev)!.seq }], T + 1000);
+    const s = reduce(med02, ev);
+    expect(s.expected[epi.id]).toBeUndefined();
+    expect(s.actions).toEqual([]);
+  });
+  it("exports carry the actions (JSON events, CSV rows, HTML table)", () => {
+    const rec = { ...newRecord(med02, "cd".repeat(32), "MED-02_anaphylaxis.json") };
+    rec.events = append(med02, [], [{ kind: "clock", action: "start" }, { kind: "action", actionId: "oxygen", values: { device: "NRB", rate: 15 } }], T);
+    const json = parseRunFile(exportJson(rec));
+    expect(json.events[1]).toMatchObject({ kind: "action", actionId: "oxygen", values: { device: "NRB", rate: 15 } });
+    expect(exportCsv(med02, rec)).toContain("Action: Oxygen therapy (NRB, 15 L/min)");
+    const html = summaryHtml(med02, rec);
+    expect(html).toContain("Provider actions");
+    expect(html).toContain("NRB, 15 L/min");
+  });
+});

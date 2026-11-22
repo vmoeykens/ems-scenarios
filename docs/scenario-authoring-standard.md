@@ -11,10 +11,11 @@ Output is always a **PDF** (US Letter, black and white, dense, no decoration). E
 - **p.1 Instructor**: header (type/level/run time/difficulty/crew), protocols, objectives, resources -> Dispatch (read aloud), Scene/setup, Patient | SAMPLE + OPQRST -> Primary (XABCDE w/ checkboxes) -> Secondary exam (2-col, checkboxes) -> Vitals progression table (staged + 2 blank ad-lib rows) -> notes lines.
 - **p.2 Instructor**: Scenario flow (Time | Phase | Say/give + IF->THEN crew branches + EXAMINER OPTION injects | Expected actions w/ checkboxes | time/initials) -> Critical actions (instructor discretion) | Differentials -> Debrief prompts | Result (Pass/Remediate/Fail) -> notes.
 - **p.3 Decision flowchart** (Graphviz, auto-built from `flow`): phase spine (top 3 expected actions), one row per branch: diamond = crew action/error, shaded hexagon = examiner option; outcome box shows the referenced stage's vitals; bold box = critical (evaluator discretion).
-- **p.4 Handouts** (cut on dashed lines): Crew card, Patient actor card, Show cards. Instructor-only `cue` text prints in a scrap strip ABOVE the cut line, never on the piece handed over.
-- **p.5 Moulage tags + Learn-more card**: 3-across tags (region + finding) to tape on the body, with cues above the cut line; then a cut-out "After the scenario - learn more" card for the trainee with an AEMT-scoped OpenEvidence prompt, a QR of the prompt text and a QR to openevidence.com.
+- **p.4 Provider actions**: checkbox | action | options to circle | 3 time blanks | notes, from the shared catalog `schema/actions.json`: this scenario's actions first (expected items with an `action` link + `provider_actions`), then common actions, then write-in rows; one page.
+- **p.5 Handouts** (cut on dashed lines): Crew card, Patient actor card, Show cards. Instructor-only `cue` text prints in a scrap strip ABOVE the cut line, never on the piece handed over.
+- **p.6 Moulage tags + Learn-more card**: 3-across tags (region + finding) to tape on the body, with cues above the cut line; then a cut-out "After the scenario - learn more" card for the trainee with an AEMT-scoped OpenEvidence prompt, a QR of the prompt text and a QR to openevidence.com.
 
-Print: p.1-2 duplex (one sheet), p.3 single, p.4-5 cut apart.
+Print: p.1-2 duplex (one sheet), p.3-4 duplex or single, p.5-6 cut apart.
 
 ## Workflow
 1. Get the chief complaint / protocols to hit. Ask only if the target protocol or difficulty is truly unclear.
@@ -22,7 +23,7 @@ Print: p.1-2 duplex (one sheet), p.3 single, p.4-5 cut apart.
 3. Write the scenario JSON (schema below). Read 1-2 examples under `claude/scenarios/` in the project first and match their density.
 4. Get the generator: Projects `project_read` path `claude/tools/ems_scenario.py` -> write it to `ems_scenario.py` (single source of truth; never retype it). Needs reportlab, matplotlib, numpy, segno and Graphviz `dot` (`pip install --break-system-packages reportlab segno`; `apt-get install -y graphviz` if `which dot` fails).
 5. Run `python3 ems_scenario.py scenario.json <ID>.pdf`. It **validates first** and refuses to build on problems (bad Stage refs, non-condition IFs, hints on card/tag faces, 'critical fail' wording, scene.safety present, prompt too long for QR). Fix the JSON, not the validator.
-6. Check: 5 pages; `pdftotext -f 3 -l 3` contains "DECISION FLOWCHART" and `-f 4 -l 4` contains "HANDOUTS" (= p.1/p.2 each fit one page). Rasterize with `pdftoppm -r 75 -png` and look at every page, especially the flowchart. Optionally confirm both QR codes decode (`pip install zxing-cpp`; `zxingcpp.read_barcodes` on a 150 dpi render of p.5). If p.1/p.2 overflow, shorten text, never shrink fonts.
+6. Check (`npm run pdf` does this): 6 pages; `pdftotext -f 3 -l 3` contains "DECISION FLOWCHART", `-f 4 -l 4` "PROVIDER ACTIONS" and `-f 5 -l 5` "HANDOUTS" (= p.1/p.2 each fit one page). Rasterize with `pdftoppm -r 75 -png` and look at every page, especially the flowchart. Optionally confirm both QR codes decode (`pip install zxing-cpp`; `zxingcpp.read_barcodes` on a 150 dpi render of p.6). If p.1/p.2 overflow, shorten text, never shrink fonts.
 7. Save JSON to the project as `claude/scenarios/<ID>_<slug>.json`; if you changed the generator, write it back to `claude/tools/ems_scenario.py`. Send the PDF with SendUserFile.
 
 ## Content standards
@@ -59,6 +60,10 @@ vitals: [{stage, trigger, HR, BP, RR, SpO2, EtCO2, BGL, Temp, Pain, GCS, Pupils,
 blank_vitals_rows: int (default 2)    vitals_note: str
 flow: [{time, phase, give, expected:[str],
         branches:[{if, then} | {type:"inject", if, then}]}]
+        # expected items may be {text, action, match?} instead of a string: action = id from schema/actions.json,
+        # match = {field: option} the logged action must have (e.g. {"device": "NRB"}). Link only when the item
+        # is one clear action; leave bundles ("IV/IO; NS 500 mL"), decisions and reports as strings.
+provider_actions: [actionId]   # optional extra relevant actions (printed + pinned in the app)
 critical: [str]    differentials: [[dx, supports, against]]    debrief: [str]
 crew_card: {dispatch, on_arrival}     actor_card: {label: text, ...}
 show_cards: [   # every card may also have cue: "instructor-only text printed above the cut line"

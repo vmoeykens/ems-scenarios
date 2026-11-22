@@ -10,6 +10,7 @@ import { normalize, type NormalizedScenario } from "../src/lib/scenario/normaliz
 import { stripMarkup } from "../src/lib/scenario/text.ts";
 import { VITAL_KEYS, type Scenario } from "../src/lib/scenario/types.ts";
 import { readJson, scenarioFiles } from "./helpers.ts";
+import { actionById, relevantActions } from "../src/lib/actions/catalog.ts";
 
 /** Every instructor-only string in a scenario. */
 function instructorOnly(sc: Scenario): string[] {
@@ -51,6 +52,12 @@ function scriptedRun(sc: NormalizedScenario): DisplaySnapshot[] {
     for (const b of p.branchList) step(...branchBodies(sc, p.id, b.id));
   }
   for (const c of sc.critical) step({ kind: "critical", itemId: c.id, status: "missed" });
+  // provider actions with every option filled: instructor-only, must not reach the display
+  for (const id of relevantActions(sc.source)) {
+    const a = actionById(id)!;
+    const values = Object.fromEntries(a.fields.map((f) => [f.id, f.kind === "number" ? 7 : f.kind === "text" ? "instructor action note" : f.kind === "multi" ? f.options : f.options[0]]));
+    step({ kind: "action", actionId: id, values });
+  }
   step({ kind: "note", text: "instructor note: crew missed the nitrate trap" });
   return snaps;
 }
@@ -68,6 +75,8 @@ describe("toDisplay leak test", () => {
       const text = JSON.stringify(snap).toLowerCase();
       for (const s of secrets) expect(text.includes(s), `leaked: "${s}"`).toBe(false);
       expect(text).not.toContain("instructor note");
+      expect(text).not.toContain("instructor action note");
+      expect(text).not.toMatch(/actionId|"action"/);
       expect(text).not.toContain('"cue"');
       // remote display relays every snapshot through a broker (Supabase Realtime broadcast): keep it small
       expect(new TextEncoder().encode(JSON.stringify(snap)).length, "snapshot too large for the broker").toBeLessThan(64 * 1024);

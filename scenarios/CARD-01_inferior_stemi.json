@@ -328,7 +328,7 @@
       "give": "Read dispatch. Show crew card. Wife: \"He was shoveling and just went white.\"",
       "expected": [
         "General impression: sick",
-        "Crew roles assigned by CC"
+        {"text": "Crew roles assigned by CC", "action": "roles"}
       ]
     },
     {
@@ -343,7 +343,7 @@
       ],
       "expected": [
         "XABCDE complete",
-        "Monitor applied",
+        {"text": "Monitor applied", "action": "monitor"},
         "Intercept vs. direct decided (don't wait on scene)"
       ]
     },
@@ -358,8 +358,8 @@
         }
       ],
       "expected": [
-        "12-lead acquired <=10 min, transmitted",
-        "ASA 324 mg chewed (allergy asked)",
+        {"text": "12-lead acquired <=10 min, transmitted", "action": "ecg12"},
+        {"text": "ASA 324 mg chewed (allergy asked)", "action": "aspirin"},
         "ED meds / PDE-5 use asked"
       ]
     },
@@ -379,9 +379,9 @@
         }
       ],
       "expected": [
-        "IV established (18-20g AC)",
+        {"text": "IV established (18-20g AC)", "action": "iv"},
         "Inferior STEMI = nitrate caution verbalized",
-        "STEMI Alert decision"
+        {"text": "STEMI Alert decision", "action": "alert", "match": {"type": "STEMI"}}
       ]
     },
     {
@@ -402,8 +402,8 @@
       ],
       "expected": [
         "Supine, no further NTG",
-        "NS bolus per 2.24A, lungs reassessed",
-        "Med Direction notified"
+        {"text": "NS bolus per 2.24A, lungs reassessed", "action": "fluid"},
+        {"text": "Med Direction notified", "action": "md_contact"}
       ]
     },
     {
@@ -411,8 +411,8 @@
       "phase": "Packaging / extrication",
       "give": "Pt stands to walk? -> dizzy. Stairs to driveway, icy steps.",
       "expected": [
-        "Pt not walked; stair chair/stretcher",
-        "Destination: UVMMC (PCI), direct",
+        {"text": "Pt not walked; stair chair/stretcher", "action": "transport"},
+        {"text": "Destination: UVMMC (PCI), direct", "action": "destination"},
         "Scene time minimized (goal < 15 min)"
       ]
     },
@@ -433,8 +433,8 @@
         }
       ],
       "expected": [
-        "STEMI Alert radio report (age, sx onset, 12-lead, tx, ETA)",
-        "Repeat vitals q5 / repeat 12-lead",
+        {"text": "STEMI Alert radio report (age, sx onset, 12-lead, tx, ETA)", "action": "radio_report"},
+        {"text": "Repeat vitals q5 / repeat 12-lead", "action": "vitals"},
         "12-lead copy left at ED; SIREN"
       ]
     }

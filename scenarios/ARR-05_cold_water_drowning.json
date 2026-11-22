@@ -109,8 +109,8 @@
         {"if": "Compressions first, no breaths / no chest rise", "then": "Stage **C**"}
       ],
       "expected": [
-        "Gentle, horizontal; pulse/breathing check up to 60 s (2.13)",
-        "Airway + a few BVM breaths w/ O2 before compressions (4.2)",
+        {"text": "Gentle, horizontal; pulse/breathing check up to 60 s (2.13)", "action": "pulse_check"},
+        {"text": "Airway + a few BVM breaths w/ O2 before compressions (4.2)", "action": "bvm"},
         "CPR + AED; no collar w/o trauma; no draining water"
       ]
     },
@@ -124,7 +124,7 @@
       ],
       "expected": [
         "1 shock max, then CPR only - no further shocks (2.13)",
-        "Wet clothes off, dry, heat packs neck/axilla/groin, wrap",
+        {"text": "Wet clothes off, dry, heat packs neck/axilla/groin, wrap", "action": "warming"},
         "IV/IO w/o pausing CPR; warm NS 500 mL (2.13)"
       ]
     },
@@ -137,7 +137,7 @@
       ],
       "expected": [
         "Epi withheld: core presumed < 30 C, no core temp -> MD (2.13)",
-        "SGA after 8 min; capno; vent 1:10",
+        {"text": "SGA after 8 min; capno; vent 1:10", "action": "sga"},
         "Flat in Stokes; CPR continuous, or 5 on/5 off only if needed to evacuate (2.13)"
       ]
     },
@@ -150,8 +150,8 @@
       ],
       "expected": [
         "CPR continued to UVMMC; compressor swaps q2 min, belted",
-        "UVMMC alerted: hypothermic arrest, CPB/ECMO (2.13)",
-        "Warming continued; unit heat up"
+        {"text": "UVMMC alerted: hypothermic arrest, CPB/ECMO (2.13)", "action": "alert", "match": {"type": "Cardiac arrest"}},
+        {"text": "Warming continued; unit heat up", "action": "warming"}
       ]
     },
     {
