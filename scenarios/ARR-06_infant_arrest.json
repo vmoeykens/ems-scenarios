@@ -97,8 +97,8 @@
         {"if": "Crew withholds: 'cold and blue, too long'", "then": "critical (evaluator discretion) - no lividity/rigor; SUID presumption not met (8.17)"}
       ],
       "expected": [
-        "Infant to firm surface (floor/table); brachial check <= 10 s",
-        "Roles: compressor, BVM, CC = commander; parent liaison (FD)",
+        {"text": "Infant to firm surface (floor/table); brachial check <= 10 s", "action": "pulse_check"},
+        {"text": "Roles: compressor, BVM, CC = commander; parent liaison (FD)", "action": "roles"},
         "Peds pads, analyze ASAP (3.2P); intercept requested"
       ]
     },
@@ -112,7 +112,7 @@
       ],
       "expected": [
         "Suction; neutral head + shoulder roll; infant mask, just enough for rise",
-        "2-rescuer 15:2, two-thumb encircling, ~4 cm, 100-120/min (3.2P)",
+        {"text": "2-rescuer 15:2, two-thumb encircling, ~4 cm, 100-120/min (3.2P)", "action": "cpr"},
         "100% O2; capno in-line on BVM"
       ]
     },
@@ -125,9 +125,9 @@
         {"type": "inject", "if": "Father: \"Give her adrenaline, you're wasting time!\"", "then": "expect calm reply: medic bringing it; liaison stays with parents"}
       ],
       "expected": [
-        "IO proximal tibia w/o pausing CPR (3.2P)",
-        "D10 5 mL/kg = 33 mL IO for BGL 38; recheck 5 min (2.8P)",
-        "NS 20 mL/kg = 130 mL by syringe (3.2P)"
+        {"text": "IO proximal tibia w/o pausing CPR (3.2P)", "action": "io"},
+        {"text": "D10 5 mL/kg = 33 mL IO for BGL 38; recheck 5 min (2.8P)", "action": "d10"},
+        {"text": "NS 20 mL/kg = 130 mL by syringe (3.2P)", "action": "fluid"}
       ]
     },
     {
@@ -135,9 +135,9 @@
       "phase": "Intercept / H's & T's",
       "give": "Stage **D**. Medic gives epi 0.01 mg/kg = 0.065 mg (0.65 mL of 0.1 mg/mL) IO. PD officer arrives (T+8).",
       "expected": [
-        "Hand-off to medic w/o CPR pause; roles kept",
+        {"text": "Hand-off to medic w/o CPR pause; roles kept", "action": "intercept_request", "match": {"status": "Met / care transferred"}},
         "H's & T's: hypoxia, glucose, hypothermia (keep warm), volume",
-        "Compressor swap q2 min; quality checked on capno"
+        {"text": "Compressor swap q2 min; quality checked on capno", "action": "compressor_swap"}
       ]
     },
     {
@@ -148,9 +148,9 @@
         {"type": "inject", "if": "MD orders termination on scene instead", "then": "expect: lines/pads left in, PD notified, parents may hold her (PD ok), support (8.17)"}
       ],
       "expected": [
-        "MD contacted at 20 min (adult TOR rule N/A < 18, 8.17)",
+        {"text": "MD contacted at 20 min (adult TOR rule N/A < 18, 8.17)", "action": "md_contact"},
         "Infant on cot, firm surface, crew belted; parent belted up front (8.13)",
-        "UVMMC alerted: infant arrest, CPR in progress, ETA"
+        {"text": "UVMMC alerted: infant arrest, CPR in progress, ETA", "action": "alert", "match": {"type": "Cardiac arrest"}}
       ]
     },
     {

@@ -295,8 +295,8 @@
       "phase": "Size-up",
       "give": "Read dispatch. FD: \"Car's stable, door's off.\" Give mechanism (roof intrusion 14 in).",
       "expected": [
-        "High-risk mechanism identified (4.9)",
-        "Roles assigned; FD tasked",
+        {"text": "High-risk mechanism identified (4.9)", "action": "trauma_exam", "match": {"parts": "Trauma triage criteria (4.9)"}},
+        {"text": "Roles assigned; FD tasked", "action": "roles"},
         "Early TRAUMA ALERT plan; minimize scene time"
       ]
     },
@@ -313,7 +313,7 @@
       "expected": [
         "Shock recognized (HR > SBP)",
         "Pelvis assessed once only",
-        "SMR decision verbalized (4.6)"
+        {"text": "SMR decision verbalized (4.6)", "action": "smr"}
       ]
     },
     {
@@ -333,9 +333,9 @@
         }
       ],
       "expected": [
-        "Pelvic binder at greater trochanters",
+        {"text": "Pelvic binder at greater trochanters", "action": "pelvic_binder"},
         "Scoop, not log-roll; legs bound together",
-        "Warm blankets, heat on in rig"
+        {"text": "Warm blankets, heat on in rig", "action": "warming"}
       ]
     },
     {
@@ -354,8 +354,8 @@
         }
       ],
       "expected": [
-        "TRAUMA ALERT to UVMMC",
-        "Ground, direct to UVMMC (Level 1)",
+        {"text": "TRAUMA ALERT to UVMMC", "action": "alert", "match": {"type": "Trauma"}},
+        {"text": "Ground, direct to UVMMC (Level 1)", "action": "destination"},
         "Intercept only en route, no delay"
       ]
     },
@@ -383,8 +383,8 @@
       ],
       "expected": [
         "IV x2 large bore, warm NS",
-        "250 mL boluses to radial pulse/mentation, SBP ~90",
-        "Med Direction after 1 L; reassess q5"
+        {"text": "250 mL boluses to radial pulse/mentation, SBP ~90", "action": "fluid"},
+        {"text": "Med Direction after 1 L; reassess q5", "action": "md_contact"}
       ]
     },
     {
@@ -394,7 +394,7 @@
       "expected": [
         "MIST report: mechanism, injuries, signs, tx",
         "Scene time stated (goal < 10 min)",
-        "SIREN: binder time, fluid total"
+        {"text": "SIREN: binder time, fluid total", "action": "documentation"}
       ]
     }
   ],

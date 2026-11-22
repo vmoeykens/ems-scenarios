@@ -281,8 +281,8 @@
       "phase": "Arrival / primary",
       "give": "Read dispatch. Daughter: \"She was fine this morning.\" Give primary + Stage **A** (BGL only when checked).",
       "expected": [
-        "Roles assigned",
-        "BGL obtained early (<5 min)",
+        {"text": "Roles assigned", "action": "roles"},
+        {"text": "BGL obtained early (<5 min)", "action": "bgl"},
         "Intercept request considered"
       ]
     },
@@ -308,7 +308,7 @@
       ],
       "expected": [
         "IV established (or glucagon 1 mg IM)",
-        "D10 bolus titrated, stop at baseline/BGL >= 60",
+        {"text": "D10 bolus titrated, stop at baseline/BGL >= 60", "action": "d10"},
         "IV site watched for extravasation"
       ]
     },
@@ -317,8 +317,8 @@
       "phase": "Reassess",
       "give": "Stage **B** at 5 min recheck. Pt: \"Oh my, I'm so sorry for all this.\"",
       "expected": [
-        "BGL rechecked 5 min post",
-        "Stroke screen repeated, cause sought",
+        {"text": "BGL rechecked 5 min post", "action": "bgl"},
+        {"text": "Stroke screen repeated, cause sought", "action": "stroke_scale"},
         "Med list reviewed: **glipizide** noted"
       ]
     },
@@ -342,9 +342,9 @@
         }
       ],
       "expected": [
-        "Capacity assessed per 8.15 (A&Ox4, no impairment)",
-        "Risks explained (recurrence 24-72 h)",
-        "Med Direction contacted"
+        {"text": "Capacity assessed per 8.15 (A&Ox4, no impairment)", "action": "refusal", "match": {"steps": "Capacity assessed"}},
+        {"text": "Risks explained (recurrence 24-72 h)", "action": "refusal", "match": {"steps": "Risks explained"}},
+        {"text": "Med Direction contacted", "action": "md_contact"}
       ]
     },
     {
@@ -369,9 +369,9 @@
       "phase": "Transport + report",
       "give": "Stage **E**. Evaluator plays ED.",
       "expected": [
-        "Serial BGL en route",
+        {"text": "Serial BGL en route", "action": "bgl"},
         "Report includes sulfonylurea + dextrose total",
-        "SIREN: times, doses, BGLs"
+        {"text": "SIREN: times, doses, BGLs", "action": "documentation"}
       ]
     }
   ],

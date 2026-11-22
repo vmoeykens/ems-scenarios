@@ -136,7 +136,7 @@
       "give": "Read dispatch. PD: \"One stab wound, left side.\" Pt tripoding, towel on L chest.",
       "expected": [
         "Gloved hand over wound immediately",
-        "Roles assigned (seal, O2/vitals, IV/packaging)",
+        {"text": "Roles assigned (seal, O2/vitals, IV/packaging)", "action": "roles"},
         "Penetrating torso = TRAUMA ALERT plan (4.9)"
       ]
     },
@@ -149,9 +149,9 @@
         {"if": "Vented seal at end-exhalation + NRB", "then": "Stage **B**"}
       ],
       "expected": [
-        "Vented/occlusive seal on chest wound (4.8)",
+        {"text": "Vented/occlusive seal on chest wound (4.8)", "action": "chest_seal"},
         "Back and axillae checked; back cut dressed",
-        "O2 NRB; SpO2/EtCO2 monitored"
+        {"text": "O2 NRB; SpO2/EtCO2 monitored", "action": "oxygen", "match": {"device": "NRB"}}
       ]
     },
     {
@@ -164,8 +164,8 @@
       ],
       "expected": [
         "Position of comfort, upright; no SMR (4.6)",
-        "TRAUMA ALERT to UVMMC (Level 1)",
-        "Intercept en route only, no delay (4.8)"
+        {"text": "TRAUMA ALERT to UVMMC (Level 1)", "action": "alert", "match": {"type": "Trauma"}},
+        {"text": "Intercept en route only, no delay (4.8)", "action": "intercept_request", "match": {"status": "Rendezvous set"}}
       ]
     },
     {
@@ -179,7 +179,7 @@
       ],
       "expected": [
         "Tension recognized (4.8: distress + shock + JVD/absent sounds)",
-        "Seal removed momentarily, then reapplied (4.8)",
+        {"text": "Seal removed momentarily, then reapplied (4.8)", "action": "chest_seal", "match": {"burped": "Yes"}},
         "Reassess sounds, SpO2, BP after burp"
       ]
     },
@@ -193,9 +193,9 @@
         {"type": "inject", "if": "Seal peels off (blood/sweat), sucking again", "then": "expect gloved hand, new seal, reassess for tension"}
       ],
       "expected": [
-        "IV x2 en route; 250 mL only if SBP < 80-90 / no radial / AMS",
+        {"text": "IV x2 en route; 250 mL only if SBP < 80-90 / no radial / AMS", "action": "iv"},
         "Seal + breath sounds rechecked q5; burp as needed",
-        "Medic rides in; no vehicle transfer delay"
+        {"text": "Medic rides in; no vehicle transfer delay", "action": "intercept_request", "match": {"status": "Met / care transferred"}}
       ]
     },
     {
@@ -205,7 +205,7 @@
       "expected": [
         "MIST: wound sites, seal type, burp times",
         "Fluid total, scene time (goal < 10 min)",
-        "SIREN incl. back wound and tension timeline"
+        {"text": "SIREN incl. back wound and tension timeline", "action": "documentation"}
       ]
     }
   ],

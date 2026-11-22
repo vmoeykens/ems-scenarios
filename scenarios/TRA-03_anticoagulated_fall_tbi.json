@@ -331,7 +331,7 @@
       ],
       "expected": [
         "Stop lift; full assessment first",
-        "Roles assigned",
+        {"text": "Roles assigned", "action": "roles"},
         "Mechanism + time on floor obtained"
       ]
     },
@@ -341,7 +341,7 @@
       "give": "Stage **A**. Neck tender at C5-6 if palpated. Show MED LIST card if asked about meds.",
       "expected": [
         "Anticoagulant identified",
-        "Spinal assessment per 4.6 -> SMR",
+        {"text": "Spinal assessment per 4.6 -> SMR", "action": "smr"},
         "Baseline GCS/pupils/neuro documented"
       ]
     },
@@ -367,7 +367,7 @@
       "expected": [
         "Risk explained (bleed on blood thinner)",
         "Repeating questions = capacity concern",
-        "Transport decision: trauma center (4.9 risk factors)"
+        {"text": "Transport decision: trauma center (4.9 risk factors)", "action": "destination"}
       ]
     },
     {
@@ -376,7 +376,7 @@
       "give": "Stage **B** -> vomits. Then Stage **C** at T+15.",
       "expected": [
         "Suction, airway protected, SMR maintained",
-        "O2 NRB; BVM if RR inadequate at 10/min",
+        {"text": "O2 NRB; BVM if RR inadequate at 10/min", "action": "oxygen", "match": {"device": "NRB"}},
         "Pupils/GCS rechecked q5"
       ]
     },
@@ -405,7 +405,7 @@
       "expected": [
         "SpO2 > 94, EtCO2 35-45, SBP >= 110",
         "HOB 30 (SBP > 100) w/ SMR",
-        "TRAUMA ALERT to UVMMC (Level 1)"
+        {"text": "TRAUMA ALERT to UVMMC (Level 1)", "action": "alert", "match": {"type": "Trauma"}}
       ]
     },
     {
@@ -414,8 +414,8 @@
       "give": "Stage **E**. Evaluator = receiving.",
       "expected": [
         "Report: anticoagulant, GCS trend, pupils, last dose",
-        "Paramedic intercept for airway support",
-        "SIREN: serial neuro exams w/ times"
+        {"text": "Paramedic intercept for airway support", "action": "intercept_request"},
+        {"text": "SIREN: serial neuro exams w/ times", "action": "documentation"}
       ]
     }
   ],

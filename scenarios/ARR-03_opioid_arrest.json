@@ -368,7 +368,7 @@
       "expected": [
         "Suction, OPA/NPA, BVM 1 breath/10 compressions w/ O2",
         "Roles assigned; capno on",
-        "Epi 1 mg (0.1 mg/mL) ASAP via IO/IV (PEA)"
+        {"text": "Epi 1 mg (0.1 mg/mL) ASAP via IO/IV (PEA)", "action": "epi_arrest"}
       ]
     },
     {
@@ -376,9 +376,9 @@
       "phase": "Adjuncts / ROSC",
       "give": "Poor veins -> IO. Stage **D** at ~T+6 if B path.",
       "expected": [
-        "Naloxone 2-4 mg IV/IO/IN (adjunct, 3.2A)",
-        "ROSC recognized; CPR stopped appropriately",
-        "Paramedic intercept requested"
+        {"text": "Naloxone 2-4 mg IV/IO/IN (adjunct, 3.2A)", "action": "naloxone"},
+        {"text": "ROSC recognized; CPR stopped appropriately", "action": "rosc"},
+        {"text": "Paramedic intercept requested", "action": "intercept_request", "match": {"status": "Requested"}}
       ]
     },
     {
@@ -404,8 +404,8 @@
       ],
       "expected": [
         "Vent 10/min, EtCO2 35-45, SpO2 94-98",
-        "Naloxone titrated to resp effort, not GCS 15",
-        "SBP < 90 -> NS 500 mL (3.4A)"
+        {"text": "Naloxone titrated to resp effort, not GCS 15", "action": "naloxone"},
+        {"text": "SBP < 90 -> NS 500 mL (3.4A)", "action": "fluid"}
       ]
     },
     {
@@ -431,9 +431,9 @@
       "phase": "Leave-behind / report",
       "give": "Friend: \"Can I get another Narcan?\"",
       "expected": [
-        "Leave-behind naloxone kit to friend (8.11)",
+        {"text": "Leave-behind naloxone kit to friend (8.11)", "action": "naloxone_leave_behind"},
         "Report: downtime, bystander naloxone, ROSC time",
-        "SIREN documentation"
+        {"text": "SIREN documentation", "action": "documentation"}
       ]
     }
   ],

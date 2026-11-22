@@ -297,8 +297,8 @@
       ],
       "expected": [
         "Decision to start; pt moved to hallway/space",
-        "Roles assigned (3.6), CC = code commander",
-        "AED analyze ASAP"
+        {"text": "Roles assigned (3.6), CC = code commander", "action": "roles"},
+        {"text": "AED analyze ASAP", "action": "aed_analyze"}
       ]
     },
     {
@@ -313,9 +313,9 @@
         }
       ],
       "expected": [
-        "Epi 1 mg (0.1 mg/mL) ASAP, then every other cycle",
+        {"text": "Epi 1 mg (0.1 mg/mL) ASAP, then every other cycle", "action": "epi_arrest"},
         "IV/IO; NS 500 mL",
-        "SGA after 8 min w/o stopping CPR; capno"
+        {"text": "SGA after 8 min w/o stopping CPR; capno", "action": "sga"}
       ]
     },
     {
@@ -346,9 +346,9 @@
         }
       ],
       "expected": [
-        "TOR criteria stated: unwitnessed by EMS, no ROSC 20 min, no shock advised",
-        "Med Direction contacted",
-        "Time of death documented"
+        {"text": "TOR criteria stated: unwitnessed by EMS, no ROSC 20 min, no shock advised", "action": "tor", "match": {"steps": "Criteria reviewed"}},
+        {"text": "Med Direction contacted", "action": "md_contact"},
+        {"text": "Time of death documented", "action": "tor", "match": {"steps": "Time of death"}}
       ]
     },
     {

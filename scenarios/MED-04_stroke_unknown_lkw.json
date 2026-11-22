@@ -292,9 +292,9 @@
       "phase": "Arrival / primary",
       "give": "Read dispatch. Wife: \"I just found him like this, he can't talk!\" Stage **A** as obtained.",
       "expected": [
-        "Roles assigned; stretcher to door",
+        {"text": "Roles assigned; stretcher to door", "action": "roles"},
         "Airway/breathing OK verbalized",
-        "BGL obtained early (mimic r/o)"
+        {"text": "BGL obtained early (mimic r/o)", "action": "bgl"}
       ]
     },
     {
@@ -316,7 +316,7 @@
         }
       ],
       "expected": [
-        "Stroke screen positive (F, A, S)",
+        {"text": "Stroke screen positive (F, A, S)", "action": "stroke_scale"},
         "FAST-ED scored (6) -> possible LVO",
         "TLKW pinned w/ source (0550, daughter)",
         "Witness phone # obtained"
@@ -333,9 +333,9 @@
         }
       ],
       "expected": [
-        "Stroke Alert to UVMMC <10 min of recognition",
+        {"text": "Stroke Alert to UVMMC <10 min of recognition", "action": "alert", "match": {"type": "Stroke"}},
         "Thrombolytic checklist; apixaban last dose ~2 wk",
-        "Direct to UVMMC, no wait for intercept",
+        {"text": "Direct to UVMMC, no wait for intercept", "action": "destination"},
         "Wife rides along"
       ]
     },
@@ -355,9 +355,9 @@
       ],
       "expected": [
         "HOB 30 deg, NPO",
-        "O2 only if SpO2 <94%",
+        {"text": "O2 only if SpO2 <94%", "action": "oxygen"},
         "IV 18g R AC + NS 250 mL (2.26A)",
-        "12-lead only if no delay"
+        {"text": "12-lead only if no delay", "action": "ecg12"}
       ]
     },
     {
@@ -384,7 +384,7 @@
       "expected": [
         "Report: TLKW + source, FAST-ED, BGL, anticoag",
         "Daughter's phone # handed off",
-        "SIREN: TLKW, alert time, scene times"
+        {"text": "SIREN: TLKW, alert time, scene times", "action": "documentation"}
       ]
     }
   ],

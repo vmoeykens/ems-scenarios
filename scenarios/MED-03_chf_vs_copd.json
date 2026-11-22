@@ -299,7 +299,7 @@
       "give": "Wife: \"It's his COPD, the neb isn't working.\" Stage **A**.",
       "expected": [
         "Roles; CPAP + monitor brought up",
-        "Paramedic intercept requested"
+        {"text": "Paramedic intercept requested", "action": "intercept_request", "match": {"status": "Requested"}}
       ]
     },
     {
@@ -315,8 +315,8 @@
       ],
       "expected": [
         "CHF recognized: crackles, JVD, edema, orthopnea",
-        "Capno shape interpreted (no bronchospasm)",
-        "O2 increased to SpO2 94-98%"
+        {"text": "Capno shape interpreted (no bronchospasm)", "action": "capnography"},
+        {"text": "O2 increased to SpO2 94-98%", "action": "oxygen"}
       ]
     },
     {
@@ -341,9 +341,9 @@
         }
       ],
       "expected": [
-        "CPAP 5-10 cm H2O (SBP >= 100 confirmed)",
+        {"text": "CPAP 5-10 cm H2O (SBP >= 100 confirmed)", "action": "cpap"},
         "Pt coached through claustrophobia",
-        "12-lead acquired + transmitted"
+        {"text": "12-lead acquired + transmitted", "action": "ecg12"}
       ]
     },
     {
@@ -357,8 +357,8 @@
         }
       ],
       "expected": [
-        "IV established before NTG",
-        "Med Direction contacted for NTG",
+        {"text": "IV established before NTG", "action": "iv"},
+        {"text": "Med Direction contacted for NTG", "action": "md_contact"},
         "PDE-5 use asked; SBP rechecked q5"
       ]
     },
@@ -367,7 +367,7 @@
       "phase": "Extrication",
       "give": "Stage **D**. Narrow stairs. Pt can't lie flat.",
       "expected": [
-        "Stair chair, upright, CPAP maintained",
+        {"text": "Stair chair, upright, CPAP maintained", "action": "transport"},
         "Portable O2 supply checked (CPAP uses lots)",
         "Pt not walked"
       ],
@@ -384,9 +384,9 @@
       "phase": "Transport + report",
       "give": "Evaluator plays ED: \"Prep for CPAP patient?\"",
       "expected": [
-        "ED notified: CPAP pt, NTG doses",
+        {"text": "ED notified: CPAP pt, NTG doses", "action": "radio_report"},
         "Serial SpO2/EtCO2/BP documented",
-        "SIREN: CPAP time + provider"
+        {"text": "SIREN: CPAP time + provider", "action": "documentation"}
       ]
     }
   ],
