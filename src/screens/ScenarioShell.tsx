@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { href, navigate } from "../lib/router.ts";
 import { findEntry } from "../lib/scenario/library.ts";
 import { useRun } from "../state/RunContext.tsx";
+import { RemoteButton } from "../ui/RemotePanel.tsx";
 import { Clock } from "../ui/Clock.tsx";
 import { Footer, Modal } from "../ui/primitives.tsx";
 import Prebrief from "./Prebrief.tsx";
@@ -93,6 +94,7 @@ export default function ScenarioShell({ entryKey, tab }: { entryKey: string; tab
             Student screen
             <span className={`ml-1 text-xs ${displayConnected ? "font-bold" : "text-rule"}`}>{displayConnected ? "(on)" : "(off)"}</span>
           </button>
+          <RemoteButton />
         </div>
       </header>
 

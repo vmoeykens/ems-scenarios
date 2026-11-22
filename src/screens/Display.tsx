@@ -3,7 +3,10 @@
 import { useEffect, useRef, useState } from "react";
 import { EMPTY_SNAPSHOT, type DisplaySnapshot } from "../lib/display/toDisplay.ts";
 import type { DisplayView, MonitorLayout } from "../lib/run/types.ts";
-import { BroadcastChannelTransport, DEFAULT_ROOM } from "../lib/sync/transport.ts";
+import { BroadcastChannelTransport, DEFAULT_ROOM, PING_MS, type SyncStatus, type SyncTransport } from "../lib/sync/transport.ts";
+import { SupabaseTransport } from "../lib/sync/supabase.ts";
+import { activeConfig, decodeConfig, ROOM_RE, type BrokerConfig } from "../lib/sync/config.ts";
+import { href, navigate } from "../lib/router.ts";
 import { FOOTER } from "../lib/scenario/constants.ts";
 import { CardFace } from "../ui/CardFace.tsx";
 import { LiveTrace, TwelveLive } from "../ui/LiveTrace.tsx";
@@ -14,29 +17,110 @@ export function cssColor(token: string, fallback: string): string {
   return getComputedStyle(document.documentElement).getPropertyValue(token).trim() || fallback;
 }
 
-export function useDisplaySnapshot(): DisplaySnapshot {
+export interface DisplayLink {
+  status: SyncStatus | "no-broker";
+  detail?: string;
+  room?: string;
+}
+
+/** Display side: local window by default; a 6-digit room joins the console from another device. */
+export function useDisplaySnapshot(room?: string, broker?: string): { snap: DisplaySnapshot; link: DisplayLink } {
   const [snap, setSnap] = useState<DisplaySnapshot>(EMPTY_SNAPSHOT);
+  const cfg: BrokerConfig | null = room ? ((broker && decodeConfig(broker)) || activeConfig()) : null;
+  const cfgKey = cfg ? `${cfg.url}|${cfg.key}` : "";
+  const [link, setLink] = useState<DisplayLink>({ status: room ? (cfg ? "connecting" : "no-broker") : "connected", room });
   useEffect(() => {
-    const t = new BroadcastChannelTransport();
-    let off = () => {};
-    void t.connect(DEFAULT_ROOM).then(() => {
-      off = t.onMessage((m) => m.type === "state" && setSnap(m.snapshot));
-      t.send({ type: "hello", role: "display" });
-    });
-    const bye = () => t.send({ type: "bye", role: "display" });
+    if (room && !cfg) {
+      setLink({ status: "no-broker", room });
+      return;
+    }
+    const id = Math.random().toString(36).slice(2, 10);
+    const t: SyncTransport = room && cfg ? new SupabaseTransport(cfg) : new BroadcastChannelTransport();
+    const hello = () => t.send({ type: "hello", role: "display", id });
+    const off = t.onMessage((m) => m.type === "state" && setSnap(m.snapshot));
+    const offStatus =
+      t.onStatus?.((status, detail) => {
+        setLink({ status, detail, room });
+        if (status === "connected") hello(); // (re)joined: ask for the current state
+      }) ?? (() => {});
+    void t.connect(room ?? DEFAULT_ROOM).then(hello);
+    const ping = room ? setInterval(() => t.send({ type: "ping", role: "display", id }), PING_MS) : undefined;
+    const bye = () => t.send({ type: "bye", role: "display", id });
     window.addEventListener("pagehide", bye);
     return () => {
       bye();
+      clearInterval(ping);
       window.removeEventListener("pagehide", bye);
       off();
+      offStatus();
       t.close();
     };
-  }, []);
-  return snap;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [room, cfgKey]);
+  return { snap, link };
 }
 
-export default function Display() {
-  const snap = useDisplaySnapshot();
+function LinkBadge({ link }: { link: DisplayLink }) {
+  if (!link.room) return null;
+  const text =
+    link.status === "connected"
+      ? `LINKED ${link.room}`
+      : link.status === "no-broker"
+        ? "NOT SET UP: open the link or QR code from the instructor console"
+        : link.status === "error"
+          ? `RECONNECTING ${link.room}${link.detail ? ` (${link.detail})` : ""}`
+          : `CONNECTING ${link.room}`;
+  return (
+    <span className="display-sim" data-testid="display-link" data-status={link.status}>
+      {text}
+    </span>
+  );
+}
+
+/** #/join: type the 6-digit code shown on the instructor console. */
+export function Join() {
+  const [code, setCode] = useState("");
+  useEffect(() => {
+    document.title = "Join student display";
+  }, []);
+  const ok = ROOM_RE.test(code);
+  return (
+    <div className="page max-w-md">
+      <h1 className="sheet-title mb-2">Join student display</h1>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          if (ok) navigate(`#/display/${code}`);
+        }}
+        className="flex flex-col gap-2"
+      >
+        <label htmlFor="join-code" className="text-sm">
+          Enter the 6-digit code shown on the instructor console (Student screen &gt; Other device).
+        </label>
+        <input
+          id="join-code"
+          inputMode="numeric"
+          autoComplete="off"
+          maxLength={6}
+          className="border border-ink min-h-14 px-2 text-3xl tracking-widest font-bold"
+          value={code}
+          onChange={(e) => setCode(e.target.value.replace(/\D/g, "").slice(0, 6))}
+          data-testid="join-code"
+        />
+        <button type="submit" className="sheet-btn font-bold" disabled={!ok} data-testid="join-go">
+          Join
+        </button>
+        {!activeConfig() && <p className="text-sm text-alert">This copy of the app has no broker set up. Scan the QR code from the console instead; it carries the settings.</p>}
+        <a className="text-sm underline" href={href.library()}>
+          Back to library
+        </a>
+      </form>
+    </div>
+  );
+}
+
+export default function Display({ room, broker }: { room?: string; broker?: string }) {
+  const { snap, link } = useDisplaySnapshot(room, broker);
   const [view, setView] = useState<DisplayView>("monitor");
   const lastViewSeq = useRef(-1);
   const [seenCards, setSeenCards] = useState(0);
@@ -74,6 +158,7 @@ export default function Display() {
           INFO / CARDS{unseen > 0 && view !== "info" ? ` (${unseen} new)` : ""}
         </button>
         <span className="display-sim">SIMULATED - training only</span>
+        <LinkBadge link={link} />
         {view === "monitor" && (
           <div className="lead-toggle" role="group" aria-label="ECG layout">
             <button type="button" aria-pressed={layout === "single"} onClick={() => setLayout("single")} data-testid="layout-single">

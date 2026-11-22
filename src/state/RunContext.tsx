@@ -6,7 +6,9 @@ import type { RunEventBody, RunRecord } from "../lib/run/types.ts";
 import { ensureHash, type LibraryEntry } from "../lib/scenario/library.ts";
 import type { NormalizedScenario } from "../lib/scenario/normalize.ts";
 import { toDisplay } from "../lib/display/toDisplay.ts";
-import { BroadcastChannelTransport, DEFAULT_ROOM, type SyncTransport } from "../lib/sync/transport.ts";
+import { BroadcastChannelTransport, DEFAULT_ROOM, DisplayPresence, type SyncMessage, type SyncStatus, type SyncTransport } from "../lib/sync/transport.ts";
+import { SupabaseTransport } from "../lib/sync/supabase.ts";
+import { activeConfig, newRoom, saveConfig, savedRoom, saveRoom, type BrokerConfig } from "../lib/sync/config.ts";
 import { clearAutosave, loadAutosave, saveAutosave, type Autosave } from "./autosave.ts";
 
 export interface ActiveRun {
@@ -29,12 +31,29 @@ interface RunCtx {
   discard(): void;
   openDisplay(): void;
   displayConnected: boolean;
+  /** student display on another device (Supabase Realtime room) */
+  remote: RemoteState;
+  startRemote(): void;
+  stopRemote(): void;
+  /** new room code; any paired device has to re-pair */
+  rotateRoom(): void;
+  /** null = back to the build default */
+  setBroker(c: BrokerConfig | null): void;
   /** push-to-display auto-switches the display to the info view */
   autoSwitch: boolean;
   setAutoSwitch(v: boolean): void;
   /** autosaved run found on load and not yet resumed/discarded; scenario routes wait for the decision */
   pendingResume: Autosave | null;
   clearPendingResume(discardSaved: boolean): void;
+}
+
+export interface RemoteState {
+  room: string | null;
+  status: SyncStatus;
+  detail?: string;
+  /** remote displays heard from recently */
+  devices: number;
+  config: BrokerConfig | null;
 }
 
 const Ctx = createContext<RunCtx | null>(null);
@@ -51,7 +70,6 @@ export function displayUrl(): string {
 
 export function RunProvider({ children }: { children: ReactNode }) {
   const [run, setRun] = useState<ActiveRun | null>(null);
-  const [displayConnected, setDisplayConnected] = useState(false);
   const [autoSwitch, setAutoSwitch] = useState(true);
   const [pendingResume, setPendingResume] = useState<Autosave | null>(() => loadAutosave());
   const transport = useRef<SyncTransport | null>(null);
@@ -63,25 +81,71 @@ export function RunProvider({ children }: { children: ReactNode }) {
   const snapRef = useRef(snapshot);
   snapRef.current = snapshot;
 
-  // transport: console side
+  // transports, console side: the local window (BroadcastChannel) always, plus a remote room when paired
+  const presence = useRef(new DisplayPresence());
+  const [localCount, setLocalCount] = useState(0);
+  const [config, setConfig] = useState<BrokerConfig | null>(() => activeConfig());
+  const [room, setRoom] = useState<string | null>(() => (activeConfig() ? savedRoom() : null));
+  const [rstatus, setRstatus] = useState<{ status: SyncStatus; detail?: string }>({ status: "idle" });
+  const [remoteCount, setRemoteCount] = useState(0);
+  const remoteT = useRef<SyncTransport | null>(null);
+  const recount = useCallback(() => {
+    setLocalCount(presence.current.count("local"));
+    setRemoteCount(presence.current.count("remote"));
+  }, []);
+
+  const handle = useCallback(
+    (t: SyncTransport, source: "local" | "remote") => (m: SyncMessage) => {
+      if (m.type === "state") return; // another console in the room: ignore
+      presence.current.note(m, source);
+      recount();
+      if (m.type === "hello" && snapRef.current) t.send({ type: "state", snapshot: snapRef.current });
+    },
+    [recount],
+  );
+
   useEffect(() => {
     const t = new BroadcastChannelTransport();
     transport.current = t;
     void t.connect(DEFAULT_ROOM);
-    const off = t.onMessage((m) => {
-      if (m.type === "hello") {
-        setDisplayConnected(true);
-        if (snapRef.current) t.send({ type: "state", snapshot: snapRef.current });
-      } else if (m.type === "bye") setDisplayConnected(false);
-    });
+    const off = t.onMessage(handle(t, "local"));
     return () => {
       off();
       t.close();
     };
-  }, []);
+  }, [handle]);
+
   useEffect(() => {
-    if (snapshot) transport.current?.send({ type: "state", snapshot });
+    if (!room || !config) return;
+    const t = new SupabaseTransport(config);
+    remoteT.current = t;
+    const offMsg = t.onMessage(handle(t, "remote"));
+    const offStatus = t.onStatus((status, detail) => {
+      setRstatus({ status, detail });
+      // (re)joined: push the current state so a display that is already waiting catches up
+      if (status === "connected" && snapRef.current) t.send({ type: "state", snapshot: snapRef.current });
+    });
+    void t.connect(room);
+    const tick = setInterval(recount, 5000); // expire silent remote displays
+    return () => {
+      clearInterval(tick);
+      offMsg();
+      offStatus();
+      t.close();
+      remoteT.current = null;
+      presence.current.clear("remote");
+      recount();
+      setRstatus({ status: "idle" });
+    };
+  }, [room, config, handle, recount]);
+
+  useEffect(() => {
+    if (!snapshot) return;
+    transport.current?.send({ type: "state", snapshot });
+    remoteT.current?.send({ type: "state", snapshot });
   }, [snapshot]);
+  const displayConnected = localCount + remoteCount > 0;
+  const remote: RemoteState = { room, ...rstatus, devices: remoteCount, config };
 
   // autosave every change (single key); cleared on export/discard
   useEffect(() => {
@@ -140,6 +204,31 @@ export function RunProvider({ children }: { children: ReactNode }) {
       window.open(displayUrl(), "scenario-runner-display", "popup=yes,width=1280,height=800");
     },
     displayConnected,
+    remote,
+    startRemote() {
+      if (!config) return;
+      const r = savedRoom() ?? newRoom();
+      saveRoom(r);
+      setRoom(r);
+    },
+    stopRemote() {
+      saveRoom(null);
+      setRoom(null);
+    },
+    rotateRoom() {
+      const r = newRoom();
+      saveRoom(r);
+      setRoom(r);
+    },
+    setBroker(c) {
+      saveConfig(c);
+      const next = activeConfig();
+      setConfig(next);
+      if (!next) {
+        saveRoom(null);
+        setRoom(null);
+      }
+    },
     autoSwitch,
     setAutoSwitch,
     pendingResume,

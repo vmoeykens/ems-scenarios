@@ -69,6 +69,8 @@ describe("toDisplay leak test", () => {
       for (const s of secrets) expect(text.includes(s), `leaked: "${s}"`).toBe(false);
       expect(text).not.toContain("instructor note");
       expect(text).not.toContain('"cue"');
+      // remote display relays every snapshot through a broker (Supabase Realtime broadcast): keep it small
+      expect(new TextEncoder().encode(JSON.stringify(snap)).length, "snapshot too large for the broker").toBeLessThan(64 * 1024);
     }
     // the final snapshot really did carry crew-facing content (so the test is not vacuous)
     const last = snaps[snaps.length - 1];

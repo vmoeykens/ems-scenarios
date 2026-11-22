@@ -16,9 +16,9 @@ Origin: viability assessment + Claude Code prompt from the "EMS Scenarios" claud
 1. Start single-device: instructor app + "student screen" button that opens a second window (second monitor / projector). No server.
 2. Branches are currently text ("-> Stage **C**"). Add machine-readable links (`goto_stage`, `goto_phase`) and IDs, backward compatible.
 3. One definition of the format: a single JSON Schema in the repo; both the app and the Python generator check against it (or at least never disagree).
-4. **Stateless, no backend, no database.** Static files only (GitHub Pages). Nothing is stored server-side; there is no IndexedDB. A run lives in memory; the only browser storage is one localStorage key autosaving the in-progress run (crash/refresh recovery), cleared when the run is exported or discarded. Results leave the app as export files (JSON / CSV / print).
+4. **Stateless, no backend, no database.** Static files only (GitHub Pages). Nothing is stored server-side; there is no IndexedDB. A run lives in memory; the only browser storage is one localStorage key autosaving the in-progress run (crash/refresh recovery), cleared when the run is exported or discarded, plus two small keys for the remote display (broker settings, current room code). Results leave the app as export files (JSON / CSV / print).
 5. No real patient data. Keep the "simulated, not for patient care" footer.
-6. Phone-to-phone sync later via a pluggable transport (Supabase Realtime with a 6-digit room code is the likely choice). Not in v1.
+6. Other-device sync (Nov 2026): Supabase Realtime broadcast with a 6-digit room code, behind the `SyncTransport` interface. Relay only; nothing stored. Broker from build variables or in-app settings, carried in pairing links; a self-hosted broker later plugs into the same interface. See `docs/remote-display.md`.
 
 ## Stack
 
@@ -125,7 +125,7 @@ User request: "Embed the current VT EMS protocols PDF in the web app; when scena
 
 ## Phase 2 - Student display
 
-- "Open student screen" opens `#/display` in a new window. Sync via BroadcastChannel behind a `SyncTransport` interface so WebSocket/Supabase can drop in later (don't build those now).
+- "Open student screen" opens `#/display` in a new window. Sync via BroadcastChannel behind a `SyncTransport` interface. **Other device** (Nov 2026): Supabase Realtime room, see `docs/remote-display.md`.
 - Two views (decision 3): MONITOR (black, large numerals for revealed vitals only, "--" otherwise, animated ECG lead II + capnography from the current stage's `monitor` or a pushed strip/capno card) and INFO / CARDS (paper; crew card + pushed cards/tags newest first; text in large type; 12-lead/strip/capno rendered static).
 - Port ECG/capno synthesis from `tools/ems_scenario.py` (`ecg()`, `twelve_png()`, `strip_png()`, `capno_png()`) to TypeScript on `<canvas>`: same rhythms (sinus, afib, svt, vt, vf, asystole, chb with p_rate, avb1, flutter with p_rate), same per-lead R/S/T/P amplitudes and ST-shift model, same capno patterns (normal, shark, cpr). Static render for cards, scrolling sweep for the live monitor. Label everything "SIMULATED".
 - The student display must never show instructor-only content: cues, stage names/triggers, the vitals `other` column, branch text, critical list, differentials, actor card, scenario title.

@@ -17,6 +17,7 @@
     "protocol-index": "tsx scripts/build-protocol-index.ts"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.119.2",
     "ajv": "^8.20.0",
     "pdfjs-dist": "^6.5.438",
     "qrcode-generator": "^2.0.4",

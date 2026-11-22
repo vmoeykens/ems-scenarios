@@ -10,6 +10,7 @@ import {
   type LibraryEntry,
 } from "../lib/scenario/library.ts";
 import { useRun } from "../state/RunContext.tsx";
+import { RemoteButton } from "../ui/RemotePanel.tsx";
 import { Footer, Md, Section } from "../ui/primitives.tsx";
 
 export default function Library() {
@@ -45,6 +46,7 @@ export default function Library() {
           <button type="button" className="sheet-btn" onClick={openDisplay}>
             Open student screen
           </button>
+          <RemoteButton />
         </div>
       </header>
       <p className="text-sm mb-2">

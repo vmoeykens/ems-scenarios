@@ -7,12 +7,13 @@ import { fmtT } from "./lib/run/reducer.ts";
 import Library from "./screens/Library.tsx";
 import ScenarioShell from "./screens/ScenarioShell.tsx";
 import Runs from "./screens/Runs.tsx";
-import Display from "./screens/Display.tsx";
+import Display, { Join } from "./screens/Display.tsx";
 
 export default function App() {
   const route = useRoute();
   // The student display is a separate window with its own (display-only) state: no run context, no autosave prompt.
-  if (route.name === "display") return <Display />;
+  if (route.name === "display") return <Display key={route.room ?? "local"} room={route.room} broker={route.broker} />;
+  if (route.name === "join") return <Join />;
   return (
     <RunProvider>
       <ProtocolProvider>
