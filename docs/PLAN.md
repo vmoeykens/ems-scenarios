@@ -84,7 +84,7 @@ Minimal, no layout changes. All 50 pages of the 10 PDFs are pixel-identical at 7
 - `_txt()` helper: `checklist()` and the flowchart spine render `{id, text}` items by `text`.
 - `validate()`: allowed branch keys + `goto_stage`, `goto_phase`, `id`; stage letter honours `vitals[].key`; rules 2, 3, 5, 12, 13, 14 above.
 - `_stage_row()`: prefers `branch.goto_stage` over the THEN regex, and matches `vitals[].key` when set. Identical output for current files (validator guarantees goto_stage == THEN ref).
-- New `tools/build_pdfs.py` (npm run pdf): builds every scenario to `out/` and checks 5 pages / p.3 "DECISION FLOWCHART" / p.4 "HANDOUTS".
+- New `tools/build_pdfs.py` (npm run pdf): builds every scenario to `out/` and checks 5 pages / p.3 "DECISION FLOWCHART" / p.4 "HANDOUTS" (since the provider-actions page: 6 pages, p.4 "PROVIDER ACTIONS", p.5 "HANDOUTS").
 
 ## 5. Visual design - "paper on the web" (SPEC.md "Visual design")
 
@@ -180,6 +180,10 @@ v1 implements `BroadcastChannelTransport` only (same browser, second window). Sn
 ## 10b. Protocol viewer (commit f)
 
 See SPEC.md "Protocol viewer". Files: `src/lib/protocols/{refs,locate,pdf}.ts`, `src/state/ProtocolContext.tsx`, `src/ui/ProtocolDrawer.tsx`, `src/data/protocol-index.json`, `scripts/build-protocol-index.ts`, `tests/protocols.test.ts`, `e2e/fixtures/protocols-sample.pdf` (6-page test fixture, not the real protocols). Status: index seeded (titles, `page: null`); page step has not run on the real PDF yet (file not in `public/protocols/`).
+
+## 10c. Provider actions
+
+See SPEC.md "Provider actions". Catalog `schema/actions.json` (65 actions, 10 groups); scenario links (165 expected items in 19 scenarios); run event `action`; reducer sync `linkedItemFor()`; UI `src/screens/run/ProviderActions.tsx`; PDF p.4 `actions_page()` in `tools/ems_scenario.py`. Tests: `tests/actions.test.ts`, provider-action blocks in `tests/run.test.ts` / `tests/display.test.ts`, Playwright smoke.
 
 ## 11. Open questions - resolved (Nov 2026)
 
