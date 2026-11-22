@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """Build every scenario PDF and run the page checks.
 Usage: python3 tools/build_pdfs.py [scenarios_dir] [out_dir]     (npm run pdf)
-Checks per PDF: 5 pages; p.3 contains "DECISION FLOWCHART"; p.4 contains "HANDOUTS" (= p.1/p.2 each fit one page).
+Checks per PDF: 6 pages; p.3 contains "DECISION FLOWCHART"; p.4 "PROVIDER ACTIONS"; p.5 "HANDOUTS"
+(= p.1/p.2 and the provider-actions page each fit one page).
 Needs poppler-utils (pdfinfo, pdftotext) for the checks.
 """
 import glob, os, subprocess, sys
@@ -18,9 +19,10 @@ def pages(pdf):
 def check(pdf):
     problems = []
     n = pages(pdf)
-    if n != 5: problems.append(f"{n} pages (want 5)")
+    if n != 6: problems.append(f"{n} pages (want 6)")
     if "DECISION FLOWCHART" not in page_text(pdf, 3): problems.append('p.3 lacks "DECISION FLOWCHART"')
-    if "HANDOUTS" not in page_text(pdf, 4): problems.append('p.4 lacks "HANDOUTS"')
+    if "PROVIDER ACTIONS" not in page_text(pdf, 4): problems.append('p.4 lacks "PROVIDER ACTIONS"')
+    if "HANDOUTS" not in page_text(pdf, 5): problems.append('p.5 lacks "HANDOUTS"')
     return problems
 
 def main():
@@ -36,7 +38,7 @@ def main():
             failed += 1; print(f"FAIL {f}\n  {(r.stderr or r.stdout).strip()}"); continue
         problems = check(pdf)
         if problems: failed += 1; print(f"FAIL {pdf}: " + "; ".join(problems))
-        else: print(f"ok   {pdf} (5 pages, p.3 flowchart, p.4 handouts)")
+        else: print(f"ok   {pdf} (6 pages, p.3 flowchart, p.4 provider actions, p.5 handouts)")
     print(f"\n{len(files) - failed}/{len(files)} built and checked")
     sys.exit(1 if failed else 0)
 
