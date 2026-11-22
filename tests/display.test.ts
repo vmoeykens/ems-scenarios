@@ -27,6 +27,8 @@ function instructorOnly(sc: Scenario): string[] {
   // Actor card is instructor/actor-only. Scene, history and exam findings are not listed: the crew learns them
   // (and the same findings legitimately appear on moulage tags).
   out.push(...Object.values(sc.actor_card ?? {}));
+  // review_notes are coordinator-only author notes ("VERIFY: ...").
+  out.push(...(sc.review_notes ?? []));
   return [...new Set(out.filter((x): x is string => typeof x === "string").map((x) => stripMarkup(x).toLowerCase()))].filter((x) => x.length >= 16 || x.split(" ").length >= 3); // 1-2 word labels ("Bathroom", "Reassess") can coincide with card titles
 }
 
@@ -66,7 +68,8 @@ const files = scenarioFiles();
 
 describe("toDisplay leak test", () => {
   it.each(files.map((f) => [basename(f), f]))("%s: no instructor-only text in any snapshot", (_n, f) => {
-    const raw = readJson(f) as Scenario;
+    // Bundled scenarios carry no review_notes; add some so the test covers that field too.
+    const raw = { ...(readJson(f) as Scenario), review_notes: ["VERIFY: coordinator-only review note for the leak test", "Question for the coordinator about this scenario"] };
     const sc = normalize(raw);
     const secrets = instructorOnly(raw);
     const snaps = scriptedRun(sc);
@@ -78,6 +81,8 @@ describe("toDisplay leak test", () => {
       expect(text).not.toContain("instructor action note");
       expect(text).not.toMatch(/actionId|"action"/);
       expect(text).not.toContain('"cue"');
+      expect(text).not.toContain("verify:");
+      expect(text).not.toContain("review_notes");
       // remote display relays every snapshot through a broker (Supabase Realtime broadcast): keep it small
       expect(new TextEncoder().encode(JSON.stringify(snap)).length, "snapshot too large for the broker").toBeLessThan(64 * 1024);
     }

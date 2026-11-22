@@ -98,4 +98,6 @@ export interface Scenario {
   show_cards?: ShowCard[];
   moulage_tags?: MoulageTag[];
   learn_more?: LearnMore;
+  /** Coordinator-only 'VERIFY: ...' items from the author. Never printed, never on the student display. */
+  review_notes?: string[];
 }

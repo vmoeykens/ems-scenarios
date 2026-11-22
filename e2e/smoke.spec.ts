@@ -155,12 +155,16 @@ test("paste JSON: live validation, copy errors, import & open", async ({ page, c
   const ours = JSON.parse(raw);
   ours.id = "MED-99";
   ours.title = "Pasted test scenario";
+  ours.review_notes = ["VERIFY: pasted coordinator note"]; // optional, coordinator-only
   await box.fill(`Here is your scenario:\n\`\`\`json\n${JSON.stringify(ours, null, 2)}\n\`\`\`\nAnything else?`);
   await expect(status).toHaveAttribute("data-state", "valid");
   await expect(page.getByTestId("paste-valid")).toContainText("MED-99 Pasted test scenario");
   await expect(status).toContainText("Text around the JSON was ignored");
+  await expect(page.getByTestId("paste-review-notes")).toContainText("VERIFY: pasted coordinator note");
   await page.getByTestId("paste-open").click();
   await expect(page.getByText("Dispatch (read aloud)")).toBeVisible();
+  await expect(page.locator("#review-notes")).toContainText("Review notes (not printed)");
+  await expect(page.locator("#review-notes")).toContainText("VERIFY: pasted coordinator note");
   await page.evaluate(() => (location.hash = "#/")); // in-app navigation (a reload clears session imports by design)
   await expect(page.getByTestId("lib-MED-99")).toContainText("imported");
 });

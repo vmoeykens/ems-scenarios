@@ -18,7 +18,7 @@ describe("bundled scenarios", () => {
 });
 
 describe("good fixtures", () => {
-  it.each(["good-minimal.json", "good-new-fields.json"])("%s passes", (f) => {
+  it.each(["good-minimal.json", "good-new-fields.json", "good-review-notes.json"])("%s passes", (f) => {
     expect(validateScenario(readJson(join(FIXTURE_DIR, f))).errors).toEqual([]);
   });
 });
@@ -51,6 +51,7 @@ const BAD: Record<string, { rules: string[]; schema: boolean }> = {
   "monitor-shape": { rules: [], schema: true },
   "no-expected": { rules: ["flow 'Transport': no expected actions"], schema: true },
   rhythm: { rules: ["bad rhythm torsades"], schema: true },
+  "review-notes-string": { rules: [], schema: true }, // schema-only (generator never reads review_notes)
   "scene-safety": { rules: ["scene.safety present - scene safety is trained outside scenarios; remove it"], schema: true },
   "stage-ref-missing": { rules: ["flow 'Arrival': references Stage Z but vitals has ['A', 'B']"], schema: false },
   "tag-hint": { rules: ["moulage tag 'Eyes': instructor hint on tag ('during ') - move to 'cue'"], schema: false },
@@ -91,6 +92,11 @@ describe("schema messages are readable", () => {
     );
     expect(schemaErrors(readJson(join(FIXTURE_DIR, "bad", "scene-safety.json")))).toContain("/scene/safety: not allowed");
   });
+  it("review_notes: optional array of strings; anything else is a schema error", () => {
+    expect(schemaErrors(readJson(join(FIXTURE_DIR, "good-review-notes.json")))).toEqual([]);
+    expect(schemaErrors(readJson(join(FIXTURE_DIR, "bad", "review-notes-string.json")))).toContain("/review_notes: must be array");
+    expect(schemaErrors({ title: "x", review_notes: ["VERIFY: ok", 3] })).toContain("/review_notes/1: must be string");
+  });
   it("requires title", () => {
     expect(schemaErrors({})).toContain("/: must have required property 'title'");
   });
@@ -106,7 +112,11 @@ describe("python formatting helpers", () => {
 });
 
 // Ground truth: run the real Python validator and compare message-for-message.
-const all = [...scenarioFiles(), join(FIXTURE_DIR, "good-minimal.json"), join(FIXTURE_DIR, "good-new-fields.json"), ...badFixtureFiles()];
+const all = [
+  ...scenarioFiles(),
+  ...["good-minimal.json", "good-new-fields.json", "good-review-notes.json"].map((f) => join(FIXTURE_DIR, f)),
+  ...badFixtureFiles(),
+];
 const py = pythonCheck(all);
 describe.skipIf(!py)("agrees with tools/ems_scenario.py validate()", () => {
   it.each(all.map((f) => [basename(f), f]))("%s: same rule errors and learn prompt", (_n, f) => {

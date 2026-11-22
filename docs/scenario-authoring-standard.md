@@ -75,6 +75,8 @@ show_cards: [   # every card may also have cue: "instructor-only text printed ab
 ]
 moulage_tags: [{region, text, cue?}]
 learn_more: {topic, focus}   (or {prompt} to override the template; <= 480 chars)
+review_notes: [str]   # optional; "VERIFY: ..." items / questions for the coordinator. Never printed, never on the
+                      # student display; the app shows them only on the instructor pre-brief and the import preview.
 rhythm: sinus | afib | svt | vt | vf | asystole | chb (p_rate = atrial rate) | avb1 | flutter (p_rate = flutter rate)
 ```
 

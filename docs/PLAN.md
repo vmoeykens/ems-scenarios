@@ -43,6 +43,7 @@ Describes the format exactly as the 10 files use it, plus the optional Runner fi
 | `show_cards[]` | discriminated on `type`: `12lead` (rhythm, rate, p_rate, st{lead: mm}), `strip` (rhythm, rate, p_rate, lead, st mm, seconds, width), `capno` (pattern normal\|shark\|cpr, etco2, rr, width), `text` (body, width), `image` (path req, caption, width); all have `title`, `cue`; non-text have `caption` | rhythm enum = generator RHYTHMS; lead enum = 12 leads |
 | `moulage_tags[]` | `{region, text, cue?}` | region + text required |
 | `learn_more` | `{topic?, focus?}` **or** `{prompt}` (<= 480) | |
+| `review_notes` | string[] | optional author/coordinator notes (`VERIFY: ...`); not printed, never on the student display; instructor pre-brief + import preview only |
 
 Objects are closed (`additionalProperties: false`) except `scene` and `actor_card` (free keys, string values).
 Unknown keys are therefore rejected by the app; see open question Q1.
