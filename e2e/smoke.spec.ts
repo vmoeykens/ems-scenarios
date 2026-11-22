@@ -128,3 +128,39 @@ test("provider actions: log O2 NRB 15 L/min twice -> two timestamped entries + l
   await page.getByRole("link", { name: "Debrief" }).click();
   await expect(page.getByTestId("debrief-actions").locator("tbody tr")).toHaveCount(2);
 });
+
+test("paste JSON: live validation, copy errors, import & open", async ({ page, context }) => {
+  await context.grantPermissions(["clipboard-read", "clipboard-write"]);
+  const raw = readFileSync(path.join(import.meta.dirname, "..", "scenarios", "MED-01_hypoglycemia_refusal.json"), "utf8");
+  await page.goto("./");
+  const box = page.getByTestId("paste-json");
+  const status = page.getByTestId("paste-status");
+
+  // syntax error -> line/column, import disabled
+  await box.fill('{\n  "id": "MED-09",\n  "title": "x",\n}');
+  await expect(status).toHaveAttribute("data-state", "json-error");
+  await expect(status).toContainText(/line \d+, column \d+/);
+  await expect(page.getByTestId("paste-open")).toBeDisabled();
+
+  // structurally wrong -> numbered problems, copy for the AI
+  const bad = JSON.parse(raw);
+  bad.scene.safety = "Scene safe";
+  await box.fill(JSON.stringify(bad, null, 2));
+  await expect(status).toHaveAttribute("data-state", "invalid");
+  await expect(page.getByTestId("paste-errors")).toContainText("safety");
+  await page.getByTestId("paste-copy-errors").click();
+  expect(await page.evaluate(() => navigator.clipboard.readText())).toMatch(/^Fix these validation errors[\s\S]*safety/);
+
+  // a whole chat reply with prose + fences -> valid, opens in the console
+  const ours = JSON.parse(raw);
+  ours.id = "MED-99";
+  ours.title = "Pasted test scenario";
+  await box.fill(`Here is your scenario:\n\`\`\`json\n${JSON.stringify(ours, null, 2)}\n\`\`\`\nAnything else?`);
+  await expect(status).toHaveAttribute("data-state", "valid");
+  await expect(page.getByTestId("paste-valid")).toContainText("MED-99 Pasted test scenario");
+  await expect(status).toContainText("Text around the JSON was ignored");
+  await page.getByTestId("paste-open").click();
+  await expect(page.getByText("Dispatch (read aloud)")).toBeVisible();
+  await page.evaluate(() => (location.hash = "#/")); // in-app navigation (a reload clears session imports by design)
+  await expect(page.getByTestId("lib-MED-99")).toContainText("imported");
+});

@@ -92,6 +92,7 @@
   .lib-table td { @apply py-2; }
   .dropzone { @apply flex items-center min-h-16 p-2 m-1.5 border border-dashed border-ink cursor-pointer text-sm; }
   .dropzone-on { @apply bg-head; }
+  .section-sub { @apply px-1.5 pt-1.5 text-xs font-bold uppercase border-t border-ink mt-1.5; }
   .field { @apply min-h-11 border border-ink px-1.5 bg-paper w-full; }
   .meter { @apply h-2 border border-ink mt-1; }
   .meter > div { @apply h-full bg-ink; }
