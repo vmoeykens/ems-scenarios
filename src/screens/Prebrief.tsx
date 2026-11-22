@@ -41,6 +41,16 @@ export default function Prebrief() {
         <KV rows={head} labelWidth="6rem" />
       </div>
 
+      {!!s.review_notes?.length && (
+        <Section title="Review notes (not printed)" right="coordinator only - from the scenario author" className="no-print" id="review-notes">
+          <ul className="text-sm list-disc pl-5 py-1 pr-1.5">
+            {s.review_notes.map((n, i) => (
+              <li key={i}>{n}</li>
+            ))}
+          </ul>
+        </Section>
+      )}
+
       <div className="grid-2">
         <div className="flex flex-col gap-2">
           <Section title="Dispatch (read aloud)">

@@ -110,6 +110,7 @@ User request: "a 'provider actions' section. On the printed sheet it can be a ch
    - `flow[].expected[]` items: string OR `{id, text}`.
    - `flow[].branches[].goto_stage` (vitals key), `.goto_phase` (flow id), `.id`.
    - `critical[]` items: string OR `{id, text}`.
+   - top-level `review_notes[]` (strings): author's `VERIFY: ...` items / questions for the coordinator. Not printed on the PDF, never sent to the student display; shown only on the instructor pre-brief ("Review notes (not printed)") and the paste-import preview.
    App auto-derives keys/ids when absent.
 3. **Generator compatibility**: `validate()` in `tools/ems_scenario.py` currently rejects unknown branch keys (`set(b) - {"if","then","type"}`) and `checklist()` assumes strings. Update the generator minimally so it accepts the new optional fields (allow the new branch keys; render `{id,text}` items by their `text`; check `goto_stage` refers to a real stage letter). Do not change layout or other rules. Confirm all 10 PDFs still build and still pass the page checks (5 pages; p.3 contains "DECISION FLOWCHART"; p.4 contains "HANDOUTS").
 4. `npm run validate`: validate every file in `scenarios/` against the schema + shared rules; non-zero exit on errors. Also add `npm run pdf` (or a Makefile target) that builds all PDFs to `out/`.

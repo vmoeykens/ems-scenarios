@@ -104,7 +104,8 @@
           "properties": { "prompt": { "type": "string", "minLength": 1, "maxLength": 480 } }
         }
       ]
-    }
+    },
+    "review_notes": { "type": "array", "items": { "type": "string" }, "description": "Optional. 'VERIFY: ...' items and questions for the coordinator. Not printed." }
   },
   "$defs": {
     "strings": { "type": "array", "items": { "type": "string" } },

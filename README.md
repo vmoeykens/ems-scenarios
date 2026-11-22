@@ -38,6 +38,6 @@ To try a scenario without committing it (e.g. one a trainer wrote with ChatGPT),
 
 ## One format, two outputs
 
-The same JSON drives the PDF (`tools/ems_scenario.py`) and the app. Optional Runner fields (`vitals[].key`, `vitals[].monitor`, `flow[].id`, `{id, text}` checklist items, branch `goto_stage` / `goto_phase` / `id`, expected-item provider-action links `{text, action, match?}`, `provider_actions`) are accepted by both; the PDF renders `{id, text}` items by their text, ignores `monitor` (student-display ECG/capno for that stage), and prints the linked actions first on the PROVIDER ACTIONS page (catalog: `schema/actions.json`).
+The same JSON drives the PDF (`tools/ems_scenario.py`) and the app. Optional Runner fields (`vitals[].key`, `vitals[].monitor`, `flow[].id`, `{id, text}` checklist items, branch `goto_stage` / `goto_phase` / `id`, expected-item provider-action links `{text, action, match?}`, `provider_actions`, `review_notes`) are accepted by both; the PDF renders `{id, text}` items by their text, ignores `monitor` (student-display ECG/capno for that stage), and prints the linked actions first on the PROVIDER ACTIONS page (catalog: `schema/actions.json`). `review_notes` (the author's `VERIFY: ...` items for the coordinator) are never printed and never reach the student display; the app shows them only on the instructor pre-brief and the import preview.
 
 Simulated training material. Not for patient care. Verify against current VT Statewide EMS Protocols & agency SOPs.

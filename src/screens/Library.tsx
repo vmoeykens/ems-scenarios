@@ -235,6 +235,16 @@ function PasteImport() {
               Valid: {check.scenario.id} {check.scenario.title}
             </div>
             {check.duplicateOf && <div className="text-xs">Same ID as {check.duplicateOf} - it will be added as a separate imported entry.</div>}
+            {!!check.scenario.review_notes?.length && (
+              <div className="text-xs mt-0.5" data-testid="paste-review-notes">
+                <b>Review notes (not printed):</b>
+                <ul className="list-disc pl-5">
+                  {check.scenario.review_notes.map((n, i) => (
+                    <li key={i}>{n}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
         )}
         {check.state !== "empty" && check.state !== "json-error" && check.cleaned && (
