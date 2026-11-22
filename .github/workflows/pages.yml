@@ -31,6 +31,11 @@ jobs:
       - run: npm run validate
       - run: npm test
       - run: npm run build
+        env:
+          # Remote student display broker (repo Settings > Secrets and variables > Actions > Variables). Optional:
+          # without them the app still builds and the broker can be entered in the app.
+          VITE_SUPABASE_URL: ${{ vars.VITE_SUPABASE_URL }}
+          VITE_SUPABASE_KEY: ${{ vars.VITE_SUPABASE_KEY }}
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
