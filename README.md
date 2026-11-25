@@ -4,7 +4,7 @@ AEMT crew-chief-in-training scenarios (UVM Rescue, VT Statewide EMS Protocols 20
 
 ## Scenario Runner in one minute
 
-Library -> pick a scenario -> Pre-brief (read dispatch, brief the actor, place moulage) -> Run (start the clock, tap vitals as the crew obtains them, tap branches, check expected actions, log provider actions with details, mark critical MET/MISSED, push cards) -> Debrief (result, learn-more QR, export JSON/CSV/HTML). "Student screen" opens `#/display` in a second window (projector/second monitor): MONITOR and INFO / CARDS views. "Other device" streams the same display to a second device by room code / QR (Supabase Realtime relay, see `docs/remote-display.md`). Nothing is stored on a server; the in-progress run is autosaved in this browser until exported.
+Library -> pick a scenario -> Pre-brief (read dispatch, brief the actor, place moulage; print moulage tags on a Zebra/ZPL label printer, 2x1 / 4x3 / custom) -> Run (start the clock, tap vitals as the crew obtains them, tap branches, check expected actions, log provider actions with details, mark critical MET/MISSED, push cards) -> Debrief (result, learn-more QR, export JSON/CSV/HTML). "Student screen" opens `#/display` in a second window (projector/second monitor): MONITOR and INFO / CARDS views. "Other device" streams the same display to a second device by room code / QR (Supabase Realtime relay, see `docs/remote-display.md`). Nothing is stored on a server; the in-progress run is autosaved in this browser until exported.
 
 ## Setup
 

@@ -16,7 +16,7 @@ Origin: viability assessment + Claude Code prompt from the "EMS Scenarios" claud
 1. Start single-device: instructor app + "student screen" button that opens a second window (second monitor / projector). No server.
 2. Branches are currently text ("-> Stage **C**"). Add machine-readable links (`goto_stage`, `goto_phase`) and IDs, backward compatible.
 3. One definition of the format: a single JSON Schema in the repo; both the app and the Python generator check against it (or at least never disagree).
-4. **Stateless, no backend, no database.** Static files only (GitHub Pages). Nothing is stored server-side; there is no IndexedDB. A run lives in memory; the only browser storage is one localStorage key autosaving the in-progress run (crash/refresh recovery), cleared when the run is exported or discarded, plus two small keys for the remote display (broker settings, current room code). Results leave the app as export files (JSON / CSV / print).
+4. **Stateless, no backend, no database.** Static files only (GitHub Pages). Nothing is stored server-side; there is no IndexedDB. A run lives in memory; the only browser storage is one localStorage key autosaving the in-progress run (crash/refresh recovery), cleared when the run is exported or discarded, plus two small keys for the remote display (broker settings, current room code) and one for label-printer settings (`scenario-runner:zpl-labels`). Results leave the app as export files (JSON / CSV / print).
 5. No real patient data. Keep the "simulated, not for patient care" footer.
 6. Other-device sync (Nov 2026): Supabase Realtime broadcast with a 6-digit room code, behind the `SyncTransport` interface. Relay only; nothing stored. Broker from build variables or in-app settings, carried in pairing links; a self-hosted broker later plugs into the same interface. See `docs/remote-display.md`.
 
@@ -93,6 +93,14 @@ User request: "a 'provider actions' section. On the printed sheet it can be a ch
 - **Links**: `flow[].expected[]` items may be `{text, action, match?}`; optional top-level `provider_actions[]` adds relevant actions. Unknown ids are a content rule in both validators; `match` fields/options are checked by the app.
 - **Web (Run tab, PROVIDER ACTIONS)**: relevant actions pinned (x-count + last time), full catalog searchable by group, newest-first log. Tap = picker (chips, steppers) -> Log = event `{kind:"action", actionId, values, itemId?}` on the scenario clock; repeatable and undoable. Sync: a logged action ticks the expected item it fits (action id + match), preferring the item it was opened from, then the current phase, then flow order; undo un-ticks. Tapping a linked expected item opens the picker pre-filled (Skip = just check). Debrief: provider-actions table; JSON/CSV/HTML exports include them. Never on the student display.
 - **PDF p.4 PROVIDER ACTIONS** (after the flowchart): checkbox | action | options to circle | 3 time blanks | notes; this scenario's actions, then common ones, then write-in rows, one page. Skipped when `schema/actions.json` is absent (standalone generator). Page checks: 6 pages, p.3 DECISION FLOWCHART, p.4 PROVIDER ACTIONS, p.5 HANDOUTS.
+
+## Moulage labels - ZPL (Nov 2026 request)
+
+- Pre-brief, Moulage tags section: **Print tags on label printer (ZPL)** opens a dialog that turns the scenario's `moulage_tags` into ZPL II labels for Zebra-compatible thermal printers, one label per tag.
+- **Printed:** region (small uppercase header, optional), the finding text (auto-sized to fill the label, word-wrapped; cut with "..." and flagged red only if it cannot fit at the minimum size), optional "SIMULATED" marker, optional border. **Never printed:** `cue` or any other instructor-only text (unit + e2e leak checks). `**bold**` markup is stripped.
+- **Sizes:** presets Small 2" x 1" and Large 4" x 3", plus Custom (0.75-4.25" wide x 0.75-12" tall). Printer resolution 203 / 300 / 600 dpi. Copies per tag (^PQ). Tags can be ticked on/off; preview is approximate (browser font vs Zebra font 0).
+- **Output:** Download `.zpl`, Copy ZPL, or **send directly via Zebra Browser Print** (the free Zebra agent on the instructor's computer; the app calls `http://127.0.0.1:9100` / `https://127.0.0.1:9101` `/available`, `/default`, `/write`). Direct HTTP to a printer IP is not possible from the HTTPS-hosted app (mixed content), so network printers without the agent get the downloaded file (printer web page "Directly Write", `nc IP 9100`, or a raw CUPS queue).
+- Code: `src/lib/labels/zpl.ts` (layout + ZPL), `src/lib/labels/browserPrint.ts`, `src/ui/LabelPrint.tsx`. Settings persist in one localStorage key. No schema or generator change.
 
 ## Deployment
 

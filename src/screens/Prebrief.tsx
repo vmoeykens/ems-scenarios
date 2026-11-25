@@ -3,10 +3,13 @@ import { Box, KV, Md, Section } from "../ui/primitives.tsx";
 import { VitalsTable } from "./run/VitalsTable.tsx";
 import { fmtT } from "../lib/run/reducer.ts";
 import { href } from "../lib/router.ts";
+import { useState } from "react";
+import { LabelPrintModal } from "../ui/LabelPrint.tsx";
 
 /** Pre-brief = PDF p.1 top + handouts the instructor needs before starting (actor card, crew card, moulage setup). */
 export default function Prebrief() {
   const { sc, state, dispatch, run } = useRun();
+  const [labels, setLabels] = useState(false);
   if (!sc || !state || !run) return null;
   const s = sc.source;
   const pt = s.patient ?? {};
@@ -94,6 +97,13 @@ export default function Prebrief() {
 
       {tags.length > 0 && (
         <Section title="Moulage tags - setup" right="check = placed on the patient">
+          <div className="flex items-center gap-2 px-1.5 py-1 border-b border-ink no-print">
+            <button type="button" className="sheet-btn font-bold" onClick={() => setLabels(true)} data-testid="zpl-open">
+              Print tags on label printer (ZPL)
+            </button>
+            <span className="cue">Region + finding only; cues never print.</span>
+          </div>
+          {labels && <LabelPrintModal tags={tags} scenarioId={s.id} onClose={() => setLabels(false)} />}
           <table className="sheet-table zebra">
             <thead>
               <tr>
