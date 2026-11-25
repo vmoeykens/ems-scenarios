@@ -114,7 +114,7 @@ export function Box({ checked }: { checked: boolean }) {
   return <span aria-hidden className={`sq ${checked ? "sq-on" : ""}`} />;
 }
 
-export function Modal({ title, children, onClose }: { title: string; children: ReactNode; onClose?: () => void }) {
+export function Modal({ title, children, onClose, wide = false }: { title: string; children: ReactNode; onClose?: () => void; wide?: boolean }) {
   useEffect(() => {
     const k = (e: KeyboardEvent) => e.key === "Escape" && onClose?.();
     window.addEventListener("keydown", k);
@@ -122,7 +122,7 @@ export function Modal({ title, children, onClose }: { title: string; children: R
   }, [onClose]);
   return (
     <div className="modal-backdrop no-print" role="dialog" aria-modal aria-label={title}>
-      <div className="section modal">
+      <div className={`section modal ${wide ? "modal-wide" : ""}`}>
         <div className="section-bar items-center">
           <span>{title}</span>
           {onClose && (
